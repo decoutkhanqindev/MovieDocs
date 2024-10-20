@@ -1,7 +1,6 @@
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
-  id("com.google.devtools.ksp")
   id("kotlin-kapt")
   id("com.google.dagger.hilt.android")
 }
@@ -50,6 +49,20 @@ dependencies {
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
   
+  // Activity
+  implementation("androidx.activity:activity-ktx:1.9.3")
+  
+  // Fragment
+  implementation("androidx.fragment:fragment-ktx:1.8.4")
+  
+  // ViewModel
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
+  // Saved state module for ViewModel
+  implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6")
+  
+  // ViewPager2
+  implementation("androidx.viewpager2:viewpager2:1.1.0")
+  
   // Retrofit
   implementation("com.squareup.retrofit2:retrofit:2.11.0")
   implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
@@ -59,19 +72,18 @@ dependencies {
   
   // Okhttp
   implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
-  implementation("com.squareup.okhttp3:okhttp")
-  implementation("com.squareup.okhttp3:logging-interceptor")
+  implementation("com.squareup.okhttp3:okhttp:4.12.0")
+  implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
   
   // Coroutine
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.9")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
   
   // Glide
   implementation("com.github.bumptech.glide:glide:4.16.0")
   implementation("com.github.bumptech.glide:okhttp3-integration:4.16.0")
   
   // Hilt
-  implementation("com.google.dagger:hilt-android:2.51.1")
-  kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+  implementation("com.google.dagger:hilt-android:2.52")
+  kapt("com.google.dagger:hilt-android-compiler:2.52")
 }
