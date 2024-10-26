@@ -96,4 +96,7 @@ dependencies {
   
   // App Startup
   implementation("androidx.startup:startup-runtime:1.1.1")
+  
+  // Splash Screen
+  implementation ("androidx.core:core-splashscreen:1.0.1")
 }
