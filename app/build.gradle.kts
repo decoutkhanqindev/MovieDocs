@@ -83,4 +83,17 @@ dependencies {
   // Hilt
   implementation("com.google.dagger:hilt-android:2.52")
   kapt("com.google.dagger:hilt-android-compiler:2.52")
+  
+  // Room
+  implementation("androidx.room:room-runtime:2.6.1")
+  annotationProcessor("androidx.room:room-compiler:2.6.1")
+  // optional - Kotlin Extensions and Coroutines support for Room
+  implementation("androidx.room:room-ktx:2.6.1")
+  kapt("androidx.room:room-compiler:2.6.1")
+  
+  // Timber
+  implementation ("com.jakewharton.timber:timber:5.0.1")
+  
+  // App Startup
+  implementation("androidx.startup:startup-runtime:1.1.1")
 }
