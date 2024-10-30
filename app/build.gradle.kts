@@ -26,15 +26,16 @@ android {
     }
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
   kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = "17"
   }
   
   buildFeatures {
     viewBinding = true
+    buildConfig = true
   }
 }
 
@@ -103,4 +104,7 @@ dependencies {
   // Navigation
   implementation("androidx.navigation:navigation-fragment:2.8.3")
   implementation("androidx.navigation:navigation-ui:2.8.3")
+  
+  // Data Store
+  implementation("androidx.datastore:datastore-preferences-core:1.1.1")
 }
