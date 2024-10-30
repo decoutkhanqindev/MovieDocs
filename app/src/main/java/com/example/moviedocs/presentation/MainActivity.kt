@@ -1,10 +1,7 @@
-package com.example.moviedocs
+package com.example.moviedocs.presentation
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.moviedocs.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
