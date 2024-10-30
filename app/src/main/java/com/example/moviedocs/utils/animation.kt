@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.utils
+package com.example.moviedocs.utils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder

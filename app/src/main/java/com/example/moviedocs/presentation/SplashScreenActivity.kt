@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.moviedocs.databinding.ActivitySplashScreenBinding
-import com.example.moviedocs.presentation.utils.applyAnimationFadeIn
+import com.example.moviedocs.utils.applyAnimationFadeIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
