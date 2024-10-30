@@ -1,16 +1,12 @@
 package com.example.moviedocs.presentation
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.moviedocs.databinding.ActivityMainBinding
+import com.example.moviedocs.presentation.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
-  private val binding: ActivityMainBinding by lazy(LazyThreadSafetyMode.NONE) {
-    ActivityMainBinding.inflate(layoutInflater)
-  }
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(binding.root)
   }
 }
