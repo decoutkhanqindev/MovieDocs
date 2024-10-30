@@ -23,12 +23,12 @@ class SplashScreenActivity : AppCompatActivity() {
     
     lifecycleScope.launch {
       delay(500)
-      applyAnimationFadeIn(binding.appLogoImg,  1500)
+      applyAnimationFadeIn(binding.appLogoImg, 1500)
       delay(500)
       applyAnimationFadeIn(binding.titleAppText, 1500)
       delay(500)
       applyAnimationFadeIn(binding.authorText, 1500)
-      delay(1800)
+      delay(1500)
       val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
       startActivity(intent)
       finish()
