@@ -1,4 +1,4 @@
-package com.example.moviedocs
+package com.example.moviedocs.presentation
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.moviedocs.databinding.ActivitySplashScreenBinding
+import com.example.moviedocs.presentation.utils.applyAnimationFadeIn
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -15,12 +16,19 @@ class SplashScreenActivity : AppCompatActivity() {
     ActivitySplashScreenBinding.inflate(layoutInflater)
   }
   
+  @SuppressLint("Recycle")
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(binding.root)
     
     lifecycleScope.launch {
-      delay(2000)
+      delay(500)
+      applyAnimationFadeIn(binding.appLogoImg,  1500)
+      delay(500)
+      applyAnimationFadeIn(binding.titleAppText, 1500)
+      delay(500)
+      applyAnimationFadeIn(binding.authorText, 1500)
+      delay(1800)
       val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
       startActivity(intent)
       finish()

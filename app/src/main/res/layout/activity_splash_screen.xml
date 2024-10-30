@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreenActivity">
+    tools:context=".presentation.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/appLogoImg"
@@ -15,13 +15,14 @@
         android:foregroundGravity="center"
         android:importantForAccessibility="no"
         android:src="@drawable/app_icon"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/titleAppText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -29,6 +30,7 @@
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@id/appLogoImg"
         app:layout_constraintStart_toStartOf="@+id/appLogoImg"
         app:layout_constraintTop_toBottomOf="@+id/appLogoImg" />
@@ -39,12 +41,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
         android:text="@string/author_name"
-        android:textStyle="italic"
         android:textColor="@color/white"
         android:textSize="15sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/titleText"
+        app:layout_constraintEnd_toEndOf="@+id/titleAppText"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="@+id/titleText"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintStart_toStartOf="@+id/titleAppText"
+        app:layout_constraintTop_toBottomOf="@+id/titleAppText" />
 </androidx.constraintlayout.widget.ConstraintLayout>
