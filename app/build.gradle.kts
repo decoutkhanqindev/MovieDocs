@@ -86,9 +86,9 @@ dependencies {
   // Retrofit
   implementation("com.squareup.retrofit2:retrofit:2.11.0")
   implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
-  // Gson
-  implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-  implementation("com.google.code.gson:gson:2.11.0")
+  // Moshi
+  implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
+  implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
   
   // Okhttp
   implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
@@ -132,5 +132,5 @@ dependencies {
   
   // Firebase
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-  implementation("com.google.firebase:firebase-auth-ktx:33.5.1")
+  implementation("com.google.firebase:firebase-auth-ktx")
 }

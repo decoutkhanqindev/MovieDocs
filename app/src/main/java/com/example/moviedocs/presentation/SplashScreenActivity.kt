@@ -7,9 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.moviedocs.databinding.ActivitySplashScreenBinding
 import com.example.moviedocs.presentation.base.BaseActivity
 import com.example.moviedocs.utils.applyAnimationFadeIn
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>(ActivitySplashScreenBinding::inflate) {
   
