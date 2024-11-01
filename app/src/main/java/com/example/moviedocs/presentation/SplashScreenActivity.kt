@@ -20,12 +20,12 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>(ActivityS
     
     lifecycleScope.launch {
       delay(500)
-      binding.appLogoImg.applyAnimationFadeIn()
+      binding.appLogoImg.applyAnimationFadeIn(1000)
       delay(500)
-      binding.titleAppText.applyAnimationFadeIn()
+      binding.titleAppText.applyAnimationFadeIn(1000)
       delay(500)
-      binding.authorText.applyAnimationFadeIn()
-      delay(1000)
+      binding.authorText.applyAnimationFadeIn(1000)
+      delay(800)
       val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
       startActivity(intent)
       finish()
