@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -21,6 +23,24 @@ android {
   }
   
   buildTypes {
+    debug {
+      // Read local.properties
+      val properties: Properties = Properties().apply {
+        load(rootProject.file("local.properties").inputStream())
+      }
+      
+      val API_KEY: String = checkNotNull(properties.getProperty("API_KEY")) {
+        "API_KEY is not set in local.properties"
+      }
+      val BASE_URL: String = checkNotNull(properties.getProperty("BASE_URL")) {
+        "BASE_URL is not set in local.properties"
+      }
+      
+      // Write API_KEY and BASE_URL to buildConfigFields
+      buildConfigField(type = "String", name = "API_KEY", value = """"$API_KEY""")
+      buildConfigField(type = "String", name = "BASE_URL", value = """"$BASE_URL""")
+    }
+    
     release {
       isMinifyEnabled = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -65,7 +85,7 @@ dependencies {
   
   // Retrofit
   implementation("com.squareup.retrofit2:retrofit:2.11.0")
-  implementation ("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+  implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
   // Gson
   implementation("com.squareup.retrofit2:converter-gson:2.11.0")
   implementation("com.google.code.gson:gson:2.11.0")
@@ -95,13 +115,13 @@ dependencies {
   kapt("androidx.room:room-compiler:2.6.1")
   
   // Timber
-  implementation ("com.jakewharton.timber:timber:5.0.1")
+  implementation("com.jakewharton.timber:timber:5.0.1")
   
   // App Startup
   implementation("androidx.startup:startup-runtime:1.1.1")
   
   // Splash Screen
-  implementation ("androidx.core:core-splashscreen:1.0.1")
+  implementation("androidx.core:core-splashscreen:1.0.1")
   
   // Navigation
   implementation("androidx.navigation:navigation-fragment:2.8.3")
@@ -112,5 +132,5 @@ dependencies {
   
   // Firebase
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-  implementation ("com.google.firebase:firebase-auth-ktx:33.5.1")
+  implementation("com.google.firebase:firebase-auth-ktx:33.5.1")
 }
