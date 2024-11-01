@@ -132,5 +132,6 @@ dependencies {
   
   // Firebase
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-  implementation("com.google.firebase:firebase-auth-ktx")
+  implementation ("com.google.firebase:firebase-auth:21.0.8")
+  implementation ("com.google.firebase:firebase-database:20.1.0")
 }
