@@ -37,8 +37,8 @@ android {
       }
       
       // Write API_KEY and BASE_URL to buildConfigFields
-      buildConfigField(type = "String", name = "API_KEY", value = """"$API_KEY""")
-      buildConfigField(type = "String", name = "BASE_URL", value = """"$BASE_URL""")
+      buildConfigField(type = "String", name = "API_KEY", value = """"$API_KEY"""")
+      buildConfigField(type = "String", name = "BASE_URL", value = """"$BASE_URL"""")
     }
     
     release {
@@ -68,6 +68,8 @@ dependencies {
   implementation(libs.androidx.activity)
   implementation(libs.androidx.constraintlayout)
   implementation(libs.androidx.core.animation)
+  implementation(libs.androidx.annotation)
+  implementation(libs.androidx.lifecycle.livedata.ktx)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
