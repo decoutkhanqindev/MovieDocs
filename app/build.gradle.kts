@@ -10,12 +10,12 @@ plugins {
 
 android {
   namespace = "com.example.moviedocs"
-  compileSdk = 34
+  compileSdk = 35
   
   defaultConfig {
     applicationId = "com.example.moviedocs"
     minSdk = 24
-    targetSdk = 34
+    targetSdk = 35
     versionCode = 1
     versionName = "1.0"
     
@@ -75,12 +75,12 @@ dependencies {
   androidTestImplementation(libs.androidx.espresso.core)
   
   // Fragment
-  implementation("androidx.fragment:fragment-ktx:1.8.4")
+  implementation("androidx.fragment:fragment-ktx:1.8.5")
   
   // ViewModel
-  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
-  // Saved state module for ViewModel
-  implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.6")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1")
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1")
   
   // ViewPager2
   implementation("androidx.viewpager2:viewpager2:1.1.0")
@@ -120,7 +120,7 @@ dependencies {
   implementation("com.jakewharton.timber:timber:5.0.1")
   
   // App Startup
-  implementation("androidx.startup:startup-runtime:1.1.1")
+  implementation("androidx.startup:startup-runtime:1.2.0")
   
   // Splash Screen
   implementation("androidx.core:core-splashscreen:1.0.1")
@@ -134,6 +134,6 @@ dependencies {
   
   // Firebase
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-  implementation ("com.google.firebase:firebase-auth:21.0.8")
-  implementation ("com.google.firebase:firebase-database:20.1.0")
+  implementation("com.google.firebase:firebase-auth:23.1.0")
+  implementation("com.google.firebase:firebase-database:21.0.0")
 }
