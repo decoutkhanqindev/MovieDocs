@@ -10,14 +10,14 @@ class MovieListRepositoryImpl
 @Inject constructor(private val apiService: ApiService) : MovieListRepository {
   
   override suspend fun getMoviesNowPlaying(): List<MovieModel> =
-    apiService.getMovieNowPlaying().map { it.toMovieListModel() }
+    apiService.getMovieNowPlaying().results.map { it.toMovieListModel() }
   
   override suspend fun getMoviesPopular(): List<MovieModel> =
-    apiService.getMoviePopular().map { it.toMovieListModel() }
+    apiService.getMoviePopular().results.map { it.toMovieListModel() }
   
   override suspend fun getMoviesTopRated(): List<MovieModel> =
-    apiService.getMovieTopRated().map { it.toMovieListModel() }
+    apiService.getMovieTopRated().results.map { it.toMovieListModel() }
   
   override suspend fun getMoviesUpcoming(): List<MovieModel> =
-    apiService.getMovieUpcoming().map { it.toMovieListModel() }
+    apiService.getMovieUpcoming().results.map { it.toMovieListModel() }
 }
