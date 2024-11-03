@@ -82,6 +82,10 @@ dependencies {
   implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1")
   
+  // Paging 3
+  implementation("androidx.paging:paging-runtime:3.3.2")
+  implementation("androidx.paging:paging-runtime-ktx:3.3.2")
+  
   // ViewPager2
   implementation("androidx.viewpager2:viewpager2:1.1.0")
   
