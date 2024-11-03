@@ -1,6 +1,6 @@
 package com.example.moviedocs.data.repository
 
-import com.example.moviedocs.data.mapper.toMovieListModel
+import com.example.moviedocs.data.mapper.toMovieModel
 import com.example.moviedocs.data.remote.ApiService
 import com.example.moviedocs.di.AppDispatcher
 import com.example.moviedocs.di.DispatcherType
@@ -13,27 +13,26 @@ import javax.inject.Inject
 class MovieListRepositoryImpl
 @Inject constructor(
   private val apiService: ApiService,
-  @AppDispatcher(DispatcherType.IO)
-  private val ioDispatcher: CoroutineDispatcher
+  @AppDispatcher(DispatcherType.IO) private val ioDispatcher: CoroutineDispatcher
 ) : MovieListRepository {
   
-  override suspend fun getMoviesNowPlaying(): Result<List<MovieModel>> =
+  override suspend fun getMoviesNowPlaying(page: Int): Result<List<MovieModel>> =
     runSuspendCatching(ioDispatcher) {
-      apiService.getMovieNowPlaying().results.map { it.toMovieListModel() }
+      apiService.getMovieNowPlaying(page).results.map { it.toMovieModel() }
     }
   
-  override suspend fun getMoviesPopular(): Result<List<MovieModel>> =
+  override suspend fun getMoviesPopular(page: Int): Result<List<MovieModel>> =
     runSuspendCatching(ioDispatcher) {
-      apiService.getMoviePopular().results.map { it.toMovieListModel() }
+      apiService.getMoviePopular(page).results.map { it.toMovieModel() }
     }
   
-  override suspend fun getMoviesTopRated(): Result<List<MovieModel>> =
+  override suspend fun getMoviesTopRated(page: Int): Result<List<MovieModel>> =
     runSuspendCatching(ioDispatcher) {
-      apiService.getMovieTopRated().results.map { it.toMovieListModel() }
+      apiService.getMovieTopRated(page).results.map { it.toMovieModel() }
     }
   
-  override suspend fun getMoviesUpcoming(): Result<List<MovieModel>> =
+  override suspend fun getMoviesUpcoming(page: Int): Result<List<MovieModel>> =
     runSuspendCatching(ioDispatcher) {
-      apiService.getMovieUpcoming().results.map { it.toMovieListModel() }
+      apiService.getMovieUpcoming(page).results.map { it.toMovieModel() }
     }
 }
