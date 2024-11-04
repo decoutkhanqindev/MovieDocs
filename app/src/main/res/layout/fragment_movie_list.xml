@@ -5,65 +5,54 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient">
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+  <EditText
+      android:id="@+id/searchEditText"
+      android:layout_width="340dp"
+      android:layout_height="50dp"
+      android:layout_marginTop="16dp"
+      android:background="@drawable/bg_rounded_border"
+      android:hint="@string/search_movies"
+      android:importantForAutofill="no"
+      android:inputType="text"
+      android:textColor="@color/white"
+      android:textColorHint="@color/white"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+  <ImageView
+      android:id="@+id/searchBtn"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_margin="8dp"
+      android:layout_marginEnd="8dp"
+      android:importantForAccessibility="no"
+      android:src="@android:drawable/ic_menu_search"
+      app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
+      app:layout_constraintEnd_toEndOf="@+id/searchEditText"
+      app:layout_constraintTop_toTopOf="@+id/searchEditText" />
 
-            <EditText
-                android:id="@+id/searchEditText"
-                android:layout_width="340dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/bg_rounded_border"
-                android:hint="@string/search_movies"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+  <androidx.viewpager2.widget.ViewPager2
+      android:id="@+id/sliderImg"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:layout_marginTop="8dp"
+      android:paddingStart="25dp"
+      android:paddingEnd="25dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/searchEditText" />
 
-            <ImageView
-                android:id="@+id/searchBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:layout_marginEnd="8dp"
-                android:importantForAccessibility="no"
-                android:src="@android:drawable/ic_menu_search"
-                app:layout_constraintBottom_toBottomOf="@+id/searchEditText"
-                app:layout_constraintEnd_toEndOf="@+id/searchEditText"
-                app:layout_constraintTop_toTopOf="@+id/searchEditText" />
+  <ProgressBar
+      android:id="@+id/sliderProgressBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintBottom_toBottomOf="@id/sliderImg"
+      app:layout_constraintEnd_toEndOf="@id/sliderImg"
+      app:layout_constraintStart_toStartOf="@id/sliderImg"
+      app:layout_constraintTop_toTopOf="@id/sliderImg" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/bannersImg"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@id/searchEditText" />
-
-            <ProgressBar
-                android:id="@+id/bannersProgressBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/bannersImg"
-                app:layout_constraintEnd_toEndOf="@+id/bannersImg"
-                app:layout_constraintStart_toStartOf="@+id/bannersImg"
-                app:layout_constraintTop_toTopOf="@+id/bannersImg" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
