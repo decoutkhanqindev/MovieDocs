@@ -17,4 +17,5 @@
     <string name="sign_in">SIGN IN</string>
     <string name="sign_up">SIGN UP</string>
     <string name="search_movies">Search Movies</string>
+    <string name="movie_title">MOVIE TITLE</string>
 </resources>
