@@ -24,15 +24,13 @@ class GlideModule : AppGlideModule() {
     val okHttpClient: OkHttpClient = entryPoint.provideOkHttpClient()
     
     registry.replace(
-      GlideUrl::class.java,
-      InputStream::class.java,
-      OkHttpUrlLoader.Factory(okHttpClient)
+      GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory(okHttpClient)
     )
   }
-  
-  @EntryPoint
-  @InstallIn(SingletonComponent::class)
-  internal interface OkHttpEntryPoint {
-    fun provideOkHttpClient(): OkHttpClient
-  }
+}
+
+@EntryPoint
+@InstallIn(SingletonComponent::class)
+interface OkHttpEntryPoint {
+  fun provideOkHttpClient(): OkHttpClient
 }
