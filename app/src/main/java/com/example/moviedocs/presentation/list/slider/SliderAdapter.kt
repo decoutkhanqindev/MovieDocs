@@ -4,14 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
 import com.example.moviedocs.domain.model.MovieModel
 
 class SliderAdapter(
-  private val viewPager: ViewPager2,
   private val requestManager: RequestManager,
 //  private val onItemClicked: (MovieModel) -> Unit
 ) : ListAdapter<MovieModel, SliderAdapter.SliderViewHolder>(MovieModelItemCallBack) {
@@ -41,7 +39,7 @@ class SliderAdapter(
           .transition(DrawableTransitionOptions.withCrossFade())
           .into(sliderItemImg)
         
-        sliderItemTitleText.text = item.title
+//        sliderItemTitleText.text = item.title
       }
     }
   }
