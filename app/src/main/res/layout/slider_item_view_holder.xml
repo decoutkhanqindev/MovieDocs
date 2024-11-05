@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
+    android:layout_margin="4dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
     app:cardMaxElevation="12dp"
     app:cardPreventCornerOverlap="true"
@@ -32,17 +32,19 @@
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/sliderItemTitleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/sliderItemImg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
-        app:layout_constraintStart_toStartOf="parent" />
+<!--    <TextView-->
+<!--        android:id="@+id/sliderItemTitleText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="24sp"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/sliderItemImg"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.054"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
   </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
