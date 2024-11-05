@@ -4,9 +4,12 @@ import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ImageView
 import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 
@@ -22,7 +25,7 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
     ).apply {
       duration = timeSpan
       interpolator = AccelerateDecelerateInterpolator() // Smooth motion
-      
+
 //      addListener(object : AnimatorListenerAdapter() {
 //        override fun onAnimationEnd(animation: Animator) {
 //          continuation.resumeWith(Result.success(Unit))
@@ -48,10 +51,23 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
   }
 }
 
-fun invisibleView(view: View) {
-  view.visibility = View.INVISIBLE
+fun ImageView.loadImgFromUrl(url: String?) {
+  Glide.with(context)
+    .load("https://image.tmdb.org/t/p/w500$url")
+    .fitCenter()
+    .centerCrop()
+    .transition(DrawableTransitionOptions.withCrossFade())
+    .into(this)
 }
 
-fun visibleView(view: View) {
-  view.visibility = View.VISIBLE
+fun View.visible() {
+  if (visibility != View.VISIBLE) visibility = View.VISIBLE
+}
+
+fun View.gone() {
+  if (visibility != View.GONE) visibility = View.GONE
+}
+
+fun View.invisible() {
+  if (visibility != View.INVISIBLE) visibility = View.INVISIBLE
 }
