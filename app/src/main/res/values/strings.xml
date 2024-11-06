@@ -18,4 +18,13 @@
     <string name="sign_up">SIGN UP</string>
     <string name="search_movies">Search Movies</string>
     <string name="movie_title">MOVIE TITLE</string>
+  <string name="username">USERNAME</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="search_description">Enter a Movie to seach</string>
+    <string name="search">Search</string>
+  <string name="home_icon">Home</string>
+  <string name="favorite_icon">Favorite</string>
+  <string name="profile_icon">Profile</string>
 </resources>
