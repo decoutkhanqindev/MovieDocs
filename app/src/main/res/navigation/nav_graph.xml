@@ -5,38 +5,51 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/signInFragment">
 
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.example.moviedocs.presentation.SignInFragment"
-        android:label="SignInFragment"
-        tools:layout="@layout/fragment_sign_in">
-        <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment"
-            app:enterAnim="@anim/to_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/from_left" />
-        <action
-            android:id="@+id/action_signInFragment_to_movieListFragment"
-            app:destination="@id/movieListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.example.moviedocs.presentation.SignUpFragment"
-        android:label="SignUpFragment"
-        tools:layout="@layout/fragment_sign_up">
-        <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/from_right"
-            app:popEnterAnim="@anim/to_left"
-            app:popExitAnim="@anim/to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/movieListFragment"
-        android:name="com.example.moviedocs.presentation.list.MovieListFragment"
-        android:label="MovieListFragment"
-        tools:layout="@layout/fragment_movie_list" />
+  <fragment
+      android:id="@+id/signInFragment"
+      android:name="com.example.moviedocs.presentation.SignInFragment"
+      android:label="SignInFragment"
+      tools:layout="@layout/fragment_sign_in">
+    <action
+        android:id="@+id/action_signInFragment_to_signUpFragment"
+        app:destination="@id/signUpFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_left" />
+    <action
+        android:id="@+id/action_signInFragment_to_movieListFragment"
+        app:destination="@id/movieListFragment" />
+  </fragment>
+  <fragment
+      android:id="@+id/signUpFragment"
+      android:name="com.example.moviedocs.presentation.SignUpFragment"
+      android:label="SignUpFragment"
+      tools:layout="@layout/fragment_sign_up">
+    <action
+        android:id="@+id/action_signUpFragment_to_signInFragment"
+        app:destination="@id/signInFragment"
+        app:enterAnim="@anim/from_left"
+        app:exitAnim="@anim/from_right"
+        app:popEnterAnim="@anim/to_left"
+        app:popExitAnim="@anim/to_right" />
+  </fragment>
+  <fragment
+      android:id="@+id/movieListFragment"
+      android:name="com.example.moviedocs.presentation.list.MoviesFragment"
+      android:label="MovieListFragment"
+      tools:layout="@layout/fragment_movies">
+    <action
+        android:id="@+id/action_movieListFragment_to_searchMoviesFragment"
+        app:destination="@id/searchMoviesFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_left" />
+  </fragment>
+  <fragment
+      android:id="@+id/searchMoviesFragment"
+      android:name="com.example.moviedocs.presentation.list.SearchMoviesFragment"
+      tools:layout="@layout/fragment_search_movies"
+      android:label="SearchMoviesFragment" />
 </navigation>
