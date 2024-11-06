@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMoviesBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.list.slider.SliderMoviesAdapter
 import com.example.moviedocs.presentation.list.viewmodel.NowPlayingViewModel
 import com.example.moviedocs.utils.gone
+import com.example.moviedocs.utils.navigateTo
 import com.example.moviedocs.utils.visible
-import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.math.abs
@@ -37,13 +38,14 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
   }
   
   private val sliderAdapter: SliderMoviesAdapter by lazy {
-    SliderMoviesAdapter()
+    SliderMoviesAdapter(viewPager = viewPager)
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
     setUpSliderImg()
+    setUpNavigate()
     bindViewModel()
   }
   
@@ -137,5 +139,9 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
         }
       }
     }
+  }
+  
+  private fun setUpNavigate() {
+    binding.searchBtn.navigateTo(R.id.action_moviesFragment_to_searchMoviesFragment)
   }
 }
