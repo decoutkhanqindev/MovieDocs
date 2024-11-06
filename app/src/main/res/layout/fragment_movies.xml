@@ -42,7 +42,7 @@
               android:layout_gravity="start"
               android:text="@string/username"
               android:textColor="@color/white"
-              android:textSize="24sp"
+              android:textSize="20sp"
               android:textStyle="bold" />
 
           <androidx.appcompat.widget.AppCompatImageButton
@@ -72,8 +72,8 @@
             android:id="@+id/sliderImg"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/now_playing"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/nowPlayingRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,10 +114,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/nowPlayingMoreBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/more_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/nowPlayingTitleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/nowPlayingTitleText"
+            app:layout_constraintVertical_bias="1.0" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/nowPlayingRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -152,7 +166,7 @@
             android:layout_height="wrap_content"
             android:text="@string/popular"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/popularRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -160,10 +174,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/popularMoreBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/more_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/popularTitleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/popularTitleText"
+            app:layout_constraintVertical_bias="1.0" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -198,17 +225,30 @@
             android:layout_height="wrap_content"
             android:text="@string/upcoming"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/upcomingMoreBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/more_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/upcomingTitleText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/upcomingTitleText"
+            app:layout_constraintVertical_bias="1.0" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/upcomingRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -235,8 +275,8 @@
       android:layout_height="wrap_content"
       android:layout_margin="10dp"
       android:background="@android:color/transparent"
-      app:cardCornerRadius="24dp"
-      app:cardElevation="10dp"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="20dp"
       app:layout_constraintBottom_toBottomOf="@id/scrollView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent">
@@ -246,10 +286,10 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="@color/dark_blue"
-        app:cnb_iconSize="28dp"
         app:cnb_badgeColor="@color/red"
-        app:cnb_unselectedColor="@color/white"
+        app:cnb_iconSize="28dp"
         app:cnb_menuResource="@menu/navigation_menu"
-        app:cnb_orientationMode="horizontal" />
+        app:cnb_orientationMode="horizontal"
+        app:cnb_unselectedColor="@color/white" />
   </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
