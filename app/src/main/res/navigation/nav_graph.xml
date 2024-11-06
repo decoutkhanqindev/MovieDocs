@@ -19,7 +19,11 @@
         app:popExitAnim="@anim/from_left" />
     <action
         android:id="@+id/action_signInFragment_to_movieListFragment"
-        app:destination="@id/movieListFragment" />
+        app:destination="@id/movieListFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_left"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_left" />
   </fragment>
   <fragment
       android:id="@+id/signUpFragment"
@@ -50,6 +54,14 @@
   <fragment
       android:id="@+id/searchMoviesFragment"
       android:name="com.example.moviedocs.presentation.list.SearchMoviesFragment"
-      tools:layout="@layout/fragment_search_movies"
-      android:label="SearchMoviesFragment" />
+      android:label="SearchMoviesFragment"
+      tools:layout="@layout/fragment_search_movies">
+    <action
+        android:id="@+id/action_searchMoviesFragment_to_movieListFragment"
+        app:destination="@id/movieListFragment"
+        app:enterAnim="@anim/from_left"
+        app:exitAnim="@anim/from_right"
+        app:popEnterAnim="@anim/to_left"
+        app:popExitAnim="@anim/to_right" />
+  </fragment>
 </navigation>
