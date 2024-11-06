@@ -18,8 +18,8 @@
         app:popEnterAnim="@anim/from_right"
         app:popExitAnim="@anim/from_left" />
     <action
-        android:id="@+id/action_signInFragment_to_movieListFragment"
-        app:destination="@id/movieListFragment"
+        android:id="@+id/action_signInFragment_to_moviesFragment"
+        app:destination="@id/moviesFragment"
         app:enterAnim="@anim/to_right"
         app:exitAnim="@anim/to_left"
         app:popEnterAnim="@anim/from_right"
@@ -39,12 +39,12 @@
         app:popExitAnim="@anim/to_right" />
   </fragment>
   <fragment
-      android:id="@+id/movieListFragment"
+      android:id="@+id/moviesFragment"
       android:name="com.example.moviedocs.presentation.list.MoviesFragment"
       android:label="MovieListFragment"
       tools:layout="@layout/fragment_movies">
     <action
-        android:id="@+id/action_movieListFragment_to_searchMoviesFragment"
+        android:id="@+id/action_moviesFragment_to_searchMoviesFragment"
         app:destination="@id/searchMoviesFragment"
         app:enterAnim="@anim/to_right"
         app:exitAnim="@anim/to_left"
@@ -57,8 +57,8 @@
       android:label="SearchMoviesFragment"
       tools:layout="@layout/fragment_search_movies">
     <action
-        android:id="@+id/action_searchMoviesFragment_to_movieListFragment"
-        app:destination="@id/movieListFragment"
+        android:id="@+id/action_searchMoviesFragment_to_moviesFragment"
+        app:destination="@id/moviesFragment"
         app:enterAnim="@anim/from_left"
         app:exitAnim="@anim/from_right"
         app:popEnterAnim="@anim/to_left"
