@@ -10,20 +10,21 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.example.moviedocs.databinding.FragmentMovieListBinding
+import com.example.moviedocs.databinding.FragmentMoviesBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.list.slider.SliderAdapter
-import com.example.moviedocs.presentation.list.viewmodel.NowPlayingMoviesViewModel
+import com.example.moviedocs.presentation.list.slider.SliderMoviesAdapter
+import com.example.moviedocs.presentation.list.viewmodel.NowPlayingViewModel
+import com.example.moviedocs.utils.gone
+import com.example.moviedocs.utils.visible
+import com.ismaeldivita.chipnavigation.ChipNavigationBar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class MovieListFragment :
-  BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
+class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding::inflate) {
   
-  private val viewModel: NowPlayingMoviesViewModel by viewModels()
+  private val viewModel: NowPlayingViewModel by viewModels()
   
   private lateinit var viewPager: ViewPager2
   
@@ -35,8 +36,8 @@ class MovieListFragment :
     Runnable { viewPager.currentItem += 1 }
   }
   
-  private val sliderAdapter: SliderAdapter by lazy {
-    SliderAdapter(requestManager = Glide.with(this))
+  private val sliderAdapter: SliderMoviesAdapter by lazy {
+    SliderMoviesAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -117,20 +118,20 @@ class MovieListFragment :
       viewModel.movieListUiStateFlow.collect { it: MovieListUiState ->
         when (it) {
           is MovieListUiState.FirstPageLoading -> {
-            binding.sliderProgressBar.visibility = View.VISIBLE
-            binding.sliderImg.visibility = View.GONE
+            binding.sliderProgressBar.visible()
+            binding.sliderImg.gone()
             sliderAdapter.submitList(emptyList())
           }
           
           is MovieListUiState.FirstPageError -> {
-            binding.sliderProgressBar.visibility = View.VISIBLE
-            binding.sliderImg.visibility = View.GONE
+            binding.sliderProgressBar.visible()
+            binding.sliderImg.gone()
             sliderAdapter.submitList(emptyList())
           }
           
           is MovieListUiState.Success -> {
-            binding.sliderProgressBar.visibility = View.GONE
-            binding.sliderImg.visibility = View.VISIBLE
+            binding.sliderProgressBar.gone()
+            binding.sliderImg.visible()
             sliderAdapter.submitList(it.items)
           }
         }

@@ -4,15 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.RequestManager
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
 import com.example.moviedocs.domain.model.MovieModel
+import com.example.moviedocs.utils.loadImgFromUrl
 
-class SliderAdapter(
-  private val requestManager: RequestManager,
+class SliderMoviesAdapter(
 //  private val onItemClicked: (MovieModel) -> Unit
-) : ListAdapter<MovieModel, SliderAdapter.SliderViewHolder>(MovieModelItemCallBack) {
+) : ListAdapter<MovieModel, SliderMoviesAdapter.SliderViewHolder>(MovieModelItemCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(
@@ -32,13 +30,7 @@ class SliderAdapter(
     
     fun bind(item: MovieModel) {
       binding.run {
-        val imageUrl = "https://image.tmdb.org/t/p/w500${item.posterPath}"
-        requestManager.load(imageUrl)
-          .fitCenter()
-          .centerCrop()
-          .transition(DrawableTransitionOptions.withCrossFade())
-          .into(sliderItemImg)
-        
+        sliderItemImg.loadImgFromUrl(item.posterPath)
 //        sliderItemTitleText.text = item.title
       }
     }

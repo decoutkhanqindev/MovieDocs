@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.MovieModel
 import com.example.moviedocs.domain.usecase.list.GetNowPlayingMoviesUseCase
 import com.example.moviedocs.presentation.list.MovieListNextPageState
-import com.example.moviedocs.presentation.list.MovieListSingleEvent
+import com.example.moviedocs.presentation.list.MoviesSingleEvent
 import com.example.moviedocs.presentation.list.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -19,7 +19,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class NowPlayingMoviesViewModel
+class NowPlayingViewModel
 @Inject constructor(
   private val getNowPlayingMoviesUseCase: GetNowPlayingMoviesUseCase,
 ) : ViewModel() {
@@ -30,8 +30,8 @@ class NowPlayingMoviesViewModel
   val movieListUiStateFlow: StateFlow<MovieListUiState> get() = _movieListUiStateFlow.asStateFlow()
   
   // Channel for One-Time Events:
-  private val _movieListSingleEvent: Channel<MovieListSingleEvent> = Channel(Channel.UNLIMITED)
-  val movieListSingleEvent: Flow<MovieListSingleEvent> get() = _movieListSingleEvent.receiveAsFlow()
+  private val _movieListSingleEvent: Channel<MoviesSingleEvent> = Channel(Channel.UNLIMITED)
+  val movieListSingleEvent: Flow<MoviesSingleEvent> get() = _movieListSingleEvent.receiveAsFlow()
   
   init {
     loadFirstPage()
@@ -52,11 +52,11 @@ class NowPlayingMoviesViewModel
               MovieListNextPageState.IDLE
             }
           )
-          _movieListSingleEvent.send(MovieListSingleEvent.Success)
+          _movieListSingleEvent.send(MoviesSingleEvent.Success)
         }
         .onFailure { it: Throwable ->
           _movieListUiStateFlow.value = MovieListUiState.FirstPageError
-          _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
+          _movieListSingleEvent.send(MoviesSingleEvent.Error(it))
           Timber.tag("NowPlayingMovieListViewModel").e("loadFirstPage: ${it.message}")
         }
     }
@@ -94,10 +94,10 @@ class NowPlayingMoviesViewModel
             MovieListNextPageState.IDLE
           }
         )
-        _movieListSingleEvent.send(MovieListSingleEvent.Success)
+        _movieListSingleEvent.send(MoviesSingleEvent.Success)
       }.onFailure { it: Throwable ->
         _movieListUiStateFlow.value = state.copy(nextPageState = MovieListNextPageState.ERROR)
-        _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
+        _movieListSingleEvent.send(MoviesSingleEvent.Error(it))
       }
     }
   }
