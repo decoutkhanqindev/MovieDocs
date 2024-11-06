@@ -8,6 +8,8 @@ import android.widget.ImageView
 import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.coroutines.CancellableContinuation
@@ -58,6 +60,12 @@ fun ImageView.loadImgFromUrl(url: String?) {
     .centerCrop()
     .transition(DrawableTransitionOptions.withCrossFade())
     .into(this)
+}
+
+fun View.navigateTo(actionId: Int) {
+  this.setOnClickListener {
+    findNavController().navigate(actionId)
+  }
 }
 
 fun View.visible() {
