@@ -42,7 +42,7 @@
               android:layout_gravity="start"
               android:text="@string/username"
               android:textColor="@color/white"
-              android:textSize="20sp"
+              android:textSize="24sp"
               android:textStyle="bold" />
 
           <androidx.appcompat.widget.AppCompatImageButton
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/now_playing"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/nowPlayingRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +166,7 @@
             android:layout_height="wrap_content"
             android:text="@string/popular"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/popularRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -225,7 +225,7 @@
             android:layout_height="wrap_content"
             android:text="@string/upcoming"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.057"
