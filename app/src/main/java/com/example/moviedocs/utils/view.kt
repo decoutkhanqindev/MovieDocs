@@ -10,6 +10,7 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.coroutines.CancellableContinuation
@@ -65,6 +66,12 @@ fun ImageView.loadImgFromUrl(url: String?) {
 fun View.navigateTo(actionId: Int) {
   this.setOnClickListener {
     findNavController().navigate(actionId)
+  }
+}
+
+fun View.navigateBack() {
+  this.setOnClickListener {
+    findNavController().navigateUp()
   }
 }
 
