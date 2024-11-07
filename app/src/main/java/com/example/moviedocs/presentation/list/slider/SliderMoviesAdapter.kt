@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
 import com.example.moviedocs.domain.model.MovieModel
+import com.example.moviedocs.presentation.list.MovieModelItemCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class SliderMoviesAdapter(
@@ -16,9 +17,8 @@ class SliderMoviesAdapter(
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(
-      SliderItemViewHolderBinding.inflate(/* inflater = */ LayoutInflater.from(parent.context),/* parent = */
-        parent,/* attachToParent = */
-        false
+      SliderItemViewHolderBinding.inflate(
+        LayoutInflater.from(parent.context), parent, false
       )
     )
   
