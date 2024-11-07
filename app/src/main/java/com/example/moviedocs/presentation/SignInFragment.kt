@@ -10,6 +10,7 @@ import com.example.moviedocs.utils.navigateTo
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    
     setUpNavigate()
   }
   
