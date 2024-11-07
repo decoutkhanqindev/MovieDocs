@@ -69,11 +69,11 @@
           app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/sliderImg"
+            android:id="@+id/sliderViewPager"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="45dp"
+            android:paddingEnd="45dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,11 +84,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/sliderImg"
-            app:layout_constraintEnd_toEndOf="@+id/sliderImg"
-            app:layout_constraintStart_toStartOf="@+id/sliderImg"
-            app:layout_constraintTop_toBottomOf="@id/sliderImg"
-            app:layout_constraintTop_toTopOf="@+id/sliderImg" />
+            app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager"
+            app:layout_constraintEnd_toEndOf="@+id/sliderViewPager"
+            app:layout_constraintStart_toStartOf="@+id/sliderViewPager"
+            app:layout_constraintTop_toBottomOf="@id/sliderViewPager"
+            app:layout_constraintTop_toTopOf="@+id/sliderViewPager" />
       </androidx.constraintlayout.widget.ConstraintLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,13 +104,14 @@
             android:id="@+id/nowPlayingTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="@string/now_playing"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/nowPlayingRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -119,32 +120,37 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
             app:layout_constraintBottom_toBottomOf="@+id/nowPlayingTitleText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/nowPlayingTitleText"
+            app:layout_constraintTop_toTopOf="@+id/nowPlayingTitleText"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/nowPlayingRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nowPlayingTitleText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/movie_item_view_holder"
+            tools:orientation="horizontal" />
 
         <ProgressBar
             android:id="@+id/nowPlayingProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/nowPlayingRecycleView"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/nowPlayingRecycleView"
             app:layout_constraintStart_toStartOf="@+id/nowPlayingRecycleView"
             app:layout_constraintTop_toBottomOf="@id/nowPlayingRecycleView"
@@ -164,13 +170,14 @@
             android:id="@+id/popularTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="@string/popular"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/popularRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -179,24 +186,30 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
             app:layout_constraintBottom_toBottomOf="@+id/popularTitleText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/popularTitleText"
+            app:layout_constraintTop_toTopOf="@+id/popularTitleText"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/popularRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/popularTitleText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/movie_item_view_holder"
+            tools:orientation="horizontal" />
 
         <ProgressBar
             android:id="@+id/popularProgressBar"
@@ -223,12 +236,14 @@
             android:id="@+id/upcomingTitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="@string/upcoming"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/upcomingRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -237,24 +252,30 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
             app:layout_constraintBottom_toBottomOf="@+id/upcomingTitleText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/upcomingTitleText"
+            app:layout_constraintTop_toTopOf="@+id/upcomingTitleText"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/upcomingRecycleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/upcomingTitleText"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/movie_item_view_holder"
+            tools:orientation="horizontal" />
 
         <ProgressBar
             android:id="@+id/upcomingProgressBar"
