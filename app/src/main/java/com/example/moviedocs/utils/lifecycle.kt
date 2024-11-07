@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 /*
  * These functions simplify the process of running suspend functions within a lifecycle-aware scope
  * that automatically respects the STARTED lifecycle state of the associated component.
- * -------------------------------------------------------------------------------------------------
+ * 
  * (0) Parameters:
  * + "launchBlock: suspend () -> Unit": A required suspend function that will be launched
  * first within the STARTED lifecycle state.
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
  * also be launched concurrently after the first block.
  * + "doAfterLaunch: (() -> Unit)? = null": An optional callback to execute after all the provided
  * suspend functions (launchBlock and launchBlocks) have been launched.
- * -------------------------------------------------------------------------------------------------
+ * 
  * (1) Fragment:
  * + It ensures that suspend functions (launchBlock and additional launchBlocks)
  * are executed repeatedly while the Fragment's Lifecycle is in the STARTED state.
@@ -26,12 +26,12 @@ import kotlinx.coroutines.launch
  * lifecycle
  * + "viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED)": Executes the block when the
  * lifecycle is at least STARTED, suspending it otherwise.
- * -------------------------------------------------------------------------------------------------
+ * 
  * (2) Activity:
  * + Similar to the Fragment version but applies to the ComponentActivity.
  * + "lifecycleScope": Ensures the coroutine runs within the Activity lifecycle.
  * + "repeatOnLifecycle(Lifecycle.State.STARTED)": Same purpose as the Fragment version.
- * -------------------------------------------------------------------------------------------------
+ * 
  * (3) How the Execution Works:
  * + For Each Coroutine: The function uses launch to start coroutines inside
  * "viewLifecycleOwner.lifecycleScope" or "lifecycleScope", depending on whether it's a Fragment
