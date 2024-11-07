@@ -14,30 +14,20 @@
         android:id="@+id/action_signInFragment_to_signUpFragment"
         app:destination="@id/signUpFragment"
         app:enterAnim="@anim/to_right"
-        app:exitAnim="@anim/to_left"
+        app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
-        app:popExitAnim="@anim/from_left" />
+        app:popExitAnim="@anim/from_right" />
     <action
         android:id="@+id/action_signInFragment_to_moviesFragment"
         app:destination="@id/moviesFragment"
         app:enterAnim="@anim/to_right"
-        app:exitAnim="@anim/to_left"
-        app:popEnterAnim="@anim/from_right"
-        app:popExitAnim="@anim/from_left" />
+        app:exitAnim="@anim/to_right" />
   </fragment>
   <fragment
       android:id="@+id/signUpFragment"
       android:name="com.example.moviedocs.presentation.SignUpFragment"
       android:label="SignUpFragment"
-      tools:layout="@layout/fragment_sign_up">
-    <action
-        android:id="@+id/action_signUpFragment_to_signInFragment"
-        app:destination="@id/signInFragment"
-        app:enterAnim="@anim/from_left"
-        app:exitAnim="@anim/from_right"
-        app:popEnterAnim="@anim/to_left"
-        app:popExitAnim="@anim/to_right" />
-  </fragment>
+      tools:layout="@layout/fragment_sign_up" />
   <fragment
       android:id="@+id/moviesFragment"
       android:name="com.example.moviedocs.presentation.list.MoviesFragment"
@@ -47,21 +37,13 @@
         android:id="@+id/action_moviesFragment_to_searchMoviesFragment"
         app:destination="@id/searchMoviesFragment"
         app:enterAnim="@anim/to_right"
-        app:exitAnim="@anim/to_left"
+        app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
-        app:popExitAnim="@anim/from_left" />
+        app:popExitAnim="@anim/from_right" />
   </fragment>
   <fragment
       android:id="@+id/searchMoviesFragment"
       android:name="com.example.moviedocs.presentation.list.SearchMoviesFragment"
       android:label="SearchMoviesFragment"
-      tools:layout="@layout/fragment_search_movies">
-    <action
-        android:id="@+id/action_searchMoviesFragment_to_moviesFragment"
-        app:destination="@id/moviesFragment"
-        app:enterAnim="@anim/from_left"
-        app:exitAnim="@anim/from_right"
-        app:popEnterAnim="@anim/to_left"
-        app:popExitAnim="@anim/to_right" />
-  </fragment>
+      tools:layout="@layout/fragment_search_movies" />
 </navigation>
