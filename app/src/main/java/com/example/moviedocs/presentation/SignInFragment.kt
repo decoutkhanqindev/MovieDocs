@@ -16,6 +16,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
   
   private fun setUpNavigate() {
     binding.signInBtn.navigateTo(R.id.action_signInFragment_to_moviesFragment)
-    binding.signUpText.navigateTo(R.id.action_signInFragment_to_signUpFragment)
+    binding.signUpBtn.navigateTo(R.id.action_signInFragment_to_signUpFragment)
   }
 }
