@@ -63,6 +63,7 @@
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
@@ -84,7 +85,7 @@
       android:layout_height="wrap_content"
       android:text="@string/search_description"
       android:textColor="@color/white"
-      android:textSize="24sp"
+      android:textSize="20sp"
       android:textStyle="bold"
       app:layout_constraintEnd_toEndOf="@+id/searchIcon"
       app:layout_constraintStart_toStartOf="@+id/searchIcon"

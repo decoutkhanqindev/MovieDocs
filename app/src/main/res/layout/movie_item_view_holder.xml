@@ -29,7 +29,7 @@
   </com.google.android.material.card.MaterialCardView>
 
   <TextView
-      android:id="@+id/movieItemTitleText"
+      android:id="@+id/movieItemTitle"
       android:layout_width="140dp"
       android:layout_height="20dp"
       android:layout_marginTop="4dp"

@@ -6,74 +6,74 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient">
 
-  <ScrollView
-      android:id="@+id/scrollView"
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@android:color/transparent"
-      app:layout_constraintBottom_toBottomOf="parent"
+      android:layout_height="wrap_content"
+      android:background="@color/main_color"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-      <com.google.android.material.appbar.AppBarLayout
-          android:id="@+id/appBarLayout"
-          android:layout_width="match_parent"
+      <TextView
+          android:id="@+id/username"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:background="@color/main_color"
-          app:layout_constraintBottom_toTopOf="@id/sliderLayout"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent">
+          android:layout_gravity="start"
+          android:text="@string/username"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+      <androidx.appcompat.widget.AppCompatImageButton
+          android:id="@+id/searchBtn"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="end"
+          android:layout_marginEnd="20dp"
+          android:background="@null"
+          android:src="@android:drawable/ic_menu_search"
+          tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    </androidx.appcompat.widget.Toolbar>
+  </com.google.android.material.appbar.AppBarLayout>
 
-          <TextView
-              android:id="@+id/usernameText"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="start"
-              android:text="@string/username"
-              android:textColor="@color/white"
-              android:textSize="24sp"
-              android:textStyle="bold" />
+  <ScrollView
+      android:id="@+id/scrollView"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginBottom="8dp"
+      android:background="@android:color/transparent"
+      app:layout_constraintBottom_toTopOf="@id/navigationLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
-          <androidx.appcompat.widget.AppCompatImageButton
-              android:id="@+id/searchBtn"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_gravity="end"
-              android:layout_marginEnd="20dp"
-              android:background="@null"
-              android:src="@android:drawable/ic_menu_search"
-              tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-        </androidx.appcompat.widget.Toolbar>
-      </com.google.android.material.appbar.AppBarLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/sliderLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          app:layout_constraintBottom_toBottomOf="@id/nowPlayingLayout"
+          app:layout_constraintBottom_toTopOf="@id/nowPlayingLayout"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+          app:layout_constraintTop_toTopOf="parent">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/sliderViewPager"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:paddingStart="45dp"
-            android:paddingEnd="45dp"
+            android:paddingStart="35dp"
+            android:paddingEnd="35dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,18 +96,19 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
+          app:layout_constraintBottom_toTopOf="@id/popularLayout"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/sliderLayout">
 
         <TextView
-            android:id="@+id/nowPlayingTitleText"
+            android:id="@+id/nowPlayingTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/now_playing"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/nowPlayingRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,9 +124,9 @@
             android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/nowPlayingTitleText"
+            app:layout_constraintBottom_toBottomOf="@+id/nowPlayingTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nowPlayingTitleText"
+            app:layout_constraintTop_toTopOf="@+id/nowPlayingTitle"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -139,7 +140,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nowPlayingTitleText"
+            app:layout_constraintTop_toBottomOf="@id/nowPlayingTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_view_holder"
@@ -161,19 +162,19 @@
           android:id="@+id/popularLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="16dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/nowPlayingLayout">
 
         <TextView
-            android:id="@+id/popularTitleText"
+            android:id="@+id/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/popular"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/popularRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -189,9 +190,9 @@
             android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/popularTitleText"
+            app:layout_constraintBottom_toBottomOf="@+id/Text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/popularTitleText"
+            app:layout_constraintTop_toTopOf="@+id/Text"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -205,7 +206,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popularTitleText"
+            app:layout_constraintTop_toBottomOf="@id/Text"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_view_holder"
@@ -227,19 +228,19 @@
           android:id="@+id/upcomingLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
+          android:layout_marginTop="16dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/popularLayout">
 
         <TextView
-            android:id="@+id/upcomingTitleText"
+            android:id="@+id/upcomingTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="@string/upcoming"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/upcomingRecycleView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -255,9 +256,9 @@
             android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
-            app:layout_constraintBottom_toBottomOf="@+id/upcomingTitleText"
+            app:layout_constraintBottom_toBottomOf="@+id/upcomingTitle"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/upcomingTitleText"
+            app:layout_constraintTop_toTopOf="@+id/upcomingTitle"
             app:layout_constraintVertical_bias="1.0" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -271,7 +272,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/upcomingTitleText"
+            app:layout_constraintTop_toBottomOf="@id/upcomingTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_view_holder"
@@ -291,26 +292,28 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
 
-  <androidx.cardview.widget.CardView
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/navigationLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="10dp"
+      android:layout_margin="8dp"
       android:background="@android:color/transparent"
       app:cardCornerRadius="8dp"
       app:cardElevation="20dp"
-      app:layout_constraintBottom_toBottomOf="@id/scrollView"
+      app:strokeColor="@android:color/transparent"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent">
 
     <com.ismaeldivita.chipnavigation.ChipNavigationBar
         android:id="@+id/navigationBar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:background="@color/dark_blue"
         app:cnb_badgeColor="@color/red"
         app:cnb_iconSize="28dp"
         app:cnb_menuResource="@menu/navigation_menu"
         app:cnb_orientationMode="horizontal"
         app:cnb_unselectedColor="@color/white" />
-  </androidx.cardview.widget.CardView>
+  </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
