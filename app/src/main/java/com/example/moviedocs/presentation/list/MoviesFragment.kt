@@ -5,7 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -13,19 +13,28 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMoviesBinding
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.list.nowplaying.NowPlayingAdapter
+import com.example.moviedocs.presentation.list.nowplaying.NowPlayingViewModel
+import com.example.moviedocs.presentation.list.popular.PopularAdapter
+import com.example.moviedocs.presentation.list.popular.PopularViewModel
 import com.example.moviedocs.presentation.list.slider.SliderMoviesAdapter
-import com.example.moviedocs.presentation.list.viewmodel.NowPlayingViewModel
+import com.example.moviedocs.presentation.list.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
+import com.example.moviedocs.utils.invisible
+import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateTo
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 @AndroidEntryPoint
 class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding::inflate) {
   
-  private val viewModel: NowPlayingViewModel by viewModels()
+  private val nowPlayingViewModel: NowPlayingViewModel by viewModels()
+  
+  private val popularViewModel: PopularViewModel by viewModels()
+  
+  private val upComingViewModel: UpcomingViewModel by viewModels()
   
   private lateinit var viewPager: ViewPager2
   
@@ -41,16 +50,31 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
     SliderMoviesAdapter(viewPager = viewPager)
   }
   
+  private val nowPlayingAdapter: NowPlayingAdapter by lazy {
+    NowPlayingAdapter()
+  }
+  
+  private val popularAdapter: PopularAdapter by lazy {
+    PopularAdapter()
+  }
+  
+  private val upComingAdapter: PopularAdapter by lazy {
+    PopularAdapter()
+  }
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
     setUpSliderImg()
     setUpNavigate()
+    setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
+    setUpRecyclerView(binding.popularRecycleView, popularAdapter)
+    setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
     bindViewModel()
   }
   
   private fun setUpSliderImg() {
-    viewPager = binding.sliderImg
+    viewPager = binding.sliderViewPager
     viewPager.apply {
       adapter = sliderAdapter
       // sets the number of pages that should be kept in memory off-screen on either side of the current page.
@@ -105,6 +129,124 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
     }
   }
   
+  private fun setUpNavigate() {
+    binding.searchBtn.navigateTo(R.id.action_moviesFragment_to_searchMoviesFragment)
+  }
+  
+  private fun setUpRecyclerView(
+    recyclerView: RecyclerView,
+    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder> // Accepts any subtype of Adapter
+  ) {
+    recyclerView.apply {
+      setHasFixedSize(true)
+      layoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.HORIZONTAL, false
+      )
+      this.adapter = adapter
+    }
+  }
+  
+  private fun bindViewModel() {
+    launchAndRepeatStarted(
+      { nowPlayingViewModel.moviesUiStateFlow.collect(::renderNowPlayingUiState) },
+      { popularViewModel.moviesUiStateFlow.collect(::renderPopularUiState) },
+      { upComingViewModel.moviesUiStateFlow.collect(::renderUpComingUiState)}
+    )
+  }
+  
+  private fun renderNowPlayingUiState(state: MoviesUiState) {
+    when (state) {
+      MoviesUiState.FirstPageLoading -> {
+        binding.apply {
+          sliderProgressBar.visible()
+          sliderViewPager.gone()
+          nowPlayingProgressBar.visible()
+          nowPlayingRecycleView.invisible()
+        }
+        sliderAdapter.submitList(emptyList())
+        nowPlayingAdapter.submitList(emptyList())
+      }
+      
+      MoviesUiState.FirstPageError -> {
+        binding.apply {
+          sliderProgressBar.visible()
+          sliderViewPager.gone()
+          nowPlayingProgressBar.visible()
+          nowPlayingRecycleView.invisible()
+        }
+        sliderAdapter.submitList(emptyList())
+        nowPlayingAdapter.submitList(emptyList())
+      }
+      
+      is MoviesUiState.Success -> {
+        binding.apply {
+          sliderProgressBar.gone()
+          sliderViewPager.visible()
+          nowPlayingProgressBar.gone()
+          nowPlayingRecycleView.visible()
+        }
+        sliderAdapter.submitList(state.items)
+        nowPlayingAdapter.submitList(state.items)
+      }
+    }
+  }
+  
+  private fun renderPopularUiState(state: MoviesUiState) {
+    when (state) {
+      MoviesUiState.FirstPageLoading -> {
+        binding.apply {
+          popularProgressBar.visible()
+          popularRecycleView.invisible()
+        }
+        popularAdapter.submitList(emptyList())
+      }
+      
+      MoviesUiState.FirstPageError -> {
+        binding.apply {
+          popularProgressBar.visible()
+          popularRecycleView.invisible()
+        }
+        popularAdapter.submitList(emptyList())
+      }
+      
+      is MoviesUiState.Success -> {
+        binding.apply {
+          popularProgressBar.gone()
+          popularRecycleView.visible()
+        }
+        popularAdapter.submitList(state.items)
+      }
+    }
+  }
+  
+  private fun renderUpComingUiState(state: MoviesUiState) {
+    when (state) {
+      MoviesUiState.FirstPageLoading -> {
+        binding.apply {
+          upcomingProgressBar.visible()
+          upcomingRecycleView.invisible()
+        }
+        upComingAdapter.submitList(emptyList())
+      }
+      
+      MoviesUiState.FirstPageError -> {
+        binding.apply {
+          upcomingProgressBar.visible()
+          upcomingRecycleView.invisible()
+        }
+        upComingAdapter.submitList(emptyList())
+      }
+      
+      is MoviesUiState.Success -> {
+        binding.apply {
+          upcomingProgressBar.gone()
+          upcomingRecycleView.visible()
+        }
+        upComingAdapter.submitList(state.items)
+      }
+    }
+  }
+  
   override fun onPause() {
     super.onPause()
     sliderHandler.removeCallbacks(sliderRunnable)
@@ -115,33 +257,16 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
     sliderHandler.postDelayed(sliderRunnable, 2000)
   }
   
-  private fun bindViewModel() {
-    viewLifecycleOwner.lifecycleScope.launch {
-      viewModel.movieListUiStateFlow.collect { it: MovieListUiState ->
-        when (it) {
-          is MovieListUiState.FirstPageLoading -> {
-            binding.sliderProgressBar.visible()
-            binding.sliderImg.gone()
-            sliderAdapter.submitList(emptyList())
-          }
-          
-          is MovieListUiState.FirstPageError -> {
-            binding.sliderProgressBar.visible()
-            binding.sliderImg.gone()
-            sliderAdapter.submitList(emptyList())
-          }
-          
-          is MovieListUiState.Success -> {
-            binding.sliderProgressBar.gone()
-            binding.sliderImg.visible()
-            sliderAdapter.submitList(it.items)
-          }
-        }
-      }
+  override fun onDestroyView() {
+    // avoid memory leak
+    binding.apply {
+      sliderViewPager.adapter = null
+      nowPlayingRecycleView.adapter = null
     }
+    super.onDestroyView()
   }
   
-  private fun setUpNavigate() {
-    binding.searchBtn.navigateTo(R.id.action_moviesFragment_to_searchMoviesFragment)
+  companion object {
+    private const val VISIBLE_THRESHOLD = 2
   }
 }
