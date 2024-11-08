@@ -10,11 +10,12 @@ sealed interface MoviesUiState {
     val currentPage: Int,
     val nextPageState: MoviesNextPageState
   ) : MoviesUiState
+  
+  enum class MoviesNextPageState {
+    LOADING,  // load more a next page state is loading
+    ERROR, // load more a next page state is error
+    IDLE, // load more a next page state is idle -> it scrolled a last element -> load more
+    DONE // load more a next page state is done -> no more items to load more
+  }
 }
 
-enum class MoviesNextPageState {
-  LOADING,  // load more a next page state is loading
-  ERROR, // load more a next page state is error
-  IDLE, // load more a next page state is idle -> it scrolled a last element -> load more
-  DONE // load more a next page state is done -> no more items to load more
-}

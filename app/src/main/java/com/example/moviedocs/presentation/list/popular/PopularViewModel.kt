@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.MovieModel
 import com.example.moviedocs.domain.usecase.list.GetPopularMoviesUseCase
-import com.example.moviedocs.presentation.list.MoviesNextPageState
 import com.example.moviedocs.presentation.list.MoviesUiState
 import com.example.moviedocs.presentation.list.MoviesSingleEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -45,9 +44,9 @@ class PopularViewModel
             items = it,
             currentPage = 1,
             nextPageState = if (it.size < MAX_ITEMS_SIZE) {
-              MoviesNextPageState.DONE
+              MoviesUiState.MoviesNextPageState.DONE
             } else {
-              MoviesNextPageState.IDLE
+              MoviesUiState.MoviesNextPageState.IDLE
             }
           )
           _moviesSingleEvent.send(MoviesSingleEvent.Success)
@@ -65,9 +64,12 @@ class PopularViewModel
       MoviesUiState.FirstPageLoading, MoviesUiState.FirstPageError -> return
       is MoviesUiState.Success -> {
         when (currentState.nextPageState) {
-          MoviesNextPageState.DONE, MoviesNextPageState.LOADING -> return
-          MoviesNextPageState.ERROR -> loadFirstPage()
-          MoviesNextPageState.IDLE -> loadNextPageInternal(currentState)
+          MoviesUiState.MoviesNextPageState.DONE,
+          MoviesUiState.MoviesNextPageState.LOADING
+            -> return
+          
+          MoviesUiState.MoviesNextPageState.ERROR -> loadFirstPage()
+          MoviesUiState.MoviesNextPageState.IDLE -> loadNextPageInternal(currentState)
         }
       }
     }
@@ -75,7 +77,9 @@ class PopularViewModel
   
   private fun loadNextPageInternal(currentState: MoviesUiState.Success) {
     viewModelScope.launch {
-      _moviesUiStateFlow.value = currentState.copy(nextPageState = MoviesNextPageState.LOADING)
+      _moviesUiStateFlow.value = currentState.copy(
+        nextPageState = MoviesUiState.MoviesNextPageState.LOADING
+      )
       val nextPage: Int = currentState.currentPage + 1
       val nextPageResponse: Result<List<MovieModel>> = getPopularMoviesUseCase(page = nextPage)
       val updateItems: MutableList<MovieModel> = currentState.items.toMutableList()
@@ -87,15 +91,17 @@ class PopularViewModel
             items = updateItems,
             currentPage = nextPage,
             nextPageState = if (it.size < MAX_ITEMS_SIZE) {
-              MoviesNextPageState.DONE
+              MoviesUiState.MoviesNextPageState.DONE
             } else {
-              MoviesNextPageState.IDLE
+              MoviesUiState.MoviesNextPageState.IDLE
             }
           )
           _moviesSingleEvent.send(MoviesSingleEvent.Success)
         }
         .onFailure { it: Throwable ->
-          _moviesUiStateFlow.value = currentState.copy(nextPageState = MoviesNextPageState.ERROR)
+          _moviesUiStateFlow.value = currentState.copy(
+            nextPageState = MoviesUiState.MoviesNextPageState.ERROR
+          )
           _moviesSingleEvent.send(MoviesSingleEvent.Error(it))
           Timber.tag("getPopularMoviesUseCase").e("loadNextPageInternal: ${it.message}")
         }

@@ -27,10 +27,10 @@ class GlideModule : AppGlideModule() {
       GlideUrl::class.java, InputStream::class.java, OkHttpUrlLoader.Factory(okHttpClient)
     )
   }
-}
-
-@EntryPoint
-@InstallIn(SingletonComponent::class)
-interface OkHttpEntryPoint {
-  fun provideOkHttpClient(): OkHttpClient
+  
+  @EntryPoint
+  @InstallIn(SingletonComponent::class)
+  interface OkHttpEntryPoint {
+    fun provideOkHttpClient(): OkHttpClient
+  }
 }
