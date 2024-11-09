@@ -70,7 +70,7 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
     setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
     setUpRecyclerView(binding.popularRecycleView, popularAdapter)
     setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
-    bindViewModel()
+    observeData()
   }
   
   private fun setUpSliderImg() {
@@ -146,7 +146,7 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
     }
   }
   
-  private fun bindViewModel() {
+  private fun observeData() {
     launchAndRepeatStarted(
       { nowPlayingViewModel.moviesUiStateFlow.collect(::renderNowPlayingUiState) },
       { popularViewModel.moviesUiStateFlow.collect(::renderPopularUiState) },

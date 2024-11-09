@@ -38,8 +38,9 @@ import kotlinx.coroutines.launch
  * or ComponentActivity.
  * + Lifecycle Awareness: "repeatOnLifecycle(Lifecycle.State.STARTED)" ensures that the coroutines
  * will:
- * Start when the lifecycle state reaches STARTED
- * Suspend execution when the state drops below STARTED (e.g., when the Fragment is paused or stopped).
+ * Runs the block of code in a coroutine when the lifecycle is at least STARTED.
+ * The coroutine will be cancelled when the ON_STOP event happens and will
+ * restart executing if the lifecycle receives the ON_START event again.
  * + Execution Flow:
  * Launch the required launchBlock.
  * Launch each additional block from launchBlocks concurrently.

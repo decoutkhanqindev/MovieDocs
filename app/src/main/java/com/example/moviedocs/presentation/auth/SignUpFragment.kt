@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation
+package com.example.moviedocs.presentation.auth
 
 import android.os.Bundle
 import android.view.View
