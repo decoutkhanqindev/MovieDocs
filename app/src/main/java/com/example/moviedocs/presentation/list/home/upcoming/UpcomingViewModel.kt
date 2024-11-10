@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.list.upcoming
+package com.example.moviedocs.presentation.list.home.upcoming
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,15 +1,15 @@
-package com.example.moviedocs.presentation.list
+package com.example.moviedocs.presentation.search
 
 import android.os.Bundle
 import android.view.View
-import com.example.moviedocs.databinding.FragmentSearchMoviesBinding
+import com.example.moviedocs.databinding.FragmentSearchBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.navigateBack
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchMoviesFragment :
-  BaseFragment<FragmentSearchMoviesBinding>(FragmentSearchMoviesBinding::inflate) {
+class SearchFragment :
+  BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

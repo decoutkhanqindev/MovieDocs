@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.list.slider
+package com.example.moviedocs.presentation.list.home.slider
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

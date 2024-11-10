@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.list.upcoming
+package com.example.moviedocs.presentation.list.home.nowplaying
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,21 +9,21 @@ import com.example.moviedocs.domain.model.MovieModel
 import com.example.moviedocs.presentation.list.MovieModelItemCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class UpcomingAdapter(
-//  private val onItemClick: () -> Unit
-) : ListAdapter<MovieModel, UpcomingAdapter.UpComingViewHolder>(MovieModelItemCallBack) {
+class NowPlayingAdapter(
+//  private val onMovieClick: (MovieModel) -> Unit
+) : ListAdapter<MovieModel, NowPlayingAdapter.NowPlayingViewHolder>(MovieModelItemCallBack) {
   
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UpComingViewHolder =
-    UpComingViewHolder(
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder =
+    NowPlayingViewHolder(
       MovieItemViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
   
-  override fun onBindViewHolder(holder: UpComingViewHolder, position: Int) =
+  override fun onBindViewHolder(holder: NowPlayingViewHolder, position: Int) =
     holder.bind(getItem(position))
   
-  inner class UpComingViewHolder(
+  inner class NowPlayingViewHolder(
     private val binding: MovieItemViewHolderBinding
   ) : RecyclerView.ViewHolder(binding.root) {
     

@@ -1,24 +1,28 @@
-package com.example.moviedocs.presentation.list
+package com.example.moviedocs.presentation.list.home
 
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
-import com.example.moviedocs.databinding.FragmentMoviesBinding
+import com.example.moviedocs.databinding.FragmentHomeBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.list.nowplaying.NowPlayingAdapter
-import com.example.moviedocs.presentation.list.nowplaying.NowPlayingViewModel
-import com.example.moviedocs.presentation.list.popular.PopularAdapter
-import com.example.moviedocs.presentation.list.popular.PopularViewModel
-import com.example.moviedocs.presentation.list.slider.SliderMoviesAdapter
-import com.example.moviedocs.presentation.list.upcoming.UpcomingViewModel
+import com.example.moviedocs.presentation.list.MoviesUiState
+import com.example.moviedocs.presentation.list.home.nowplaying.NowPlayingAdapter
+import com.example.moviedocs.presentation.list.home.nowplaying.NowPlayingViewModel
+import com.example.moviedocs.presentation.list.home.popular.PopularAdapter
+import com.example.moviedocs.presentation.list.home.popular.PopularViewModel
+import com.example.moviedocs.presentation.list.home.slider.SliderMoviesAdapter
+import com.example.moviedocs.presentation.list.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
@@ -28,7 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
   
   private val nowPlayingViewModel: NowPlayingViewModel by viewModels()
   
@@ -62,15 +66,24 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
     PopularAdapter()
   }
   
+  private lateinit var navController: NavController
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    setUpSliderImg()
     setUpNavigate()
+    setUpSliderImg()
     setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
     setUpRecyclerView(binding.popularRecycleView, popularAdapter)
     setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
     observeData()
+  }
+  
+  private fun setUpNavigate() {
+    navController = findNavController()
+    binding.bottomNavigationMenu.setupWithNavController(navController)
+    
+    binding.searchBtn.navigateTo(R.id.action_moviesFragment_to_searchMoviesFragment)
   }
   
   private fun setUpSliderImg() {
@@ -127,10 +140,6 @@ class MoviesFragment : BaseFragment<FragmentMoviesBinding>(FragmentMoviesBinding
         }
       })
     }
-  }
-  
-  private fun setUpNavigate() {
-    binding.searchBtn.navigateTo(R.id.action_moviesFragment_to_searchMoviesFragment)
   }
   
   private fun setUpRecyclerView(
