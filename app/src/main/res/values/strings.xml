@@ -27,4 +27,7 @@
   <string name="home_icon">Home</string>
   <string name="favorite_icon">Favorite</string>
   <string name="profile_icon">Profile</string>
+  <string name="whoops">WHOOPS!</string>
+  <string name="noNetworkConnectivityDescription">No internet connection found. \nPlease check your connection or try again later.</string>
+  <string name="try_again">TRY AGAIN</string>
 </resources>

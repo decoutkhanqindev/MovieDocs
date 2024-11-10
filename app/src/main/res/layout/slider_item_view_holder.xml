@@ -8,7 +8,6 @@
     app:cardElevation="4dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
-    app:contentPadding="0dp"
     app:strokeColor="@android:color/transparent">
 
   <ImageView
