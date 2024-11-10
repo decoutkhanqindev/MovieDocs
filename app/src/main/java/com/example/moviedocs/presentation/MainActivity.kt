@@ -1,9 +1,11 @@
 package com.example.moviedocs.presentation
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.ActivityMainBinding
+import com.example.moviedocs.databinding.CustomNetworkDialogLayoutBinding
 import com.example.moviedocs.presentation.base.BaseActivity
 import com.example.moviedocs.utils.connectivity.NetworkConnectivityObserver
 import com.example.moviedocs.utils.launchAndRepeatStarted
@@ -38,11 +40,18 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
   }
   
   private fun showAlertDialog() {
+    val dialogLayoutBinding: CustomNetworkDialogLayoutBinding = CustomNetworkDialogLayoutBinding.inflate(layoutInflater)
+    
     if (alertDialog?.isShowing == true) return
     alertDialog = AlertDialog.Builder(this)
-      .setView(R.layout.custom_network_dialog_layout)
+      .setView(dialogLayoutBinding.root)
       .setCancelable(false)
       .show()
+    
+    dialogLayoutBinding.tryAgainBtn.setOnClickListener {
+      // open wifi settings
+      startActivity(Intent(android.provider.Settings.ACTION_WIFI_SETTINGS))
+    }
   }
   
   private fun hideAlertDialog() {
