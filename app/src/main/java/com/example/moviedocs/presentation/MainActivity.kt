@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
+  
   @Inject
   internal lateinit var networkConnectivityObserver: NetworkConnectivityObserver
   
@@ -25,29 +26,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
   
   private fun observeNetworkConnectivity() {
     launchAndRepeatStarted(
-      { networkConnectivityObserver.observe().collect(::renderAlertDialog) }
+      { networkConnectivityObserver.observe().collect(::renderAlertDialog) },
     )
   }
   
   private fun renderAlertDialog(status: NetworkConnectivityObserver.NetworkStatus) {
     when (status) {
       NetworkConnectivityObserver.NetworkStatus.AVAILABLE -> hideAlertDialog()
-      NetworkConnectivityObserver.NetworkStatus.LOSING -> showAlertDialog("losing")
-      NetworkConnectivityObserver.NetworkStatus.LOST -> showAlertDialog("lost")
-      NetworkConnectivityObserver.NetworkStatus.UNAVAILABLE -> showAlertDialog("unavailable")
+      else -> showAlertDialog()
     }
   }
   
-  private fun showAlertDialog(message: String) {
+  private fun showAlertDialog() {
+    if (alertDialog?.isShowing == true) return
     alertDialog = AlertDialog.Builder(this)
-      .setTitle("Network Connectivity")
-      .setMessage("Your network is $message \nPlease check your internet connection.")
-      .setIcon(R.drawable.no_internet_connection)
-      .setPositiveButton("OK", null)
+      .setView(R.layout.custom_network_dialog_layout)
+      .setCancelable(false)
       .show()
   }
   
   private fun hideAlertDialog() {
     alertDialog?.dismiss()
+    alertDialog = null
   }
 }
