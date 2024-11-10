@@ -11,6 +11,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ import javax.inject.Inject
  * a Flow that emits the current network status whenever it changes.
  */
 class NetworkConnectivityObserverImpl
-@Inject constructor( @ApplicationContext context: Context) : NetworkConnectivityObserver {
+@Inject constructor(@ApplicationContext context: Context) : NetworkConnectivityObserver {
   
   // Get the ConnectivityManager system service
   private val connectivityManager: ConnectivityManager =
@@ -34,35 +35,35 @@ class NetworkConnectivityObserverImpl
         
         override fun onAvailable(network: Network) {
           super.onAvailable(network)
-          channel.trySend(NetworkConnectivityObserver.NetworkStatus.AVAILABLE)
-          Timber.tag("Network Status").d("AVAILABLE")
+          launch {
+            send(NetworkConnectivityObserver.NetworkStatus.AVAILABLE)
+          }
         }
         
         override fun onUnavailable() {
           super.onUnavailable()
-          channel.trySend(NetworkConnectivityObserver.NetworkStatus.UNAVAILABLE)
-          Timber.tag("Network Status").d("UNAVAILABLE")
+          launch {
+            send(NetworkConnectivityObserver.NetworkStatus.UNAVAILABLE)
+          }
         }
         
         override fun onLosing(network: Network, maxMsToLive: Int) {
           super.onLosing(network, maxMsToLive)
-          channel.trySend(NetworkConnectivityObserver.NetworkStatus.LOSING)
-          Timber.tag("Network Status").d("LOSING")
+          launch {
+            send(NetworkConnectivityObserver.NetworkStatus.LOSING)
+          }
         }
         
         override fun onLost(network: Network) {
           super.onLost(network)
-          channel.trySend(NetworkConnectivityObserver.NetworkStatus.LOST)
-          Timber.tag("Network Status").d("LOST")
+          launch {
+            send(NetworkConnectivityObserver.NetworkStatus.LOST)
+          }
         }
       }
       
-      val request: NetworkRequest = NetworkRequest.Builder()
-        .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        .build()
-      
       // Register the NetworkCallback with the ConnectivityManager
-      connectivityManager.registerNetworkCallback(request, callback)
+      connectivityManager.registerDefaultNetworkCallback(callback)
       
       // Unregister the NetworkCallback when the Flow is closed
       awaitClose {
@@ -70,3 +71,4 @@ class NetworkConnectivityObserverImpl
       }
     }.distinctUntilChanged() // Only emit distinct status changes
 }
+
