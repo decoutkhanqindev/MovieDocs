@@ -1,11 +1,11 @@
-package com.example.moviedocs.presentation.list.home.nowplaying
+package com.example.moviedocs.presentation.home.nowplaying
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.MovieModel
 import com.example.moviedocs.domain.usecase.list.GetNowPlayingMoviesUseCase
-import com.example.moviedocs.presentation.list.MoviesSingleEvent
-import com.example.moviedocs.presentation.list.MoviesUiState
+import com.example.moviedocs.presentation.home.MoviesSingleEvent
+import com.example.moviedocs.presentation.home.MoviesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow

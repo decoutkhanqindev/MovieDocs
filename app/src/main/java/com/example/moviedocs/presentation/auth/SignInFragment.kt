@@ -12,11 +12,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    setUpNavigate()
+    setUpNavigation()
   }
-
-  private fun setUpNavigate() {
-    binding.signInBtn.navigateTo(R.id.action_signInFragment_to_moviesFragment)
+  
+  private fun setUpNavigation() {
+    binding.signInBtn.navigateTo(R.id.action_signInFragment_to_homeFragment)
     binding.signUpBtn.navigateTo(R.id.action_signInFragment_to_signUpFragment)
   }
 }

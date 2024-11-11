@@ -11,10 +11,10 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    setUpNavigate()
+    setUpNavigation()
   }
   
-  private fun setUpNavigate() {
+  private fun setUpNavigation() {
     binding.backBtn.navigateBack()
   }
 }

@@ -1,26 +1,24 @@
-package com.example.moviedocs.presentation.list.home.popular
+package com.example.moviedocs.presentation.home.upcoming
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.MovieModel
-import com.example.moviedocs.domain.usecase.list.GetPopularMoviesUseCase
-import com.example.moviedocs.presentation.list.MoviesUiState
-import com.example.moviedocs.presentation.list.MoviesSingleEvent
+import com.example.moviedocs.domain.usecase.list.GetUpcomingMoviesUseCase
+import com.example.moviedocs.presentation.home.MoviesSingleEvent
+import com.example.moviedocs.presentation.home.MoviesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class PopularViewModel
+class UpcomingViewModel
 @Inject constructor(
-  private val getPopularMoviesUseCase: GetPopularMoviesUseCase
+  private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase
 ) : ViewModel() {
   
   private val _moviesUiStateFlow: MutableStateFlow<MoviesUiState> =
@@ -28,7 +26,7 @@ class PopularViewModel
   val moviesUiStateFlow: StateFlow<MoviesUiState> get() = _moviesUiStateFlow.asStateFlow()
   
   private val _moviesSingleEvent: Channel<MoviesSingleEvent> = Channel(capacity = Channel.UNLIMITED)
-  val moviesSingleEvent: Flow<MoviesSingleEvent> get() = _moviesSingleEvent.receiveAsFlow()
+  val moviesSingleEvent: Channel<MoviesSingleEvent> get() = _moviesSingleEvent
   
   init {
     loadFirstPage()
@@ -37,8 +35,8 @@ class PopularViewModel
   private fun loadFirstPage() {
     viewModelScope.launch {
       _moviesUiStateFlow.value = MoviesUiState.FirstPageLoading
-      val firstPageResponse: Result<List<MovieModel>> = getPopularMoviesUseCase(page = 1)
-      firstPageResponse
+      val fistPageResponse: Result<List<MovieModel>> = getUpcomingMoviesUseCase(page = 1)
+      fistPageResponse
         .onSuccess { it: List<MovieModel> ->
           _moviesUiStateFlow.value = MoviesUiState.Success(
             items = it,
@@ -54,7 +52,7 @@ class PopularViewModel
         .onFailure { it: Throwable ->
           _moviesUiStateFlow.value = MoviesUiState.FirstPageError
           _moviesSingleEvent.send(MoviesSingleEvent.Error(it))
-          Timber.tag("getPopularMoviesUseCase").e("loadFirstPage: ${it.message}")
+          Timber.tag("UpComingViewModel").e("loadFirstPage: ${it.message}")
         }
     }
   }
@@ -64,8 +62,8 @@ class PopularViewModel
       MoviesUiState.FirstPageLoading, MoviesUiState.FirstPageError -> return
       is MoviesUiState.Success -> {
         when (currentState.nextPageState) {
-          MoviesUiState.MoviesNextPageState.DONE,
-          MoviesUiState.MoviesNextPageState.LOADING
+          MoviesUiState.MoviesNextPageState.LOADING,
+          MoviesUiState.MoviesNextPageState.DONE
             -> return
           
           MoviesUiState.MoviesNextPageState.ERROR -> loadFirstPage()
@@ -81,14 +79,14 @@ class PopularViewModel
         nextPageState = MoviesUiState.MoviesNextPageState.LOADING
       )
       val nextPage: Int = currentState.currentPage + 1
-      val nextPageResponse: Result<List<MovieModel>> = getPopularMoviesUseCase(page = nextPage)
-      val updateItems: MutableList<MovieModel> = currentState.items.toMutableList()
+      val nextPageResponse: Result<List<MovieModel>> = getUpcomingMoviesUseCase(page = nextPage)
+      val updatedItems: MutableList<MovieModel> = currentState.items.toMutableList()
       
       nextPageResponse
         .onSuccess { it: List<MovieModel> ->
-          updateItems.addAll(it)
+          updatedItems.addAll(it)
           _moviesUiStateFlow.value = MoviesUiState.Success(
-            items = updateItems,
+            items = updatedItems,
             currentPage = nextPage,
             nextPageState = if (it.size < MAX_ITEMS_SIZE) {
               MoviesUiState.MoviesNextPageState.DONE
@@ -103,7 +101,7 @@ class PopularViewModel
             nextPageState = MoviesUiState.MoviesNextPageState.ERROR
           )
           _moviesSingleEvent.send(MoviesSingleEvent.Error(it))
-          Timber.tag("getPopularMoviesUseCase").e("loadNextPageInternal: ${it.message}")
+          Timber.tag("UpComingViewModel").e("loadNextPageInternal: ${it.message}")
         }
     }
   }
