@@ -48,7 +48,7 @@
       android:layout_height="0dp"
       android:layout_marginBottom="8dp"
       android:background="@android:color/transparent"
-      app:layout_constraintBottom_toTopOf="@id/bottomNavigationMenu"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout">
@@ -285,24 +285,4 @@
       </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
-  
-  <com.google.android.material.bottomnavigation.BottomNavigationView
-      android:id="@+id/bottomNavigationMenu"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:background="@drawable/bg_rounded_no_border"
-      app:itemActiveIndicatorStyle="@style/ShapeAppearance.Material3.Corner.None"
-      app:itemBackground="@drawable/bottom_nav_menu_item_selector"
-      app:itemIconSize="28sp"
-      app:itemIconTint="@color/white"
-      app:itemRippleColor="@android:color/transparent"
-      app:itemTextAppearanceActive="@android:style/TextAppearance.Material.Small"
-      app:itemTextAppearanceActiveBoldEnabled="true"
-      app:itemTextColor="@color/white"
-      app:labelVisibilityMode="selected"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/scrollView"
-      app:menu="@menu/bottom_navigation_menu" />
 </androidx.constraintlayout.widget.ConstraintLayout>
