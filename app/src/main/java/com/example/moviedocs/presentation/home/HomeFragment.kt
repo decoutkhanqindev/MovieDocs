@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.list.home
+package com.example.moviedocs.presentation.home
 
 import android.os.Bundle
 import android.os.Handler
@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,13 +17,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.list.MoviesUiState
-import com.example.moviedocs.presentation.list.home.nowplaying.NowPlayingAdapter
-import com.example.moviedocs.presentation.list.home.nowplaying.NowPlayingViewModel
-import com.example.moviedocs.presentation.list.home.popular.PopularAdapter
-import com.example.moviedocs.presentation.list.home.popular.PopularViewModel
-import com.example.moviedocs.presentation.list.home.slider.SliderMoviesAdapter
-import com.example.moviedocs.presentation.list.home.upcoming.UpcomingViewModel
+import com.example.moviedocs.presentation.home.nowplaying.NowPlayingAdapter
+import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
+import com.example.moviedocs.presentation.home.popular.PopularAdapter
+import com.example.moviedocs.presentation.home.popular.PopularViewModel
+import com.example.moviedocs.presentation.home.slider.SliderMoviesAdapter
+import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
@@ -66,8 +66,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     PopularAdapter()
   }
   
-  private lateinit var navController: NavController
-  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
@@ -80,10 +78,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   }
   
   private fun setUpNavigate() {
-    navController = findNavController()
-    binding.bottomNavigationMenu.setupWithNavController(navController)
-    
-    binding.searchBtn.navigateTo(R.id.action_moviesFragment_to_searchMoviesFragment)
+    binding.searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
   }
   
   private fun setUpSliderImg() {

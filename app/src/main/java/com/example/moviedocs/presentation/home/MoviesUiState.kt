@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.list
+package com.example.moviedocs.presentation.home
 
 import com.example.moviedocs.domain.model.MovieModel
 
