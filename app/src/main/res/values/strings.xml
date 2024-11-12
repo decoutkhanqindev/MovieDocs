@@ -31,4 +31,6 @@
   <string name="noNetworkConnectivityDescription">No internet connection found. \nPlease check your connection or try again later.</string>
   <string name="try_again">TRY AGAIN</string>
   <string name="top_rated">Top Rated</string>
+  <string name="vote_average">7.7</string>
+  <string name="vote_count">853</string>
 </resources>

@@ -8,7 +8,8 @@ fun MovieResponse.toMovieModel(): MovieModel =
     id = id,
     title = title,
     overview = overview,
-    posterPath = posterPath,
     releaseDate = releaseDate,
-    voteAverage = voteAverage
+    voteAverage = voteAverage,
+    voteCount = voteCount,
+    posterPath = posterPath
   )

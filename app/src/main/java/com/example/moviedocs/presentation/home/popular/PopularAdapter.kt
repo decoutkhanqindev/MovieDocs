@@ -31,6 +31,8 @@ class PopularAdapter(
       binding.apply {
         movieItemImg.loadImgFromUrl(item.posterPath)
         movieItemTitle.text = item.title
+        movieItemRatingVoteAverage.text = String.format("%.1f", item.voteAverage)
+        movieItemRatingVoteCout.text = item.voteCount.toString()
       }
     }
   }
