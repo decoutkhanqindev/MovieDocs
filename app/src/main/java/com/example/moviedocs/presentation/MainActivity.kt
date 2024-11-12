@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.moviedocs.R
@@ -17,6 +16,7 @@ import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -48,7 +48,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
   
   private fun handleBottomNavigationMenuVisibility(destination: Int) {
     when (destination) {
-      R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> binding.bottomNavigationMenu.visible()
+      R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
+        launchAndRepeatStarted({
+          delay(250)
+          binding.bottomNavigationMenu.visible()
+        })
+      }
+      
       else -> binding.bottomNavigationMenu.gone()
     }
   }
@@ -71,10 +77,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
       CustomNetworkDialogLayoutBinding.inflate(layoutInflater)
     
     if (alertDialog?.isShowing == true) return
-    alertDialog = AlertDialog.Builder(this)
-      .setView(dialogLayoutBinding.root)
-      .setCancelable(false)
-      .show()
+    alertDialog =
+      AlertDialog.Builder(this).setView(dialogLayoutBinding.root).setCancelable(false).show()
     
     dialogLayoutBinding.tryAgainBtn.setOnClickListener {
       // open wifi settings
