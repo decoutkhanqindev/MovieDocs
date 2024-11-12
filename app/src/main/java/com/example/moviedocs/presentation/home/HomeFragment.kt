@@ -18,6 +18,8 @@ import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
 import com.example.moviedocs.presentation.home.popular.PopularAdapter
 import com.example.moviedocs.presentation.home.popular.PopularViewModel
 import com.example.moviedocs.presentation.home.slider.SliderAdapter
+import com.example.moviedocs.presentation.home.toprated.TopRatedAdapter
+import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
@@ -36,8 +38,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private val upComingViewModel: UpcomingViewModel by viewModels()
   
+  private val topRatedViewModel: TopRatedViewModel by viewModels()
+  
   private lateinit var viewPager: ViewPager2
-
+  
   // Handler is used for scheduling tasks and delivering messages or Runnables to be executed on
   // specific thread (usually the main thread)
   // - It's associated with a thread's message queue (Looper).
@@ -76,6 +80,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     PopularAdapter()
   }
   
+  private val topRatedAdapter: TopRatedAdapter by lazy {
+    TopRatedAdapter()
+  }
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
@@ -84,8 +92,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
     setUpRecyclerView(binding.popularRecycleView, popularAdapter)
     setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
-    observeData()
-    
+    setUpRecyclerView(binding.topRatedRecycleView, topRatedAdapter)
+    bindViewModel()
   }
   
   private fun setUpNavigation() {
@@ -162,7 +170,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun setUpRecyclerView(
     recyclerView: RecyclerView,
-    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder> // Accepts any subtype of Adapter
+    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
   ) {
     recyclerView.apply {
       setHasFixedSize(true)
@@ -173,17 +181,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
   }
   
-  private fun observeData() {
+  private fun bindViewModel() {
     launchAndRepeatStarted(
-      { nowPlayingViewModel.moviesUiStateFlow.collect(::renderNowPlayingUiState) },
-      { popularViewModel.moviesUiStateFlow.collect(::renderPopularUiState) },
-      { upComingViewModel.moviesUiStateFlow.collect(::renderUpComingUiState)}
+      { nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
+      { popularViewModel.movieListUiState.collect(::renderPopularUi) },
+      { upComingViewModel.movieListUiState.collect(::renderUpcomingUi) },
+      { topRatedViewModel.movieListUiState.collect(::renderTopRatedUi) }
     )
   }
   
-  private fun renderNowPlayingUiState(state: MoviesUiState) {
+  private fun renderNowPlayingUi(state: MovieListUiState) {
     when (state) {
-      MoviesUiState.FirstPageLoading -> {
+      MovieListUiState.FirstPageLoading -> {
         binding.apply {
           sliderProgressBar.visible()
           sliderViewPager.gone()
@@ -194,7 +203,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         nowPlayingAdapter.submitList(emptyList())
       }
       
-      MoviesUiState.FirstPageError -> {
+      MovieListUiState.FirstPageError -> {
         binding.apply {
           sliderProgressBar.visible()
           sliderViewPager.gone()
@@ -205,7 +214,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         nowPlayingAdapter.submitList(emptyList())
       }
       
-      is MoviesUiState.Success -> {
+      is MovieListUiState.Success -> {
         binding.apply {
           sliderProgressBar.gone()
           sliderViewPager.visible()
@@ -218,9 +227,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
   }
   
-  private fun renderPopularUiState(state: MoviesUiState) {
+  private fun renderPopularUi(state: MovieListUiState) {
     when (state) {
-      MoviesUiState.FirstPageLoading -> {
+      MovieListUiState.FirstPageLoading -> {
         binding.apply {
           popularProgressBar.visible()
           popularRecycleView.invisible()
@@ -228,7 +237,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         popularAdapter.submitList(emptyList())
       }
       
-      MoviesUiState.FirstPageError -> {
+      MovieListUiState.FirstPageError -> {
         binding.apply {
           popularProgressBar.visible()
           popularRecycleView.invisible()
@@ -236,7 +245,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         popularAdapter.submitList(emptyList())
       }
       
-      is MoviesUiState.Success -> {
+      is MovieListUiState.Success -> {
         binding.apply {
           popularProgressBar.gone()
           popularRecycleView.visible()
@@ -246,9 +255,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
   }
   
-  private fun renderUpComingUiState(state: MoviesUiState) {
+  private fun renderUpcomingUi(state: MovieListUiState) {
     when (state) {
-      MoviesUiState.FirstPageLoading -> {
+      MovieListUiState.FirstPageLoading -> {
         binding.apply {
           upcomingProgressBar.visible()
           upcomingRecycleView.invisible()
@@ -256,7 +265,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         upComingAdapter.submitList(emptyList())
       }
       
-      MoviesUiState.FirstPageError -> {
+      MovieListUiState.FirstPageError -> {
         binding.apply {
           upcomingProgressBar.visible()
           upcomingRecycleView.invisible()
@@ -264,7 +273,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         upComingAdapter.submitList(emptyList())
       }
       
-      is MoviesUiState.Success -> {
+      is MovieListUiState.Success -> {
         binding.apply {
           upcomingProgressBar.gone()
           upcomingRecycleView.visible()
@@ -274,11 +283,42 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
   }
   
+  private fun renderTopRatedUi(state: MovieListUiState) {
+    when (state) {
+      MovieListUiState.FirstPageLoading -> {
+        binding.apply {
+          topRatedProgressBar.visible()
+          topRatedRecycleView.invisible()
+        }
+        topRatedAdapter.submitList(emptyList())
+      }
+      
+      MovieListUiState.FirstPageError -> {
+        binding.apply {
+          topRatedProgressBar.visible()
+          topRatedRecycleView.invisible()
+        }
+        topRatedAdapter.submitList(emptyList())
+      }
+      
+      is MovieListUiState.Success -> {
+        binding.apply {
+          topRatedProgressBar.gone()
+          topRatedRecycleView.visible()
+        }
+        topRatedAdapter.submitList(state.items)
+      }
+    }
+  }
+  
   override fun onDestroyView() {
     // avoid memory leak
     binding.apply {
       sliderViewPager.adapter = null
       nowPlayingRecycleView.adapter = null
+      popularRecycleView.adapter = null
+      upcomingRecycleView.adapter = null
+      topRatedRecycleView.adapter = null
     }
     super.onDestroyView()
   }
