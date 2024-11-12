@@ -283,6 +283,70 @@
             app:layout_constraintTop_toBottomOf="@id/upcomingRecycleView"
             app:layout_constraintTop_toTopOf="@+id/upcomingRecycleView" />
       </androidx.constraintlayout.widget.ConstraintLayout>
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/topRatedLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/upcomingLayout">
+        
+        <TextView
+            android:id="@+id/topRatedTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/top_rated"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/topRatedRecycleView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <ImageView
+            android:id="@+id/topRatedMoreBtn"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:importantForAccessibility="no"
+            android:src="@mipmap/more_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/topRatedTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/topRatedTitle"
+            app:layout_constraintVertical_bias="1.0" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/topRatedRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topRatedTitle"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/movie_item_view_holder"
+            tools:orientation="horizontal" />
+        
+        <ProgressBar
+            android:id="@+id/topRatedProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/topRatedRecycleView"
+            app:layout_constraintEnd_toEndOf="@+id/topRatedRecycleView"
+            app:layout_constraintStart_toStartOf="@+id/topRatedRecycleView"
+            app:layout_constraintTop_toBottomOf="@id/topRatedRecycleView"
+            app:layout_constraintTop_toTopOf="@+id/topRatedRecycleView" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
