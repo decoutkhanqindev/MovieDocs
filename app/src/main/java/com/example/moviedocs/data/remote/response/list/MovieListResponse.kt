@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.squareup.moshi.Json
 
 @Keep
-data class MoviesResponse(
+data class MovieListResponse(
   @Json(name = "page")
   val page: Int, // 1
   @Json(name = "results")
