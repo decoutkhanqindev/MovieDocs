@@ -33,7 +33,6 @@ annotation class ApiRequest
 @Module
 @InstallIn(SingletonComponent::class)
 object RemoteModule {
-  
   @Provides
   @BaseUrl
   fun provideBaseUrl(): String = BuildConfig.BASE_URL

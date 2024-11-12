@@ -8,9 +8,7 @@ import android.widget.ImageView
 import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import kotlinx.coroutines.CancellableContinuation
@@ -22,7 +20,8 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
   
   suspendCancellableCoroutine { continuation: CancellableContinuation<Unit> ->
     ObjectAnimator.ofPropertyValuesHolder(
-      this, PropertyValuesHolder.ofFloat("alpha", 0f, 1f), // fade-in
+      this,
+      PropertyValuesHolder.ofFloat("alpha", 0f, 1f), // fade-in
       PropertyValuesHolder.ofFloat("scaleX", 0.5f, 1f), // Zoom along X axis
       PropertyValuesHolder.ofFloat("scaleY", 0.5f, 1f)  // Zoom along Y axis
     ).apply {
@@ -42,6 +41,7 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
       // or
       
       doOnEnd {
+        // resume another animation of views at suspend point
         continuation.resumeWith(Result.success(Unit))
       }
       
@@ -63,17 +63,16 @@ fun ImageView.loadImgFromUrl(url: String?) {
     .into(this)
 }
 
-fun View.navigateTo(actionId: Int) {
+fun View.navigateTo(actionId: Int) =
   this.setOnClickListener {
     findNavController().navigate(actionId)
   }
-}
 
-fun View.navigateBack() {
+fun View.navigateBack() =
   this.setOnClickListener {
     findNavController().navigateUp()
   }
-}
+
 
 fun View.visible() {
   if (visibility != View.VISIBLE) visibility = View.VISIBLE
