@@ -10,10 +10,10 @@ import com.example.moviedocs.domain.model.MovieModel
 import com.example.moviedocs.presentation.home.MovieModelItemCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class SliderMoviesAdapter(
+class SliderAdapter(
   private val viewPager: ViewPager2,
 //  private val onItemClicked: (MovieModel) -> Unit
-) : ListAdapter<MovieModel, SliderMoviesAdapter.SliderViewHolder>(MovieModelItemCallBack) {
+) : ListAdapter<MovieModel, SliderAdapter.SliderViewHolder>(MovieModelItemCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(

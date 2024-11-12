@@ -5,10 +5,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -21,7 +17,7 @@ import com.example.moviedocs.presentation.home.nowplaying.NowPlayingAdapter
 import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
 import com.example.moviedocs.presentation.home.popular.PopularAdapter
 import com.example.moviedocs.presentation.home.popular.PopularViewModel
-import com.example.moviedocs.presentation.home.slider.SliderMoviesAdapter
+import com.example.moviedocs.presentation.home.slider.SliderAdapter
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
@@ -41,17 +37,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   private val upComingViewModel: UpcomingViewModel by viewModels()
   
   private lateinit var viewPager: ViewPager2
-  
+
+  // Handler is used for scheduling tasks and delivering messages or Runnables to be executed on
+  // specific thread (usually the main thread)
+  // - It's associated with a thread's message queue (Looper).
+  // - You can post Runnables or messages to the Handler, which will then be added to the message queue.
+  // - The thread associated with the Handler processes messages and Runnables from the queue sequentially.
+  // In case, this Handler is created with the main looper, meaning it's associated with the main thread.
   private val sliderHandler: Handler by lazy {
     Handler(Looper.getMainLooper())
   }
   
+  // Runnable represents a task or a unit of work that can be executed with run()
+  // - You create a Runnable object and define the task within its run() method.
+  // - You can then pass this Runnable to a Handler to be executed on a specific thread.
+  // In case, this Runnable contains the code to transfer the ViewPager2 to the next item
+  // (viewPager.currentItem += 1)
   private val sliderRunnable: Runnable by lazy {
     Runnable { viewPager.currentItem += 1 }
   }
   
-  private val sliderAdapter: SliderMoviesAdapter by lazy {
-    SliderMoviesAdapter(viewPager = viewPager)
+  // ==> This Handler and Runnable are used for auto-scrolling functionality in ViewPager2.
+  // The sliderHandler posts a delayed sliderRunnable that transfer the viewPager to the next item.
+  
+  private val sliderAdapter: SliderAdapter by lazy {
+    SliderAdapter(viewPager = viewPager)
   }
   
   private val nowPlayingAdapter: NowPlayingAdapter by lazy {
@@ -69,15 +79,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    setUpNavigate()
+    setUpNavigation()
     setUpSliderImg()
     setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
     setUpRecyclerView(binding.popularRecycleView, popularAdapter)
     setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
     observeData()
+    
   }
   
-  private fun setUpNavigate() {
+  private fun setUpNavigation() {
     binding.searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
   }
   
@@ -104,7 +115,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     // to apply multiple transformations to the pages of the ViewPager2.
     val transformer = CompositePageTransformer()
     transformer.apply {
-      addTransformer(MarginPageTransformer(20)) // This transformer adds a margin between pages
+      // This transformer adds a margin between pages
+      addTransformer(MarginPageTransformer(10))
       
       //  This transformer modifies the scale of the pages based on their position. The position parameter
       //  represents the page's position relative to the center of the screen. The code calculates
@@ -118,23 +130,34 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     
     viewPager.apply {
       setPageTransformer(transformer)
-      currentItem = 1
+      currentItem = 0
       
       // A page change callback is registered to listen for page selection events. This callback is
       // triggered whenever the current page of the ViewPager2 changes.
       registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
           super.onPageSelected(position)
+          
           sliderHandler.removeCallbacks(sliderRunnable)
           sliderHandler.postDelayed(sliderRunnable, 2000)
           
-          // This method is called when a new page is selected. It removes any pending callbacks for
+          // This method is called when a new page is selected by user. It removes any pending callbacks for
           // the sliderRunnable (likely a runnable for auto-scrolling) and then posts a delayed execution
           // of the sliderRunnable with a delay of 2000 milliseconds (2 seconds). This likely restarts
-          // the auto-scrolling timer whenever a new page is selected.
+          // the auto-scrolling timer whenever a new page is selected by user.
         }
       })
     }
+  }
+  
+  override fun onPause() {
+    super.onPause()
+    sliderHandler.removeCallbacks(sliderRunnable)
+  }
+  
+  override fun onResume() {
+    super.onResume()
+    sliderHandler.postDelayed(sliderRunnable, 2000)
   }
   
   private fun setUpRecyclerView(
@@ -249,16 +272,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         upComingAdapter.submitList(state.items)
       }
     }
-  }
-  
-  override fun onPause() {
-    super.onPause()
-    sliderHandler.removeCallbacks(sliderRunnable)
-  }
-  
-  override fun onResume() {
-    super.onResume()
-    sliderHandler.postDelayed(sliderRunnable, 2000)
   }
   
   override fun onDestroyView() {
