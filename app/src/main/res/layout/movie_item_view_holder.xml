@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:layout_margin="2dp">
-
+  
   <com.google.android.material.card.MaterialCardView
-      android:id="@+id/materialCardView"
+      android:id="@+id/movieItemImgLayout"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:cardCornerRadius="8dp"
@@ -18,7 +19,7 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       app:strokeColor="@android:color/transparent">
-
+    
     <ImageView
         android:id="@+id/movieItemImg"
         android:layout_width="140dp"
@@ -26,8 +27,67 @@
         android:importantForAccessibility="no"
         android:scaleType="fitXY"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/movieItemRatingLayout"
+        android:layout_width="50dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="90dp"
+        android:backgroundTint="@android:color/transparent"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="20dp"
+        app:strokeColor="@android:color/transparent">
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@color/red">
+        
+        <ImageView
+            android:id="@+id/movieItemRatingImg"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:src="@drawable/star_rating_icon"
+            app:layout_constraintBottom_toBottomOf="@id/movieItemRatingVoteAverage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+        
+        <TextView
+            android:id="@+id/movieItemRatingVoteAverage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/vote_average"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/movieItemRatingVoteCout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/movieItemRatingImg" />
+        
+        <TextView
+            android:id="@+id/movieItemRatingVoteCout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/vote_count"
+            android:textColor="@color/white"
+            android:layout_marginBottom="4dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/movieItemRatingVoteAverage"
+            app:layout_constraintStart_toStartOf="@id/movieItemRatingVoteAverage"
+            app:layout_constraintTop_toBottomOf="@id/movieItemRatingVoteAverage" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
   </com.google.android.material.card.MaterialCardView>
-
+  
   <TextView
       android:id="@+id/movieItemTitle"
       android:layout_width="140dp"
@@ -39,5 +99,6 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/materialCardView" />
+      app:layout_constraintTop_toBottomOf="@id/movieItemImgLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
