@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MovieItemViewHolderBinding
-import com.example.moviedocs.domain.model.MovieModel
-import com.example.moviedocs.presentation.home.MovieModelItemCallBack
+import com.example.moviedocs.domain.model.list.MovieItemModel
+import com.example.moviedocs.presentation.home.MovieItemModelCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class NowPlayingAdapter(
 //  private val onMovieClick: (MovieModel) -> Unit
-) : ListAdapter<MovieModel, NowPlayingAdapter.NowPlayingViewHolder>(MovieModelItemCallBack) {
+) : ListAdapter<MovieItemModel, NowPlayingAdapter.NowPlayingViewHolder>(MovieItemModelCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder =
     NowPlayingViewHolder(
@@ -24,10 +24,10 @@ class NowPlayingAdapter(
     holder.bind(getItem(position))
   
   inner class NowPlayingViewHolder(
-    private val binding: MovieItemViewHolderBinding
+    private val binding: MovieItemViewHolderBinding,
   ) : RecyclerView.ViewHolder(binding.root) {
     
-    fun bind(item: MovieModel) {
+    fun bind(item: MovieItemModel) {
       binding.apply {
         movieItemImg.loadImgFromUrl(item.posterPath)
         movieItemTitle.text = item.title

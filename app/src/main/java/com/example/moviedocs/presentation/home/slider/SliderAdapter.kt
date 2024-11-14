@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
-import com.example.moviedocs.domain.model.MovieModel
-import com.example.moviedocs.presentation.home.MovieModelItemCallBack
+import com.example.moviedocs.domain.model.list.MovieItemModel
+import com.example.moviedocs.presentation.home.MovieItemModelCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class SliderAdapter(
   private val viewPager: ViewPager2,
 //  private val onItemClicked: (MovieModel) -> Unit
-) : ListAdapter<MovieModel, SliderAdapter.SliderViewHolder>(MovieModelItemCallBack) {
+) : ListAdapter<MovieItemModel, SliderAdapter.SliderViewHolder>(MovieItemModelCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(
@@ -36,7 +36,7 @@ class SliderAdapter(
     private val binding: SliderItemViewHolderBinding
   ) : RecyclerView.ViewHolder(binding.root) {
     
-    fun bind(item: MovieModel) {
+    fun bind(item: MovieItemModel) {
       binding.run {
         sliderItemImg.loadImgFromUrl(item.posterPath)
 //        sliderItemTitleText.text = item.title
