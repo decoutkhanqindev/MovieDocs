@@ -26,8 +26,6 @@ class NowPlayingFragment :
     NowPlayingAdapter()
   }
   
-  private var isLoadingMore: Boolean = false
-  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
@@ -82,14 +80,7 @@ class NowPlayingFragment :
 //
 //                """.trimIndent()
 //            )
-            
-            val currentState = viewModel.movieListUiState.value
-            if (currentState is MovieListUiState.Success
-              && currentState.nextPageState == MovieListUiState.NextPageState.LOAD_MORE
-            ) {
-              isLoadingMore = true
-              viewModel.loadNextPage()
-            }
+            viewModel.loadNextPage()
           }
         }
       }
@@ -133,28 +124,11 @@ class NowPlayingFragment :
           
           // show/hide load more progress bar
           when (state.nextPageState) {
-            MovieListUiState.NextPageState.LOADING -> {
-              movieListBottomProgressBar.visible()
-              isLoadingMore = true
-            }
-            
-            MovieListUiState.NextPageState.DONE -> {
-              movieListProgressBar.gone()
-              isLoadingMore = false
-            }
-            
-            MovieListUiState.NextPageState.ERROR -> {
-              movieListBottomProgressBar.gone()
-              isLoadingMore = false
-            }
-            
-            MovieListUiState.NextPageState.LOAD_MORE -> {
-              movieListBottomProgressBar.gone()
-              isLoadingMore = true
-            }
+            MovieListUiState.NextPageState.LOADING -> movieListBottomProgressBar.visible()
+            else -> movieListBottomProgressBar.gone()
           }
+          adapter.submitList(state.items)
         }
-        adapter.submitList(state.items)
       }
     }
   }

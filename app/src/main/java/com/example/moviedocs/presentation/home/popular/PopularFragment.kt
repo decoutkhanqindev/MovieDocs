@@ -152,7 +152,7 @@ class PopularFragment :
             
             MovieListUiState.NextPageState.LOAD_MORE -> {
               movieListBottomProgressBar.gone()
-              isLoadingMore = true
+              isLoadingMore = false
             }
           }
         }
