@@ -44,9 +44,9 @@ class TopRatedViewModel
             items = it,
             currentPage = 1,
             nextPageState = if (it.size < MAX_ITEMS_SIZE) {
-              MovieListUiState.MovieListNextPageState.DONE
+              MovieListUiState.NextPageState.DONE
             } else {
-              MovieListUiState.MovieListNextPageState.LOAD_MORE
+              MovieListUiState.NextPageState.LOAD_MORE
             }
           )
           _movieListSingleEvent.send(MovieListSingleEvent.Success)
@@ -66,12 +66,12 @@ class TopRatedViewModel
       
       is MovieListUiState.Success -> {
         when (currentState.nextPageState) {
-          MovieListUiState.MovieListNextPageState.DONE,
-          MovieListUiState.MovieListNextPageState.LOADING,
+          MovieListUiState.NextPageState.DONE,
+          MovieListUiState.NextPageState.LOADING,
             -> return
           
-          MovieListUiState.MovieListNextPageState.ERROR -> loadFirstPage()
-          MovieListUiState.MovieListNextPageState.LOAD_MORE -> loadNextPageInternal(currentState)
+          MovieListUiState.NextPageState.ERROR -> loadFirstPage()
+          MovieListUiState.NextPageState.LOAD_MORE -> loadNextPageInternal(currentState)
         }
       }
     }
@@ -80,7 +80,7 @@ class TopRatedViewModel
   private fun loadNextPageInternal(currentState: MovieListUiState.Success) {
     viewModelScope.launch {
       _movieListUiState.value = currentState.copy(
-        nextPageState = MovieListUiState.MovieListNextPageState.LOADING
+        nextPageState = MovieListUiState.NextPageState.LOADING
       )
       val nextPage: Int = currentState.currentPage + 1
       val nextPageResponse: Result<List<MovieModel>> = getTopRatedUseCase(page = nextPage)
@@ -93,16 +93,16 @@ class TopRatedViewModel
             items = updateItems,
             currentPage = nextPage,
             nextPageState = if (it.size < MAX_ITEMS_SIZE) {
-              MovieListUiState.MovieListNextPageState.DONE
+              MovieListUiState.NextPageState.DONE
             } else {
-              MovieListUiState.MovieListNextPageState.LOAD_MORE
+              MovieListUiState.NextPageState.LOAD_MORE
             }
           )
           _movieListSingleEvent.send(MovieListSingleEvent.Success)
         }
         .onFailure { it: Throwable ->
           _movieListUiState.value = currentState.copy(
-            nextPageState = MovieListUiState.MovieListNextPageState.ERROR
+            nextPageState = MovieListUiState.NextPageState.ERROR
           )
           _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
         }

@@ -49,9 +49,9 @@ class NowPlayingViewModel
             items = it,
             currentPage = 1,
             nextPageState = if (it.size < MAX_ITEMS_SIZE) {
-              MovieListUiState.MovieListNextPageState.DONE // no more pages available
+              MovieListUiState.NextPageState.DONE // no more pages available
             } else {
-              MovieListUiState.MovieListNextPageState.LOAD_MORE // ready to load next page if necessary
+              MovieListUiState.NextPageState.LOAD_MORE // ready to load next page if necessary
             }
           )
           _movieListSingleEvent.send(MovieListSingleEvent.Success)
@@ -72,10 +72,10 @@ class NowPlayingViewModel
       
       is MovieListUiState.Success -> {
         when (currentState.nextPageState) {
-          MovieListUiState.MovieListNextPageState.DONE -> return // no items to load
-          MovieListUiState.MovieListNextPageState.LOADING -> return // has in progress request -> avoid duplicate request
-          MovieListUiState.MovieListNextPageState.ERROR -> loadFirstPage() // if there was an error, retry the first page
-          MovieListUiState.MovieListNextPageState.LOAD_MORE -> loadNextPageInternal(currentState) // load the next page if load more
+          MovieListUiState.NextPageState.DONE -> return // no items to load
+          MovieListUiState.NextPageState.LOADING -> return // has in progress request -> avoid duplicate request
+          MovieListUiState.NextPageState.ERROR -> loadFirstPage() // if there was an error, retry the first page
+          MovieListUiState.NextPageState.LOAD_MORE -> loadNextPageInternal(currentState) // load the next page if load more
         }
       }
     }
@@ -84,7 +84,7 @@ class NowPlayingViewModel
   private fun loadNextPageInternal(currentState: MovieListUiState.Success) {
     viewModelScope.launch {
       _movieListUiState.value = currentState.copy(
-        nextPageState = MovieListUiState.MovieListNextPageState.LOADING
+        nextPageState = MovieListUiState.NextPageState.LOADING
       )
       val nextPage: Int = currentState.currentPage + 1
       val nextPageResponse: Result<List<MovieModel>> = getNowPlayingMoviesUseCase(page = nextPage)
@@ -97,16 +97,16 @@ class NowPlayingViewModel
           items = updateItems,
           currentPage = nextPage,
           nextPageState = if (it.size < MAX_ITEMS_SIZE) {
-            MovieListUiState.MovieListNextPageState.DONE // no more pages available
+            MovieListUiState.NextPageState.DONE // no more pages available
           } else {
-            MovieListUiState.MovieListNextPageState.LOAD_MORE // ready to load next page if necessary
+            MovieListUiState.NextPageState.LOAD_MORE // ready to load next page if necessary
           }
         )
         _movieListSingleEvent.send(MovieListSingleEvent.Success)
       }
         .onFailure { it: Throwable ->
           _movieListUiState.value = currentState.copy(
-            nextPageState = MovieListUiState.MovieListNextPageState.ERROR
+            nextPageState = MovieListUiState.NextPageState.ERROR
           )
           _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
           Timber.tag("NowPlayingMovieListViewModel").e("loadNextPage: ${it.message}")
