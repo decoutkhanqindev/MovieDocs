@@ -1,6 +1,6 @@
-package com.example.moviedocs.domain.model
+package com.example.moviedocs.domain.model.list
 
-data class MovieModel(
+data class MovieItemModel(
   val id: Int,
   val title: String,
   val overview: String,

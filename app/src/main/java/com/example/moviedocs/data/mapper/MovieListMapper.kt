@@ -1,15 +1,12 @@
 package com.example.moviedocs.data.mapper
 
-import com.example.moviedocs.data.remote.response.list.MovieResponse
-import com.example.moviedocs.domain.model.MovieModel
+import com.example.moviedocs.data.remote.response.list.MovieListResponse
+import com.example.moviedocs.domain.model.list.MovieListModel
 
-fun MovieResponse.toMovieModel(): MovieModel =
-  MovieModel(
-    id = id,
-    title = title,
-    overview = overview,
-    releaseDate = releaseDate,
-    voteAverage = voteAverage,
-    voteCount = voteCount,
-    posterPath = posterPath
+fun MovieListResponse.toMovieListModel(): MovieListModel =
+  MovieListModel(
+    page = page,
+    results = results.map { it.toMovieModel() },
+    totalPages = totalPages,
+    totalResults = totalResults
   )

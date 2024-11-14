@@ -4,7 +4,7 @@ import androidx.annotation.Keep
 import com.squareup.moshi.Json
 
 @Keep
-data class MovieResponse(
+data class MovieItemResponse(
   @Json(name = "adult")
   val adult: Boolean, // false
   @Json(name = "backdrop_path")
