@@ -2,7 +2,7 @@ package com.example.moviedocs.presentation.home.nowplaying
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NowPlayingFragment :
   BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
   
-  private val viewModel: NowPlayingViewModel by activityViewModels()
+  private val viewModel: NowPlayingViewModel by viewModels()
   
   private val adapter: NowPlayingAdapter by lazy(LazyThreadSafetyMode.NONE) {
     NowPlayingAdapter()
@@ -65,10 +65,24 @@ class NowPlayingFragment :
           val totalItemCount = layoutManager.itemCount
           val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
           
-          // load more when user is near the end
-          if ((visibleItemCount + firstVisibleItemPosition)
-            >= totalItemCount - 3 && firstVisibleItemPosition >= 0
+          // Load more when there are fewer than 12 items remaining
+          val threshold = 12 // 12 items (4 rows)
+          if ((visibleItemCount + firstVisibleItemPosition + threshold)
+            >= totalItemCount && firstVisibleItemPosition >= 0
           ) {
+
+//            Timber.tag("Pagination").d(
+//              """
+//                    visibleItemCount: $visibleItemCount
+//                    totalItemCount: $totalItemCount
+//                    firstVisiblePosition: $firstVisibleItemPosition
+//                    isLoadingMore: $isLoadingMore
+//                    currentPage: ${(viewModel.movieListUiState.value as? MovieListUiState.Success)?.currentPage}
+//                    _____________________________________________________________________
+//
+//                """.trimIndent()
+//            )
+            
             val currentState = viewModel.movieListUiState.value
             if (currentState is MovieListUiState.Success
               && currentState.nextPageState == MovieListUiState.NextPageState.LOAD_MORE
@@ -106,6 +120,16 @@ class NowPlayingFragment :
         binding.apply {
           movieListProgressBar.gone()
           movieListRecyclerView.visible()
+//
+//          Timber.tag("Pagination").d(
+//            """
+//                    State Update:
+//                    Current Page: ${state.currentPage}
+//                    Items Count: ${state.items.size}
+//                    Next State: ${state.nextPageState}
+//                    _____________________________________________________________________
+//                """.trimIndent()
+//          )
           
           // show/hide load more progress bar
           when (state.nextPageState) {
@@ -126,7 +150,7 @@ class NowPlayingFragment :
             
             MovieListUiState.NextPageState.LOAD_MORE -> {
               movieListBottomProgressBar.gone()
-              isLoadingMore = false
+              isLoadingMore = true
             }
           }
         }

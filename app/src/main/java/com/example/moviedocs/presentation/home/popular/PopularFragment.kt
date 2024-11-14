@@ -2,7 +2,7 @@ package com.example.moviedocs.presentation.home.popular
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PopularFragment :
   BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
   
-  private val viewModel: PopularViewModel by activityViewModels()
+  private val viewModel: PopularViewModel by viewModels()
   
   private val adapter: PopularAdapter by lazy(LazyThreadSafetyMode.NONE) {
     PopularAdapter()
