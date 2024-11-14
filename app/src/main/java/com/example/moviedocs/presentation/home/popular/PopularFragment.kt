@@ -67,10 +67,24 @@ class PopularFragment :
           val totalItemCount = layoutManager.itemCount
           val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
           
-          // load more when user is near the end
-          if ((visibleItemCount + firstVisibleItemPosition)
-            >= totalItemCount - 3 && firstVisibleItemPosition >= 0
+          // Load more when there are fewer than 12 items remaining
+          val threshold = 12 // 12 items (4 rows)
+          if ((visibleItemCount + firstVisibleItemPosition + threshold)
+            >= totalItemCount && firstVisibleItemPosition >= 0
           ) {
+
+//            Timber.tag("Pagination").d(
+//              """
+//                    visibleItemCount: $visibleItemCount
+//                    totalItemCount: $totalItemCount
+//                    firstVisiblePosition: $firstVisibleItemPosition
+//                    isLoadingMore: $isLoadingMore
+//                    currentPage: ${(viewModel.movieListUiState.value as? MovieListUiState.Success)?.currentPage}
+//                    _____________________________________________________________________
+//
+//                """.trimIndent()
+//            )
+            
             val currentState = viewModel.movieListUiState.value
             if (currentState is MovieListUiState.Success
               && currentState.nextPageState == MovieListUiState.NextPageState.LOAD_MORE
@@ -108,6 +122,16 @@ class PopularFragment :
         binding.apply {
           movieListProgressBar.gone()
           movieListRecyclerView.visible()
+//
+//          Timber.tag("Pagination").d(
+//            """
+//                    State Update:
+//                    Current Page: ${state.currentPage}
+//                    Items Count: ${state.items.size}
+//                    Next State: ${state.nextPageState}
+//                    _____________________________________________________________________
+//                """.trimIndent()
+//          )
           
           // show/hide load more progress bar
           when (state.nextPageState) {
@@ -128,7 +152,7 @@ class PopularFragment :
             
             MovieListUiState.NextPageState.LOAD_MORE -> {
               movieListBottomProgressBar.gone()
-              isLoadingMore = false
+              isLoadingMore = true
             }
           }
         }
