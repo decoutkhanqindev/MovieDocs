@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -20,6 +20,7 @@ import com.example.moviedocs.presentation.home.popular.PopularViewModel
 import com.example.moviedocs.presentation.home.slider.SliderAdapter
 import com.example.moviedocs.presentation.home.toprated.TopRatedAdapter
 import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
+import com.example.moviedocs.presentation.home.upcoming.UpcomingAdapter
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
@@ -32,13 +33,17 @@ import kotlin.math.abs
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
   
-  private val nowPlayingViewModel: NowPlayingViewModel by viewModels()
+  companion object {
+    fun newInstance(): HomeFragment = HomeFragment()
+  }
   
-  private val popularViewModel: PopularViewModel by viewModels()
+  private val nowPlayingViewModel: NowPlayingViewModel by activityViewModels()
   
-  private val upComingViewModel: UpcomingViewModel by viewModels()
+  private val popularViewModel: PopularViewModel by activityViewModels()
   
-  private val topRatedViewModel: TopRatedViewModel by viewModels()
+  private val upComingViewModel: UpcomingViewModel by activityViewModels()
+  
+  private val topRatedViewModel: TopRatedViewModel by activityViewModels()
   
   private lateinit var viewPager: ViewPager2
   
@@ -48,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   // - You can post Runnables or messages to the Handler, which will then be added to the message queue.
   // - The thread associated with the Handler processes messages and Runnables from the queue sequentially.
   // In case, this Handler is created with the main looper, meaning it's associated with the main thread.
-  private val sliderHandler: Handler by lazy {
+  private val sliderHandler: Handler by lazy(LazyThreadSafetyMode.NONE) {
     Handler(Looper.getMainLooper())
   }
   
@@ -57,30 +62,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   // - You can then pass this Runnable to a Handler to be executed on a specific thread.
   // In case, this Runnable contains the code to transfer the ViewPager2 to the next item
   // (viewPager.currentItem += 1)
-  private val sliderRunnable: Runnable by lazy {
+  private val sliderRunnable: Runnable by lazy(LazyThreadSafetyMode.NONE) {
     Runnable { viewPager.currentItem += 1 }
   }
   
   // ==> This Handler and Runnable are used for auto-scrolling functionality in ViewPager2.
   // The sliderHandler posts a delayed sliderRunnable that transfer the viewPager to the next item.
   
-  private val sliderAdapter: SliderAdapter by lazy {
+  private val sliderAdapter: SliderAdapter by lazy(LazyThreadSafetyMode.NONE) {
     SliderAdapter(viewPager = viewPager)
   }
   
-  private val nowPlayingAdapter: NowPlayingAdapter by lazy {
+  private val nowPlayingAdapter: NowPlayingAdapter by lazy(LazyThreadSafetyMode.NONE) {
     NowPlayingAdapter()
   }
   
-  private val popularAdapter: PopularAdapter by lazy {
+  private val popularAdapter: PopularAdapter by lazy(LazyThreadSafetyMode.NONE) {
     PopularAdapter()
   }
   
-  private val upComingAdapter: PopularAdapter by lazy {
-    PopularAdapter()
+  private val upComingAdapter: UpcomingAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    UpcomingAdapter()
   }
   
-  private val topRatedAdapter: TopRatedAdapter by lazy {
+  private val topRatedAdapter: TopRatedAdapter by lazy(LazyThreadSafetyMode.NONE) {
     TopRatedAdapter()
   }
   
@@ -98,6 +103,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun setUpNavigation() {
     binding.searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
+    binding.nowPlayingMoreBtn.navigateTo(R.id.action_homeFragment_to_nowPlayingFragment)
+    binding.popularMoreBtn.navigateTo(R.id.action_homeFragment_to_popularFragment)
   }
   
   private fun setUpSliderImg() {
@@ -321,9 +328,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       topRatedRecycleView.adapter = null
     }
     super.onDestroyView()
-  }
-  
-  companion object {
-    private const val VISIBLE_THRESHOLD = 2
   }
 }
