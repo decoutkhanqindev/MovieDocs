@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.nowplaying
+package com.example.moviedocs.presentation.home.popular
 
 import android.os.Bundle
 import android.view.View
@@ -17,13 +17,13 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NowPlayingFragment :
+class PopularFragment :
   BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
   
-  private val viewModel: NowPlayingViewModel by activityViewModels()
+  private val viewModel: PopularViewModel by activityViewModels()
   
-  private val adapter: NowPlayingAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    NowPlayingAdapter()
+  private val adapter: PopularAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    PopularAdapter()
   }
   
   private var isLoadingMore: Boolean = false
@@ -31,7 +31,7 @@ class NowPlayingFragment :
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    binding.movieListTitle.text = getString(R.string.now_playing)
+    binding.movieListTitle.text = getString(R.string.popular)
     setUpNavigation()
     setUpRecyclerView()
     setUpScrollListener()
@@ -48,12 +48,14 @@ class NowPlayingFragment :
       layoutManager = GridLayoutManager(
         requireContext(), 3, LinearLayoutManager.VERTICAL, false
       )
-      adapter = this@NowPlayingFragment.adapter
+      adapter = this@PopularFragment.adapter
     }
   }
   
   private fun bindViewModel() {
-    launchAndRepeatStarted({ viewModel.movieListUiState.collect(::renderUi) })
+    launchAndRepeatStarted(
+      { viewModel.movieListUiState.collect(::renderUi) }
+    )
   }
   
   private fun setUpScrollListener() {
