@@ -17,7 +17,20 @@
         app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
         app:popExitAnim="@anim/from_right" />
+    <action
+        android:id="@+id/action_homeFragment_to_nowPlayingFragment"
+        app:destination="@id/nowPlayingFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right"/>
   </fragment>
   
   <include app:graph="@navigation/search_graph" />
+  
+  <fragment
+      android:id="@+id/nowPlayingFragment"
+      android:name="com.example.moviedocs.presentation.home.nowplaying.NowPlayingFragment"
+      android:label="NowPlayingFragment"
+      tools:layout="@layout/fragment_movie_list" />
 </navigation>
