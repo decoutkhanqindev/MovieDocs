@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.moviedocs.R
@@ -25,39 +24,44 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
   @Inject
   internal lateinit var networkConnectivityObserver: NetworkConnectivityObserver
   
-  private lateinit var navController: NavController
-  
   private var alertDialog: AlertDialog? = null
+  
+  private lateinit var navController: NavController
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     
-    setUpNavigation()
+    setUpBottomNavigationMenu()
     observeNetworkConnectivity()
   }
   
-  private fun setUpNavigation() {
+  private fun setUpBottomNavigationMenu() {
     val navHostFragment: NavHostFragment = binding.mainNavHost.getFragment()
     navController = navHostFragment.navController
+    
     binding.bottomNavigationMenu.setupWithNavController(navController)
     
-    navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, _: Bundle? ->
-      handleBottomNavigationMenuVisibility(destination.id)
+    handleBottomNavigationMenuVisibility()
+  }
+  
+  private fun handleBottomNavigationMenuVisibility() {
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+      when (destination.id) {
+        R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
+          launchAndRepeatStarted(
+            {
+              delay(250)
+              binding.bottomNavigationMenu.visible()
+            }
+          )
+        }
+        
+        else -> binding.bottomNavigationMenu.gone()
+      }
     }
   }
   
-  private fun handleBottomNavigationMenuVisibility(destination: Int) {
-    when (destination) {
-      R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
-        launchAndRepeatStarted({
-          delay(250)
-          binding.bottomNavigationMenu.visible()
-        })
-      }
-      
-      else -> binding.bottomNavigationMenu.gone()
-    }
-  }
+  override fun onNavigateUp(): Boolean = navController.navigateUp()
   
   private fun observeNetworkConnectivity() {
     launchAndRepeatStarted(
@@ -77,8 +81,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
       CustomNetworkDialogLayoutBinding.inflate(layoutInflater)
     
     if (alertDialog?.isShowing == true) return
-    alertDialog =
-      AlertDialog.Builder(this).setView(dialogLayoutBinding.root).setCancelable(false).show()
+    alertDialog = AlertDialog.Builder(this)
+      .setView(dialogLayoutBinding.root)
+      .setCancelable(false) // can not close a dialog if network is unavailable
+      .show()
     
     dialogLayoutBinding.tryAgainBtn.setOnClickListener {
       // open wifi settings
