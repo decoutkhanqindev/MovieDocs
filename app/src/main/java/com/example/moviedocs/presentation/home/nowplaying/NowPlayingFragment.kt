@@ -2,9 +2,10 @@ package com.example.moviedocs.presentation.home.nowplaying
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class NowPlayingFragment :
   BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
   
-  private val viewModel: NowPlayingViewModel by viewModels()
+  private val viewModel: NowPlayingViewModel by activityViewModels()
   
   private val adapter: NowPlayingAdapter by lazy {
     NowPlayingAdapter()
@@ -80,5 +81,22 @@ class NowPlayingFragment :
         adapter.submitList(state.items)
       }
     }
+    
+    // load next page
+    val linearLayoutManager: LinearLayoutManager =
+      binding.movieListRecyclerView.layoutManager as LinearLayoutManager
+    
+    binding.movieListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+      // OnScrollListener designed to detect when the user scrolls near the bottom of the
+      // RecyclerView and potentially trigger an action like loading more data
+      // dx: The amount of horizontal scroll.
+      // dy: The amount of vertical scroll.
+      override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        // If there are 2 more elements from the last element, you can call loadNextPage()
+        if ((dy > 0) && ((linearLayoutManager.findLastVisibleItemPosition() + 2) >= linearLayoutManager.itemCount)) {
+          viewModel.loadNextPage()
+        }
+      }
+    })
   }
 }
