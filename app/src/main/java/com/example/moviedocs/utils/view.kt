@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.moviedocs.R
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
 
@@ -57,6 +58,7 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
 fun ImageView.loadImgFromUrl(url: String?) {
   Glide.with(context)
     .load("https://image.tmdb.org/t/p/w500$url")
+    .error(R.drawable.app_icon)
     .fitCenter()
     .centerCrop()
     .transition(DrawableTransitionOptions.withCrossFade())
