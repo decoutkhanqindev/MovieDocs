@@ -3,7 +3,6 @@ package com.example.moviedocs.presentation.home.nowplaying
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.R
@@ -22,8 +21,8 @@ class NowPlayingFragment :
   
   private val viewModel: NowPlayingViewModel by viewModels()
   
-  private val adapter: NowPlayingAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    NowPlayingAdapter()
+  private val adapter: NowPlayingVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    NowPlayingVerticalAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +42,8 @@ class NowPlayingFragment :
   private fun setUpRecyclerView() {
     binding.movieListRecyclerView.apply {
       setHasFixedSize(true)
-      layoutManager = GridLayoutManager(
-        requireContext(), 3, LinearLayoutManager.VERTICAL, false
+      layoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.VERTICAL, false
       )
       adapter = this@NowPlayingFragment.adapter
     }
@@ -55,7 +54,8 @@ class NowPlayingFragment :
   }
   
   private fun setUpScrollListener() {
-    val layoutManager = binding.movieListRecyclerView.layoutManager as GridLayoutManager
+    val layoutManager: LinearLayoutManager =
+      binding.movieListRecyclerView.layoutManager as LinearLayoutManager
     binding.movieListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         if (dy > 0) { // scrolling down
