@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -23,7 +23,6 @@ import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
 import com.example.moviedocs.presentation.home.upcoming.UpcomingAdapter
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
-import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateTo
 import com.example.moviedocs.utils.visible
@@ -37,13 +36,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     fun newInstance(): HomeFragment = HomeFragment()
   }
   
-  private val nowPlayingViewModel: NowPlayingViewModel by activityViewModels()
+  private val nowPlayingViewModel: NowPlayingViewModel by viewModels()
   
-  private val popularViewModel: PopularViewModel by activityViewModels()
+  private val popularViewModel: PopularViewModel by viewModels()
   
-  private val upComingViewModel: UpcomingViewModel by activityViewModels()
+  private val upComingViewModel: UpcomingViewModel by viewModels()
   
-  private val topRatedViewModel: TopRatedViewModel by activityViewModels()
+  private val topRatedViewModel: TopRatedViewModel by viewModels()
   
   private lateinit var viewPager: ViewPager2
   
@@ -105,6 +104,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     binding.searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
     binding.nowPlayingMoreBtn.navigateTo(R.id.action_homeFragment_to_nowPlayingFragment)
     binding.popularMoreBtn.navigateTo(R.id.action_homeFragment_to_popularFragment)
+    binding.upcomingMoreBtn.navigateTo(R.id.action_homeFragment_to_upcomingFragment)
+    binding.topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
   }
   
   private fun setUpSliderImg() {
@@ -177,7 +178,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun setUpRecyclerView(
     recyclerView: RecyclerView,
-    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
+    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>,
   ) {
     recyclerView.apply {
       setHasFixedSize(true)
@@ -189,12 +190,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   }
   
   private fun bindViewModel() {
-    launchAndRepeatStarted(
-      { nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
+    launchAndRepeatStarted({ nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
       { popularViewModel.movieListUiState.collect(::renderPopularUi) },
       { upComingViewModel.movieListUiState.collect(::renderUpcomingUi) },
-      { topRatedViewModel.movieListUiState.collect(::renderTopRatedUi) }
-    )
+      { topRatedViewModel.movieListUiState.collect(::renderTopRatedUi) })
   }
   
   private fun renderNowPlayingUi(state: MovieListUiState) {
@@ -204,7 +203,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           sliderProgressBar.visible()
           sliderViewPager.gone()
           nowPlayingProgressBar.visible()
-          nowPlayingRecycleView.invisible()
+          nowPlayingRecycleView.gone()
         }
         sliderAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
@@ -215,7 +214,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           sliderProgressBar.visible()
           sliderViewPager.gone()
           nowPlayingProgressBar.visible()
-          nowPlayingRecycleView.invisible()
+          nowPlayingRecycleView.gone()
         }
         sliderAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
@@ -239,7 +238,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageLoading -> {
         binding.apply {
           popularProgressBar.visible()
-          popularRecycleView.invisible()
+          popularRecycleView.gone()
         }
         popularAdapter.submitList(emptyList())
       }
@@ -247,7 +246,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageError -> {
         binding.apply {
           popularProgressBar.visible()
-          popularRecycleView.invisible()
+          popularRecycleView.gone()
         }
         popularAdapter.submitList(emptyList())
       }
@@ -267,7 +266,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageLoading -> {
         binding.apply {
           upcomingProgressBar.visible()
-          upcomingRecycleView.invisible()
+          upcomingRecycleView.gone()
         }
         upComingAdapter.submitList(emptyList())
       }
@@ -275,7 +274,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageError -> {
         binding.apply {
           upcomingProgressBar.visible()
-          upcomingRecycleView.invisible()
+          upcomingRecycleView.gone()
         }
         upComingAdapter.submitList(emptyList())
       }
@@ -295,7 +294,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageLoading -> {
         binding.apply {
           topRatedProgressBar.visible()
-          topRatedRecycleView.invisible()
+          topRatedRecycleView.gone()
         }
         topRatedAdapter.submitList(emptyList())
       }
@@ -303,7 +302,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageError -> {
         binding.apply {
           topRatedProgressBar.visible()
-          topRatedRecycleView.invisible()
+          topRatedRecycleView.gone()
         }
         topRatedAdapter.submitList(emptyList())
       }

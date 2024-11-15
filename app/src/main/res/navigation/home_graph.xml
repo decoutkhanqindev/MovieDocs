@@ -23,14 +23,29 @@
         app:enterAnim="@anim/to_right"
         app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
-        app:popExitAnim="@anim/from_right"/>
+        app:popExitAnim="@anim/from_right" />
     <action
         android:id="@+id/action_homeFragment_to_popularFragment"
         app:destination="@id/popularFragment"
         app:enterAnim="@anim/to_right"
         app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right" />
+    <action
+        android:id="@+id/action_homeFragment_to_upcomingFragment"
+        app:destination="@id/upcomingFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right" />
+    <action
+        android:id="@+id/action_homeFragment_to_topRatedFragment"
+        app:destination="@id/topRatedFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
         app:popExitAnim="@anim/from_right"/>
+  
   </fragment>
   
   <include app:graph="@navigation/search_graph" />
@@ -44,5 +59,18 @@
   <fragment
       android:id="@+id/popularFragment"
       android:name="com.example.moviedocs.presentation.home.popular.PopularFragment"
-      android:label="PopularFragment" />
+      android:label="PopularFragment"
+      tools:layout="@layout/fragment_movie_list" />
+  
+  <fragment
+      android:id="@+id/topRatedFragment"
+      android:name="com.example.moviedocs.presentation.home.toprated.TopRatedFragment"
+      android:label="TopRatedFragment"
+      tools:layout="@layout/fragment_movie_list" />
+  
+  <fragment
+      android:id="@+id/upcomingFragment"
+      android:name="com.example.moviedocs.presentation.home.upcoming.UpcomingFragment"
+      android:label="UpcomingFragment"
+      tools:layout="@layout/fragment_movie_list" />
 </navigation>
