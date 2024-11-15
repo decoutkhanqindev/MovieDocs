@@ -45,11 +45,11 @@
         
         <ImageView
             android:id="@+id/movieItemRatingImg"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
-            android:src="@drawable/star_rating_icon"
+            android:src="@mipmap/star_rating_icon"
             app:layout_constraintBottom_toBottomOf="@id/movieItemRatingVoteAverage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +90,10 @@
   
   <TextView
       android:id="@+id/movieItemTitle"
-      android:layout_width="140dp"
-      android:layout_height="20dp"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:maxLines="1"
+      android:ellipsize="end"
       android:gravity="center"
       android:text="@string/app_name"
       android:textColor="@color/white"
