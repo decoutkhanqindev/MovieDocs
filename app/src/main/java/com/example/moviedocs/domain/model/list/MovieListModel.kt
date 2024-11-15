@@ -4,5 +4,5 @@ data class MovieListModel(
   val page: Int,
   val results: List<MovieItemModel>,
   val totalPages: Int,
-  val totalResults: Int
+  val totalResults: Int,
 )

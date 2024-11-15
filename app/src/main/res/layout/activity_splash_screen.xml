@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.SplashScreenActivity">
-
+  
   <ImageView
       android:id="@+id/appLogoImg"
       android:layout_width="150dp"
@@ -20,7 +20,7 @@
       app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
-
+  
   <TextView
       android:id="@+id/titleAppText"
       android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
       app:layout_constraintEnd_toEndOf="@id/appLogoImg"
       app:layout_constraintStart_toStartOf="@+id/appLogoImg"
       app:layout_constraintTop_toBottomOf="@+id/appLogoImg" />
-
+  
   <TextView
       android:id="@+id/authorText"
       android:layout_width="wrap_content"

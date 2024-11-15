@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
-class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>(ActivitySplashScreenBinding::inflate) {
+class SplashScreenActivity :
+  BaseActivity<ActivitySplashScreenBinding>(ActivitySplashScreenBinding::inflate) {
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

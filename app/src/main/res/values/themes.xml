@@ -1,13 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MovieDocs" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
-    <style name="Theme.MovieDocs" parent="Base.Theme.MovieDocs" />
-
-    <style name="Theme.App.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@drawable/bg_gradient</item>
-    </style>
+<resources>
+  <!-- Base application theme. -->
+  <style name="Base.Theme.MovieDocs" parent="Theme.Material3.DayNight.NoActionBar">
+    <item name="android:windowIsTranslucent">true</item>
+  </style>
+  
+  <style name="Theme.MovieDocs" parent="Base.Theme.MovieDocs" />
+  
+  <style name="Theme.App.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="android:windowIsTranslucent">true</item>
+    <item name="android:windowBackground">@drawable/bg_gradient</item>
+  </style>
 </resources>

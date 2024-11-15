@@ -5,10 +5,10 @@ import com.example.moviedocs.domain.model.list.MovieItemModel
 
 object MovieItemModelCallBack : DiffUtil.ItemCallback<MovieItemModel>() {
   override fun areContentsTheSame(
-    oldItem: MovieItemModel, newItem: MovieItemModel
+    oldItem: MovieItemModel, newItem: MovieItemModel,
   ): Boolean = oldItem == newItem
   
   override fun areItemsTheSame(
-    oldItem: MovieItemModel, newItem: MovieItemModel
+    oldItem: MovieItemModel, newItem: MovieItemModel,
   ): Boolean = oldItem.id == newItem.id
 }

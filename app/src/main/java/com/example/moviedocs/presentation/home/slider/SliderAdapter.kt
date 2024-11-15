@@ -33,7 +33,7 @@ class SliderAdapter(
   }
   
   inner class SliderViewHolder(
-    private val binding: SliderItemViewHolderBinding
+    private val binding: SliderItemViewHolderBinding,
   ) : RecyclerView.ViewHolder(binding.root) {
     
     fun bind(item: MovieItemModel) {

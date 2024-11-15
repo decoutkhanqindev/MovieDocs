@@ -55,7 +55,7 @@ object RemoteModule {
   @Singleton
   fun provideOkHttpClient(
     authorizationInterceptor: AuthorizationInterceptor,
-    httpLoggingInterceptor: HttpLoggingInterceptor
+    httpLoggingInterceptor: HttpLoggingInterceptor,
   ): OkHttpClient =
     OkHttpClient.Builder()
       .connectTimeout(33, TimeUnit.SECONDS)
@@ -77,7 +77,7 @@ object RemoteModule {
   fun provideRetrofit(
     moshi: Moshi,
     client: OkHttpClient,
-    @BaseUrl baseUrl: String
+    @BaseUrl baseUrl: String,
   ): Retrofit =
     Retrofit.Builder()
       .baseUrl(baseUrl)
@@ -88,6 +88,6 @@ object RemoteModule {
   @Provides
   @Singleton
   fun provideApiService(
-    @ApiRequest retrofit: Retrofit
+    @ApiRequest retrofit: Retrofit,
   ): ApiService = retrofit.create()
 }

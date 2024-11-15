@@ -10,7 +10,7 @@
     app:cardUseCompatPadding="true"
     app:strokeColor="@android:color/transparent">
 
-  <ImageView
+<ImageView
       android:id="@+id/sliderItemImg"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

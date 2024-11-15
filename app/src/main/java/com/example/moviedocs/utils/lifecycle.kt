@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 fun Fragment.launchAndRepeatStarted(
   launchBlock: suspend () -> Unit,
   vararg launchBlocks: suspend () -> Unit,
-  doAfterLaunch: (() -> Unit)? = null
+  doAfterLaunch: (() -> Unit)? = null,
 ) {
   viewLifecycleOwner.lifecycleScope.launch {
     viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -66,7 +66,7 @@ fun Fragment.launchAndRepeatStarted(
 fun ComponentActivity.launchAndRepeatStarted(
   launchBlock: suspend () -> Unit,
   vararg launchBlocks: suspend () -> Unit,
-  doAfterLaunch: (() -> Unit)? = null
+  doAfterLaunch: (() -> Unit)? = null,
 ) {
   lifecycleScope.launch {
     repeatOnLifecycle(Lifecycle.State.STARTED) {

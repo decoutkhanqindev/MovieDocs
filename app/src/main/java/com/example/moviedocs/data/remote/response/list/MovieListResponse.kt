@@ -12,5 +12,5 @@ data class MovieListResponse(
   @Json(name = "total_pages")
   val totalPages: Int, // 46880
   @Json(name = "total_results")
-  val totalResults: Int // 937587
+  val totalResults: Int, // 937587
 )

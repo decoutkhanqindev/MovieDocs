@@ -8,6 +8,6 @@
   <fragment
       android:id="@+id/favoriteFragment"
       android:name="com.example.moviedocs.presentation.favorite.FavoriteFragment"
-      tools:layout="@layout/fragment_favorite"
-      android:label="FavoriteFragment" />
+      android:label="FavoriteFragment"
+      tools:layout="@layout/fragment_favorite" />
 </navigation>
