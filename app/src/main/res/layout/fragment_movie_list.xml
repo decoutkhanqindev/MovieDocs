@@ -60,7 +60,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-      tools:listitem="@layout/movie_item_view_holder"
+      tools:listitem="@layout/movie_item_vertical_view_holder"
       tools:orientation="vertical" />
   
   <ProgressBar

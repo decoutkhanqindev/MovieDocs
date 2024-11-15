@@ -141,7 +141,7 @@
             app:layout_constraintTop_toBottomOf="@id/nowPlayingTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/movie_item_view_holder"
+            tools:listitem="@layout/movie_item__horizontal_view_holder"
             tools:orientation="horizontal" />
         
         <ProgressBar
@@ -205,7 +205,7 @@
             app:layout_constraintTop_toBottomOf="@id/Text"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/movie_item_view_holder"
+            tools:listitem="@layout/movie_item__horizontal_view_holder"
             tools:orientation="horizontal" />
         
         <ProgressBar
@@ -269,7 +269,7 @@
             app:layout_constraintTop_toBottomOf="@id/upcomingTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/movie_item_view_holder"
+            tools:listitem="@layout/movie_item__horizontal_view_holder"
             tools:orientation="horizontal" />
         
         <ProgressBar
@@ -334,7 +334,7 @@
             app:layout_constraintTop_toBottomOf="@id/topRatedTitle"
             app:layout_constraintVertical_bias="0.0"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/movie_item_view_holder"
+            tools:listitem="@layout/movie_item__horizontal_view_holder"
             tools:orientation="horizontal" />
         
         <ProgressBar
