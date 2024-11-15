@@ -91,20 +91,21 @@ class PopularViewModel
       val nextPageResponse: Result<MovieListModel> = getPopularUseCase(page = nextPage)
       val currentItems: MutableList<MovieItemModel> = currentState.items.toMutableList()
       
-      nextPageResponse.onSuccess { it: MovieListModel ->
-        // append the newly loaded movies to the list
-        currentItems.addAll(it.results)
-        _movieListUiState.value = currentState.copy(
-          items = currentItems,
-          currentPage = nextPage,
-          nextPageState = if (it.page >= it.totalPages) {
-            MovieListUiState.NextPageState.DONE // no more pages available
-          } else {
-            MovieListUiState.NextPageState.LOAD_MORE // ready to load next page if necessary
-          }
-        )
-        _movieListSingleEvent.send(MovieListSingleEvent.Success)
-      }
+      nextPageResponse
+        .onSuccess { it: MovieListModel ->
+          // append the newly loaded movies to the list
+          currentItems.addAll(it.results)
+          _movieListUiState.value = currentState.copy(
+            items = currentItems,
+            currentPage = nextPage,
+            nextPageState = if (it.page >= it.totalPages) {
+              MovieListUiState.NextPageState.DONE // no more pages available
+            } else {
+              MovieListUiState.NextPageState.LOAD_MORE // ready to load next page if necessary
+            }
+          )
+          _movieListSingleEvent.send(MovieListSingleEvent.Success)
+        }
         .onFailure { it: Throwable ->
           _movieListUiState.value = currentState.copy(
             nextPageState = MovieListUiState.NextPageState.ERROR

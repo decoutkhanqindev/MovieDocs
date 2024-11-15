@@ -71,8 +71,9 @@ class NowPlayingViewModel
       
       is MovieListUiState.Success -> {
         when (currentState.nextPageState) {
-          MovieListUiState.NextPageState.DONE -> return
-          MovieListUiState.NextPageState.LOADING -> return
+          MovieListUiState.NextPageState.DONE, MovieListUiState.NextPageState.LOADING,
+            -> return
+          
           MovieListUiState.NextPageState.ERROR -> loadFirstPage()
           MovieListUiState.NextPageState.LOAD_MORE -> loadNextPageInternal(currentState)
         }

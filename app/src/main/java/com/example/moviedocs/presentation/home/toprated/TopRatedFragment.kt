@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.popular
+package com.example.moviedocs.presentation.home.toprated
 
 import android.os.Bundle
 import android.view.View
@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.home.MovieListUiState
@@ -17,18 +16,18 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
+class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
   
-  private val viewModel: PopularViewModel by viewModels()
+  private val viewModel: TopRatedViewModel by viewModels()
   
-  private val adapter: PopularAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    PopularAdapter()
+  private val adapter: TopRatedAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    TopRatedAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    binding.movieListTitle.text = getString(R.string.popular)
+    binding.movieListTitle.text = "Top Rated"
     setUpNavigation()
     setUpRecyclerView()
     setUpScrollListener()
@@ -45,7 +44,7 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieList
       layoutManager = GridLayoutManager(
         requireContext(), 3, LinearLayoutManager.VERTICAL, false
       )
-      adapter = this@PopularFragment.adapter
+      adapter = this@TopRatedFragment.adapter
     }
   }
   
@@ -101,8 +100,8 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieList
             MovieListUiState.NextPageState.LOADING -> movieListBottomProgressBar.visible()
             else -> movieListBottomProgressBar.gone()
           }
+          adapter.submitList(state.items)
         }
-        adapter.submitList(state.items)
       }
     }
   }
