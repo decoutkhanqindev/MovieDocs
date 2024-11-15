@@ -4,18 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedocs.databinding.MovieItemViewHolderBinding
+import com.example.moviedocs.databinding.MovieItemHorizontalViewHolderBinding
 import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.presentation.home.MovieItemModelCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class NowPlayingAdapter(
+class NowPlayingHorizontalAdapter(
 //  private val onMovieClick: (MovieModel) -> Unit
-) : ListAdapter<MovieItemModel, NowPlayingAdapter.NowPlayingViewHolder>(MovieItemModelCallBack) {
+) : ListAdapter<MovieItemModel, NowPlayingHorizontalAdapter.NowPlayingViewHolder>(
+  MovieItemModelCallBack
+) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingViewHolder =
     NowPlayingViewHolder(
-      MovieItemViewHolderBinding.inflate(
+      MovieItemHorizontalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
@@ -24,7 +26,7 @@ class NowPlayingAdapter(
     holder.bind(getItem(position))
   
   inner class NowPlayingViewHolder(
-    private val binding: MovieItemViewHolderBinding,
+    private val binding: MovieItemHorizontalViewHolderBinding,
   ) : RecyclerView.ViewHolder(binding.root) {
     
     fun bind(item: MovieItemModel) {

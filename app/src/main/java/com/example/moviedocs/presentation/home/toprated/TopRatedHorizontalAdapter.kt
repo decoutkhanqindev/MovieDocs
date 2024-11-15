@@ -1,30 +1,31 @@
-package com.example.moviedocs.presentation.home.popular
+package com.example.moviedocs.presentation.home.toprated
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.moviedocs.databinding.MovieItemViewHolderBinding
+import com.example.moviedocs.databinding.MovieItemHorizontalViewHolderBinding
 import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.presentation.home.MovieItemModelCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class PopularAdapter(
-//  private val onItemClick: () -> Unit
-) : ListAdapter<MovieItemModel, PopularAdapter.PopularViewHolder>(MovieItemModelCallBack) {
+class TopRatedHorizontalAdapter(
+//  private val onItemClick: (MovieModel) -> Unit
+) :
+  ListAdapter<MovieItemModel, TopRatedHorizontalAdapter.TopRatedViewHolder>(MovieItemModelCallBack) {
   
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder =
-    PopularViewHolder(
-      MovieItemViewHolderBinding.inflate(
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedViewHolder =
+    TopRatedViewHolder(
+      MovieItemHorizontalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
   
-  override fun onBindViewHolder(holder: PopularViewHolder, position: Int) =
+  override fun onBindViewHolder(holder: TopRatedViewHolder, position: Int) =
     holder.bind(getItem(position))
   
-  inner class PopularViewHolder(
-    private val binding: MovieItemViewHolderBinding
+  inner class TopRatedViewHolder(
+    private val binding: MovieItemHorizontalViewHolderBinding,
   ) : RecyclerView.ViewHolder(binding.root) {
     
     fun bind(item: MovieItemModel) {

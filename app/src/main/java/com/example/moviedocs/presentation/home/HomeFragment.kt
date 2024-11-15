@@ -13,16 +13,17 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.home.nowplaying.NowPlayingAdapter
+import com.example.moviedocs.presentation.home.nowplaying.NowPlayingHorizontalAdapter
 import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
-import com.example.moviedocs.presentation.home.popular.PopularAdapter
+import com.example.moviedocs.presentation.home.popular.PopularHorizontalAdapter
 import com.example.moviedocs.presentation.home.popular.PopularViewModel
 import com.example.moviedocs.presentation.home.slider.SliderAdapter
-import com.example.moviedocs.presentation.home.toprated.TopRatedAdapter
+import com.example.moviedocs.presentation.home.toprated.TopRatedHorizontalAdapter
 import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
-import com.example.moviedocs.presentation.home.upcoming.UpcomingAdapter
+import com.example.moviedocs.presentation.home.upcoming.UpcomingHorizontalAdapter
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
+import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateTo
 import com.example.moviedocs.utils.visible
@@ -72,20 +73,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     SliderAdapter(viewPager = viewPager)
   }
   
-  private val nowPlayingAdapter: NowPlayingAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    NowPlayingAdapter()
+  private val nowPlayingAdapter: NowPlayingHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    NowPlayingHorizontalAdapter()
   }
   
-  private val popularAdapter: PopularAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    PopularAdapter()
+  private val popularAdapter: PopularHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    PopularHorizontalAdapter()
   }
   
-  private val upComingAdapter: UpcomingAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    UpcomingAdapter()
+  private val upComingAdapter: UpcomingHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    UpcomingHorizontalAdapter()
   }
   
-  private val topRatedAdapter: TopRatedAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    TopRatedAdapter()
+  private val topRatedAdapter: TopRatedHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    TopRatedHorizontalAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -203,7 +204,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           sliderProgressBar.visible()
           sliderViewPager.gone()
           nowPlayingProgressBar.visible()
-          nowPlayingRecycleView.gone()
+          nowPlayingRecycleView.invisible()
         }
         sliderAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
@@ -214,7 +215,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           sliderProgressBar.visible()
           sliderViewPager.gone()
           nowPlayingProgressBar.visible()
-          nowPlayingRecycleView.gone()
+          nowPlayingRecycleView.invisible()
         }
         sliderAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
@@ -238,7 +239,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageLoading -> {
         binding.apply {
           popularProgressBar.visible()
-          popularRecycleView.gone()
+          popularRecycleView.invisible()
         }
         popularAdapter.submitList(emptyList())
       }
@@ -246,7 +247,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageError -> {
         binding.apply {
           popularProgressBar.visible()
-          popularRecycleView.gone()
+          popularRecycleView.invisible()
         }
         popularAdapter.submitList(emptyList())
       }
@@ -266,7 +267,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageLoading -> {
         binding.apply {
           upcomingProgressBar.visible()
-          upcomingRecycleView.gone()
+          upcomingRecycleView.invisible()
         }
         upComingAdapter.submitList(emptyList())
       }
@@ -274,7 +275,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageError -> {
         binding.apply {
           upcomingProgressBar.visible()
-          upcomingRecycleView.gone()
+          upcomingRecycleView.invisible()
         }
         upComingAdapter.submitList(emptyList())
       }
@@ -294,7 +295,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageLoading -> {
         binding.apply {
           topRatedProgressBar.visible()
-          topRatedRecycleView.gone()
+          topRatedRecycleView.invisible()
         }
         topRatedAdapter.submitList(emptyList())
       }
@@ -302,7 +303,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       MovieListUiState.FirstPageError -> {
         binding.apply {
           topRatedProgressBar.visible()
-          topRatedRecycleView.gone()
+          topRatedRecycleView.invisible()
         }
         topRatedAdapter.submitList(emptyList())
       }

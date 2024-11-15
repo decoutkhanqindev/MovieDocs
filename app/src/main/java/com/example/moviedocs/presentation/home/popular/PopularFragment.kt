@@ -21,8 +21,8 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieList
   
   private val viewModel: PopularViewModel by viewModels()
   
-  private val adapter: PopularAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    PopularAdapter()
+  private val adapter: PopularHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    PopularHorizontalAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,7 +54,8 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieList
   }
   
   private fun setUpScrollListener() {
-    val layoutManager = binding.movieListRecyclerView.layoutManager as GridLayoutManager
+    val layoutManager: GridLayoutManager =
+      binding.movieListRecyclerView.layoutManager as GridLayoutManager
     binding.movieListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         if (dy > 0) { // scrolling down

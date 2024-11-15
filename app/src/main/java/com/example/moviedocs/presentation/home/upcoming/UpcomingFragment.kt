@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.home.MovieListUiState
@@ -20,14 +21,14 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   
   private val viewModel: UpcomingViewModel by viewModels()
   
-  private val adapter: UpcomingAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    UpcomingAdapter()
+  private val adapter: UpcomingHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    UpcomingHorizontalAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    binding.movieListTitle.text = "Upcoming"
+    binding.movieListTitle.text = getString(R.string.upcoming)
     setUpNavigation()
     setUpRecyclerView()
     setUpScrollListener()
@@ -53,7 +54,8 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   }
   
   private fun setUpScrollListener() {
-    val layoutManager = binding.movieListRecyclerView.layoutManager as GridLayoutManager
+    val layoutManager: GridLayoutManager =
+      binding.movieListRecyclerView.layoutManager as GridLayoutManager
     binding.movieListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         if (dy > 0) { // scrolling down
