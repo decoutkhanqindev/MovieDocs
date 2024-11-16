@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.slider
+package com.example.moviedocs.presentation.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,13 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
 import com.example.moviedocs.domain.model.list.MovieItemModel
-import com.example.moviedocs.presentation.home.MovieItemModelCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class SliderAdapter(
   private val viewPager: ViewPager2,
 //  private val onItemClicked: (MovieModel) -> Unit
-) : ListAdapter<MovieItemModel, SliderAdapter.SliderViewHolder>(MovieItemModelCallBack) {
+) : ListAdapter<MovieItemModel, SliderAdapter.SliderViewHolder>(MovieItemModelDiffCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(
