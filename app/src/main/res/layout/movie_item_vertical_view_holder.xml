@@ -14,13 +14,13 @@
       android:id="@+id/movieItemDescriptionLayout"
       android:layout_width="match_parent"
       android:layout_height="120dp"
-      app:cardBackgroundColor="@color/dark_blue2"
+      app:cardBackgroundColor="@color/card_bg_color_selector"
       app:cardCornerRadius="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:strokeColor="@color/main_color"
-      app:strokeWidth="5dp">
+      app:strokeWidth="3dp">
     
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
           android:maxLines="1"
           android:text="@string/app_name"
           android:textColor="@color/white"
-          android:textSize="16sp"
+          android:textSize="18sp"
           android:textStyle="bold"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,6 @@
           android:maxLines="2"
           android:text="@string/overview"
           android:textColor="@color/white"
-          android:textSize="16sp"
           android:textStyle="italic"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
