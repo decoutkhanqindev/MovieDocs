@@ -29,7 +29,7 @@
       
       <TextView
           android:id="@+id/movieItemTitle"
-          android:layout_width="235dp"
+          android:layout_width="200dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="143dp"
           android:layout_marginTop="8dp"
@@ -81,6 +81,19 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="@id/movieItemTitle"
           app:layout_constraintTop_toBottomOf="@id/movieItemRatingVoteAverage" />
+      
+      <ImageView
+          android:id="@+id/movieItemAddToFavorite"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_marginEnd="16dp"
+          android:layout_marginStart="8dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/white_favorite_icon"
+          app:layout_constraintBottom_toBottomOf="@id/movieItemTitle"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@id/movieItemTitle"
+          app:layout_constraintTop_toTopOf="@id/movieItemTitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
   
