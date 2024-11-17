@@ -22,8 +22,8 @@
     
     <ImageView
         android:id="@+id/movieItemImg"
-        android:layout_width="110dp"
-        android:layout_height="160dp"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
         android:importantForAccessibility="no"
         android:scaleType="fitXY"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -32,7 +32,7 @@
         android:id="@+id/movieItemRatingLayout"
         android:layout_width="45dp"
         android:layout_height="70dp"
-        android:layout_marginStart="65dp"
+        android:layout_marginStart="55dp"
         android:backgroundTint="@android:color/transparent"
         app:cardCornerRadius="0dp"
         app:cardElevation="20dp"

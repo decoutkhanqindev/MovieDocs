@@ -22,7 +22,7 @@
   <string name="now_playing">Now Playing</string>
   <string name="popular">Popular</string>
   <string name="upcoming">Upcoming</string>
-  <string name="search_description">Enter a Movie to seach</string>
+  <string name="search_description">Enter a Movie to search</string>
   <string name="search">Search</string>
   <string name="home_icon">Home</string>
   <string name="favorite_icon">Favorite</string>
@@ -35,4 +35,8 @@
   <string name="vote_count">853</string>
   <string name="overview">Eddie and Venom are on the run. Hunted by both of their worlds and with the net closing in, the duo are forced into a devastating decision that will bring the curtains down on Venom and Eddie\'s last dance.</string>
   <string name="release_date">22/10/2024</string>
+  <string name="title_a_z">Title A-Z</string>
+  <string name="title_z_a">Title (Z-A)</string>
+  <string name="rating_ascending">Rating Ascending</string>
+  <string name="rating_descending">Rating Descending</string>
 </resources>

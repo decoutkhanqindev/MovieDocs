@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.moviedocs.databinding.MovieItemVerticalViewHolderBinding
 import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.utils.formatTimestamp
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class MovieListVerticalAdapter :
@@ -29,6 +30,7 @@ class MovieListVerticalAdapter :
         movieItemTitle.text = item.title
         movieItemRatingVoteAverage.text = "%.1f".format(item.voteAverage)
         movieItemRatingOverView.text = item.overview
+        movieItemRatingReleaseDate.text = item.releaseDate.formatTimestamp()
       }
     }
   }
