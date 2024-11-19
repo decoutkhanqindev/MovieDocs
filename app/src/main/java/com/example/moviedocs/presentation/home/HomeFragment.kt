@@ -13,14 +13,11 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.home.nowplaying.NowPlayingHorizontalAdapter
+import com.example.moviedocs.presentation.home.adapter.MovieListHorizontalAdapter
+import com.example.moviedocs.presentation.home.adapter.SliderAdapter
 import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
-import com.example.moviedocs.presentation.home.popular.PopularHorizontalAdapter
 import com.example.moviedocs.presentation.home.popular.PopularViewModel
-import com.example.moviedocs.presentation.home.slider.SliderAdapter
-import com.example.moviedocs.presentation.home.toprated.TopRatedHorizontalAdapter
 import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
-import com.example.moviedocs.presentation.home.upcoming.UpcomingHorizontalAdapter
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
@@ -73,20 +70,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     SliderAdapter(viewPager = viewPager)
   }
   
-  private val nowPlayingAdapter: NowPlayingHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    NowPlayingHorizontalAdapter()
+  private val nowPlayingAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListHorizontalAdapter()
   }
   
-  private val popularAdapter: PopularHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    PopularHorizontalAdapter()
+  private val popularAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListHorizontalAdapter()
   }
   
-  private val upComingAdapter: UpcomingHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    UpcomingHorizontalAdapter()
+  private val upComingAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListHorizontalAdapter()
   }
   
-  private val topRatedAdapter: TopRatedHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    TopRatedHorizontalAdapter()
+  private val topRatedAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListHorizontalAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
