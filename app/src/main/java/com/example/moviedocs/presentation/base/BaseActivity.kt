@@ -2,6 +2,7 @@ package com.example.moviedocs.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
@@ -10,6 +11,7 @@ abstract class BaseActivity<VB : ViewBinding>(
 ) : AppCompatActivity() {
   protected lateinit var binding: VB
   
+  @CallSuper
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = inflate(layoutInflater)
