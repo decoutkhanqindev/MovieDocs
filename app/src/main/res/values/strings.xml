@@ -40,4 +40,5 @@
   <string name="rating_up">Rating up</string>
   <string name="rating_down">Rating down</string>
   <string name="sorting_menu">Sorting Menu</string>
+  <string name="add_to_favorite">Add to Favorite</string>
 </resources>

@@ -17,9 +17,11 @@
     
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
-        app:menu="@menu/sorting_movie_list_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:elevation="4dp"
+        app:menu="@menu/sorting_movie_list_menu"
+        app:popupTheme="@style/ToolbarMenuStyle">
       
       <ImageView
           android:id="@+id/backBtn"
