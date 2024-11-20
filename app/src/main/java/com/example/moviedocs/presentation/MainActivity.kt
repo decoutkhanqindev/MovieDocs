@@ -39,29 +39,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     val navHostFragment: NavHostFragment = binding.mainNavHost.getFragment()
     navController = navHostFragment.navController
     
-    binding.bottomNavigationMenu.setupWithNavController(navController)
-    
-    handleBottomNavigationMenuVisibility()
-  }
-  
-  private fun handleBottomNavigationMenuVisibility() {
     navController.addOnDestinationChangedListener { _, destination, _ ->
       when (destination.id) {
         R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
-          launchAndRepeatStarted(
-            {
-              delay(250)
-              binding.bottomNavigationMenu.visible()
-            }
-          )
+          launchAndRepeatStarted({
+            delay(200)
+            binding.bottomNavigationMenu.visible()
+          })
         }
         
         else -> binding.bottomNavigationMenu.gone()
       }
     }
+    
+    binding.bottomNavigationMenu.setupWithNavController(navController)
   }
   
-  override fun onNavigateUp(): Boolean = navController.navigateUp()
+  override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
   
   private fun observeNetworkConnectivity() {
     launchAndRepeatStarted(
@@ -81,8 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
       CustomNetworkDialogLayoutBinding.inflate(layoutInflater)
     
     if (alertDialog?.isShowing == true) return
-    alertDialog = AlertDialog.Builder(this)
-      .setView(dialogLayoutBinding.root)
+    alertDialog = AlertDialog.Builder(this).setView(dialogLayoutBinding.root)
       .setCancelable(false) // can not close a dialog if network is unavailable
       .show()
     
