@@ -48,7 +48,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:indeterminateTint="@android:color/white"
-      app:layout_constraintBottom_toTopOf="@id/movieListBottomProgressBar"
+      app:layout_constraintBottom_toTopOf="@id/movieListBottomPageNumber"
       app:layout_constraintEnd_toEndOf="@id/movieListRecyclerView"
       app:layout_constraintStart_toStartOf="@id/movieListRecyclerView"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
@@ -58,21 +58,26 @@
       android:layout_width="match_parent"
       android:layout_height="0dp"
       android:layout_marginTop="4dp"
-      app:layout_constraintBottom_toTopOf="@id/movieListBottomProgressBar"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout"
       tools:listitem="@layout/movie_item_vertical_view_holder"
       tools:orientation="vertical" />
   
-  <ProgressBar
-      android:id="@+id/movieListBottomProgressBar"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:indeterminateTint="@android:color/white"
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/movieListBottomPageNumber"
+      android:layout_width="250dp"
+      android:layout_height="45dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginBottom="16dp"
+      android:background="@drawable/bg_rounded_no_border_3"
+      android:orientation="horizontal"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/movieListRecyclerView" />
-
+      tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+      tools:listitem="@layout/page_number_item_view_holder" />
 </androidx.constraintlayout.widget.ConstraintLayout>
