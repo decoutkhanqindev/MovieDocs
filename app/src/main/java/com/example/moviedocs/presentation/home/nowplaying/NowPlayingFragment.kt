@@ -125,22 +125,22 @@ class NowPlayingFragment :
     binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
       when (it.itemId) {
         R.id.titleAsc -> {
-          viewModel.sortItems(SortType.TITLE_ASC)
+          viewModel.sortItems(MovieListUiState.SortType.TITLE_ASC)
           true
         }
         
         R.id.titleDsc -> {
-          viewModel.sortItems(SortType.TITLE_DSC)
+          viewModel.sortItems(MovieListUiState.SortType.TITLE_DSC)
           true
         }
         
         R.id.ratingAsc -> {
-          viewModel.sortItems(SortType.RATING_ASC)
+          viewModel.sortItems(MovieListUiState.SortType.RATING_ASC)
           true
         }
         
         R.id.ratingDsc -> {
-          viewModel.sortItems(SortType.RATING_DSC)
+          viewModel.sortItems(MovieListUiState.SortType.RATING_DSC)
           true
         }
         
