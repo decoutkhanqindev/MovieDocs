@@ -37,8 +37,8 @@
   <string name="release_date">22/10/2024</string>
   <string name="title_a_z">Title A-Z</string>
   <string name="title_z_a">Title Z-A</string>
-  <string name="rating_up">Rating up</string>
-  <string name="rating_down">Rating down</string>
+  <string name="rating_asc">Rating Ascending</string>
+  <string name="rating_dsc">Rating Descending</string>
   <string name="sorting_menu">Sorting Menu</string>
   <string name="add_to_favorite">Add to Favorite</string>
 </resources>

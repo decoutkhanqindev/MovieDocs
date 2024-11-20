@@ -8,24 +8,24 @@
       app:showAsAction="ifRoom">
     <menu>
       <item
-          android:id="@+id/titleAToZ"
-          android:icon="@drawable/down_icon"
+          android:id="@+id/titleAsc"
+          android:icon="@drawable/up_icon"
           android:title="@string/title_a_z"
           app:showAsAction="never" />
       <item
-          android:id="@+id/titleZToA"
-          android:icon="@drawable/up_icon"
+          android:id="@+id/titleDsc"
+          android:icon="@drawable/down_icon"
           android:title="@string/title_z_a"
           app:showAsAction="never" />
       <item
-          android:id="@+id/ratingUp"
+          android:id="@+id/ratingAsc"
           android:icon="@drawable/up_icon"
-          android:title="@string/rating_up"
+          android:title="@string/rating_asc"
           app:showAsAction="never" />
       <item
-          android:id="@+id/ratingDown"
+          android:id="@+id/ratingDsc"
           android:icon="@drawable/down_icon"
-          android:title="@string/rating_down"
+          android:title="@string/rating_dsc"
           app:showAsAction="never" />
     </menu>
   </item>
