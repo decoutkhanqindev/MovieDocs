@@ -10,4 +10,12 @@
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowBackground">@drawable/bg_gradient</item>
   </style>
+  
+  <style name="ToolbarMenuStyle" parent="Widget.Material3.PopupMenu.Overflow">
+    <item name="android:popupBackground">@drawable/bg_rounded_no_border</item>
+    <item name="android:textColor">@color/white</item>
+    <item name="android:itemBackground">@color/item_bg_color_selector</item>
+    <item name="android:dropDownVerticalOffset">0dp</item>
+    <item name="android:dropDownHorizontalOffset">0dp</item>
+  </style>
 </resources>
