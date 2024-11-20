@@ -18,5 +18,9 @@ sealed interface MovieListUiState {
     LOAD_MORE, // load more a next page state is idle -> it scrolled a last element -> load more
     DONE // load more a next page state is done -> no more items to load more
   }
+  
+  enum class SortType {
+    NONE, TITLE_ASC, TITLE_DSC, RATING_ASC, RATING_DSC
+  }
 }
 

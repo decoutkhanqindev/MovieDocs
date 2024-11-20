@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
-import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.home.MovieListUiState
 import com.example.moviedocs.presentation.home.adapter.MovieListVerticalAdapter
@@ -36,6 +35,7 @@ class NowPlayingFragment :
     setUpRecyclerView()
     setUpScrollListener()
     bindViewModel()
+    handleSortingMenuItemClick()
   }
   
   private fun setUpNavigation() {
@@ -116,32 +116,31 @@ class NowPlayingFragment :
             else -> movieListBottomProgressBar.gone()
           }
           adapter.submitList(state.items)
-          handleSortingMenuItemClick(state.items)
         }
       }
     }
   }
   
-  private fun handleSortingMenuItemClick(items: List<MovieItemModel>) {
-    binding.toolBar.setOnMenuItemClickListener { menuItem: MenuItem ->
-      when (menuItem.itemId) {
-        R.id.titleAToZ -> {
-          adapter.submitList(items.sortedBy { it: MovieItemModel -> it.title })
+  private fun handleSortingMenuItemClick() {
+    binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
+      when (it.itemId) {
+        R.id.titleAsc -> {
+          viewModel.sortItems(SortType.TITLE_ASC)
           true
         }
         
-        R.id.titleZToA -> {
-          adapter.submitList(items.sortedByDescending { it: MovieItemModel -> it.title })
+        R.id.titleDsc -> {
+          viewModel.sortItems(SortType.TITLE_DSC)
           true
         }
         
-        R.id.ratingUp -> {
-          adapter.submitList(items.sortedBy { it: MovieItemModel -> it.voteAverage })
+        R.id.ratingAsc -> {
+          viewModel.sortItems(SortType.RATING_ASC)
           true
         }
         
-        R.id.ratingDown -> {
-          adapter.submitList(items.sortedByDescending { it: MovieItemModel -> it.voteAverage })
+        R.id.ratingDsc -> {
+          viewModel.sortItems(SortType.RATING_DSC)
           true
         }
         
