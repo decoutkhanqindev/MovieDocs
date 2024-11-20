@@ -1,14 +1,17 @@
 package com.example.moviedocs.presentation.home.nowplaying
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
+import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.home.MovieListUiState
+import com.example.moviedocs.presentation.home.adapter.MovieListVerticalAdapter
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -21,8 +24,8 @@ class NowPlayingFragment :
   
   private val viewModel: NowPlayingViewModel by viewModels()
   
-  private val adapter: NowPlayingVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    NowPlayingVerticalAdapter()
+  private val adapter: MovieListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListVerticalAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,12 +62,22 @@ class NowPlayingFragment :
     binding.movieListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
       override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         if (dy > 0) { // scrolling down
+          // number of items currently visible on screen
           val visibleItemCount = layoutManager.childCount
+          // total number of items in the list
           val totalItemCount = layoutManager.itemCount
+          // position of the first visible item
           val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+          // trigger point before reaching the end
+          val threshold = 2
           
-          // Load more when there are fewer than 12 items remaining
-          val threshold = 12 // 12 items (4 rows)
+          // If there are 2 more elements from the last element, you can call loadNextPage()
+          // e.g:
+          // [1][2][3][4][5]  <- Visible items (visibleItemCount = 5)
+          // ↑ firstVisibleItemPosition = 1
+          // Total items = 20
+          // Threshold = 2
+          // When: (5 + 1 + 2) >= 20 is true, load more
           if ((visibleItemCount + firstVisibleItemPosition + threshold) >= totalItemCount && firstVisibleItemPosition >= 0) {
             viewModel.loadNextPage()
           }
@@ -103,7 +116,36 @@ class NowPlayingFragment :
             else -> movieListBottomProgressBar.gone()
           }
           adapter.submitList(state.items)
+          handleSortingMenuItemClick(state.items)
         }
+      }
+    }
+  }
+  
+  private fun handleSortingMenuItemClick(items: List<MovieItemModel>) {
+    binding.toolBar.setOnMenuItemClickListener { menuItem: MenuItem ->
+      when (menuItem.itemId) {
+        R.id.titleAToZ -> {
+          adapter.submitList(items.sortedBy { it: MovieItemModel -> it.title })
+          true
+        }
+        
+        R.id.titleZToA -> {
+          adapter.submitList(items.sortedByDescending { it: MovieItemModel -> it.title })
+          true
+        }
+        
+        R.id.ratingUp -> {
+          adapter.submitList(items.sortedBy { it: MovieItemModel -> it.voteAverage })
+          true
+        }
+        
+        R.id.ratingDown -> {
+          adapter.submitList(items.sortedByDescending { it: MovieItemModel -> it.voteAverage })
+          true
+        }
+        
+        else -> false
       }
     }
   }
