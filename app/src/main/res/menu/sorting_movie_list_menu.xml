@@ -2,15 +2,31 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
-      android:id="@+id/titleAToZ"
-      android:title="@string/title_a_z" />
-  <item
-      android:id="@+id/titleZToA"
-      android:title="@string/title_z_a" />
-  <item
-      android:id="@+id/ratingAscending"
-      android:title="@string/rating_ascending" />
-  <item
-      android:id="@+id/ratingDescending"
-      android:title="@string/rating_descending" />
+      android:id="@+id/sortingMenu"
+      android:icon="@drawable/sorting_icon"
+      android:title="@string/sorting_menu"
+      app:showAsAction="ifRoom">
+    <menu>
+      <item
+          android:id="@+id/titleAToZ"
+          android:icon="@drawable/down_icon"
+          android:title="@string/title_a_z"
+          app:showAsAction="never" />
+      <item
+          android:id="@+id/titleZToA"
+          android:icon="@drawable/up_icon"
+          android:title="@string/title_z_a"
+          app:showAsAction="never" />
+      <item
+          android:id="@+id/ratingUp"
+          android:icon="@drawable/up_icon"
+          android:title="@string/rating_up"
+          app:showAsAction="never" />
+      <item
+          android:id="@+id/ratingDown"
+          android:icon="@drawable/down_icon"
+          android:title="@string/rating_down"
+          app:showAsAction="never" />
+    </menu>
+  </item>
 </menu>
