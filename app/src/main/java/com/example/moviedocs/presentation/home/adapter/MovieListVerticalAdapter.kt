@@ -13,13 +13,13 @@ class MovieListVerticalAdapter :
   BaseListAdapter<MovieItemModel, MovieItemVerticalViewHolderBinding>(MovieItemModelDiffCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
-    NowPlayingViewHolder(
+    MovieListVerticalViewHolder(
       MovieItemVerticalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
   
-  private inner class NowPlayingViewHolder(
+  private inner class  MovieListVerticalViewHolder(
     binding: MovieItemVerticalViewHolderBinding,
   ) : BaseViewHolder(binding) {
     

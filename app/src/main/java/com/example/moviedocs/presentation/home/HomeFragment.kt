@@ -17,6 +17,7 @@ import com.example.moviedocs.presentation.home.adapter.MovieListHorizontalAdapte
 import com.example.moviedocs.presentation.home.adapter.SliderAdapter
 import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
 import com.example.moviedocs.presentation.home.popular.PopularViewModel
+import com.example.moviedocs.presentation.home.state.MovieListUiState
 import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
 import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
 import com.example.moviedocs.utils.gone
@@ -32,6 +33,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   companion object {
     fun newInstance(): HomeFragment = HomeFragment()
+    const val TAG: String = "HomeFragment"
   }
   
   private val nowPlayingViewModel: NowPlayingViewModel by viewModels()
@@ -188,6 +190,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   }
   
   private fun bindViewModel() {
+    nowPlayingViewModel.loadPage(1)
     launchAndRepeatStarted({ nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
       { popularViewModel.movieListUiState.collect(::renderPopularUi) },
       { upComingViewModel.movieListUiState.collect(::renderUpcomingUi) },
@@ -196,7 +199,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun renderNowPlayingUi(state: MovieListUiState) {
     when (state) {
-      MovieListUiState.FirstPageLoading -> {
+      MovieListUiState.Loading -> {
         binding.apply {
           sliderProgressBar.visible()
           sliderViewPager.gone()
@@ -207,7 +210,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         nowPlayingAdapter.submitList(emptyList())
       }
       
-      MovieListUiState.FirstPageError -> {
+      is MovieListUiState.Error -> {
         binding.apply {
           sliderProgressBar.visible()
           sliderViewPager.gone()
@@ -233,7 +236,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun renderPopularUi(state: MovieListUiState) {
     when (state) {
-      MovieListUiState.FirstPageLoading -> {
+      MovieListUiState.Loading -> {
         binding.apply {
           popularProgressBar.visible()
           popularRecycleView.invisible()
@@ -241,7 +244,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         popularAdapter.submitList(emptyList())
       }
       
-      MovieListUiState.FirstPageError -> {
+      is MovieListUiState.Error -> {
         binding.apply {
           popularProgressBar.visible()
           popularRecycleView.invisible()
@@ -261,7 +264,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun renderUpcomingUi(state: MovieListUiState) {
     when (state) {
-      MovieListUiState.FirstPageLoading -> {
+      MovieListUiState.Loading -> {
         binding.apply {
           upcomingProgressBar.visible()
           upcomingRecycleView.invisible()
@@ -269,7 +272,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         upComingAdapter.submitList(emptyList())
       }
       
-      MovieListUiState.FirstPageError -> {
+      is MovieListUiState.Error -> {
         binding.apply {
           upcomingProgressBar.visible()
           upcomingRecycleView.invisible()
@@ -289,7 +292,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   private fun renderTopRatedUi(state: MovieListUiState) {
     when (state) {
-      MovieListUiState.FirstPageLoading -> {
+      MovieListUiState.Loading -> {
         binding.apply {
           topRatedProgressBar.visible()
           topRatedRecycleView.invisible()
@@ -297,7 +300,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         topRatedAdapter.submitList(emptyList())
       }
       
-      MovieListUiState.FirstPageError -> {
+      is MovieListUiState.Error -> {
         binding.apply {
           topRatedProgressBar.visible()
           topRatedRecycleView.invisible()

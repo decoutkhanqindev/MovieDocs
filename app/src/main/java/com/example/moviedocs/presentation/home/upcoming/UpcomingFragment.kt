@@ -1,15 +1,16 @@
 package com.example.moviedocs.presentation.home.upcoming
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.home.MovieListUiState
+import com.example.moviedocs.presentation.home.adapter.MovieListPageNumbersAdapter
+import com.example.moviedocs.presentation.home.adapter.MovieListVerticalAdapter
+import com.example.moviedocs.presentation.home.state.MovieListUiState
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -21,8 +22,12 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   
   private val viewModel: UpcomingViewModel by viewModels()
   
-  private val adapter: UpcomingHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    UpcomingHorizontalAdapter()
+  private val movieListAdapter: MovieListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListVerticalAdapter()
+  }
+  
+  private val pageNumbersAdapter: MovieListPageNumbersAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListPageNumbersAdapter()
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,8 +36,9 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
     binding.movieListTitle.text = getString(R.string.upcoming)
     setUpNavigation()
     setUpRecyclerView()
-    setUpScrollListener()
     bindViewModel()
+    handleLoadNextPage()
+    handleSortingMovies()
   }
   
   private fun setUpNavigation() {
@@ -42,68 +48,85 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   private fun setUpRecyclerView() {
     binding.movieListRecyclerView.apply {
       setHasFixedSize(true)
-      layoutManager = GridLayoutManager(
-        requireContext(), 3, LinearLayoutManager.VERTICAL, false
+      layoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.VERTICAL, false
       )
-      adapter = this@UpcomingFragment.adapter
+      adapter = this@UpcomingFragment.movieListAdapter
+    }
+    
+    binding.movieListBottomPageNumbersRecyclerView.apply {
+      setHasFixedSize(true)
+      layoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.HORIZONTAL, false
+      )
+      adapter = this@UpcomingFragment.pageNumbersAdapter
     }
   }
   
   private fun bindViewModel() {
+    viewModel.loadPage(1)
     launchAndRepeatStarted({ viewModel.movieListUiState.collect(::renderUi) })
-  }
-  
-  private fun setUpScrollListener() {
-    val layoutManager: GridLayoutManager =
-      binding.movieListRecyclerView.layoutManager as GridLayoutManager
-    binding.movieListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-      override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        if (dy > 0) { // scrolling down
-          val visibleItemCount = layoutManager.childCount
-          val totalItemCount = layoutManager.itemCount
-          val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-          
-          // Load more when there are fewer than 12 items remaining
-          val threshold = 12 // 12 items (4 rows)
-          if ((visibleItemCount + firstVisibleItemPosition + threshold) >= totalItemCount && firstVisibleItemPosition >= 0) {
-            viewModel.loadNextPage()
-          }
-        }
-      }
-    })
   }
   
   private fun renderUi(state: MovieListUiState) {
     when (state) {
-      MovieListUiState.FirstPageLoading -> {
+      MovieListUiState.Loading -> {
         binding.apply {
           movieListProgressBar.visible()
-          movieListBottomProgressBar.gone()
           movieListRecyclerView.gone()
         }
-        adapter.submitList(emptyList())
+        movieListAdapter.submitList(emptyList())
       }
       
-      MovieListUiState.FirstPageError -> {
+      is MovieListUiState.Error -> {
         binding.apply {
           movieListProgressBar.visible()
-          movieListBottomProgressBar.gone()
           movieListRecyclerView.gone()
         }
-        adapter.submitList(emptyList())
+        movieListAdapter.submitList(emptyList())
       }
       
       is MovieListUiState.Success -> {
         binding.apply {
           movieListProgressBar.gone()
           movieListRecyclerView.visible()
-          // show/hide load more progress bar
-          when (state.nextPageState) {
-            MovieListUiState.NextPageState.LOADING -> movieListBottomProgressBar.visible()
-            else -> movieListBottomProgressBar.gone()
-          }
-          adapter.submitList(state.items)
         }
+        pageNumbersAdapter.submitList((1..state.totalPage).toList())
+        movieListAdapter.submitList(state.items)
+      }
+    }
+  }
+  
+  private fun handleLoadNextPage() {
+    pageNumbersAdapter.setOnItemClickListener { it: Int ->
+      viewModel.loadPage(it)
+    }
+  }
+  
+  private fun handleSortingMovies() {
+    binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
+      when (it.itemId) {
+        R.id.titleAsc -> {
+          viewModel.sortItems(MovieListUiState.SortType.TITLE_ASC)
+          true
+        }
+        
+        R.id.titleDsc -> {
+          viewModel.sortItems(MovieListUiState.SortType.TITLE_DSC)
+          true
+        }
+        
+        R.id.ratingAsc -> {
+          viewModel.sortItems(MovieListUiState.SortType.RATING_ASC)
+          true
+        }
+        
+        R.id.ratingDsc -> {
+          viewModel.sortItems(MovieListUiState.SortType.RATING_DSC)
+          true
+        }
+        
+        else -> false
       }
     }
   }
