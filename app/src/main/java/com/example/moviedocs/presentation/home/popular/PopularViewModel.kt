@@ -2,11 +2,10 @@ package com.example.moviedocs.presentation.home.popular
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.domain.model.list.MovieListModel
 import com.example.moviedocs.domain.usecase.list.GetPopularUseCase
-import com.example.moviedocs.presentation.home.MovieListSingleEvent
-import com.example.moviedocs.presentation.home.MovieListUiState
+import com.example.moviedocs.presentation.home.state.MovieListSingleEvent
+import com.example.moviedocs.presentation.home.state.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -25,7 +24,7 @@ class PopularViewModel
   // StateFlow for State Management:
   // This is used for managing the UI state for the movie list (e.g., loading, success, error).
   private val _movieListUiState: MutableStateFlow<MovieListUiState> =
-    MutableStateFlow(MovieListUiState.FirstPageLoading)
+    MutableStateFlow(MovieListUiState.Loading)
   val movieListUiState: StateFlow<MovieListUiState> get() = _movieListUiState.asStateFlow()
   
   // Channel for One-Time Events:
@@ -34,85 +33,41 @@ class PopularViewModel
     Channel(capacity = Channel.UNLIMITED)
   val movieListSingleEvent: Flow<MovieListSingleEvent> get() = _movieListSingleEvent.receiveAsFlow()
   
-  init {
-    loadFirstPage()
-  }
-  
-  private fun loadFirstPage() {
+  fun loadPage(page: Int) {
     viewModelScope.launch {
-      _movieListUiState.value = MovieListUiState.FirstPageLoading
-      val firstPageResponse: Result<MovieListModel> = getPopularUseCase(page = 1)
+      _movieListUiState.value = MovieListUiState.Loading
       
-      firstPageResponse
-        .onSuccess { it: MovieListModel ->
-          _movieListUiState.value = MovieListUiState.Success(
-            items = it.results,
-            currentPage = it.page,
-            nextPageState = if (it.page >= it.totalPages) {
-              MovieListUiState.NextPageState.DONE // no more pages available
-            } else {
-              MovieListUiState.NextPageState.LOAD_MORE // ready to load next page if necessary
-            }
-          )
-          _movieListSingleEvent.send(MovieListSingleEvent.Success)
-        }
-        .onFailure { it: Throwable ->
-          _movieListUiState.value = MovieListUiState.FirstPageError
-          _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
-          Timber.tag(TAG).e("loadFirstPage: ${it.message}")
-        }
-    }
-  }
-  
-  fun loadNextPage() {
-    when (val currentState: MovieListUiState = _movieListUiState.value) {
-      MovieListUiState.FirstPageLoading,
-      MovieListUiState.FirstPageError,
-        -> return
-      
-      is MovieListUiState.Success -> {
-        when (currentState.nextPageState) {
-          MovieListUiState.NextPageState.DONE -> return // no items to load
-          MovieListUiState.NextPageState.LOADING -> return // has in progress request -> avoid duplicate request
-          MovieListUiState.NextPageState.ERROR -> loadFirstPage() // if there was an error, retry the first page
-          MovieListUiState.NextPageState.LOAD_MORE -> loadNextPageInternal(currentState) // load the next page if load more
-        }
+      getPopularUseCase(page).onSuccess { it: MovieListModel ->
+        _movieListUiState.value = MovieListUiState.Success(
+          items = it.results,
+          currentPage = it.page,
+          totalPage = it.totalPages,
+          nextPageState = if (it.page >= it.totalPages) {
+            MovieListUiState.NextPageState.DONE
+          } else {
+            MovieListUiState.NextPageState.LOAD_MORE
+          }
+        )
+        _movieListSingleEvent.send(MovieListSingleEvent.Success)
+      }.onFailure { it: Throwable ->
+        _movieListUiState.value = MovieListUiState.Error(it)
+        _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
+        Timber.tag(TAG).e("loadPage: ${it.message}")
       }
     }
   }
   
-  private fun loadNextPageInternal(currentState: MovieListUiState.Success) {
-    viewModelScope.launch {
-      _movieListUiState.value = currentState.copy(
-        nextPageState = MovieListUiState.NextPageState.LOADING
-      )
-      
-      val nextPage: Int = currentState.currentPage + 1
-      val nextPageResponse: Result<MovieListModel> = getPopularUseCase(page = nextPage)
-      val currentItems: MutableList<MovieItemModel> = currentState.items.toMutableList()
-      
-      nextPageResponse
-        .onSuccess { it: MovieListModel ->
-          // append the newly loaded movies to the list
-          currentItems.addAll(it.results)
-          _movieListUiState.value = currentState.copy(
-            items = currentItems,
-            currentPage = nextPage,
-            nextPageState = if (it.page >= it.totalPages) {
-              MovieListUiState.NextPageState.DONE // no more pages available
-            } else {
-              MovieListUiState.NextPageState.LOAD_MORE // ready to load next page if necessary
-            }
-          )
-          _movieListSingleEvent.send(MovieListSingleEvent.Success)
-        }
-        .onFailure { it: Throwable ->
-          _movieListUiState.value = currentState.copy(
-            nextPageState = MovieListUiState.NextPageState.ERROR
-          )
-          _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
-          Timber.tag(TAG).e("loadNextPage: ${it.message}")
-        }
+  fun sortItems(type: MovieListUiState.SortType) {
+    val currentState = _movieListUiState.value
+    if (currentState is MovieListUiState.Success) {
+      val sortedItems = when (type) {
+        MovieListUiState.SortType.TITLE_ASC -> currentState.items.sortedBy { it.title }
+        MovieListUiState.SortType.TITLE_DSC -> currentState.items.sortedByDescending { it.title }
+        MovieListUiState.SortType.RATING_ASC -> currentState.items.sortedBy { it.voteAverage }
+        MovieListUiState.SortType.RATING_DSC -> currentState.items.sortedByDescending { it.voteAverage }
+        else -> currentState.items
+      }
+      _movieListUiState.value = currentState.copy(items = sortedItems)
     }
   }
   
