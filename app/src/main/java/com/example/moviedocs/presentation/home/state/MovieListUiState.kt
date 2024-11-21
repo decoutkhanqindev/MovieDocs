@@ -1,14 +1,15 @@
-package com.example.moviedocs.presentation.home
+package com.example.moviedocs.presentation.home.state
 
 import com.example.moviedocs.domain.model.list.MovieItemModel
 
 sealed interface MovieListUiState {
-  data object FirstPageLoading : MovieListUiState
-  data object FirstPageError : MovieListUiState
+  data object Loading : MovieListUiState
+  data class Error(val throwable: Throwable) : MovieListUiState
   
   data class Success(
     val items: List<MovieItemModel>,
     val currentPage: Int,
+    val totalPage: Int,
     val nextPageState: NextPageState,
   ) : MovieListUiState
   
