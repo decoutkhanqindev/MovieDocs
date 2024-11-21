@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 /*
  * These functions simplify the process of running suspend functions within a lifecycle-aware scope
@@ -77,4 +78,8 @@ fun ComponentActivity.launchAndRepeatStarted(
       doAfterLaunch?.invoke()
     }
   }
+}
+
+fun logLifecycle(event: String, className: String) {
+  Timber.tag(className).d("$className: $event")
 }
