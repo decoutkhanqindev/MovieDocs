@@ -55,8 +55,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     binding.bottomNavigationMenu.setupWithNavController(navController)
   }
   
-  override fun onSupportNavigateUp(): Boolean = navController.navigateUp()
-  
   private fun observeNetworkConnectivity() {
     launchAndRepeatStarted(
       { networkConnectivityObserver.observe().collect(::renderAlertDialog) },

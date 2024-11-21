@@ -80,6 +80,6 @@ fun ComponentActivity.launchAndRepeatStarted(
   }
 }
 
-fun logLifecycle(event: String, className: String) {
+fun logLifecycle(className: String, event: String) {
   Timber.tag(className).d("$className: $event")
 }

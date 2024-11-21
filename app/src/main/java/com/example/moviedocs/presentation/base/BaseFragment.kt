@@ -22,46 +22,46 @@ abstract class BaseFragment<VB : ViewBinding>(
   
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    logLifecycle("onCreate", className)
+    logLifecycle(className, "onCreate")
   }
   
   @CallSuper
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
   ): View? {
-    logLifecycle("onCreateView", className)
+    logLifecycle(className, "onCreateView")
     return inflate(inflater, container, false).also { _binding = it }.root
   }
   
   override fun onStart() {
     super.onStart()
-    logLifecycle("onStart", className)
+    logLifecycle(className, "onStart")
   }
   
   override fun onResume() {
     super.onResume()
-    logLifecycle("onResume", className)
+    logLifecycle(className, "onResume")
   }
   
   override fun onPause() {
-    logLifecycle("onPause", className)
+    logLifecycle(className, "onPause")
     super.onPause()
   }
   
   override fun onStop() {
-    logLifecycle("onStop", className)
+    logLifecycle(className, "onStop")
     super.onStop()
   }
   
   @CallSuper
   override fun onDestroyView() {
-    logLifecycle("onDestroyView", className)
+    logLifecycle(className, "onDestroyView")
     _binding = null
     super.onDestroyView()
   }
   
   override fun onDestroy() {
-    logLifecycle("onDestroy", className)
+    logLifecycle(className, "onDestroy")
     super.onDestroy()
   }
 }
