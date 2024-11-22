@@ -92,6 +92,7 @@ class NowPlayingFragment :
           movieListRecyclerView.visible()
         }
         pageNumbersAdapter.submitList((1..state.totalPage).toList())
+        pageNumbersAdapter.setCurrentPage(state.currentPage - 1)
         movieListAdapter.submitList(state.items)
       }
     }

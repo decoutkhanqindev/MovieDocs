@@ -19,6 +19,15 @@ class MovieListPageNumbersAdapter :
       )
     )
   
+  fun setCurrentPage(page: Int) {
+    if (page >= 0  && page != selectedPosition) {
+      val oldPosition = selectedPosition
+      selectedPosition = page
+      notifyItemChanged(oldPosition)
+      notifyItemChanged(selectedPosition)
+    }
+  }
+  
   inner class PageNumbersItemViewHolder(
     binding: PageNumbersItemViewHolderBinding,
   ) : BaseViewHolder(binding) {
@@ -26,11 +35,8 @@ class MovieListPageNumbersAdapter :
     init {
       binding.root.setOnClickListener {
         val position = bindingAdapterPosition
-        if (position != RecyclerView.NO_POSITION && position != selectedPosition) {
-          val oldPosition = selectedPosition
-          selectedPosition = position
-          notifyItemChanged(oldPosition)
-          notifyItemChanged(selectedPosition)
+        if (position != RecyclerView.NO_POSITION) {
+          setCurrentPage(position)
           onItemClickListener?.invoke(getItem(position))
         }
       }
