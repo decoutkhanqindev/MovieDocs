@@ -9,19 +9,13 @@ abstract class BaseListAdapter<T : Any, VB : ViewBinding>(
   diffCallBack: DiffUtil.ItemCallback<T>,
 ) : ListAdapter<T, BaseListAdapter<T, VB>.BaseViewHolder>(diffCallBack) {
   
-  private var onItemClickListener: ((T) -> Unit)? = null
+  // init in child adapter
+  internal var onItemClickListener: ((T) -> Unit)? = null
   
-  override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-    getItem(position)?.let { item: T ->
-      holder.bind(item) // bind item with view holder
-      
-      // bind item click listener
-      holder.itemView.setOnClickListener {
-        onItemClickListener?.invoke(item)
-      }
-    }
-  }
+  override fun onBindViewHolder(holder: BaseViewHolder, position: Int) =
+    holder.bind(getItem(position))
   
+  // activity or fragment call
   fun setOnItemClickListener(listener: (T) -> Unit) {
     onItemClickListener = listener
   }
