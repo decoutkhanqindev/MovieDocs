@@ -1,4 +1,4 @@
-package com.example.moviedocs.data.mapper
+package com.example.moviedocs.data.mapper.list
 
 import com.example.moviedocs.data.remote.response.list.MovieItemResponse
 import com.example.moviedocs.domain.model.list.MovieItemModel

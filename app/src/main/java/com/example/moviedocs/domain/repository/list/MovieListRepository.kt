@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.repository
+package com.example.moviedocs.domain.repository.list
 
 import com.example.moviedocs.domain.model.list.MovieListModel
 

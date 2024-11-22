@@ -1,11 +1,11 @@
-package com.example.moviedocs.data.repository
+package com.example.moviedocs.data.repository.list
 
-import com.example.moviedocs.data.mapper.toMovieListModel
+import com.example.moviedocs.data.mapper.list.toMovieListModel
 import com.example.moviedocs.data.remote.ApiService
 import com.example.moviedocs.di.AppDispatcher
 import com.example.moviedocs.di.DispatcherType
 import com.example.moviedocs.domain.model.list.MovieListModel
-import com.example.moviedocs.domain.repository.MovieListRepository
+import com.example.moviedocs.domain.repository.list.MovieListRepository
 import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
