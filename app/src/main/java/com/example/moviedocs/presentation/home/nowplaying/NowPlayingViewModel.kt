@@ -64,12 +64,13 @@ class NowPlayingViewModel
   fun sortItems(type: MovieListUiState.SortType) {
     val currentState = _movieListUiState.value
     if (currentState is MovieListUiState.Success) {
+      val currentItems = currentState.items
       val sortedItems = when (type) {
-        MovieListUiState.SortType.TITLE_ASC -> currentState.items.sortedBy { it.title }
-        MovieListUiState.SortType.TITLE_DSC -> currentState.items.sortedByDescending { it.title }
-        MovieListUiState.SortType.RATING_ASC -> currentState.items.sortedBy { it.voteAverage }
-        MovieListUiState.SortType.RATING_DSC -> currentState.items.sortedByDescending { it.voteAverage }
-        else -> currentState.items
+        MovieListUiState.SortType.TITLE_ASC -> currentItems.sortedBy { it.title }
+        MovieListUiState.SortType.TITLE_DSC -> currentItems.sortedByDescending { it.title }
+        MovieListUiState.SortType.RATING_ASC -> currentItems.sortedBy { it.voteAverage }
+        MovieListUiState.SortType.RATING_DSC -> currentItems.sortedByDescending { it.voteAverage }
+        else -> currentItems
       }
       _movieListUiState.value = currentState.copy(items = sortedItems)
     }
