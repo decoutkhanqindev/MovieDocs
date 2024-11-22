@@ -81,5 +81,5 @@ fun ComponentActivity.launchAndRepeatStarted(
 }
 
 fun logLifecycle(className: String, event: String) {
-  Timber.tag(className).d("$className: $event")
+  Timber.tag("Lifecycle").d("$className: $event")
 }
