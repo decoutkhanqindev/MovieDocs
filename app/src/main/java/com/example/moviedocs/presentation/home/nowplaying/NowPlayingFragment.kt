@@ -65,7 +65,6 @@ class NowPlayingFragment :
   }
   
   private fun bindViewModel() {
-    viewModel.loadPage(1)
     launchAndRepeatStarted({ viewModel.movieListUiState.collect(::renderUi) })
   }
   

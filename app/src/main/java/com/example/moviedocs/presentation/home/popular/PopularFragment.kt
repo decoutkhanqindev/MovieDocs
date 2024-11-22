@@ -64,7 +64,6 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieList
   }
   
   private fun bindViewModel() {
-    viewModel.loadPage(1)
     launchAndRepeatStarted({ viewModel.movieListUiState.collect(::renderUi) })
   }
   

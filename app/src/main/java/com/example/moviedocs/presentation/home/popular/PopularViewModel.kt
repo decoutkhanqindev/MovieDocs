@@ -33,6 +33,10 @@ class PopularViewModel
     Channel(capacity = Channel.UNLIMITED)
   val movieListSingleEvent: Flow<MovieListSingleEvent> get() = _movieListSingleEvent.receiveAsFlow()
   
+  init {
+    loadPage(1)
+  }
+  
   fun loadPage(page: Int) {
     viewModelScope.launch {
       _movieListUiState.value = MovieListUiState.Loading

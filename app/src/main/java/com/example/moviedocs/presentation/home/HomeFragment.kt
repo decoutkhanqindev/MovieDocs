@@ -190,11 +190,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   }
   
   private fun bindViewModel() {
-    nowPlayingViewModel.loadPage(1)
-    launchAndRepeatStarted({ nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
+    launchAndRepeatStarted(
+      { nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
       { popularViewModel.movieListUiState.collect(::renderPopularUi) },
       { upComingViewModel.movieListUiState.collect(::renderUpcomingUi) },
-      { topRatedViewModel.movieListUiState.collect(::renderTopRatedUi) })
+      { topRatedViewModel.movieListUiState.collect(::renderTopRatedUi) }
+    )
   }
   
   private fun renderNowPlayingUi(state: MovieListUiState) {

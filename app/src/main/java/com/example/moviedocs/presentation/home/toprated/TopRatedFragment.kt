@@ -64,7 +64,6 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   }
   
   private fun bindViewModel() {
-    viewModel.loadPage(1)
     launchAndRepeatStarted({ viewModel.movieListUiState.collect(::renderUi) })
   }
   

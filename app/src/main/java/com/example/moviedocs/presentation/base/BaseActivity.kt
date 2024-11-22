@@ -23,31 +23,31 @@ abstract class BaseActivity<VB : ViewBinding>(
     binding = inflate(layoutInflater)
     setContentView(binding.root)
     
-    logLifecycle("onCreate", className)
+    logLifecycle(className, "onCreate")
   }
   
   override fun onStart() {
     super.onStart()
-    logLifecycle("onStart", className)
+    logLifecycle(className, "onStart")
   }
   
   override fun onResume() {
     super.onResume()
-    logLifecycle("onResume", className)
+    logLifecycle(className, "onResume")
   }
   
   override fun onPause() {
-    logLifecycle("onPause", className)
+    logLifecycle(className, "onPause")
     super.onPause()
   }
   
   override fun onStop() {
-    logLifecycle("onStop", className)
+    logLifecycle(className, "onStop")
     super.onStop()
   }
   
   override fun onDestroy() {
-    logLifecycle("onDestroy", className)
+    logLifecycle(className, "onDestroy")
     super.onDestroy()
   }
 }
