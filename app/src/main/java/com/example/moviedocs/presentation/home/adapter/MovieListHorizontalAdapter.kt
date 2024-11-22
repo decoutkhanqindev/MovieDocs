@@ -1,8 +1,8 @@
 package com.example.moviedocs.presentation.home.adapter
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MovieItemHorizontalViewHolderBinding
 import com.example.moviedocs.domain.model.list.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
@@ -22,13 +22,19 @@ class MovieListHorizontalAdapter :
     binding: MovieItemHorizontalViewHolderBinding,
   ) : BaseViewHolder(binding) {
     
-    @SuppressLint("DefaultLocale", "SetTextI18n")
+    init {
+      binding.root.setOnClickListener {
+        val position = bindingAdapterPosition
+        if (position != RecyclerView.NO_POSITION) onItemClickListener?.invoke(getItem(position))
+      }
+    }
+    
     override fun bind(item: MovieItemModel) {
       binding.apply {
         movieItemImg.loadImgFromUrl(item.posterPath)
         movieItemTitle.text = item.title
         movieItemRatingVoteAverage.text = "%.1f".format(item.voteAverage)
-        movieItemRatingVoteCout.text = item.voteCount.toString()
+        movieItemRatingVoteCout.text = "${item.voteCount}"
       }
     }
   }
