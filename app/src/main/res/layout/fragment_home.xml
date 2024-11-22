@@ -63,7 +63,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          app:layout_constraintBottom_toTopOf="@id/nowPlayingLayout"
+          app:layout_constraintBottom_toTopOf="@id/genreLayout"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
@@ -93,6 +93,57 @@
       </androidx.constraintlayout.widget.ConstraintLayout>
       
       <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/genreLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintBottom_toTopOf="@id/nowPlayingLayout"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/sliderLayout">
+        
+        <TextView
+            android:id="@+id/genreTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/genre_title"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/genreRecycleView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genreRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genreTitle"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/genre_item_view_holder"
+            tools:orientation="horizontal" />
+        
+        <ProgressBar
+            android:id="@+id/genreProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/genreRecycleView"
+            app:layout_constraintStart_toStartOf="@+id/genreRecycleView"
+            app:layout_constraintTop_toBottomOf="@id/genreRecycleView"
+            app:layout_constraintTop_toTopOf="@+id/genreRecycleView" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/nowPlayingLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
@@ -100,7 +151,7 @@
           app:layout_constraintBottom_toTopOf="@id/popularLayout"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/sliderLayout">
+          app:layout_constraintTop_toBottomOf="@id/genreLayout">
         
         <TextView
             android:id="@+id/nowPlayingTitle"

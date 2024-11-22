@@ -42,4 +42,6 @@
   <string name="sorting_menu">Sorting Menu</string>
   <string name="add_to_favorite">Add to Favorite</string>
   <string name="page_number_1">1</string>
+  <string name="genre">Horror</string>
+  <string name="genre_title">Genre</string>
 </resources>
