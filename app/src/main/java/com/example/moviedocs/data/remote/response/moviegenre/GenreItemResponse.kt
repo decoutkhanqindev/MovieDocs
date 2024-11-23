@@ -1,4 +1,4 @@
-package com.example.moviedocs.data.remote.response.genre
+package com.example.moviedocs.data.remote.response.moviegenre
 
 import androidx.annotation.Keep
 import com.squareup.moshi.Json
