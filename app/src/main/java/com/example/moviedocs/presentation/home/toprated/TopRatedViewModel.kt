@@ -2,10 +2,10 @@ package com.example.moviedocs.presentation.home.toprated
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.model.list.MovieListModel
-import com.example.moviedocs.domain.usecase.list.GetTopRatedUseCase
-import com.example.moviedocs.presentation.home.state.MovieListSingleEvent
-import com.example.moviedocs.presentation.home.state.MovieListUiState
+import com.example.moviedocs.domain.model.movielist.MovieListModel
+import com.example.moviedocs.domain.usecase.movielist.GetTopRatedUseCase
+import com.example.moviedocs.presentation.state.movielist.MovieListSingleEvent
+import com.example.moviedocs.presentation.state.movielist.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -23,15 +23,15 @@ class TopRatedViewModel
   
   // StateFlow for State Management:
   // This is used for managing the UI state for the movie list (e.g., loading, success, error).
-  private val _movieListUiState: MutableStateFlow<MovieListUiState> =
+  private val _uiState: MutableStateFlow<MovieListUiState> =
     MutableStateFlow(MovieListUiState.Loading)
-  val movieListUiState: StateFlow<MovieListUiState> get() = _movieListUiState.asStateFlow()
+  val uiState: StateFlow<MovieListUiState> get() = _uiState.asStateFlow()
   
   // Channel for One-Time Events:
   // This is used to send one-time events like error or success notifications to the UI.
-  private val _movieListSingleEvent: Channel<MovieListSingleEvent> =
+  private val _singleEvent: Channel<MovieListSingleEvent> =
     Channel(capacity = Channel.UNLIMITED)
-  val movieListSingleEvent: Flow<MovieListSingleEvent> get() = _movieListSingleEvent.receiveAsFlow()
+  val singleEvent: Flow<MovieListSingleEvent> get() = _singleEvent.receiveAsFlow()
   
   init {
     loadPage(1)
@@ -39,10 +39,10 @@ class TopRatedViewModel
   
   fun loadPage(page: Int) {
     viewModelScope.launch {
-      _movieListUiState.value = MovieListUiState.Loading
+      _uiState.value = MovieListUiState.Loading
       
       getTopRatedUseCase(page).onSuccess { it: MovieListModel ->
-        _movieListUiState.value = MovieListUiState.Success(
+        _uiState.value = MovieListUiState.Success(
           items = it.results,
           currentPage = it.page,
           totalPage = it.totalPages,
@@ -52,17 +52,17 @@ class TopRatedViewModel
             MovieListUiState.NextPageState.LOAD_MORE
           }
         )
-        _movieListSingleEvent.send(MovieListSingleEvent.Success)
+        _singleEvent.send(MovieListSingleEvent.Success)
       }.onFailure { it: Throwable ->
-        _movieListUiState.value = MovieListUiState.Error(it)
-        _movieListSingleEvent.send(MovieListSingleEvent.Error(it))
-        Timber.tag(TAG).e("loadPage: ${it.message}")
+        _uiState.value = MovieListUiState.Error(it)
+        _singleEvent.send(MovieListSingleEvent.Error(it))
+        Timber.tag(this.javaClass.simpleName).e("loadPage: ${it.message}")
       }
     }
   }
   
   fun sortItems(type: MovieListUiState.SortType) {
-    val currentState = _movieListUiState.value
+    val currentState = _uiState.value
     if (currentState is MovieListUiState.Success) {
       val sortedItems = when (type) {
         MovieListUiState.SortType.TITLE_ASC -> currentState.items.sortedBy { it.title }
@@ -71,7 +71,7 @@ class TopRatedViewModel
         MovieListUiState.SortType.RATING_DSC -> currentState.items.sortedByDescending { it.voteAverage }
         else -> currentState.items
       }
-      _movieListUiState.value = currentState.copy(items = sortedItems)
+      _uiState.value = currentState.copy(items = sortedItems)
     }
   }
   

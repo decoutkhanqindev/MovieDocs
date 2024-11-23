@@ -1,7 +1,7 @@
-package com.example.moviedocs.domain.usecase.list
+package com.example.moviedocs.domain.usecase.movielist
 
-import com.example.moviedocs.domain.model.list.MovieListModel
-import com.example.moviedocs.domain.repository.list.MovieListRepository
+import com.example.moviedocs.domain.model.movielist.MovieListModel
+import com.example.moviedocs.domain.repository.movielist.MovieListRepository
 import javax.inject.Inject
 
 class GetUpcomingUseCase

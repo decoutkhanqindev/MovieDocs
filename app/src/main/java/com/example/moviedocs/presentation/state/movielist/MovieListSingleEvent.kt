@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.state
+package com.example.moviedocs.presentation.state.movielist
 
 sealed interface MovieListSingleEvent {
   data object Success : MovieListSingleEvent

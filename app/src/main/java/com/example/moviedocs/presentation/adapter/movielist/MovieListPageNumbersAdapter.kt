@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.adapter
+package com.example.moviedocs.presentation.adapter.movielist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,14 +13,14 @@ class MovieListPageNumbersAdapter :
   private var selectedPosition = 0
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
-    PageNumbersItemViewHolder(
+    VH(
       PageNumbersItemViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
   
   fun setCurrentPage(page: Int) {
-    if (page >= 0  && page != selectedPosition) {
+    if (page >= 0 && page != selectedPosition) {
       val oldPosition = selectedPosition
       selectedPosition = page
       notifyItemChanged(oldPosition)
@@ -28,9 +28,7 @@ class MovieListPageNumbersAdapter :
     }
   }
   
-  inner class PageNumbersItemViewHolder(
-    binding: PageNumbersItemViewHolderBinding,
-  ) : BaseViewHolder(binding) {
+  inner class VH(binding: PageNumbersItemViewHolderBinding) : BaseViewHolder(binding) {
     
     init {
       binding.root.setOnClickListener {

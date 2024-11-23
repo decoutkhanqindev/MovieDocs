@@ -9,7 +9,6 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(FragmentFavoriteB
   
   companion object {
     fun newInstance(): FavoriteFragment = FavoriteFragment()
-    const val TAG: String = "HomeFragment"
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

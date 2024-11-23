@@ -1,6 +1,6 @@
-package com.example.moviedocs.domain.repository.list
+package com.example.moviedocs.domain.repository.movielist
 
-import com.example.moviedocs.domain.model.list.MovieListModel
+import com.example.moviedocs.domain.model.movielist.MovieListModel
 
 interface MovieListRepository {
   suspend fun getNowPlaying(page: Int): Result<MovieListModel>

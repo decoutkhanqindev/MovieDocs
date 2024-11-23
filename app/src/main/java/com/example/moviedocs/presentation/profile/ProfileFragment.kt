@@ -9,7 +9,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
   
   companion object {
     fun newInstance(): ProfileFragment = ProfileFragment()
-    const val TAG: String = "HomeFragment"
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

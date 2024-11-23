@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.home.adapter.MovieListPageNumbersAdapter
-import com.example.moviedocs.presentation.home.adapter.MovieListVerticalAdapter
-import com.example.moviedocs.presentation.home.state.MovieListUiState
+import com.example.moviedocs.presentation.adapter.movielist.MovieListPageNumbersAdapter
+import com.example.moviedocs.presentation.adapter.movielist.MovieListVerticalAdapter
+import com.example.moviedocs.presentation.state.movielist.MovieListUiState
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -64,7 +64,7 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   }
   
   private fun bindViewModel() {
-    launchAndRepeatStarted({ viewModel.movieListUiState.collect(::renderUi) })
+    launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
   
   private fun renderUi(state: MovieListUiState) {

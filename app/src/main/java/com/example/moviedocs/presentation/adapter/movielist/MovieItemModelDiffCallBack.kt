@@ -1,7 +1,7 @@
-package com.example.moviedocs.presentation.home.adapter
+package com.example.moviedocs.presentation.adapter.movielist
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.moviedocs.domain.model.list.MovieItemModel
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 
 object MovieItemModelDiffCallBack : DiffUtil.ItemCallback<MovieItemModel>() {
   override fun areContentsTheSame(

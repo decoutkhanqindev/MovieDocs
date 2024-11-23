@@ -1,9 +1,9 @@
 package com.example.moviedocs.di
 
-import com.example.moviedocs.data.repository.genre.GenreListRepositoryImpl
-import com.example.moviedocs.data.repository.list.MovieListRepositoryImpl
-import com.example.moviedocs.domain.repository.genre.GenreListRepository
-import com.example.moviedocs.domain.repository.list.MovieListRepository
+import com.example.moviedocs.data.repository.moviegenre.GenreListRepositoryImpl
+import com.example.moviedocs.data.repository.movielist.MovieListRepositoryImpl
+import com.example.moviedocs.domain.repository.moviegenre.GenreListRepository
+import com.example.moviedocs.domain.repository.movielist.MovieListRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

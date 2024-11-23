@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.adapter
+package com.example.moviedocs.presentation.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
-import com.example.moviedocs.domain.model.list.MovieItemModel
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
+import com.example.moviedocs.presentation.adapter.movielist.MovieItemModelDiffCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class SliderAdapter(

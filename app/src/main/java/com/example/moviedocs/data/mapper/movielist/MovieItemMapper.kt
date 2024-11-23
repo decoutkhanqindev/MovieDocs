@@ -1,7 +1,7 @@
-package com.example.moviedocs.data.mapper.list
+package com.example.moviedocs.data.mapper.movielist
 
-import com.example.moviedocs.data.remote.response.list.MovieItemResponse
-import com.example.moviedocs.domain.model.list.MovieItemModel
+import com.example.moviedocs.data.remote.response.movielist.MovieItemResponse
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 
 fun MovieItemResponse.toMovieModel(): MovieItemModel =
   MovieItemModel(

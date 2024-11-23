@@ -1,6 +1,6 @@
-package com.example.moviedocs.presentation.home.state
+package com.example.moviedocs.presentation.state.movielist
 
-import com.example.moviedocs.domain.model.list.MovieItemModel
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 
 sealed interface MovieListUiState {
   data object Loading : MovieListUiState
