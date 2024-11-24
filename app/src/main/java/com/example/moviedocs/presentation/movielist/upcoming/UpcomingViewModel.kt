@@ -18,8 +18,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class UpcomingViewModel
-@Inject constructor(private val getUpcomingUseCase: GetUpcomingUseCase) : ViewModel() {
+class UpcomingViewModel @Inject constructor(
+  private val getUpcomingUseCase: GetUpcomingUseCase
+) : ViewModel() {
   
   // StateFlow for State Management:
   // This is used for managing the UI state for the movie list (e.g., loading, success, error).

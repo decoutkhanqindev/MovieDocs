@@ -18,8 +18,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class TopRatedViewModel
-@Inject constructor(private val getTopRatedUseCase: GetTopRatedUseCase) : ViewModel() {
+class TopRatedViewModel @Inject constructor(
+  private val getTopRatedUseCase: GetTopRatedUseCase
+) : ViewModel() {
   
   // StateFlow for State Management:
   // This is used for managing the UI state for the movie list (e.g., loading, success, error).
