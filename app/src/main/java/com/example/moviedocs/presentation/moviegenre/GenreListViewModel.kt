@@ -1,10 +1,9 @@
-package com.example.moviedocs.presentation.home.genre
+package com.example.moviedocs.presentation.moviegenre
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.moviegenre.GenreListModel
 import com.example.moviedocs.domain.usecase.moviegenre.GetGenreListUseCase
-import com.example.moviedocs.presentation.state.moviegenre.GenreListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

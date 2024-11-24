@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.state.moviegenre
+package com.example.moviedocs.presentation.moviegenre
 
 import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
 
