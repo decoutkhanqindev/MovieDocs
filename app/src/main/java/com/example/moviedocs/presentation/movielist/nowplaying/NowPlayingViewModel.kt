@@ -1,11 +1,11 @@
-package com.example.moviedocs.presentation.home.upcoming
+package com.example.moviedocs.presentation.movielist.nowplaying
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
-import com.example.moviedocs.domain.usecase.movielist.GetUpcomingUseCase
-import com.example.moviedocs.presentation.state.movielist.MovieListSingleEvent
-import com.example.moviedocs.presentation.state.movielist.MovieListUiState
+import com.example.moviedocs.domain.usecase.movielist.GetNowPlayingUseCase
+import com.example.moviedocs.presentation.movielist.MovieListSingleEvent
+import com.example.moviedocs.presentation.movielist.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -18,8 +18,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class UpcomingViewModel
-@Inject constructor(private val getUpcomingUseCase: GetUpcomingUseCase) : ViewModel() {
+class NowPlayingViewModel @Inject constructor(
+  private val getNowPlayingUseCase: GetNowPlayingUseCase,
+) : ViewModel() {
   
   // StateFlow for State Management:
   // This is used for managing the UI state for the movie list (e.g., loading, success, error).
@@ -41,16 +42,11 @@ class UpcomingViewModel
     viewModelScope.launch {
       _uiState.value = MovieListUiState.Loading
       
-      getUpcomingUseCase(page).onSuccess { it: MovieListModel ->
+      getNowPlayingUseCase(page).onSuccess { it: MovieListModel ->
         _uiState.value = MovieListUiState.Success(
           items = it.results,
           currentPage = it.page,
           totalPage = it.totalPages,
-          nextPageState = if (it.page >= it.totalPages) {
-            MovieListUiState.NextPageState.DONE
-          } else {
-            MovieListUiState.NextPageState.LOAD_MORE
-          }
         )
         _singleEvent.send(MovieListSingleEvent.Success)
       }.onFailure { it: Throwable ->
@@ -64,18 +60,15 @@ class UpcomingViewModel
   fun sortItems(type: MovieListUiState.SortType) {
     val currentState = _uiState.value
     if (currentState is MovieListUiState.Success) {
+      val currentItems = currentState.items
       val sortedItems = when (type) {
-        MovieListUiState.SortType.TITLE_ASC -> currentState.items.sortedBy { it.title }
-        MovieListUiState.SortType.TITLE_DSC -> currentState.items.sortedByDescending { it.title }
-        MovieListUiState.SortType.RATING_ASC -> currentState.items.sortedBy { it.voteAverage }
-        MovieListUiState.SortType.RATING_DSC -> currentState.items.sortedByDescending { it.voteAverage }
-        else -> currentState.items
+        MovieListUiState.SortType.TITLE_ASC -> currentItems.sortedBy { it.title }
+        MovieListUiState.SortType.TITLE_DSC -> currentItems.sortedByDescending { it.title }
+        MovieListUiState.SortType.RATING_ASC -> currentItems.sortedBy { it.voteAverage }
+        MovieListUiState.SortType.RATING_DSC -> currentItems.sortedByDescending { it.voteAverage }
+        else -> currentItems
       }
       _uiState.value = currentState.copy(items = sortedItems)
     }
-  }
-  
-  private companion object {
-    private const val TAG = "UpcomingViewModel"
   }
 }

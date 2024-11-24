@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.upcoming
+package com.example.moviedocs.presentation.movielist.nowplaying
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,7 +10,7 @@ import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.adapter.movielist.MovieListPageNumbersAdapter
 import com.example.moviedocs.presentation.adapter.movielist.MovieListVerticalAdapter
-import com.example.moviedocs.presentation.state.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListUiState
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -18,9 +18,10 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
+class NowPlayingFragment :
+  BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
   
-  private val viewModel: UpcomingViewModel by viewModels()
+  private val viewModel: NowPlayingViewModel by viewModels()
   
   private val movieListAdapter: MovieListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListVerticalAdapter()
@@ -33,7 +34,7 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    binding.movieListTitle.text = getString(R.string.upcoming)
+    binding.movieListTitle.text = getString(R.string.now_playing)
     setUpNavigation()
     setUpRecyclerView()
     bindViewModel()
@@ -51,7 +52,7 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
       layoutManager = LinearLayoutManager(
         requireContext(), LinearLayoutManager.VERTICAL, false
       )
-      adapter = this@UpcomingFragment.movieListAdapter
+      adapter = this@NowPlayingFragment.movieListAdapter
     }
     
     binding.movieListBottomPageNumbersRecyclerView.apply {
@@ -59,7 +60,7 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
       layoutManager = LinearLayoutManager(
         requireContext(), LinearLayoutManager.HORIZONTAL, false
       )
-      adapter = this@UpcomingFragment.pageNumbersAdapter
+      adapter = this@NowPlayingFragment.pageNumbersAdapter
     }
   }
   
@@ -91,6 +92,7 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
           movieListRecyclerView.visible()
         }
         pageNumbersAdapter.submitList((1..state.totalPage).toList())
+        pageNumbersAdapter.setCurrentPage(state.currentPage - 1)
         movieListAdapter.submitList(state.items)
       }
     }

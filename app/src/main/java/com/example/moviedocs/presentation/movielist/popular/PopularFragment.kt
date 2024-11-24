@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.home.popular
+package com.example.moviedocs.presentation.movielist.popular
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -10,7 +10,7 @@ import com.example.moviedocs.databinding.FragmentMovieListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.adapter.movielist.MovieListPageNumbersAdapter
 import com.example.moviedocs.presentation.adapter.movielist.MovieListVerticalAdapter
-import com.example.moviedocs.presentation.state.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListUiState
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack

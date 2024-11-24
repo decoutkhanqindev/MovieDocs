@@ -1,11 +1,11 @@
-package com.example.moviedocs.presentation.home.popular
+package com.example.moviedocs.presentation.movielist.popular
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.movielist.GetPopularUseCase
-import com.example.moviedocs.presentation.state.movielist.MovieListSingleEvent
-import com.example.moviedocs.presentation.state.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListSingleEvent
+import com.example.moviedocs.presentation.movielist.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -29,8 +29,7 @@ class PopularViewModel
   
   // Channel for One-Time Events:
   // This is used to send one-time events like error or success notifications to the UI.
-  private val _singleEvent: Channel<MovieListSingleEvent> =
-    Channel(capacity = Channel.UNLIMITED)
+  private val _singleEvent: Channel<MovieListSingleEvent> = Channel(capacity = Channel.UNLIMITED)
   val singleEvent: Flow<MovieListSingleEvent> get() = _singleEvent.receiveAsFlow()
   
   init {
@@ -46,11 +45,6 @@ class PopularViewModel
           items = it.results,
           currentPage = it.page,
           totalPage = it.totalPages,
-          nextPageState = if (it.page >= it.totalPages) {
-            MovieListUiState.NextPageState.DONE
-          } else {
-            MovieListUiState.NextPageState.LOAD_MORE
-          }
         )
         _singleEvent.send(MovieListSingleEvent.Success)
       }.onFailure { it: Throwable ->
@@ -73,9 +67,5 @@ class PopularViewModel
       }
       _uiState.value = currentState.copy(items = sortedItems)
     }
-  }
-  
-  private companion object {
-    private const val TAG = "PopularViewModel"
   }
 }
