@@ -174,7 +174,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>,
   ) {
     recyclerView.apply {
-      setHasFixedSize(true)
+      setHasFixedSize(false)
       layoutManager = LinearLayoutManager(
         context, LinearLayoutManager.HORIZONTAL, false
       )
