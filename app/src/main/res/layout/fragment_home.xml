@@ -43,6 +43,16 @@
     </androidx.appcompat.widget.Toolbar>
   </com.google.android.material.appbar.AppBarLayout>
   
+  <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminateTint="@android:color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+  
   <ScrollView
       android:id="@+id/scrollView"
       android:layout_width="match_parent"
@@ -79,17 +89,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        
-        <ProgressBar
-            android:id="@+id/sliderProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/sliderViewPager"
-            app:layout_constraintEnd_toEndOf="@+id/sliderViewPager"
-            app:layout_constraintStart_toStartOf="@+id/sliderViewPager"
-            app:layout_constraintTop_toBottomOf="@id/sliderViewPager"
-            app:layout_constraintTop_toTopOf="@+id/sliderViewPager" />
       </androidx.constraintlayout.widget.ConstraintLayout>
       
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -143,17 +142,7 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/genre_item_view_holder"
             tools:orientation="horizontal" />
-        
-        <ProgressBar
-            android:id="@+id/genreProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/genreRecycleView"
-            app:layout_constraintStart_toStartOf="@+id/genreRecycleView"
-            app:layout_constraintTop_toBottomOf="@id/genreRecycleView"
-            app:layout_constraintTop_toTopOf="@+id/genreRecycleView" />
+      
       </androidx.constraintlayout.widget.ConstraintLayout>
       
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -208,17 +197,6 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_horizontal_view_holder"
             tools:orientation="horizontal" />
-        
-        <ProgressBar
-            android:id="@+id/nowPlayingProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/nowPlayingRecycleView"
-            app:layout_constraintStart_toStartOf="@+id/nowPlayingRecycleView"
-            app:layout_constraintTop_toBottomOf="@id/nowPlayingRecycleView"
-            app:layout_constraintTop_toTopOf="@+id/nowPlayingRecycleView" />
       </androidx.constraintlayout.widget.ConstraintLayout>
       
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -272,17 +250,7 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_horizontal_view_holder"
             tools:orientation="horizontal" />
-        
-        <ProgressBar
-            android:id="@+id/popularProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/popularRecycleView"
-            app:layout_constraintEnd_toEndOf="@+id/popularRecycleView"
-            app:layout_constraintStart_toStartOf="@+id/popularRecycleView"
-            app:layout_constraintTop_toBottomOf="@id/popularRecycleView"
-            app:layout_constraintTop_toTopOf="@+id/popularRecycleView" />
+      
       </androidx.constraintlayout.widget.ConstraintLayout>
       
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -336,17 +304,7 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_horizontal_view_holder"
             tools:orientation="horizontal" />
-        
-        <ProgressBar
-            android:id="@+id/upcomingProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/upcomingRecycleView"
-            app:layout_constraintEnd_toEndOf="@+id/upcomingRecycleView"
-            app:layout_constraintStart_toStartOf="@+id/upcomingRecycleView"
-            app:layout_constraintTop_toBottomOf="@id/upcomingRecycleView"
-            app:layout_constraintTop_toTopOf="@+id/upcomingRecycleView" />
+      
       </androidx.constraintlayout.widget.ConstraintLayout>
       
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -401,17 +359,6 @@
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/movie_item_horizontal_view_holder"
             tools:orientation="horizontal" />
-        
-        <ProgressBar
-            android:id="@+id/topRatedProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/topRatedRecycleView"
-            app:layout_constraintEnd_toEndOf="@+id/topRatedRecycleView"
-            app:layout_constraintStart_toStartOf="@+id/topRatedRecycleView"
-            app:layout_constraintTop_toBottomOf="@id/topRatedRecycleView"
-            app:layout_constraintTop_toTopOf="@+id/topRatedRecycleView" />
       </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>

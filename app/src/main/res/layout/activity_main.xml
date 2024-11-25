@@ -8,12 +8,24 @@
     android:background="@drawable/bg_gradient"
     tools:context=".presentation.MainActivity">
   
+  <androidx.fragment.app.FragmentContainerView
+      android:id="@+id/mainNavHost"
+      android:name="androidx.navigation.fragment.NavHostFragment"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:defaultNavHost="true"
+      app:layout_constraintBottom_toTopOf="@id/bottomNavigationMenu"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:navGraph="@navigation/main_graph" />
+  
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/bottomNavigationMenu"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="@drawable/bg_rounded_no_border"
-      android:visibility="gone"
+      android:visibility="visible"
       app:itemActiveIndicatorStyle="@style/ShapeAppearance.Material3.Corner.None"
       app:itemBackground="@drawable/bottom_nav_menu_item_selector"
       app:itemIconSize="24sp"
@@ -27,19 +39,7 @@
       app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/main_nav_host"
+      app:layout_constraintTop_toBottomOf="@id/mainNavHost"
       app:layout_constraintVertical_bias="1.0"
       app:menu="@menu/bottom_navigation_menu" />
-  
-  <androidx.fragment.app.FragmentContainerView
-      android:id="@+id/main_nav_host"
-      android:name="androidx.navigation.fragment.NavHostFragment"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      app:defaultNavHost="true"
-      app:layout_constraintBottom_toTopOf="@id/bottomNavigationMenu"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:navGraph="@navigation/main_graph" />
 </androidx.constraintlayout.widget.ConstraintLayout>

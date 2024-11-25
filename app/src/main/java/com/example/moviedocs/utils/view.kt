@@ -72,9 +72,8 @@ fun View.navigateTo(actionId: Int) =
 
 fun View.navigateBack() =
   this.setOnClickListener {
-    findNavController().navigateUp()
+    findNavController().popBackStack()
   }
-
 
 fun View.visible() {
   if (visibility != View.VISIBLE) visibility = View.VISIBLE
