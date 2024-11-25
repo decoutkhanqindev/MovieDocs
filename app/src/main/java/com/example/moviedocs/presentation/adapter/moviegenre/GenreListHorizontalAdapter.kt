@@ -8,7 +8,7 @@ import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 
 class GenreListHorizontalAdapter :
-  BaseListAdapter<GenreItemModel, GenreItemViewHolderBinding>(GenreItemModelDiffCallBack()) {
+  BaseListAdapter<GenreItemModel, GenreItemViewHolderBinding>(GenreItemModelDiffCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(
@@ -17,7 +17,7 @@ class GenreListHorizontalAdapter :
       )
     )
   
-  inner class VH(binding: GenreItemViewHolderBinding) : BaseViewHolder(binding) {
+  private inner class VH(binding: GenreItemViewHolderBinding) : BaseViewHolder(binding) {
     
     init {
       binding.root.setOnClickListener {

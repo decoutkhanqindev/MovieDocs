@@ -52,25 +52,25 @@
   
   <fragment
       android:id="@+id/nowPlayingFragment"
-      android:name="com.example.moviedocs.presentation.home.nowplaying.NowPlayingFragment"
+      android:name="com.example.moviedocs.presentation.movielist.nowplaying.NowPlayingFragment"
       android:label="NowPlayingFragment"
       tools:layout="@layout/fragment_movie_list" />
   
   <fragment
       android:id="@+id/popularFragment"
-      android:name="com.example.moviedocs.presentation.home.popular.PopularFragment"
+      android:name="com.example.moviedocs.presentation.movielist.popular.PopularFragment"
       android:label="PopularFragment"
       tools:layout="@layout/fragment_movie_list" />
   
   <fragment
       android:id="@+id/topRatedFragment"
-      android:name="com.example.moviedocs.presentation.home.toprated.TopRatedFragment"
+      android:name="com.example.moviedocs.presentation.movielist.toprated.TopRatedFragment"
       android:label="TopRatedFragment"
       tools:layout="@layout/fragment_movie_list" />
   
   <fragment
       android:id="@+id/upcomingFragment"
-      android:name="com.example.moviedocs.presentation.home.upcoming.UpcomingFragment"
+      android:name="com.example.moviedocs.presentation.movielist.upcoming.UpcomingFragment"
       android:label="UpcomingFragment"
       tools:layout="@layout/fragment_movie_list" />
 </navigation>

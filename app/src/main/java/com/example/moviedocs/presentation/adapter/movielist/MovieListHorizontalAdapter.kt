@@ -18,8 +18,7 @@ class MovieListHorizontalAdapter :
       )
     )
   
-  private inner class VH(binding: MovieItemHorizontalViewHolderBinding) :
-    BaseViewHolder(binding) {
+  private inner class VH(binding: MovieItemHorizontalViewHolderBinding) : BaseViewHolder(binding) {
     
     init {
       binding.root.setOnClickListener {
