@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,15 +13,9 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
+import com.example.moviedocs.presentation.adapter.moviegenre.GenreListHorizontalAdapter
+import com.example.moviedocs.presentation.adapter.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.home.adapter.MovieListHorizontalAdapter
-import com.example.moviedocs.presentation.home.adapter.SliderAdapter
-import com.example.moviedocs.presentation.home.nowplaying.NowPlayingViewModel
-import com.example.moviedocs.presentation.home.popular.PopularViewModel
-import com.example.moviedocs.presentation.home.state.MovieListUiState
-import com.example.moviedocs.presentation.home.toprated.TopRatedViewModel
-import com.example.moviedocs.presentation.home.upcoming.UpcomingViewModel
-import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateTo
@@ -33,16 +28,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   
   companion object {
     fun newInstance(): HomeFragment = HomeFragment()
-    const val TAG: String = "HomeFragment"
   }
   
-  private val nowPlayingViewModel: NowPlayingViewModel by viewModels()
-  
-  private val popularViewModel: PopularViewModel by viewModels()
-  
-  private val upComingViewModel: UpcomingViewModel by viewModels()
-  
-  private val topRatedViewModel: TopRatedViewModel by viewModels()
+  private val viewModel: HomeViewModel by viewModels()
   
   private lateinit var viewPager: ViewPager2
   
@@ -72,6 +60,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     SliderAdapter(viewPager = viewPager)
   }
   
+  private val genreAdapter: GenreListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    GenreListHorizontalAdapter()
+  }
+  
   private val nowPlayingAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListHorizontalAdapter()
   }
@@ -93,6 +85,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     
     setUpNavigation()
     setUpSliderImg()
+    setUpRecyclerView(binding.genreRecycleView, genreAdapter)
     setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
     setUpRecyclerView(binding.popularRecycleView, popularAdapter)
     setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
@@ -183,138 +176,60 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     recyclerView.apply {
       setHasFixedSize(true)
       layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.HORIZONTAL, false
+        context, LinearLayoutManager.HORIZONTAL, false
       )
       this.adapter = adapter
     }
   }
   
   private fun bindViewModel() {
-    launchAndRepeatStarted(
-      { nowPlayingViewModel.movieListUiState.collect(::renderNowPlayingUi) },
-      { popularViewModel.movieListUiState.collect(::renderPopularUi) },
-      { upComingViewModel.movieListUiState.collect(::renderUpcomingUi) },
-      { topRatedViewModel.movieListUiState.collect(::renderTopRatedUi) }
-    )
+    launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
   
-  private fun renderNowPlayingUi(state: MovieListUiState) {
+  private fun renderUi(state: HomeUiState) {
     when (state) {
-      MovieListUiState.Loading -> {
+      HomeUiState.Loading -> {
         binding.apply {
-          sliderProgressBar.visible()
-          sliderViewPager.gone()
-          nowPlayingProgressBar.visible()
-          nowPlayingRecycleView.invisible()
+          progressBar.visible()
+          scrollView.invisible()
         }
         sliderAdapter.submitList(emptyList())
+        genreAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
-      }
-      
-      is MovieListUiState.Error -> {
-        binding.apply {
-          sliderProgressBar.visible()
-          sliderViewPager.gone()
-          nowPlayingProgressBar.visible()
-          nowPlayingRecycleView.invisible()
-        }
-        sliderAdapter.submitList(emptyList())
-        nowPlayingAdapter.submitList(emptyList())
-      }
-      
-      is MovieListUiState.Success -> {
-        binding.apply {
-          sliderProgressBar.gone()
-          sliderViewPager.visible()
-          nowPlayingProgressBar.gone()
-          nowPlayingRecycleView.visible()
-        }
-        sliderAdapter.submitList(state.items)
-        nowPlayingAdapter.submitList(state.items)
-      }
-    }
-  }
-  
-  private fun renderPopularUi(state: MovieListUiState) {
-    when (state) {
-      MovieListUiState.Loading -> {
-        binding.apply {
-          popularProgressBar.visible()
-          popularRecycleView.invisible()
-        }
         popularAdapter.submitList(emptyList())
-      }
-      
-      is MovieListUiState.Error -> {
-        binding.apply {
-          popularProgressBar.visible()
-          popularRecycleView.invisible()
-        }
-        popularAdapter.submitList(emptyList())
-      }
-      
-      is MovieListUiState.Success -> {
-        binding.apply {
-          popularProgressBar.gone()
-          popularRecycleView.visible()
-        }
-        popularAdapter.submitList(state.items)
-      }
-    }
-  }
-  
-  private fun renderUpcomingUi(state: MovieListUiState) {
-    when (state) {
-      MovieListUiState.Loading -> {
-        binding.apply {
-          upcomingProgressBar.visible()
-          upcomingRecycleView.invisible()
-        }
         upComingAdapter.submitList(emptyList())
-      }
-      
-      is MovieListUiState.Error -> {
-        binding.apply {
-          upcomingProgressBar.visible()
-          upcomingRecycleView.invisible()
-        }
-        upComingAdapter.submitList(emptyList())
-      }
-      
-      is MovieListUiState.Success -> {
-        binding.apply {
-          upcomingProgressBar.gone()
-          upcomingRecycleView.visible()
-        }
-        upComingAdapter.submitList(state.items)
-      }
-    }
-  }
-  
-  private fun renderTopRatedUi(state: MovieListUiState) {
-    when (state) {
-      MovieListUiState.Loading -> {
-        binding.apply {
-          topRatedProgressBar.visible()
-          topRatedRecycleView.invisible()
-        }
         topRatedAdapter.submitList(emptyList())
       }
       
-      is MovieListUiState.Error -> {
+      is HomeUiState.Success -> {
         binding.apply {
-          topRatedProgressBar.visible()
-          topRatedRecycleView.invisible()
+          progressBar.invisible()
+          scrollView.visible()
         }
-        topRatedAdapter.submitList(emptyList())
+        sliderAdapter.submitList(state.nowPlaying)
+        genreAdapter.submitList(state.genreList)
+//        binding.genreRecycleView.post {
+//          binding.genreRecycleView.requestLayout()
+//        }
+        nowPlayingAdapter.submitList(state.nowPlaying)
+        popularAdapter.submitList(state.popular)
+        upComingAdapter.submitList(state.upcoming)
+        topRatedAdapter.submitList(state.topRated)
       }
       
-      is MovieListUiState.Success -> {
+      is HomeUiState.Error -> {
         binding.apply {
-          topRatedProgressBar.gone()
-          topRatedRecycleView.visible()
+          progressBar.visible()
+          scrollView.invisible()
         }
-        topRatedAdapter.submitList(state.items)
+        genreAdapter.submitList(emptyList())
+        sliderAdapter.submitList(emptyList())
+        nowPlayingAdapter.submitList(emptyList())
+        popularAdapter.submitList(emptyList())
+        upComingAdapter.submitList(emptyList())
+        topRatedAdapter.submitList(emptyList())
+        
+        Toast.makeText(requireContext(), state.throwable.message, Toast.LENGTH_SHORT).show()
       }
     }
   }
@@ -323,6 +238,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     // avoid memory leak
     binding.apply {
       sliderViewPager.adapter = null
+      genreRecycleView.adapter = null
       nowPlayingRecycleView.adapter = null
       popularRecycleView.adapter = null
       upcomingRecycleView.adapter = null
