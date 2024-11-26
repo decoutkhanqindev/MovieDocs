@@ -7,8 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
-import com.example.moviedocs.presentation.adapter.movielist.MovieListPageNumbersAdapter
-import com.example.moviedocs.presentation.adapter.movielist.MovieListVerticalAdapter
+import com.example.moviedocs.presentation.movielist.MovieListPageNumbersAdapter
+import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.MovieListUiState
 import com.example.moviedocs.utils.gone

@@ -9,6 +9,10 @@ import com.example.moviedocs.utils.navigateTo
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
   
+  companion object {
+    fun newInstance(): SignInFragment = SignInFragment()
+  }
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
@@ -16,7 +20,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
   }
   
   private fun setUpNavigation() {
-    binding.signInBtn.navigateTo(R.id.action_signInFragment_to_homeFragment)
-    binding.signUpBtn.navigateTo(R.id.action_signInFragment_to_signUpFragment)
+    binding.signInBtn.navigateTo(actionId = R.id.action_signInFragment_to_homeFragment)
+    binding.signUpBtn.navigateTo(actionId = R.id.action_signInFragment_to_signUpFragment)
   }
 }

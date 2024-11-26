@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.databinding.SliderItemViewHolderBinding
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
-import com.example.moviedocs.presentation.adapter.movielist.MovieItemModelDiffCallBack
+import com.example.moviedocs.presentation.movielist.MovieItemModelDiffCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class SliderAdapter(

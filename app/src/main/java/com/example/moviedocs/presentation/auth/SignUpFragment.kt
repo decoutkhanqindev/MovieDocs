@@ -8,6 +8,10 @@ import com.example.moviedocs.utils.navigateBack
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
   
+  companion object {
+    fun newInstance(): SignUpFragment = SignUpFragment()
+  }
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     

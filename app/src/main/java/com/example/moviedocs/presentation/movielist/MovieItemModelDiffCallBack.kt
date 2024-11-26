@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.adapter.movielist
+package com.example.moviedocs.presentation.movielist
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.moviedocs.domain.model.movielist.MovieItemModel

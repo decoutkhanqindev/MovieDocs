@@ -13,9 +13,9 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
-import com.example.moviedocs.presentation.adapter.moviegenre.GenreListHorizontalAdapter
-import com.example.moviedocs.presentation.adapter.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
+import com.example.moviedocs.presentation.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateTo
@@ -60,8 +60,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     SliderAdapter(viewPager = viewPager)
   }
   
-  private val genreAdapter: GenreListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    GenreListHorizontalAdapter()
+  private val genreAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    GenreListAdapter()
   }
   
   private val nowPlayingAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -94,11 +94,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   }
   
   private fun setUpNavigation() {
-    binding.searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
-    binding.nowPlayingMoreBtn.navigateTo(R.id.action_homeFragment_to_nowPlayingFragment)
-    binding.popularMoreBtn.navigateTo(R.id.action_homeFragment_to_popularFragment)
-    binding.upcomingMoreBtn.navigateTo(R.id.action_homeFragment_to_upcomingFragment)
-    binding.topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
+    binding.apply {
+      searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
+      nowPlayingMoreBtn.navigateTo(R.id.action_homeFragment_to_nowPlayingFragment)
+      popularMoreBtn.navigateTo(R.id.action_homeFragment_to_popularFragment)
+      upcomingMoreBtn.navigateTo(R.id.action_homeFragment_to_upcomingFragment)
+      topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
+      genreMoreBtn.navigateTo(R.id.action_homeFragment_to_genreListFragment)
+    }
   }
   
   private fun setUpSliderImg() {
@@ -208,9 +211,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
         sliderAdapter.submitList(state.nowPlaying)
         genreAdapter.submitList(state.genreList)
-//        binding.genreRecycleView.post {
-//          binding.genreRecycleView.requestLayout()
-//        }
         nowPlayingAdapter.submitList(state.nowPlaying)
         popularAdapter.submitList(state.popular)
         upComingAdapter.submitList(state.upcoming)

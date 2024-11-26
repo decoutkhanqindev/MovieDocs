@@ -36,6 +36,7 @@ class HomeViewModel @Inject constructor(
     viewModelScope.launch {
       _uiState.value = HomeUiState.Loading
       
+      // launch coroutines in parallel and wait for all of them to complete
       val genreListDeferred = async { getGenreListUseCase() }
       val nowPlayingDeferred = async { getNowPlayingUseCase(page = 1) }
       val popularDeferred = async { getPopularUseCase(page = 1) }
@@ -48,11 +49,9 @@ class HomeViewModel @Inject constructor(
       val upcomingResult = upcomingDeferred.await()
       val topRatedResult = topRatedDeferred.await()
       
-      if (genreListResult.isSuccess
-        && nowPlayingResult.isSuccess
-        && popularResult.isSuccess
-        && upcomingResult.isSuccess
-        && topRatedResult.isSuccess
+      // check if all requests were successful
+      if (genreListResult.isSuccess && nowPlayingResult.isSuccess && popularResult.isSuccess
+        && upcomingResult.isSuccess && topRatedResult.isSuccess
       ) {
         _uiState.value = HomeUiState.Success(
           genreList = genreListResult.getOrNull()?.genres ?: emptyList(),
@@ -61,20 +60,18 @@ class HomeViewModel @Inject constructor(
           upcoming = upcomingResult.getOrNull()?.results ?: emptyList(),
           topRated = topRatedResult.getOrNull()?.results ?: emptyList(),
         )
-      } else {
+      }
+      
+      // if at least one request failed, emit the error
+      else {
         val error = listOf(
-          genreListResult,
-          nowPlayingResult,
-          popularResult,
-          upcomingResult,
-          topRatedResult
+          genreListResult, nowPlayingResult, popularResult, upcomingResult, topRatedResult
         ).first { it.isFailure }
         _uiState.value = HomeUiState.Error(error.exceptionOrNull() ?: Throwable())
         Timber.tag(this.javaClass.simpleName).e(error.exceptionOrNull())
       }
     }
   }
-
 
 //  private fun updateUiState(update: (HomeUiState.Success) -> HomeUiState.Success) {
 //    val currentState = _uiState.value
