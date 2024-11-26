@@ -6,56 +6,137 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient">
   
-  <com.google.android.material.appbar.AppBarLayout
-      android:id="@+id/appBarLayout"
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/movieDetailTopLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/main_color"
+      app:cardBackgroundColor="@color/dark_blue2"
+      app:cardCornerRadius="0dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:tabMode="scrollable">
+      app:strokeColor="@android:color/transparent">
     
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolBar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="4dp">
+        android:layout_height="match_parent">
       
-      <ImageView
-          android:id="@+id/backBtn"
-          android:layout_width="24dp"
-          android:layout_height="24dp"
-          android:layout_gravity="start"
-          android:importantForAccessibility="no"
-          android:src="@mipmap/back_btn" />
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/movieDetailImgLayout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          app:cardCornerRadius="8dp"
+          app:cardElevation="16dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:strokeColor="@android:color/transparent">
+        
+        <ImageView
+            android:id="@+id/movieDetailImg"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+      </com.google.android.material.card.MaterialCardView>
       
       <TextView
           android:id="@+id/movieDetailTitle"
-          android:layout_width="wrap_content"
+          android:layout_width="200dp"
           android:layout_height="wrap_content"
-          android:layout_gravity="center"
-          android:text="@string/detail"
+          android:layout_marginStart="24dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginEnd="16dp"
+          android:gravity="start"
+          android:maxLines="2"
+          android:text="@string/app_name"
           android:textColor="@color/white"
           android:textSize="20sp"
-          android:textStyle="bold" />
-    </androidx.appcompat.widget.Toolbar>
-    
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/main_color" />
-  </com.google.android.material.appbar.AppBarLayout>
+          android:textStyle="bold"
+          app:layout_constraintStart_toEndOf="@id/movieDetailImgLayout"
+          app:layout_constraintTop_toTopOf="@id/movieDetailImgLayout" />
+      
+      <TextView
+          android:id="@+id/movieDetailRatingReleaseDate"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:text="@string/release_date"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:textStyle="italic"
+          app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailTitle" />
+      
+      <TextView
+          android:id="@+id/movieDetailRatingVoteAverage"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginTop="16dp"
+          android:gravity="center"
+          android:text="@string/vote_average"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="@id/movieDetailRatingReleaseDate"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailRatingReleaseDate" />
+      
+      <ImageView
+          android:id="@+id/movieDetailRatingIcon"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:layout_marginStart="4dp"
+          android:gravity="center"
+          android:src="@mipmap/star_rating_icon"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailRatingVoteAverage"
+          app:layout_constraintStart_toEndOf="@id/movieDetailRatingVoteAverage"
+          app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage"
+          tools:ignore="ContentDescription" />
+      
+      <TextView
+          android:id="@+id/movieDetailRatingVoteCount"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/count"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintStart_toEndOf="@id/movieDetailRatingIcon"
+          app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage" />
+      
+      <TextView
+          android:id="@+id/movieDetailStatus"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailRatingVoteAverage" />
+      
+      <TextView
+          android:id="@+id/movieDetailLanguage"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          android:layout_marginBottom="8dp"
+          android:text="@string/language_english"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailStatus" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
   
-  <androidx.viewpager2.widget.ViewPager2
-      android:id="@+id/feeds_view_pager"
+  <com.google.android.material.tabs.TabLayout
+      android:id="@+id/tabLayout"
       android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_marginEnd="@dimen/cardview_compat_inset_shadow"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
+      android:layout_height="wrap_content"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+      app:layout_constraintStart_toEndOf="parent"
+      android:background="@color/dark_blue2"
+      app:layout_constraintTop_toBottomOf="@id/movieDetailTopLayout"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
