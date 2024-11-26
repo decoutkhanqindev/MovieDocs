@@ -45,6 +45,13 @@
         app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
         app:popExitAnim="@anim/from_right" />
+    <action
+        android:id="@+id/action_homeFragment_to_genreListFragment"
+        app:destination="@id/genreListFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right" />
   
   </fragment>
   
@@ -73,4 +80,10 @@
       android:name="com.example.moviedocs.presentation.movielist.upcoming.UpcomingFragment"
       android:label="UpcomingFragment"
       tools:layout="@layout/fragment_movie_list" />
+  
+  <fragment
+      android:id="@+id/genreListFragment"
+      android:name="com.example.moviedocs.presentation.moviegenre.GenreListFragment"
+      android:label="GenreListFragment"
+      tools:layout="@layout/fragment_genre_list" />
 </navigation>
