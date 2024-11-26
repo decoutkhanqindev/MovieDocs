@@ -13,8 +13,9 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class GenreListViewModel
-@Inject constructor(private val getGenreListUseCase: GetGenreListUseCase) : ViewModel() {
+class GenreListViewModel @Inject constructor(
+  private val getGenreListUseCase: GetGenreListUseCase
+) : ViewModel() {
   
   private val _uiState: MutableStateFlow<GenreListUiState> =
     MutableStateFlow(GenreListUiState.Loading)
