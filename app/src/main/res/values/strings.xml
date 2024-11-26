@@ -44,4 +44,5 @@
   <string name="page_number_1">1</string>
   <string name="genre">Horror</string>
   <string name="genre_title">Genre</string>
+  <string name="detail">Detail</string>
 </resources>
