@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.adapter.moviegenre
+package com.example.moviedocs.presentation.moviegenre
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
