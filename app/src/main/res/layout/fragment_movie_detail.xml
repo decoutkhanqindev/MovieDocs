@@ -44,11 +44,9 @@
       
       <TextView
           android:id="@+id/movieDetailTitle"
-          android:layout_width="200dp"
-          android:layout_height="wrap_content"
+          android:layout_width="220dp"
+          android:layout_height="50dp"
           android:layout_marginStart="24dp"
-          android:layout_marginTop="8dp"
-          android:layout_marginEnd="16dp"
           android:gravity="start"
           android:maxLines="2"
           android:text="@string/app_name"
@@ -106,28 +104,55 @@
           app:layout_constraintStart_toEndOf="@id/movieDetailRatingIcon"
           app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage" />
       
-      <TextView
-          android:id="@+id/movieDetailStatus"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
+      <ImageView
+          android:id="@+id/movieDetailFb"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/fb_icon"
           android:text="@string/status_released"
           android:textColor="@color/white"
           android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailImgLayout"
           app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
           app:layout_constraintTop_toBottomOf="@id/movieDetailRatingVoteAverage" />
       
-      <TextView
-          android:id="@+id/movieDetailLanguage"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
-          android:layout_marginBottom="8dp"
-          android:text="@string/language_english"
+      <ImageView
+          android:id="@+id/movieDetailIg"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/ig_icon"
+          android:text="@string/status_released"
           android:textColor="@color/white"
           android:textSize="16sp"
-          app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
-          app:layout_constraintTop_toBottomOf="@id/movieDetailStatus" />
+          app:layout_constraintEnd_toStartOf="@id/movieDetailTwitter"
+          app:layout_constraintStart_toEndOf="@id/movieDetailFb"
+          app:layout_constraintTop_toTopOf="@id/movieDetailFb" />
+      
+      <ImageView
+          android:id="@+id/movieDetailTwitter"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/twitter_icon"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintEnd_toStartOf="@id/movieDetailAddToFavoriteBtn"
+          app:layout_constraintStart_toEndOf="@id/movieDetailIg"
+          app:layout_constraintTop_toTopOf="@id/movieDetailIg" />
+      
+      
+      <ImageView
+          android:id="@+id/movieDetailAddToFavoriteBtn"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/white_favorite_icon"
+          app:layout_constraintStart_toEndOf="@id/movieDetailTwitter"
+          app:layout_constraintEnd_toEndOf="@id/movieDetailTitle"
+          app:layout_constraintTop_toTopOf="@id/movieDetailFb" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
   
@@ -135,8 +160,20 @@
       android:id="@+id/tabLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintStart_toEndOf="parent"
       android:background="@color/dark_blue2"
-      app:layout_constraintTop_toBottomOf="@id/movieDetailTopLayout"/>
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/movieDetailTopLayout"
+      app:tabMode="scrollable" />
+  
+  <androidx.viewpager2.widget.ViewPager2
+      android:id="@+id/movieDetailViewPager"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

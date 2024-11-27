@@ -82,17 +82,6 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="@id/movieItemTitle"
           app:layout_constraintTop_toBottomOf="@id/movieItemRatingVoteAverage" />
-      
-      <ImageView
-          android:id="@+id/movieItemAddToFavoriteBtn"
-          android:layout_width="25dp"
-          android:layout_height="25dp"
-          android:layout_marginEnd="16dp"
-          android:importantForAccessibility="no"
-          android:src="@drawable/white_favorite_icon"
-          app:layout_constraintBottom_toBottomOf="@id/movieItemTitle"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="@id/movieItemTitle" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
   
