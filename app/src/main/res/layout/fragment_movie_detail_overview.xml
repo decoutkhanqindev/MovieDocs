@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+  
+  <ScrollView
+      android:id="@+id/scrollView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_margin="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+      
+      <TextView
+          android:id="@+id/movieDetailOverview"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/overview"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:textStyle="italic"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/movieDetailGenreLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailOverview">
+        
+        <TextView
+            android:id="@+id/genreTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/genre_title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genreRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genreTitle"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/genre_item_view_holder"
+            tools:orientation="horizontal" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/movieDetailStatusLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailGenreLayout">
+        
+        <TextView
+            android:id="@+id/statusTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status_title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/statusValue"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <TextView
+            android:id="@+id/statusValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/released"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/statusTitle"
+            app:layout_constraintStart_toEndOf="@id/statusTitle"
+            app:layout_constraintTop_toTopOf="@id/statusTitle" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/movieDetailLanguageLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailStatusLayout">
+        
+        <TextView
+            android:id="@+id/languageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/language_title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/languageValue"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <TextView
+            android:id="@+id/languageValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/english"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/languageTitle"
+            app:layout_constraintStart_toEndOf="@id/languageTitle"
+            app:layout_constraintTop_toTopOf="@id/languageTitle" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/movieDetailBudgetLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailLanguageLayout">
+        
+        <TextView
+            android:id="@+id/budgetTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/budget_title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/budgetValue"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <TextView
+            android:id="@+id/budgetValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/budget"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/budgetTitle"
+            app:layout_constraintStart_toEndOf="@id/budgetTitle"
+            app:layout_constraintTop_toTopOf="@id/budgetTitle" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/movieDetailRevenueLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="16dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailBudgetLayout">
+        
+        <TextView
+            android:id="@+id/revenueTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/revenue_tilte"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/revenueValue"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        
+        <TextView
+            android:id="@+id/revenueValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/revenue"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/revenueTitle"
+            app:layout_constraintStart_toEndOf="@id/revenueTitle"
+            app:layout_constraintTop_toTopOf="@id/revenueTitle" />
+      </androidx.constraintlayout.widget.ConstraintLayout>
+      
+<!--      // cast & crew-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,4 +48,12 @@
   <string name="status_released">Status: Released</string>
   <string name="language_english">Language: English</string>
   <string name="runtime">2h 5m</string>
+  <string name="status_title">Status: </string>
+  <string name="released">Released</string>
+  <string name="language_title">Original Language:</string>
+  <string name="english">English</string>
+  <string name="budget_title">Budget:</string>
+  <string name="budget">$2,000,000.00</string>
+  <string name="revenue_tilte">Revenue:</string>
+  <string name="revenue">$87,261,211.00</string>
 </resources>
