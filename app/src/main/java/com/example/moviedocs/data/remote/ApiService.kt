@@ -1,5 +1,7 @@
 package com.example.moviedocs.data.remote
 
+import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
+import com.example.moviedocs.data.remote.response.moviedetails.external.ExternalIdsResponse
 import com.example.moviedocs.data.remote.response.moviegenre.GenreListResponse
 import com.example.moviedocs.data.remote.response.movielist.MovieListResponse
 import retrofit2.http.GET
@@ -20,4 +22,10 @@ interface ApiService {
   
   @GET("genre/movie/list")
   suspend fun getGenreList() : GenreListResponse
+  
+  @GET("movie/{movie_id}")
+  suspend fun getMovieDetail(@Query("movie_id") movieId: Int): MovieDetailResponse
+  
+  @GET("movie/{movie_id}/external_ids")
+  suspend fun getExternalIds(@Query("movie_id") movieId: Int): ExternalIdsResponse
 }
