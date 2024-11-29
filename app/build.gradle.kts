@@ -6,6 +6,7 @@ plugins {
   id("kotlin-kapt")
   id("com.google.dagger.hilt.android")
   id("com.google.gms.google-services")
+  id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -130,6 +131,7 @@ dependencies {
   implementation("androidx.core:core-splashscreen:1.0.1")
   
   // Navigation
+  implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
   implementation("androidx.navigation:navigation-fragment:2.8.3")
   implementation("androidx.navigation:navigation-ui:2.8.3")
   
