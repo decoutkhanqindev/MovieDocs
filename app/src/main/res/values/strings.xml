@@ -58,4 +58,6 @@
   <string name="revenue">$87,261,211.00</string>
   <string name="company_title">Company:</string>
   <string name="company_name">Cineverse</string>
+  <string name="coutry_title">Original Country</string>
+  <string name="us">US</string>
 </resources>
