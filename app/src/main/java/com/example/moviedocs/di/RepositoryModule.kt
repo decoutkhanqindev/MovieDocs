@@ -1,7 +1,9 @@
 package com.example.moviedocs.di
 
+import com.example.moviedocs.data.repository.moviedetail.MovieDetailRepositoryImpl
 import com.example.moviedocs.data.repository.moviegenre.GenreListRepositoryImpl
 import com.example.moviedocs.data.repository.movielist.MovieListRepositoryImpl
+import com.example.moviedocs.domain.repository.moviedetail.MovieDetailRepository
 import com.example.moviedocs.domain.repository.moviegenre.GenreListRepository
 import com.example.moviedocs.domain.repository.movielist.MovieListRepository
 import dagger.Binds
@@ -17,4 +19,7 @@ interface RepositoryModule {
   
   @Binds
   fun bindGenreListRepository(repository: GenreListRepositoryImpl): GenreListRepository
+  
+  @Binds
+  fun bindMovieDetailRepository(repository: MovieDetailRepositoryImpl): MovieDetailRepository
 }
