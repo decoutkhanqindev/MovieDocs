@@ -58,7 +58,7 @@
           app:layout_constraintTop_toTopOf="@id/movieDetailImgLayout" />
       
       <TextView
-          android:id="@+id/movieDetailRatingReleaseDate"
+          android:id="@+id/movieDetailReleaseDate"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginTop="16dp"
@@ -78,8 +78,8 @@
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
-          app:layout_constraintStart_toEndOf="@id/movieDetailRatingReleaseDate"
-          app:layout_constraintTop_toTopOf="@id/movieDetailRatingReleaseDate" />
+          app:layout_constraintStart_toEndOf="@id/movieDetailReleaseDate"
+          app:layout_constraintTop_toTopOf="@id/movieDetailReleaseDate" />
       
       <TextView
           android:id="@+id/movieDetailRatingVoteAverage"
@@ -91,8 +91,8 @@
           android:text="@string/vote_average"
           android:textColor="@color/white"
           android:textSize="16sp"
-          app:layout_constraintStart_toStartOf="@id/movieDetailRatingReleaseDate"
-          app:layout_constraintTop_toBottomOf="@id/movieDetailRatingReleaseDate" />
+          app:layout_constraintStart_toStartOf="@id/movieDetailReleaseDate"
+          app:layout_constraintTop_toBottomOf="@id/movieDetailReleaseDate" />
       
       <ImageView
           android:id="@+id/movieDetailRatingIcon"
@@ -189,4 +189,14 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+  
+  <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminateTint="@android:color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
