@@ -6,6 +6,7 @@ import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
 import com.example.moviedocs.presentation.movielist.MovieListHorizontalAdapter
@@ -101,6 +103,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       upcomingMoreBtn.navigateTo(R.id.action_homeFragment_to_upcomingFragment)
       topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
       genreMoreBtn.navigateTo(R.id.action_homeFragment_to_genreListFragment)
+    }
+    
+    nowPlayingAdapter.onItemClickListener = { it: MovieItemModel ->
+      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+    }
+    
+    popularAdapter.onItemClickListener = { it: MovieItemModel ->
+      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+    }
+    
+    upComingAdapter.onItemClickListener = { it: MovieItemModel ->
+      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+    }
+    
+    topRatedAdapter.onItemClickListener = { it: MovieItemModel ->
+      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
     }
   }
   

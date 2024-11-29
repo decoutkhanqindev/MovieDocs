@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
-import com.example.moviedocs.presentation.movielist.MovieListPageNumbersAdapter
-import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.movielist.MovieListPageNumbersAdapter
 import com.example.moviedocs.presentation.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -43,6 +44,14 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieLis
   
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
+    
+    movieListAdapter.onItemClickListener = {
+      findNavController().navigate(
+        TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailFragment(
+          movieId = it.id
+        )
+      )
+    }
   }
   
   private fun setUpRecyclerView() {
