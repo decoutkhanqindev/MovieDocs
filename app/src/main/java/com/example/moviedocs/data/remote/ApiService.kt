@@ -5,6 +5,7 @@ import com.example.moviedocs.data.remote.response.moviedetails.external.External
 import com.example.moviedocs.data.remote.response.moviegenre.GenreListResponse
 import com.example.moviedocs.data.remote.response.movielist.MovieListResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -23,9 +24,12 @@ interface ApiService {
   @GET("genre/movie/list")
   suspend fun getGenreList() : GenreListResponse
   
+  // This annotation tells Retrofit to replace the {movie_id} placeholder in the URL with the
+  // value of the movieId parameter.
+  
   @GET("movie/{movie_id}")
-  suspend fun getMovieDetail(@Query("movie_id") movieId: Int): MovieDetailResponse
+  suspend fun getMovieDetail(@Path("movie_id") movieId: Int): MovieDetailResponse
   
   @GET("movie/{movie_id}/external_ids")
-  suspend fun getExternalIds(@Query("movie_id") movieId: Int): ExternalIdsResponse
+  suspend fun getExternalIds(@Path("movie_id") movieId: Int): ExternalIdsResponse
 }
