@@ -10,10 +10,9 @@ import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.movielist.MovieItemModelDiffCallBack
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class SliderAdapter(
+class SliderViewPagerAdapter(
   private val viewPager: ViewPager2,
-//  private val onItemClicked: (MovieModel) -> Unit
-) : ListAdapter<MovieItemModel, SliderAdapter.SliderViewHolder>(MovieItemModelDiffCallBack) {
+) : ListAdapter<MovieItemModel, SliderViewPagerAdapter.SliderViewHolder>(MovieItemModelDiffCallBack) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(
@@ -27,7 +26,7 @@ class SliderAdapter(
     // infinite scrolling
     if (position == currentList.lastIndex) {
       viewPager.post {
-        viewPager.setCurrentItem(0, true)
+        viewPager.setCurrentItem(1, true)
       }
     }
   }
