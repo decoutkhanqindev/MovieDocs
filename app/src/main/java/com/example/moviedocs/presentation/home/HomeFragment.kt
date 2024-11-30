@@ -58,8 +58,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   // ==> This Handler and Runnable are used for auto-scrolling functionality in ViewPager2.
   // The sliderHandler posts a delayed sliderRunnable that transfer the viewPager to the next item.
   
-  private val sliderAdapter: SliderAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    SliderAdapter(viewPager = viewPager)
+  private val sliderViewPagerAdapter: SliderViewPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    SliderViewPagerAdapter(viewPager = viewPager)
   }
   
   private val genreAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -125,7 +125,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   private fun setUpSliderImg() {
     viewPager = binding.sliderViewPager
     viewPager.apply {
-      adapter = sliderAdapter
+      adapter = sliderViewPagerAdapter
       // sets the number of pages that should be kept in memory off-screen on either side of the current page.
       offscreenPageLimit = 3
       // This disables clipping of child views to the padding of the ViewPager2.
@@ -214,7 +214,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.visible()
           scrollView.invisible()
         }
-        sliderAdapter.submitList(emptyList())
+        sliderViewPagerAdapter.submitList(emptyList())
         genreAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
         popularAdapter.submitList(emptyList())
@@ -227,7 +227,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.invisible()
           scrollView.visible()
         }
-        sliderAdapter.submitList(state.nowPlaying)
+        sliderViewPagerAdapter.submitList(state.nowPlaying)
         genreAdapter.submitList(state.genreList)
         nowPlayingAdapter.submitList(state.nowPlaying)
         popularAdapter.submitList(state.popular)
@@ -241,7 +241,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           scrollView.invisible()
         }
         genreAdapter.submitList(emptyList())
-        sliderAdapter.submitList(emptyList())
+        sliderViewPagerAdapter.submitList(emptyList())
         nowPlayingAdapter.submitList(emptyList())
         popularAdapter.submitList(emptyList())
         upComingAdapter.submitList(emptyList())
