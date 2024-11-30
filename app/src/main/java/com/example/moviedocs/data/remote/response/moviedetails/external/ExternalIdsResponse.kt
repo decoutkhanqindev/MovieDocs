@@ -12,9 +12,9 @@ import com.squareup.moshi.Json
 //    @Json(name = "wikidata_id")
 //    val wikidataId: String, // Q119821866
     @Json(name = "facebook_id")
-    val facebookId: String, // TerrifierFilm
+    val facebookId: String?, // TerrifierFilm
     @Json(name = "instagram_id")
-    val instagramId: String, // officialterrifier3
+    val instagramId: String?, // officialterrifier3
     @Json(name = "twitter_id")
-    val twitterId: String // terrifierfilm
+    val twitterId: String? // terrifierfilm
 )

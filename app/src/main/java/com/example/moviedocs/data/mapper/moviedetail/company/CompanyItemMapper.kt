@@ -5,5 +5,5 @@ import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 
 fun CompanyItemResponse.toCompanyItemModel(): CompanyItemModel = CompanyItemModel(
   id = id,
-  logoPath = logoPath,
+  logoPath = logoPath ?: "No logo available",
 )

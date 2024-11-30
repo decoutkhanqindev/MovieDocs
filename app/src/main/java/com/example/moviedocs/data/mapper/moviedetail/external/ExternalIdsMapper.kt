@@ -5,7 +5,7 @@ import com.example.moviedocs.domain.model.moviedetail.external.ExternalIdsModel
 
 fun ExternalIdsResponse.toExternalIdsModel(): ExternalIdsModel = ExternalIdsModel(
   id = id,
-  facebookId = facebookId,
-  instagramId = instagramId,
-  twitterId = twitterId,
+  facebookId = facebookId ?: "Not found FB id",
+  instagramId = instagramId ?: "Not found IG id",
+  twitterId = twitterId ?: "Not found Twitter id",
 )
