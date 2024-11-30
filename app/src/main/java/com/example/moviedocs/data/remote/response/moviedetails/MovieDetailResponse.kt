@@ -2,8 +2,8 @@ package com.example.moviedocs.data.remote.response.moviedetails
 
 
 import androidx.annotation.Keep
-import com.example.moviedocs.data.remote.response.moviedetails.company.CompanyListResponse
-import com.example.moviedocs.data.remote.response.moviegenre.GenreListResponse
+import com.example.moviedocs.data.remote.response.moviedetails.company.CompanyItemResponse
+import com.example.moviedocs.data.remote.response.moviegenre.GenreItemResponse
 import com.squareup.moshi.Json
 
 @Keep
@@ -17,7 +17,7 @@ data class MovieDetailResponse(
     @Json(name = "budget")
     val budget: Int, // 2000000
     @Json(name = "genres")
-    val genres: GenreListResponse,
+    val genres: List<GenreItemResponse>,
     @Json(name = "homepage")
     val homepage: String, // https://terrifier3.com/
     @Json(name = "id")
@@ -37,7 +37,7 @@ data class MovieDetailResponse(
     @Json(name = "poster_path")
     val posterPath: String, // /l1175hgL5DoXnqeZQCcU3eZIdhX.jpg
     @Json(name = "production_companies")
-    val productionCompanies: CompanyListResponse,
+    val productionCompanies: List<CompanyItemResponse>,
 //    @Json(name = "production_countries")
 //    val productionCountries: List<ProductionCountry>,
     @Json(name = "release_date")
