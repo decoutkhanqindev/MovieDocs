@@ -13,3 +13,10 @@ fun String.formatTimestamp(): String {
   val date: Date? = inputFormat.parse(this)
   return if (date != null) outputFormat.format(date) else "Invalid Date"
 }
+
+fun Int.convertMinutesToHoursAndMinutes(): String {
+  val minutes = this
+  val hours = minutes / 60
+  val remainingMinutes = minutes % 60
+  return "${hours}h ${remainingMinutes}m"
+}
