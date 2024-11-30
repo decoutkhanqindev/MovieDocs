@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.movielist
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +28,7 @@ class MovieListHorizontalAdapter :
       }
     }
     
+    @SuppressLint("SetTextI18n")
     override fun bind(item: MovieItemModel) {
       binding.apply {
         movieItemImg.loadImgFromUrl(item.posterPath)
