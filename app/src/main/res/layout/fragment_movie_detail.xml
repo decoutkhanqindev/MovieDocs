@@ -6,16 +6,50 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient">
   
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/main_color"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+    
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      
+      <ImageView
+          android:id="@+id/backBtn"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_gravity="start"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/back_btn" />
+      
+      <TextView
+          android:id="@+id/movieDetialTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:text="@string/detail"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+  </com.google.android.material.appbar.AppBarLayout>
+  
   <com.google.android.material.card.MaterialCardView
       android:id="@+id/movieDetailTopLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:cardBackgroundColor="@color/dark_blue2"
       app:cardCornerRadius="0dp"
-      app:cardElevation="8dp"
+      app:cardElevation="16dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/appBarLayout"
       app:strokeColor="@android:color/transparent">
     
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,17 +61,19 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_margin="8dp"
+          android:layout_marginTop="16dp"
           app:cardCornerRadius="8dp"
           app:cardElevation="16dp"
           app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/movieDetailTitle"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:strokeColor="@android:color/transparent">
         
         <ImageView
             android:id="@+id/movieDetailImg"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
+            android:layout_width="140dp"
+            android:layout_height="190dp"
             android:scaleType="fitXY"
             tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -46,14 +82,16 @@
       <TextView
           android:id="@+id/movieDetailTitle"
           android:layout_width="220dp"
-          android:layout_height="50dp"
-          android:layout_marginStart="24dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
           android:gravity="start"
           android:maxLines="2"
           android:text="@string/app_name"
           android:textColor="@color/white"
           android:textSize="20sp"
           android:textStyle="bold"
+          app:layout_constraintBottom_toTopOf="@id/movieDetailReleaseDate"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/movieDetailImgLayout"
           app:layout_constraintTop_toTopOf="@id/movieDetailImgLayout" />
       
@@ -66,6 +104,7 @@
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
+          app:layout_constraintBottom_toTopOf="@id/movieDetailRatingVoteAverage"
           app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
           app:layout_constraintTop_toBottomOf="@id/movieDetailTitle" />
       
@@ -91,6 +130,7 @@
           android:text="@string/vote_average"
           android:textColor="@color/white"
           android:textSize="16sp"
+          app:layout_constraintBottom_toTopOf="@id/movieDetailFb"
           app:layout_constraintStart_toStartOf="@id/movieDetailReleaseDate"
           app:layout_constraintTop_toBottomOf="@id/movieDetailReleaseDate" />
       
@@ -121,6 +161,7 @@
           android:id="@+id/movieDetailFb"
           android:layout_width="40dp"
           android:layout_height="40dp"
+          android:layout_marginTop="16dp"
           android:importantForAccessibility="no"
           android:src="@mipmap/fb_icon"
           android:text="@string/status_released"
@@ -163,8 +204,8 @@
           android:layout_height="40dp"
           android:importantForAccessibility="no"
           android:src="@drawable/white_favorite_icon"
-          app:layout_constraintStart_toEndOf="@id/movieDetailTwitter"
           app:layout_constraintEnd_toEndOf="@id/movieDetailTitle"
+          app:layout_constraintStart_toEndOf="@id/movieDetailTwitter"
           app:layout_constraintTop_toTopOf="@id/movieDetailFb" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
@@ -173,12 +214,17 @@
       android:id="@+id/tabLayout"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/main_color"
+      android:background="@color/dark_blue2"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/movieDetailTopLayout"
-      app:tabMode="scrollable" />
+      app:tabGravity="center"
+      app:tabMode="scrollable"
+      app:tabIndicatorColor="@color/red"
+      app:tabSelectedTextAppearance="@android:style/TextAppearance.Material.Large"
+      app:tabTextAppearance="@android:style/TextAppearance.Material.Small"
+      app:tabTextColor="@color/white" />
   
   <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/movieDetailViewPager"
