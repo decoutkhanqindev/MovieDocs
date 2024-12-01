@@ -19,7 +19,9 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
+class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
+  FragmentMovieListBinding::inflate
+) {
   
   private val viewModel: TopRatedViewModel by viewModels()
   

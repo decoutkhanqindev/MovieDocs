@@ -7,8 +7,9 @@ import okhttp3.Request
 import okhttp3.Response
 import javax.inject.Inject
 
-class AuthorizationInterceptor
-@Inject constructor(@ApiKey private val apiKey: String) : Interceptor {
+class AuthorizationInterceptor @Inject constructor(
+  @ApiKey private val apiKey: String,
+) : Interceptor {
   override fun intercept(chain: Interceptor.Chain): Response {
     val originalRequest: Request = chain.request()
     

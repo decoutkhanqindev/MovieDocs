@@ -13,7 +13,7 @@ sealed interface MovieListUiState {
   ) : MovieListUiState
   
   enum class SortType {
-    NONE, TITLE_ASC, TITLE_DSC, RATING_ASC, RATING_DSC
+    TITLE_ASC, TITLE_DSC, RATING_ASC, RATING_DSC
   }
 }
 

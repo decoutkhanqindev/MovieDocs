@@ -6,7 +6,9 @@ import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentSignInBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.navigateTo
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
   
   companion object {

@@ -10,7 +10,9 @@ import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class MovieListHorizontalAdapter :
-  BaseListAdapter<MovieItemModel, MovieItemHorizontalViewHolderBinding>(MovieItemModelDiffCallBack) {
+  BaseListAdapter<MovieItemModel, MovieItemHorizontalViewHolderBinding>(
+    MovieItemModelDiffCallBack
+  ) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(

@@ -14,8 +14,9 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GenreListFragment :
-  BaseFragment<FragmentGenreListBinding>(FragmentGenreListBinding::inflate) {
+class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
+  FragmentGenreListBinding::inflate
+) {
   
   companion object {
     fun newInstance(): GenreListFragment = GenreListFragment()

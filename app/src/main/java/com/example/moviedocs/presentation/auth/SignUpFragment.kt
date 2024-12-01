@@ -5,7 +5,9 @@ import android.view.View
 import com.example.moviedocs.databinding.FragmentSignUpBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.navigateBack
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
   
   companion object {

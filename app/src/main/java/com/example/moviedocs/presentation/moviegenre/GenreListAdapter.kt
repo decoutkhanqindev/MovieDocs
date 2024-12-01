@@ -7,8 +7,9 @@ import com.example.moviedocs.databinding.GenreItemViewHolderBinding
 import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 
-class GenreListAdapter :
-  BaseListAdapter<GenreItemModel, GenreItemViewHolderBinding>(GenreItemModelDiffCallBack) {
+class GenreListAdapter : BaseListAdapter<GenreItemModel, GenreItemViewHolderBinding>(
+  GenreItemModelDiffCallBack
+) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(
@@ -17,7 +18,9 @@ class GenreListAdapter :
       )
     )
   
-  private inner class VH(binding: GenreItemViewHolderBinding) : BaseViewHolder(binding) {
+  private inner class VH(
+    binding: GenreItemViewHolderBinding,
+  ) : BaseViewHolder(binding) {
     
     init {
       binding.root.setOnClickListener {

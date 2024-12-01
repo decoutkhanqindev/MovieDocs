@@ -11,7 +11,9 @@ import com.example.moviedocs.utils.formatTimestamp
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class MovieListVerticalAdapter :
-  BaseListAdapter<MovieItemModel, MovieItemVerticalViewHolderBinding>(MovieItemModelDiffCallBack) {
+  BaseListAdapter<MovieItemModel, MovieItemVerticalViewHolderBinding>(
+    MovieItemModelDiffCallBack
+  ) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(

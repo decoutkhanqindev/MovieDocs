@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GenreListViewModel @Inject constructor(
-  private val getGenreListUseCase: GetGenreListUseCase
+  private val getGenreListUseCase: GetGenreListUseCase,
 ) : ViewModel() {
   
   private val _uiState: MutableStateFlow<GenreListUiState> =
@@ -29,12 +29,14 @@ class GenreListViewModel @Inject constructor(
     viewModelScope.launch {
       _uiState.value = GenreListUiState.Loading
       
-      getGenreListUseCase().onSuccess { it: GenreListModel ->
-        _uiState.value = GenreListUiState.Success(items = it.genres)
-      }.onFailure { it: Throwable ->
-        _uiState.value = GenreListUiState.Error(it)
-        Timber.tag(this.javaClass.simpleName).e("loadGenreList: $it")
-      }
+      getGenreListUseCase()
+        .onSuccess { it: GenreListModel ->
+          _uiState.value = GenreListUiState.Success(items = it.genres)
+        }
+        .onFailure { it: Throwable ->
+          _uiState.value = GenreListUiState.Error(it)
+          Timber.tag(this.javaClass.simpleName).e("loadGenreList: $it")
+        }
     }
   }
 }

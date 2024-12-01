@@ -19,8 +19,9 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class NowPlayingFragment :
-  BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
+class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
+  FragmentMovieListBinding::inflate
+) {
   
   private val viewModel: NowPlayingViewModel by viewModels()
   

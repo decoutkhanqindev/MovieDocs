@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.PageNumbersItemViewHolderBinding
 import com.example.moviedocs.presentation.base.BaseListAdapter
 
-class MovieListPageNumbersAdapter :
-  BaseListAdapter<Int, PageNumbersItemViewHolderBinding>(PageDiffUtil()) {
+class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHolderBinding>(
+  PageDiffUtil
+) {
   
   private var selectedPosition = 0
   
@@ -51,7 +52,7 @@ class MovieListPageNumbersAdapter :
     }
   }
   
-  private class PageDiffUtil : DiffUtil.ItemCallback<Int>() {
+  private object PageDiffUtil : DiffUtil.ItemCallback<Int>() {
     override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean = oldItem == newItem
     
     override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean = oldItem == newItem

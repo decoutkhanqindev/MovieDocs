@@ -12,7 +12,9 @@ import com.example.moviedocs.utils.loadImgFromUrl
 
 class SliderViewPagerAdapter(
   private val viewPager: ViewPager2,
-) : ListAdapter<MovieItemModel, SliderViewPagerAdapter.SliderViewHolder>(MovieItemModelDiffCallBack) {
+) : ListAdapter<MovieItemModel, SliderViewPagerAdapter.SliderViewHolder>(
+  MovieItemModelDiffCallBack
+) {
   
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(

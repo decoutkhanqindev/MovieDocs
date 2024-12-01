@@ -10,10 +10,10 @@ import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class MovieListRepositoryImpl
-@Inject constructor(
+class MovieListRepositoryImpl @Inject constructor(
   private val apiService: ApiService,
-  @AppDispatcher(DispatcherType.IO) private val ioDispatcher: CoroutineDispatcher,
+  @AppDispatcher(DispatcherType.IO)
+  private val ioDispatcher: CoroutineDispatcher,
 ) : MovieListRepository {
   
   override suspend fun getNowPlaying(page: Int): Result<MovieListModel> =

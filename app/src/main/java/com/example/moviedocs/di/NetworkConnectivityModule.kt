@@ -10,8 +10,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface NetworkModule {
+interface NetworkConnectivityModule {
   @Binds
   @Singleton
-  fun bindNetworkConnectivityObserver(observerImpl: NetworkConnectivityObserverImpl): NetworkConnectivityObserver
+  fun bindNetworkConnectivityObserver(
+    observerImpl: NetworkConnectivityObserverImpl
+  ): NetworkConnectivityObserver
 }

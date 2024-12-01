@@ -10,13 +10,13 @@ import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class GenreListRepositoryImpl
-@Inject constructor(
+class GenreListRepositoryImpl @Inject constructor(
   private val apiService: ApiService,
-  @AppDispatcher(DispatcherType.IO) private val ioDispatcher: CoroutineDispatcher,
+  @AppDispatcher(DispatcherType.IO)
+  private val ioDispatcher: CoroutineDispatcher,
 ) : GenreListRepository {
   
-  override suspend fun getGenre(): Result<GenreListModel> =
+  override suspend fun getGenreList(): Result<GenreListModel> =
     runSuspendCatching(ioDispatcher) {
       apiService.getGenreList().toGenreListModel()
     }

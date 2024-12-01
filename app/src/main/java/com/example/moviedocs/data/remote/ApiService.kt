@@ -24,7 +24,7 @@ interface ApiService {
   @GET("genre/movie/list")
   suspend fun getGenreList() : GenreListResponse
   
-  // This annotation tells Retrofit to replace the {movie_id} placeholder in the URL with the
+  // The annotation @Path tells Retrofit to replace the {movie_id} placeholder in the URL with the
   // value of the movieId parameter.
   
   @GET("movie/{movie_id}")

@@ -16,9 +16,10 @@ import kotlin.coroutines.cancellation.CancellationException
 */
 
 @OptIn(ExperimentalContracts::class)
-suspend inline fun <R> runSuspendCatching(
-  context: CoroutineContext = EmptyCoroutineContext, crossinline block: suspend () -> R,
-): Result<R> {
+suspend inline fun <T> runSuspendCatching(
+  context: CoroutineContext = EmptyCoroutineContext,
+  crossinline block: suspend () -> T,
+): Result<T> {
   contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
   
   return try {

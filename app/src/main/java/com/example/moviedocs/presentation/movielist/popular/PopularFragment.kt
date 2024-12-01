@@ -19,7 +19,9 @@ import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PopularFragment : BaseFragment<FragmentMovieListBinding>(FragmentMovieListBinding::inflate) {
+class PopularFragment : BaseFragment<FragmentMovieListBinding>(
+  FragmentMovieListBinding::inflate
+) {
   
   private val viewModel: PopularViewModel by viewModels()
   

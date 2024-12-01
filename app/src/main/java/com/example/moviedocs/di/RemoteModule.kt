@@ -67,9 +67,10 @@ object RemoteModule {
   
   @Provides
   @Singleton
-  fun provideMoshi(): Moshi = Moshi.Builder()
-    .addLast(KotlinJsonAdapterFactory()) // to convert kotlin obj to json
-    .build()
+  fun provideMoshi(): Moshi =
+    Moshi.Builder()
+      .addLast(KotlinJsonAdapterFactory()) // to convert kotlin obj to json
+      .build()
   
   @Provides
   @Singleton
@@ -77,7 +78,8 @@ object RemoteModule {
   fun provideRetrofit(
     moshi: Moshi,
     client: OkHttpClient,
-    @BaseUrl baseUrl: String,
+    @BaseUrl
+    baseUrl: String,
   ): Retrofit =
     Retrofit.Builder()
       .baseUrl(baseUrl)
@@ -88,6 +90,7 @@ object RemoteModule {
   @Provides
   @Singleton
   fun provideApiService(
-    @ApiRequest retrofit: Retrofit,
+    @ApiRequest
+    retrofit: Retrofit,
   ): ApiService = retrofit.create()
 }

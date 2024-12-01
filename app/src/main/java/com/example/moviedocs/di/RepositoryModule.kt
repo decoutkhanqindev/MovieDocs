@@ -15,11 +15,17 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 interface RepositoryModule {
   @Binds
-  fun bindMovieListRepository(repository: MovieListRepositoryImpl): MovieListRepository
+  fun bindMovieListRepository(
+    repository: MovieListRepositoryImpl
+  ): MovieListRepository
   
   @Binds
-  fun bindGenreListRepository(repository: GenreListRepositoryImpl): GenreListRepository
+  fun bindGenreListRepository(
+    repository: GenreListRepositoryImpl
+  ): GenreListRepository
   
   @Binds
-  fun bindMovieDetailRepository(repository: MovieDetailRepositoryImpl): MovieDetailRepository
+  fun bindMovieDetailRepository(
+    repository: MovieDetailRepositoryImpl
+  ): MovieDetailRepository
 }
