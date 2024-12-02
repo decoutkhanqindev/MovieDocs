@@ -1,6 +1,8 @@
 package com.example.moviedocs.utils
 
 import android.annotation.SuppressLint
+import com.example.moviedocs.domain.model.moviedetail.country.CountryItemModel
+import com.example.moviedocs.domain.model.moviedetail.language.LanguageItemModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
@@ -12,6 +14,18 @@ fun String.formatTimestamp(): String {
   val outputFormat: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
   val date: Date? = inputFormat.parse(this)
   return if (date != null) outputFormat.format(date) else "Invalid Date"
+}
+
+fun String.toLanguageName(languageList: List<LanguageItemModel>): String {
+  val languageCode = this
+  val language = languageList.find { it.iso6391 == languageCode }
+  return language!!.englishName
+}
+
+fun String.toCountryName(countryList: List<CountryItemModel>): String {
+  val countryCode = this
+  val country = countryList.find { it.iso31661 == countryCode }
+  return country!!.englishName
 }
 
 fun Int.convertMinutesToHoursAndMinutes(): String {
