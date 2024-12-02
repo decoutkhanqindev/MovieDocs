@@ -3,7 +3,9 @@ package com.example.moviedocs.presentation.moviedetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
+import com.example.moviedocs.domain.usecase.moviedetail.GetCountryListUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetExternalIdsUseCase
+import com.example.moviedocs.domain.usecase.moviedetail.GetLanguageListUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetMovieDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +19,8 @@ import javax.inject.Inject
 class MovieDetailViewModel @Inject constructor(
   private val getMovieDetailUseCase: GetMovieDetailUseCase,
   private val getExternalIdsUseCase: GetExternalIdsUseCase,
+  private val getLanguageListUseCase: GetLanguageListUseCase,
+  private val getCountryListUseCase: GetCountryListUseCase,
 ) : ViewModel() {
   
   private val _uiState: MutableStateFlow<MovieDetailUiState> =
@@ -31,6 +35,8 @@ class MovieDetailViewModel @Inject constructor(
         _uiState.value = MovieDetailUiState.Success(
           movieDetail = it,
           externalIds = getExternalIdsUseCase(movieId = movieId).getOrThrow(),
+          languageList = getLanguageListUseCase().getOrThrow(),
+          countryList = getCountryListUseCase().getOrThrow(),
         )
       }.onFailure { it: Throwable ->
         _uiState.value = MovieDetailUiState.Error(throwable = it)

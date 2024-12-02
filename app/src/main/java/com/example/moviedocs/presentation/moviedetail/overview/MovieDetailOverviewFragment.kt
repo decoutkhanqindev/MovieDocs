@@ -12,6 +12,8 @@ import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
+import com.example.moviedocs.utils.toCountryName
+import com.example.moviedocs.utils.toLanguageName
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -75,8 +77,10 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
           movieDetailOverview.text = state.movieDetail.overview
           genreListAdapter.submitList(state.movieDetail.genres)
           statusValue.text = state.movieDetail.status
-          languageValue.text = state.movieDetail.originalLanguage
-          countryValue.text = state.movieDetail.originCountry.joinToString { "," }
+          languageValue.text = state.movieDetail.originalLanguage.toLanguageName(state.languageList)
+          countryValue.text = state.movieDetail.originCountry.joinToString(", ") {
+            it.toCountryName(state.countryList)
+          }
           budgetValue.text = "$${state.movieDetail.budget}"
           revenueValue.text = "$${state.movieDetail.revenue}"
         }
