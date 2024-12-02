@@ -47,7 +47,7 @@ data class MovieDetailResponse(
     @Json(name = "runtime")
     val runtime: Int, // 125
 //    @Json(name = "spoken_languages")
-//    val spokenLanguages: List<SpokenLanguage>,
+//    val spokenLanguages: List<LanguageItemResponse>,
     @Json(name = "status")
     val status: String, // Released
     @Json(name = "tagline")
