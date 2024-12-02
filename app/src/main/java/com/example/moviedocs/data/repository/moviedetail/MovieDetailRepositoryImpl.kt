@@ -14,7 +14,8 @@ import javax.inject.Inject
 
 class MovieDetailRepositoryImpl @Inject constructor(
   private val apiService: ApiService,
-  @AppDispatcher(DispatcherType.IO) private val ioDispatcher: CoroutineDispatcher,
+  @AppDispatcher(DispatcherType.IO)
+  private val ioDispatcher: CoroutineDispatcher,
 ) : MovieDetailRepository {
   
   override suspend fun getMovieDetail(movieId: Int): Result<MovieDetailModel> =

@@ -3,10 +3,11 @@ package com.example.moviedocs.presentation.moviedetail
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentMovieDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.utils.convertMinutesToHoursAndMinutes
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.loadImgFromUrl
@@ -23,7 +24,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   
   private val args: MovieDetailFragmentArgs by navArgs()
   
-  private val viewModel: MovieDetailViewModel by viewModels()
+  private val viewModel: MovieDetailViewModel by activityViewModels()
   
   private val viewPagerAdapter: MovieDetailViewPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieDetailViewPagerAdapter(fragment = this)
@@ -82,7 +83,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           movieDetailImg.loadImgFromUrl(state.movieDetail.posterPath)
           movieDetailTitle.text = state.movieDetail.title
           movieDetailReleaseDate.text = state.movieDetail.releaseDate
-          movieDetailRuntime.text = "${state.movieDetail.runtime} min"
+          movieDetailRuntime.text = state.movieDetail.runtime.convertMinutesToHoursAndMinutes()
           movieDetailRatingVoteAverage.text = "%.1f".format(state.movieDetail.voteAverage)
           movieDetailRatingVoteCount.text = "${state.movieDetail.voteCount}"
         }
