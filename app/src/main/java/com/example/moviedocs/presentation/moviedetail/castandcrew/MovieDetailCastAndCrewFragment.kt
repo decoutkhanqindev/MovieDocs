@@ -1,10 +1,12 @@
-package com.example.moviedocs.presentation.moviedetail
+package com.example.moviedocs.presentation.moviedetail.castandcrew
 
 import android.os.Bundle
 import android.view.View
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.presentation.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieDetailCastAndCrewFragment : BaseFragment<FragmentMovieDetailOverviewBinding>(
   FragmentMovieDetailOverviewBinding::inflate
 ) {
