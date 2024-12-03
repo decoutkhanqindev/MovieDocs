@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
@@ -32,21 +33,29 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     GenreListAdapter()
   }
   
+  private val companyListAdapter: CompanyListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    CompanyListAdapter()
+  }
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     
-    setUpRecyclerView()
+    setUpRecyclerView(binding.genreRecycleView, genreListAdapter)
+    setUpRecyclerView(binding.companyRecycleView, companyListAdapter)
     bindViewModel()
   }
   
-  private fun setUpRecyclerView() {
-    binding.genreRecycleView.apply {
-      setHasFixedSize(false)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.HORIZONTAL, false
-      )
-      adapter = genreListAdapter
-    }
+  private fun setUpRecyclerView(
+    recyclerView: RecyclerView,
+    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
+  ) {
+     recyclerView.apply {
+       setHasFixedSize(false)
+       layoutManager = LinearLayoutManager(
+         requireContext(), LinearLayoutManager.HORIZONTAL, false
+       )
+       this.adapter = adapter
+     }
   }
   
   private fun bindViewModel() {
@@ -83,6 +92,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
           }
           budgetValue.text = "$${state.movieDetail.budget}"
           revenueValue.text = "$${state.movieDetail.revenue}"
+          companyListAdapter.submitList(state.movieDetail.productionCompanies)
         }
       }
       
@@ -101,6 +111,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   override fun onDestroyView() {
     binding.apply {
       genreRecycleView.adapter = null
+      companyRecycleView.adapter = null
     }
     super.onDestroyView()
   }
