@@ -7,4 +7,5 @@ fun CompanyItemResponse.toCompanyItemModel(): CompanyItemModel =
   CompanyItemModel(
     id = id,
     logoPath = logoPath ?: "No logo available",
+    name = name,
   )
