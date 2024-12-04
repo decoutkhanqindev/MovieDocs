@@ -1,6 +1,8 @@
 package com.example.moviedocs.presentation.moviedetail
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -22,6 +24,16 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   FragmentMovieDetailBinding::inflate
 ) {
   
+  companion object {
+    private const val FB_URL: String = "https://www.facebook.com/"
+    private const val IG_URL: String = "https://www.instagram.com/"
+    private const val TWITTER_URL: String = "https://www.twitter.com/"
+  }
+  
+  private lateinit var fbId: String
+  private lateinit var igId: String
+  private lateinit var twId: String
+  
   private val args: MovieDetailFragmentArgs by navArgs()
   
   private val viewModel: MovieDetailViewModel by activityViewModels()
@@ -40,7 +52,27 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   }
   
   private fun setUpNavigation() {
-    binding.backBtn.navigateBack()
+    binding.apply {
+      backBtn.navigateBack()
+      
+      movieDetailFbImg.setOnClickListener {
+        val fbUrl = "$FB_URL$fbId"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(fbUrl))
+        startActivity(intent)
+      }
+      
+      movieDetailIgImg.setOnClickListener {
+        val igUrl = "$IG_URL$igId"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(igUrl))
+        startActivity(intent)
+      }
+      
+      movieDetailTwitterImg.setOnClickListener {
+        val twitterUrl = "$TWITTER_URL$twId"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(twitterUrl))
+        startActivity(intent)
+      }
+    }
   }
   
   private fun setUpViewPagerTabLayout() {
@@ -48,7 +80,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
       adapter = viewPagerAdapter
       isUserInputEnabled = true
       TabLayoutMediator(binding.tabLayout, this) { tab: TabLayout.Tab, position: Int ->
-        tab.text = when(position) {
+        tab.text = when (position) {
           0 -> "Overview"
           1 -> "Cast & Crew"
           else -> throw IllegalArgumentException("Invalid $position")
@@ -65,8 +97,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
       MovieDetailUiState.Loading -> {
-        binding.apply {
-          progressBar.visible()
+        binding.apply {          progressBar.visible()
           movieDetailTopLayout.invisible()
           tabLayout.invisible()
           movieDetailViewPager.invisible()
@@ -79,6 +110,21 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           movieDetailTopLayout.visible()
           tabLayout.visible()
           movieDetailViewPager.visible()
+
+//          state.apply {
+//            movieDetailImg.loadImgFromUrl(movieDetail.posterPath)
+//            movieDetailTitle.text = movieDetail.title
+//            movieDetailReleaseDate.text = movieDetail.releaseDate
+//            movieDetailRuntime.text =
+//              movieDetail.runtime.convertMinutesToHoursAndMinutes()
+//            movieDetailRatingVoteAverage.text =
+//              "%.1f".format(movieDetail.voteAverage)
+//            movieDetailRatingVoteCount.text = "${movieDetail.voteCount}"
+//
+//            fbId = externalIds.facebookId
+//            igId = externalIds.instagramId
+//            twId = externalIds.twitterId
+//          }
           
           movieDetailImg.loadImgFromUrl(state.movieDetail.posterPath)
           movieDetailTitle.text = state.movieDetail.title
@@ -86,6 +132,9 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           movieDetailRuntime.text = state.movieDetail.runtime.convertMinutesToHoursAndMinutes()
           movieDetailRatingVoteAverage.text = "%.1f".format(state.movieDetail.voteAverage)
           movieDetailRatingVoteCount.text = "${state.movieDetail.voteCount}"
+          fbId = state.externalIds.facebookId
+          igId = state.externalIds.instagramId
+          twId = state.externalIds.twitterId
         }
       }
       
