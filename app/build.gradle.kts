@@ -79,8 +79,8 @@ dependencies {
   implementation("androidx.fragment:fragment-ktx:1.8.5")
   
   // ViewModel
-  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.1")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.1")
   
   // Paging 3

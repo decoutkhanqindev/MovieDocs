@@ -83,7 +83,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     
     dialogLayoutBinding.tryAgainBtn.setOnClickListener {
       // open wifi settings
-      startActivity(Intent(android.provider.Settings.ACTION_WIFI_SETTINGS))
+      val intent = Intent(android.provider.Settings.ACTION_WIFI_SETTINGS)
+      startActivity(intent)
     }
   }
   

@@ -130,7 +130,7 @@
           android:text="@string/vote_average"
           android:textColor="@color/white"
           android:textSize="16sp"
-          app:layout_constraintBottom_toTopOf="@id/movieDetailFb"
+          app:layout_constraintBottom_toTopOf="@id/movieDetailFbImg"
           app:layout_constraintStart_toStartOf="@id/movieDetailReleaseDate"
           app:layout_constraintTop_toBottomOf="@id/movieDetailReleaseDate" />
       
@@ -158,7 +158,7 @@
           app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage" />
       
       <ImageView
-          android:id="@+id/movieDetailFb"
+          android:id="@+id/movieDetailFbImg"
           android:layout_width="40dp"
           android:layout_height="40dp"
           android:layout_marginTop="16dp"
@@ -172,7 +172,7 @@
           app:layout_constraintTop_toBottomOf="@id/movieDetailRatingVoteAverage" />
       
       <ImageView
-          android:id="@+id/movieDetailIg"
+          android:id="@+id/movieDetailIgImg"
           android:layout_width="40dp"
           android:layout_height="40dp"
           android:importantForAccessibility="no"
@@ -180,12 +180,12 @@
           android:text="@string/status_released"
           android:textColor="@color/white"
           android:textSize="16sp"
-          app:layout_constraintEnd_toStartOf="@id/movieDetailTwitter"
-          app:layout_constraintStart_toEndOf="@id/movieDetailFb"
-          app:layout_constraintTop_toTopOf="@id/movieDetailFb" />
+          app:layout_constraintEnd_toStartOf="@id/movieDetailTwitterImg"
+          app:layout_constraintStart_toEndOf="@id/movieDetailFbImg"
+          app:layout_constraintTop_toTopOf="@id/movieDetailFbImg" />
       
       <ImageView
-          android:id="@+id/movieDetailTwitter"
+          android:id="@+id/movieDetailTwitterImg"
           android:layout_width="40dp"
           android:layout_height="40dp"
           android:importantForAccessibility="no"
@@ -194,9 +194,8 @@
           android:textColor="@color/white"
           android:textSize="16sp"
           app:layout_constraintEnd_toStartOf="@id/movieDetailAddToFavoriteBtn"
-          app:layout_constraintStart_toEndOf="@id/movieDetailIg"
-          app:layout_constraintTop_toTopOf="@id/movieDetailIg" />
-      
+          app:layout_constraintStart_toEndOf="@id/movieDetailIgImg"
+          app:layout_constraintTop_toTopOf="@id/movieDetailIgImg" />
       
       <ImageView
           android:id="@+id/movieDetailAddToFavoriteBtn"
@@ -205,8 +204,8 @@
           android:importantForAccessibility="no"
           android:src="@drawable/white_favorite_icon"
           app:layout_constraintEnd_toEndOf="@id/movieDetailTitle"
-          app:layout_constraintStart_toEndOf="@id/movieDetailTwitter"
-          app:layout_constraintTop_toTopOf="@id/movieDetailFb" />
+          app:layout_constraintStart_toEndOf="@id/movieDetailTwitterImg"
+          app:layout_constraintTop_toTopOf="@id/movieDetailFbImg" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
   

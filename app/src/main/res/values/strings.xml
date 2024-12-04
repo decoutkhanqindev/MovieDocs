@@ -43,7 +43,8 @@
   <string name="add_to_favorite">Add to Favorite</string>
   <string name="page_number_1">1</string>
   <string name="genre">Horror</string>
-  <string name="genre_title">Genre:</string>
+  <string name="genre_title">Genre</string>
+  <string name="genre_title1">Genre:</string>
   <string name="count">11939</string>
   <string name="status_released">Status: Released</string>
   <string name="language_english">Language: English</string>
