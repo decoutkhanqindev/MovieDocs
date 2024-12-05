@@ -3,6 +3,9 @@ package com.example.moviedocs.presentation
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.moviedocs.databinding.ActivitySplashScreenBinding
 import com.example.moviedocs.presentation.base.BaseActivity
@@ -16,10 +19,21 @@ import kotlinx.coroutines.launch
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>(
   ActivitySplashScreenBinding::inflate
 ) {
-  
+
   override fun onCreate(savedInstanceState: Bundle?) {
+    enableEdgeToEdge()
     super.onCreate(savedInstanceState)
-    
+    ViewCompat.setOnApplyWindowInsetsListener(findViewById(binding.root.id)) { v, insets ->
+      val systemBarInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+      v.setPadding(
+        systemBarInsets.left,
+        systemBarInsets.top,
+        systemBarInsets.right,
+        systemBarInsets.bottom
+      )
+      insets
+    }
+
     lifecycleScope.launch {
       delay(200)
       binding.appLogoImg.applyAnimationFadeIn(500)

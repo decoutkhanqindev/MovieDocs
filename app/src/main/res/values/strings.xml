@@ -61,5 +61,6 @@
   <string name="company_name">Cineverse</string>
   <string name="country_title">Original Country:</string>
   <string name="us">US</string>
-  <string name="detail">Detail</string>
+  <string name="movie_detail">Movie Detail</string>
+  <string name="company_detail">Company Detail</string>
 </resources>

@@ -34,7 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge()
     super.onCreate(savedInstanceState)
-    ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+    ViewCompat.setOnApplyWindowInsetsListener(findViewById(binding.root.id)) { v, insets ->
       val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
       v.setPadding(
         systemBarsInsets.left,

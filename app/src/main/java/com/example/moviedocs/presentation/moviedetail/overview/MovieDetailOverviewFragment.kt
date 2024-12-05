@@ -4,10 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
+import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
@@ -22,11 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBinding>(
   FragmentMovieDetailOverviewBinding::inflate
 ) {
-  
   companion object {
     fun newInstance(): MovieDetailOverviewFragment = MovieDetailOverviewFragment()
   }
-  
+
   private val viewModel: MovieDetailViewModel by activityViewModels()
   
   private val genreListAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -39,12 +41,23 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
+    setUpNavigation()
     setUpRecyclerView(binding.genreRecycleView, genreListAdapter)
     setUpRecyclerView(binding.companyRecycleView, companyListAdapter)
     bindViewModel()
   }
-  
+
+  private fun setUpNavigation() {
+    companyListAdapter.onItemClickListener = { it: CompanyItemModel ->
+      findNavController().navigate(
+        MovieDetailFragmentDirections.actionMovieDetailFragmentToCompanyDetailFragment(
+          companyId = it.id
+        )
+      )
+    }
+  }
+
   private fun setUpRecyclerView(
     recyclerView: RecyclerView,
     adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
