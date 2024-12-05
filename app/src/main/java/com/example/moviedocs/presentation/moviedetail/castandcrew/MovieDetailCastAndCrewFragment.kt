@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailCastAndCrewFragment : BaseFragment<FragmentMovieDetailOverviewBinding>(
   FragmentMovieDetailOverviewBinding::inflate
 ) {
-  
   companion object {
     fun newInstance(): MovieDetailCastAndCrewFragment = MovieDetailCastAndCrewFragment()
   }
