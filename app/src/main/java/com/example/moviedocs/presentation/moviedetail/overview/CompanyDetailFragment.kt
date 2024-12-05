@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentCompanyDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.utils.navigateBack
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -19,5 +20,10 @@ class CompanyDetailFragment: BaseFragment<FragmentCompanyDetailBinding>(
     super.onViewCreated(view, savedInstanceState)
 
     Timber.d("companyId: ${args.companyId}")
+    setUpNavigation()
+  }
+
+  private fun setUpNavigation() {
+    binding.backBtn.navigateBack()
   }
 }

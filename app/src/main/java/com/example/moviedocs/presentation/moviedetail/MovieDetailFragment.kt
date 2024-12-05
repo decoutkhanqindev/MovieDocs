@@ -23,61 +23,54 @@ import dagger.hilt.android.AndroidEntryPoint
 class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   FragmentMovieDetailBinding::inflate
 ) {
-  
+
   companion object {
     private const val FB_URL: String = "https://www.facebook.com/"
     private const val IG_URL: String = "https://www.instagram.com/"
     private const val TWITTER_URL: String = "https://www.twitter.com/"
   }
-  
+
   private lateinit var fbId: String
   private lateinit var igId: String
   private lateinit var twId: String
-  
+
   private val args: MovieDetailFragmentArgs by navArgs()
-  
+
   private val viewModel: MovieDetailViewModel by activityViewModels()
   
-  private val viewPagerAdapter: MovieDetailViewPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MovieDetailViewPagerAdapter(fragment = this)
-  }
+  private lateinit var viewPagerAdapter: MovieDetailViewPagerAdapter
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
+    viewPagerAdapter = MovieDetailViewPagerAdapter(fragment = this)
     viewModel.getMovieDetail(movieId = args.movieId)
     setUpNavigation()
-    setUpViewPagerTabLayout()
+    setUpTabLayout()
     bindViewModel()
   }
-  
+
+
   private fun setUpNavigation() {
     binding.apply {
       backBtn.navigateBack()
-      
-      movieDetailFbImg.setOnClickListener {
-        val fbUrl = "$FB_URL$fbId"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(fbUrl))
-        startActivity(intent)
-      }
-      
-      movieDetailIgImg.setOnClickListener {
-        val igUrl = "$IG_URL$igId"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(igUrl))
-        startActivity(intent)
-      }
-      
-      movieDetailTwitterImg.setOnClickListener {
-        val twitterUrl = "$TWITTER_URL$twId"
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(twitterUrl))
-        startActivity(intent)
-      }
+      movieDetailFbImg.setOnClickListener { openSocialMedia(FB_URL, fbId) }
+      movieDetailIgImg.setOnClickListener { openSocialMedia(IG_URL, igId) }
+      movieDetailTwitterImg.setOnClickListener { openSocialMedia(TWITTER_URL, twId) }
     }
   }
+
+  private fun openSocialMedia(baseUrl: String, id: String) {
+    val url = "$baseUrl$id"
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    startActivity(intent)
+  }
   
-  private fun setUpViewPagerTabLayout() {
+  private fun setUpTabLayout() {
     binding.movieDetailViewPager.apply {
-      adapter = viewPagerAdapter
+      if (adapter == null) {
+        adapter = viewPagerAdapter
+      }
       isUserInputEnabled = true
       TabLayoutMediator(binding.tabLayout, this) { tab: TabLayout.Tab, position: Int ->
         tab.text = when (position) {
@@ -97,7 +90,8 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
       MovieDetailUiState.Loading -> {
-        binding.apply {          progressBar.visible()
+        binding.apply {
+          progressBar.visible()
           movieDetailTopLayout.invisible()
           tabLayout.invisible()
           movieDetailViewPager.invisible()
@@ -110,21 +104,6 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           movieDetailTopLayout.visible()
           tabLayout.visible()
           movieDetailViewPager.visible()
-
-//          state.apply {
-//            movieDetailImg.loadImgFromUrl(movieDetail.posterPath)
-//            movieDetailTitle.text = movieDetail.title
-//            movieDetailReleaseDate.text = movieDetail.releaseDate
-//            movieDetailRuntime.text =
-//              movieDetail.runtime.convertMinutesToHoursAndMinutes()
-//            movieDetailRatingVoteAverage.text =
-//              "%.1f".format(movieDetail.voteAverage)
-//            movieDetailRatingVoteCount.text = "${movieDetail.voteCount}"
-//
-//            fbId = externalIds.facebookId
-//            igId = externalIds.instagramId
-//            twId = externalIds.twitterId
-//          }
           
           movieDetailImg.loadImgFromUrl(state.movieDetail.posterPath)
           movieDetailTitle.text = state.movieDetail.title
@@ -147,5 +126,10 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
         }
       }
     }
+  }
+
+  override fun onDestroyView() {
+    binding.movieDetailViewPager.adapter = null
+    super.onDestroyView()
   }
 }
