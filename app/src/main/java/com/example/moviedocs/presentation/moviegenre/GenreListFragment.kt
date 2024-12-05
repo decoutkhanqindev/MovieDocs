@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
   FragmentGenreListBinding::inflate
 ) {
-  
   companion object {
     fun newInstance(): GenreListFragment = GenreListFragment()
   }
