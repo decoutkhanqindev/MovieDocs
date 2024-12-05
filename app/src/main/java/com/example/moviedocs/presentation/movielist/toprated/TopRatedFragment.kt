@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieListBinding
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.MovieListPageNumbersAdapter
 import com.example.moviedocs.presentation.movielist.MovieListUiState
@@ -47,7 +48,7 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
     
-    movieListAdapter.onItemClickListener = {
+    movieListAdapter.onItemClickListener = {it: MovieItemModel ->
       findNavController().navigate(
         TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailFragment(
           movieId = it.id
