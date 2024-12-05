@@ -20,7 +20,7 @@
     
     <ImageView
         android:id="@+id/companyItemImg"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:scaleType="fitXY"
         tools:ignore="ContentDescription"
