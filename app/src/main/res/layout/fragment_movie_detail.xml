@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient">
-  
+
   <com.google.android.material.appbar.AppBarLayout
       android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
@@ -14,12 +14,12 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
-    
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-      
+
       <ImageView
           android:id="@+id/backBtn"
           android:layout_width="24dp"
@@ -27,7 +27,7 @@
           android:layout_gravity="start"
           android:importantForAccessibility="no"
           android:src="@mipmap/back_btn" />
-      
+
       <TextView
           android:id="@+id/movieDetialTitle"
           android:layout_width="wrap_content"
@@ -37,9 +37,18 @@
           android:textColor="@color/white"
           android:textSize="20sp"
           android:textStyle="bold" />
+
+      <ImageView
+          android:id="@+id/movieDetailAddToFavoriteBtn"
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_gravity="end"
+          android:layout_marginEnd="8dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/white_favorite_icon" />
     </androidx.appcompat.widget.Toolbar>
   </com.google.android.material.appbar.AppBarLayout>
-  
+
   <com.google.android.material.card.MaterialCardView
       android:id="@+id/movieDetailTopLayout"
       android:layout_width="match_parent"
@@ -51,25 +60,24 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout"
       app:strokeColor="@android:color/transparent">
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-      
+
       <com.google.android.material.card.MaterialCardView
           android:id="@+id/movieDetailImgLayout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_margin="8dp"
-          android:layout_marginTop="16dp"
           app:cardCornerRadius="8dp"
           app:cardElevation="16dp"
+          app:cardUseCompatPadding="true"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@id/movieDetailTitle"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:strokeColor="@android:color/transparent">
-        
+
         <ImageView
             android:id="@+id/movieDetailImg"
             android:layout_width="140dp"
@@ -78,7 +86,7 @@
             tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
       </com.google.android.material.card.MaterialCardView>
-      
+
       <TextView
           android:id="@+id/movieDetailTitle"
           android:layout_width="220dp"
@@ -94,12 +102,11 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/movieDetailImgLayout"
           app:layout_constraintTop_toTopOf="@id/movieDetailImgLayout" />
-      
+
       <TextView
           android:id="@+id/movieDetailReleaseDate"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="16dp"
           android:text="@string/release_date"
           android:textColor="@color/white"
           android:textSize="16sp"
@@ -107,7 +114,7 @@
           app:layout_constraintBottom_toTopOf="@id/movieDetailRatingVoteAverage"
           app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
           app:layout_constraintTop_toBottomOf="@id/movieDetailTitle" />
-      
+
       <TextView
           android:id="@+id/movieDetailRuntime"
           android:layout_width="wrap_content"
@@ -119,13 +126,12 @@
           android:textStyle="italic"
           app:layout_constraintStart_toEndOf="@id/movieDetailReleaseDate"
           app:layout_constraintTop_toTopOf="@id/movieDetailReleaseDate" />
-      
+
       <TextView
           android:id="@+id/movieDetailRatingVoteAverage"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
-          android:layout_marginTop="16dp"
           android:gravity="center"
           android:text="@string/vote_average"
           android:textColor="@color/white"
@@ -133,7 +139,7 @@
           app:layout_constraintBottom_toTopOf="@id/movieDetailFbImg"
           app:layout_constraintStart_toStartOf="@id/movieDetailReleaseDate"
           app:layout_constraintTop_toBottomOf="@id/movieDetailReleaseDate" />
-      
+
       <ImageView
           android:id="@+id/movieDetailRatingIcon"
           android:layout_width="20dp"
@@ -145,7 +151,7 @@
           app:layout_constraintStart_toEndOf="@id/movieDetailRatingVoteAverage"
           app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage"
           tools:ignore="ContentDescription" />
-      
+
       <TextView
           android:id="@+id/movieDetailRatingVoteCount"
           android:layout_width="wrap_content"
@@ -156,21 +162,34 @@
           android:textSize="16sp"
           app:layout_constraintStart_toEndOf="@id/movieDetailRatingIcon"
           app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage" />
-      
+
       <ImageView
-          android:id="@+id/movieDetailFbImg"
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          android:layout_marginTop="16dp"
+          android:id="@+id/movieDetailLinkImg"
+          android:layout_width="33dp"
+          android:layout_height="33dp"
           android:importantForAccessibility="no"
-          android:src="@mipmap/fb_icon"
+          android:src="@drawable/link_icon"
           android:text="@string/status_released"
           android:textColor="@color/white"
           android:textSize="16sp"
           app:layout_constraintBottom_toBottomOf="@id/movieDetailImgLayout"
           app:layout_constraintStart_toStartOf="@id/movieDetailTitle"
           app:layout_constraintTop_toBottomOf="@id/movieDetailRatingVoteAverage" />
-      
+
+      <ImageView
+          android:id="@+id/movieDetailFbImg"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/fb_icon"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailLinkImg"
+          app:layout_constraintEnd_toStartOf="@id/movieDetailIgImg"
+          app:layout_constraintStart_toEndOf="@id/movieDetailLinkImg"
+          app:layout_constraintTop_toTopOf="@id/movieDetailLinkImg" />
+
       <ImageView
           android:id="@+id/movieDetailIgImg"
           android:layout_width="40dp"
@@ -180,10 +199,11 @@
           android:text="@string/status_released"
           android:textColor="@color/white"
           android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailFbImg"
           app:layout_constraintEnd_toStartOf="@id/movieDetailTwitterImg"
           app:layout_constraintStart_toEndOf="@id/movieDetailFbImg"
           app:layout_constraintTop_toTopOf="@id/movieDetailFbImg" />
-      
+
       <ImageView
           android:id="@+id/movieDetailTwitterImg"
           android:layout_width="40dp"
@@ -193,22 +213,13 @@
           android:text="@string/status_released"
           android:textColor="@color/white"
           android:textSize="16sp"
-          app:layout_constraintEnd_toStartOf="@id/movieDetailAddToFavoriteBtn"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailIgImg"
+          app:layout_constraintEnd_toEndOf="@id/movieDetailTitle"
           app:layout_constraintStart_toEndOf="@id/movieDetailIgImg"
           app:layout_constraintTop_toTopOf="@id/movieDetailIgImg" />
-      
-      <ImageView
-          android:id="@+id/movieDetailAddToFavoriteBtn"
-          android:layout_width="40dp"
-          android:layout_height="40dp"
-          android:importantForAccessibility="no"
-          android:src="@drawable/white_favorite_icon"
-          app:layout_constraintEnd_toEndOf="@id/movieDetailTitle"
-          app:layout_constraintStart_toEndOf="@id/movieDetailTwitterImg"
-          app:layout_constraintTop_toTopOf="@id/movieDetailFbImg" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
-  
+
   <com.google.android.material.tabs.TabLayout
       android:id="@+id/tabLayout"
       android:layout_width="match_parent"
@@ -219,12 +230,12 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/movieDetailTopLayout"
       app:tabGravity="center"
-      app:tabMode="scrollable"
       app:tabIndicatorColor="@color/red"
+      app:tabMode="scrollable"
       app:tabSelectedTextAppearance="@android:style/TextAppearance.Material.Large"
       app:tabTextAppearance="@android:style/TextAppearance.Material.Small"
       app:tabTextColor="@color/white" />
-  
+
   <androidx.viewpager2.widget.ViewPager2
       android:id="@+id/movieDetailViewPager"
       android:layout_width="match_parent"
@@ -234,7 +245,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@id/tabLayout" />
-  
+
   <ProgressBar
       android:id="@+id/progressBar"
       android:layout_width="wrap_content"
