@@ -16,6 +16,7 @@ import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
+import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,31 +24,40 @@ import dagger.hilt.android.AndroidEntryPoint
 class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
   FragmentMovieListBinding::inflate
 ) {
-  
+
   private val viewModel: NowPlayingViewModel by viewModels()
-  
+
   private val movieListAdapter: MovieListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListVerticalAdapter()
   }
-  
+
   private val pageNumbersAdapter: MovieListPageNumbersAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListPageNumbersAdapter()
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
     binding.movieListTitle.text = getString(R.string.now_playing)
     setUpNavigation()
-    setUpRecyclerView()
+    setUpRecyclerView(
+      binding.movieListRecyclerView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+      movieListAdapter,
+    )
+    setUpRecyclerView(
+      binding.movieListBottomPageNumbersRecyclerView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      pageNumbersAdapter,
+    )
     bindViewModel()
     handleLoadNextPage()
     handleSortingMovies()
   }
-  
+
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
-    
+
     movieListAdapter.onItemClickListener = { it: MovieItemModel ->
       findNavController().navigate(
         NowPlayingFragmentDirections.actionNowPlayingFragmentToMovieDetailFragment(
@@ -56,29 +66,11 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
       )
     }
   }
-  
-  private fun setUpRecyclerView() {
-    binding.movieListRecyclerView.apply {
-      setHasFixedSize(true)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.VERTICAL, false
-      )
-      adapter = this@NowPlayingFragment.movieListAdapter
-    }
-    
-    binding.movieListBottomPageNumbersRecyclerView.apply {
-      setHasFixedSize(true)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.HORIZONTAL, false
-      )
-      adapter = this@NowPlayingFragment.pageNumbersAdapter
-    }
-  }
-  
+
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
-  
+
   private fun renderUi(state: MovieListUiState) {
     when (state) {
       MovieListUiState.Loading -> {
@@ -88,7 +80,7 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
         }
         movieListAdapter.submitList(emptyList())
       }
-      
+
       is MovieListUiState.Error -> {
         binding.apply {
           movieListProgressBar.visible()
@@ -96,7 +88,7 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
         }
         movieListAdapter.submitList(emptyList())
       }
-      
+
       is MovieListUiState.Success -> {
         binding.apply {
           movieListProgressBar.gone()
@@ -108,13 +100,13 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
       }
     }
   }
-  
+
   private fun handleLoadNextPage() {
     pageNumbersAdapter.setOnItemClickListener { it: Int ->
       viewModel.loadPage(it)
     }
   }
-  
+
   private fun handleSortingMovies() {
     binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
       when (it.itemId) {
@@ -122,27 +114,27 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
           viewModel.sortItems(MovieListUiState.SortType.TITLE_ASC)
           true
         }
-        
+
         R.id.titleDsc -> {
           viewModel.sortItems(MovieListUiState.SortType.TITLE_DSC)
           true
         }
-        
+
         R.id.ratingAsc -> {
           viewModel.sortItems(MovieListUiState.SortType.RATING_ASC)
           true
         }
-        
+
         R.id.ratingDsc -> {
           viewModel.sortItems(MovieListUiState.SortType.RATING_DSC)
           true
         }
-        
+
         else -> false
       }
     }
   }
-  
+
   override fun onDestroyView() {
     binding.movieListRecyclerView.adapter = null
     super.onDestroyView()

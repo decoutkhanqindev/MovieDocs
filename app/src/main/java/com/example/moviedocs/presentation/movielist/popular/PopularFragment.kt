@@ -16,6 +16,7 @@ import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
+import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +40,16 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(
     
     binding.movieListTitle.text = getString(R.string.popular)
     setUpNavigation()
-    setUpRecyclerView()
+    setUpRecyclerView(
+      binding.movieListRecyclerView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+      movieListAdapter,
+    )
+    setUpRecyclerView(
+      binding.movieListBottomPageNumbersRecyclerView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      pageNumbersAdapter,
+    )
     bindViewModel()
     handleLoadNextPage()
     handleSortingMovies()
@@ -56,25 +66,7 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(
       )
     }
   }
-  
-  private fun setUpRecyclerView() {
-    binding.movieListRecyclerView.apply {
-      setHasFixedSize(true)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.VERTICAL, false
-      )
-      adapter = this@PopularFragment.movieListAdapter
-    }
-    
-    binding.movieListBottomPageNumbersRecyclerView.apply {
-      setHasFixedSize(true)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.HORIZONTAL, false
-      )
-      adapter = this@PopularFragment.pageNumbersAdapter
-    }
-  }
-  
+
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }

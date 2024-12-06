@@ -16,6 +16,7 @@ import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
+import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +40,16 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
     
     binding.movieListTitle.text = getString(R.string.top_rated)
     setUpNavigation()
-    setUpRecyclerView()
+    setUpRecyclerView(
+      binding.movieListRecyclerView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+      movieListAdapter,
+    )
+    setUpRecyclerView(
+      binding.movieListBottomPageNumbersRecyclerView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      pageNumbersAdapter,
+    )
     bindViewModel()
     handleLoadNextPage()
     handleSortingMovies()
@@ -54,24 +64,6 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
           movieId = it.id
         )
       )
-    }
-  }
-  
-  private fun setUpRecyclerView() {
-    binding.movieListRecyclerView.apply {
-      setHasFixedSize(true)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.VERTICAL, false
-      )
-      adapter = this@TopRatedFragment.movieListAdapter
-    }
-    
-    binding.movieListBottomPageNumbersRecyclerView.apply {
-      setHasFixedSize(true)
-      layoutManager = LinearLayoutManager(
-        requireContext(), LinearLayoutManager.HORIZONTAL, false
-      )
-      adapter = this@TopRatedFragment.pageNumbersAdapter
     }
   }
   
