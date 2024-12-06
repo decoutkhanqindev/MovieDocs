@@ -6,6 +6,6 @@ import com.example.moviedocs.domain.model.moviedetail.country.CountryItemModel
 fun CountryItemResponse.toCountryItemModel(): CountryItemModel =
   CountryItemModel(
     iso31661 = iso31661,
-    englishName = englishName,
-    nativeName = nativeName,
+    englishName = englishName ?: "No english name",
+    nativeName = nativeName ?: "No native name",
   )

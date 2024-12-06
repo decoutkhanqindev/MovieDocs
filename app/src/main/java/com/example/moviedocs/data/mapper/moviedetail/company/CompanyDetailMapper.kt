@@ -6,11 +6,11 @@ import com.example.moviedocs.domain.model.moviedetail.company.CompanyDetailModel
 fun CompanyDetailResponse.toCompanyDetailModel(): CompanyDetailModel =
   CompanyDetailModel(
     id = id,
-    description = description ?: "No Description",
-    headquarters = headquarters ?: "No Headquarters",
-    homepage = homepage ?: "No Homepage",
-    logoPath = logoPath ?: "No Logo",
-    name = name ?: "No Name",
-    originCountry = originCountry ?: "No Origin Country",
-    parentCompany = parentCompany ?: "No Parent Company"
+    description = if (description.equals("")) "No description" else description.toString(),
+    headquarters = headquarters ?: "No headquarters",
+    homepage = homepage ?: "No homepage",
+    logoPath = logoPath ?: "No logo",
+    name = name ?: "No name",
+    originCountry = originCountry ?: "No origin country",
+    parentCompany = parentCompany?: "No parent company"
   )

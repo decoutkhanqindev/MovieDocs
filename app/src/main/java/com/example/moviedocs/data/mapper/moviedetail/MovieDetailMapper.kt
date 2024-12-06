@@ -14,7 +14,7 @@ fun MovieDetailResponse.toMovieDetailModel(): MovieDetailModel =
     runtime = runtime ?: 0,
     voteAverage = voteAverage ?: 0.0,
     voteCount = voteCount ?: 0,
-    overview = overview ?: "No overview found",
+    overview = if(overview.equals("")) "No overview" else overview.toString(),
     genres = genres?.map { it.toGenreItemModel() } ?: emptyList(),
     status = status ?: "No status found",
     originCountry = originCountry ?: emptyList(),
@@ -22,4 +22,5 @@ fun MovieDetailResponse.toMovieDetailModel(): MovieDetailModel =
     budget = budget ?: 0,
     revenue = revenue ?: 0,
     productionCompanies = productionCompanies?.map { it.toCompanyItemModel() } ?: emptyList(),
+    homepage = homepage ?: "No homepage found",
   )
