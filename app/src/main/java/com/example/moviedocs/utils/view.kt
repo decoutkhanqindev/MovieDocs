@@ -9,6 +9,7 @@ import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.moviedocs.R
@@ -85,4 +86,16 @@ fun View.gone() {
 
 fun View.invisible() {
   if (visibility != View.INVISIBLE) visibility = View.INVISIBLE
+}
+
+fun setUpRecyclerView(
+  mRecyclerView: RecyclerView,
+  mLayoutManager: RecyclerView.LayoutManager,
+  mAdapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
+) {
+  mRecyclerView.apply {
+    setHasFixedSize(false)
+    layoutManager = mLayoutManager
+    adapter = mAdapter
+  }
 }
