@@ -63,4 +63,14 @@
   <string name="us">US</string>
   <string name="movie_detail">Movie Detail</string>
   <string name="company_detail">Company Detail</string>
+  <string name="homepage_title">Homepage:</string>
+  <string name="homepage_url">www.abc.com</string>
+  <string name="company_name_title">Company Name:</string>
+  <string name="headquarter_title">Headquarter:</string>
+  <string name="headquarter_value">Barcelona, Catalonia</string>
+  <string name="description_title">Description:</string>
+  <string name="no_description_value">No description</string>
+  <string name="parent_company_title">Parent Company:</string>
+  <string name="no_parent_company_value">No parent company</string>
+  <string name="movie_list_title">Movie List:</string>
 </resources>

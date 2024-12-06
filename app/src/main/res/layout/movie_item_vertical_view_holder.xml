@@ -6,10 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginEnd="8dp"
-    android:layout_marginBottom="16dp">
-  
+    android:layout_marginEnd="8dp">
+
   <com.google.android.material.card.MaterialCardView
       android:id="@+id/movieItemDescriptionLayout"
       android:layout_width="match_parent"
@@ -21,15 +19,15 @@
       app:layout_constraintStart_toStartOf="parent"
       app:strokeColor="@color/main_color"
       app:strokeWidth="4dp">
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center">
-      
+
       <TextView
           android:id="@+id/movieItemTitle"
-          android:layout_width="200dp"
+          android:layout_width="220dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="140dp"
           android:layout_marginTop="8dp"
@@ -39,9 +37,10 @@
           android:textColor="@color/white"
           android:textSize="20sp"
           android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
-      
+
       <TextView
           android:id="@+id/movieItemRatingVoteAverage"
           android:layout_width="0dp"
@@ -54,7 +53,7 @@
           android:textSize="16sp"
           app:layout_constraintStart_toStartOf="@id/movieItemTitle"
           app:layout_constraintTop_toBottomOf="@id/movieItemTitle" />
-      
+
       <ImageView
           android:id="@+id/movieItemRatingIcon"
           android:layout_width="20dp"
@@ -66,7 +65,7 @@
           app:layout_constraintStart_toEndOf="@id/movieItemRatingVoteAverage"
           app:layout_constraintTop_toTopOf="@id/movieItemRatingVoteAverage"
           tools:ignore="ContentDescription" />
-      
+
       <TextView
           android:id="@+id/movieItemRatingOverView"
           android:layout_width="0dp"
@@ -84,20 +83,21 @@
           app:layout_constraintTop_toBottomOf="@id/movieItemRatingVoteAverage" />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </com.google.android.material.card.MaterialCardView>
-  
+
   <com.google.android.material.card.MaterialCardView
       android:id="@+id/movieItemImgLayout"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="20dp"
+      android:layout_marginStart="8dp"
       android:layout_marginBottom="100dp"
       app:cardCornerRadius="8dp"
       app:cardElevation="16dp"
+      app:cardUseCompatPadding="true"
       app:layout_constraintBottom_toBottomOf="@id/movieItemDescriptionLayout"
       app:layout_constraintStart_toStartOf="@id/movieItemDescriptionLayout"
       app:layout_constraintTop_toTopOf="@id/movieItemDescriptionLayout"
       app:strokeColor="@android:color/transparent">
-    
+
     <ImageView
         android:id="@+id/movieItemImg"
         android:layout_width="100dp"
@@ -106,7 +106,7 @@
         tools:ignore="ContentDescription"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
   </com.google.android.material.card.MaterialCardView>
-  
+
   <TextView
       android:id="@+id/movieItemRatingReleaseDate"
       android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
       android:textColor="@color/white"
       android:textSize="16sp"
       android:textStyle="italic"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="@id/movieItemImgLayout"
-      app:layout_constraintStart_toStartOf="@id/movieItemImgLayout"
-      app:layout_constraintTop_toBottomOf="@id/movieItemImgLayout" />
+      app:layout_constraintStart_toStartOf="@id/movieItemImgLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
