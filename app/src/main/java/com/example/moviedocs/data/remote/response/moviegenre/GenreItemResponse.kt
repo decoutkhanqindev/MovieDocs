@@ -8,5 +8,5 @@ data class GenreItemResponse(
   @Json(name = "id")
   val id: Int, // 28
   @Json(name = "name")
-  val name: String, // Action
+  val name: String?, // Action
 )

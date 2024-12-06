@@ -6,6 +6,6 @@ import com.squareup.moshi.Json
 @Keep
 data class GenreListResponse(
   @Json(name = "genres")
-  val genres: List<GenreItemResponse>,
+  val genres: List<GenreItemResponse>?,
 )
 

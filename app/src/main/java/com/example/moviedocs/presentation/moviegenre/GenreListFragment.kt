@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentGenreListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
+import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,39 +22,33 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
   companion object {
     fun newInstance(): GenreListFragment = GenreListFragment()
   }
-  
+
   private val viewModel: GenreListViewModel by viewModels()
-  
+
   private val adapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
     GenreListAdapter()
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
     setUpNavigation()
-    setUpRecyclerView()
+    setUpRecyclerView(
+      binding.genreRecycleView,
+      GridLayoutManager(requireContext(), 3, LinearLayoutManager.VERTICAL, false),
+      adapter
+    )
     bindViewModel()
   }
-  
+
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
   }
-  
-  private fun setUpRecyclerView() {
-    binding.genreRecycleView.apply {
-      setHasFixedSize(true)
-      layoutManager = GridLayoutManager(
-        requireContext(), 3
-      )
-      adapter = this@GenreListFragment.adapter
-    }
-  }
-  
+
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
-  
+
   private fun renderUi(state: GenreListUiState) {
     when (state) {
       GenreListUiState.Loading -> {
@@ -62,7 +58,7 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
         }
         adapter.submitList(emptyList())
       }
-      
+
       is GenreListUiState.Error -> {
         binding.apply {
           genreListProgressBar.visible()
@@ -70,7 +66,7 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
         }
         adapter.submitList(emptyList())
       }
-      
+
       is GenreListUiState.Success -> {
         binding.apply {
           genreListProgressBar.gone()

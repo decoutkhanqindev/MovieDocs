@@ -30,6 +30,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
     private const val TWITTER_URL: String = "https://www.twitter.com/"
   }
 
+  private lateinit var homepage: String
   private lateinit var fbId: String
   private lateinit var igId: String
   private lateinit var twId: String
@@ -37,9 +38,9 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   private val args: MovieDetailFragmentArgs by navArgs()
 
   private val viewModel: MovieDetailViewModel by activityViewModels()
-  
+
   private lateinit var viewPagerAdapter: MovieDetailViewPagerAdapter
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -50,10 +51,14 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
     bindViewModel()
   }
 
-
   private fun setUpNavigation() {
     binding.apply {
       backBtn.navigateBack()
+      movieDetailLinkImg.setOnClickListener {
+        val url: String = homepage
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+      }
       movieDetailFbImg.setOnClickListener { openSocialMedia(FB_URL, fbId) }
       movieDetailIgImg.setOnClickListener { openSocialMedia(IG_URL, igId) }
       movieDetailTwitterImg.setOnClickListener { openSocialMedia(TWITTER_URL, twId) }
@@ -65,7 +70,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
     startActivity(intent)
   }
-  
+
   private fun setUpTabLayout() {
     binding.movieDetailViewPager.apply {
       if (adapter == null) {
@@ -81,11 +86,11 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
       }.attach()
     }
   }
-  
+
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
-  
+
   @SuppressLint("SetTextI18n")
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
@@ -97,26 +102,27 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           movieDetailViewPager.invisible()
         }
       }
-      
+
       is MovieDetailUiState.Success -> {
         binding.apply {
           progressBar.invisible()
           movieDetailTopLayout.visible()
           tabLayout.visible()
           movieDetailViewPager.visible()
-          
+
           movieDetailImg.loadImgFromUrl(state.movieDetail.posterPath)
           movieDetailTitle.text = state.movieDetail.title
           movieDetailReleaseDate.text = state.movieDetail.releaseDate
           movieDetailRuntime.text = state.movieDetail.runtime.convertMinutesToHoursAndMinutes()
           movieDetailRatingVoteAverage.text = "%.1f".format(state.movieDetail.voteAverage)
           movieDetailRatingVoteCount.text = "${state.movieDetail.voteCount}"
+          homepage = state.movieDetail.homepage
           fbId = state.externalIds.facebookId
           igId = state.externalIds.instagramId
           twId = state.externalIds.twitterId
         }
       }
-      
+
       is MovieDetailUiState.Error -> {
         binding.apply {
           progressBar.visible()

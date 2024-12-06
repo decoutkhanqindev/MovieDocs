@@ -8,7 +8,7 @@ data class CountryItemResponse(
   @Json(name = "iso_3166_1")
   val iso31661: String, // AD
   @Json(name = "english_name")
-  val englishName: String, // Andorra
+  val englishName: String? , // Andorra
   @Json(name = "native_name")
-  val nativeName: String, // Andorra
+  val nativeName: String?, // Andorra
 )

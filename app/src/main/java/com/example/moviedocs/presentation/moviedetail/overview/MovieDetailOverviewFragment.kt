@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
@@ -16,6 +15,7 @@ import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
+import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.toCountryName
 import com.example.moviedocs.utils.toLanguageName
 import com.example.moviedocs.utils.visible
@@ -30,21 +30,29 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   }
 
   private val viewModel: MovieDetailViewModel by activityViewModels()
-  
+
   private val genreListAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
     GenreListAdapter()
   }
-  
+
   private val companyListAdapter: CompanyListAdapter by lazy(LazyThreadSafetyMode.NONE) {
     CompanyListAdapter()
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
     setUpNavigation()
-    setUpRecyclerView(binding.genreRecycleView, genreListAdapter)
-    setUpRecyclerView(binding.companyRecycleView, companyListAdapter)
+    setUpRecyclerView(
+      binding.genreRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      genreListAdapter,
+    )
+    setUpRecyclerView(
+      binding.companyRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      companyListAdapter,
+    )
     bindViewModel()
   }
 
@@ -58,23 +66,10 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     }
   }
 
-  private fun setUpRecyclerView(
-    recyclerView: RecyclerView,
-    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
-  ) {
-     recyclerView.apply {
-       setHasFixedSize(false)
-       layoutManager = LinearLayoutManager(
-         requireContext(), LinearLayoutManager.HORIZONTAL, false
-       )
-       this.adapter = adapter
-     }
-  }
-  
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
-  
+
   @SuppressLint("SetTextI18n")
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
@@ -87,7 +82,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
           movieDetailCountryLayout.invisible()
         }
       }
-      
+
       is MovieDetailUiState.Success -> {
         binding.apply {
           movieDetailOverview.visible()
@@ -95,7 +90,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
           movieDetailStatusLayout.visible()
           movieDetailLanguageLayout.visible()
           movieDetailCountryLayout.visible()
-          
+
           movieDetailOverview.text = state.movieDetail.overview
           genreListAdapter.submitList(state.movieDetail.genres)
           statusValue.text = state.movieDetail.status
@@ -108,7 +103,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
           companyListAdapter.submitList(state.movieDetail.productionCompanies)
         }
       }
-      
+
       is MovieDetailUiState.Error -> {
         binding.apply {
           movieDetailOverview.invisible()
@@ -120,7 +115,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
       }
     }
   }
-  
+
   override fun onDestroyView() {
     binding.apply {
       genreRecycleView.adapter = null

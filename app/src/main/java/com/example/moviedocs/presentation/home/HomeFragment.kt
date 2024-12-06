@@ -21,21 +21,22 @@ import com.example.moviedocs.presentation.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateTo
+import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
-  
+
   companion object {
     fun newInstance(): HomeFragment = HomeFragment()
   }
-  
+
   private val viewModel: HomeViewModel by viewModels()
-  
+
   private lateinit var viewPager: ViewPager2
-  
+
   // Handler is used for scheduling tasks and delivering messages or Runnables to be executed on
   // specific thread (usually the main thread)
   // - It's associated with a thread's message queue (Looper).
@@ -45,7 +46,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   private val sliderHandler: Handler by lazy(LazyThreadSafetyMode.NONE) {
     Handler(Looper.getMainLooper())
   }
-  
+
   // Runnable represents a task or a unit of work that can be executed with run()
   // - You create a Runnable object and define the task within its run() method.
   // - You can then pass this Runnable to a Handler to be executed on a specific thread.
@@ -54,47 +55,67 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   private val sliderRunnable: Runnable by lazy(LazyThreadSafetyMode.NONE) {
     Runnable { viewPager.currentItem += 1 }
   }
-  
+
   // ==> This Handler and Runnable are used for auto-scrolling functionality in ViewPager2.
   // The sliderHandler posts a delayed sliderRunnable that transfer the viewPager to the next item.
-  
+
   private val sliderViewPagerAdapter: SliderViewPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
     SliderViewPagerAdapter(viewPager = viewPager)
   }
-  
+
   private val genreAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
     GenreListAdapter()
   }
-  
+
   private val nowPlayingAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListHorizontalAdapter()
   }
-  
+
   private val popularAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListHorizontalAdapter()
   }
-  
+
   private val upComingAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListHorizontalAdapter()
   }
-  
+
   private val topRatedAdapter: MovieListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListHorizontalAdapter()
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
     setUpNavigation()
     setUpSliderImg()
-    setUpRecyclerView(binding.genreRecycleView, genreAdapter)
-    setUpRecyclerView(binding.nowPlayingRecycleView, nowPlayingAdapter)
-    setUpRecyclerView(binding.popularRecycleView, popularAdapter)
-    setUpRecyclerView(binding.upcomingRecycleView, upComingAdapter)
-    setUpRecyclerView(binding.topRatedRecycleView, topRatedAdapter)
+    setUpRecyclerView(
+      binding.genreRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      genreAdapter
+    )
+    setUpRecyclerView(
+      binding.nowPlayingRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      nowPlayingAdapter
+    )
+    setUpRecyclerView(
+      binding.popularRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      popularAdapter,
+    )
+    setUpRecyclerView(
+      binding.upcomingRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      upComingAdapter
+    )
+    setUpRecyclerView(
+      binding.topRatedRecycleView,
+      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      topRatedAdapter,
+    )
     bindViewModel()
   }
-  
+
   private fun setUpNavigation() {
     binding.apply {
       searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
@@ -104,24 +125,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
       genreMoreBtn.navigateTo(R.id.action_homeFragment_to_genreListFragment)
     }
-    
+
     nowPlayingAdapter.onItemClickListener = { it: MovieItemModel ->
-      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+      findNavController().navigate(
+        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+          movieId = it.id
+        )
+      )
     }
-    
+
     popularAdapter.onItemClickListener = { it: MovieItemModel ->
-      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+      findNavController().navigate(
+        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+          movieId = it.id
+        )
+      )
     }
-    
+
     upComingAdapter.onItemClickListener = { it: MovieItemModel ->
-      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+      findNavController().navigate(
+        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+          movieId = it.id
+        )
+      )
     }
-    
+
     topRatedAdapter.onItemClickListener = { it: MovieItemModel ->
-      findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(movieId = it.id))
+      findNavController().navigate(
+        HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
+          movieId = it.id
+        )
+      )
     }
   }
-  
+
   private fun setUpSliderImg() {
     viewPager = binding.sliderViewPager
     viewPager.apply {
@@ -132,14 +169,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       clipToPadding = false
       // This disables clipping of child views to the bounds of the ViewPager2.
       clipChildren = false
-      
+
       // This line accesses the first child of the ViewPager2 (which is typically a RecyclerView)
       // and sets its over-scroll mode to OVER_SCROLL_NEVER.
       getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
     }
     setUpSliderTransformer()
   }
-  
+
   private fun setUpSliderTransformer() {
     // CompositePageTransformer is created to combine multiple page transformation effects. This allows you
     // to apply multiple transformations to the pages of the ViewPager2.
@@ -147,7 +184,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     transformer.apply {
       // This transformer adds a margin between pages
       addTransformer(MarginPageTransformer(10))
-      
+
       //  This transformer modifies the scale of the pages based on their position. The position parameter
       //  represents the page's position relative to the center of the screen. The code calculates
       //  a scale factor (scaleY) that ranges from 0.85 to 1.0, creating a zoom-in effect as the
@@ -157,20 +194,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         page.scaleY = 0.85f + r * 0.15f
       }
     }
-    
+
     viewPager.apply {
       setPageTransformer(transformer)
       currentItem = 0
-      
+
       // A page change callback is registered to listen for page selection events. This callback is
       // triggered whenever the current page of the ViewPager2 changes.
       registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
           super.onPageSelected(position)
-          
+
           sliderHandler.removeCallbacks(sliderRunnable)
           sliderHandler.postDelayed(sliderRunnable, 2000)
-          
+
           // This method is called when a new page is selected by user. It removes any pending callbacks for
           // the sliderRunnable (likely a runnable for auto-scrolling) and then posts a delayed execution
           // of the sliderRunnable with a delay of 2000 milliseconds (2 seconds). This likely restarts
@@ -179,34 +216,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       })
     }
   }
-  
+
   override fun onPause() {
     super.onPause()
     sliderHandler.removeCallbacks(sliderRunnable)
   }
-  
+
   override fun onResume() {
     super.onResume()
     sliderHandler.postDelayed(sliderRunnable, 2000)
   }
-  
-  private fun setUpRecyclerView(
-    recyclerView: RecyclerView,
-    adapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>,
-  ) {
-    recyclerView.apply {
-      setHasFixedSize(false)
-      layoutManager = LinearLayoutManager(
-        context, LinearLayoutManager.HORIZONTAL, false
-      )
-      this.adapter = adapter
-    }
-  }
-  
+
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
-  
+
   private fun renderUi(state: HomeUiState) {
     when (state) {
       HomeUiState.Loading -> {
@@ -221,7 +245,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         upComingAdapter.submitList(emptyList())
         topRatedAdapter.submitList(emptyList())
       }
-      
+
       is HomeUiState.Success -> {
         binding.apply {
           progressBar.invisible()
@@ -234,7 +258,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         upComingAdapter.submitList(state.upcoming)
         topRatedAdapter.submitList(state.topRated)
       }
-      
+
       is HomeUiState.Error -> {
         binding.apply {
           progressBar.visible()
@@ -246,12 +270,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         popularAdapter.submitList(emptyList())
         upComingAdapter.submitList(emptyList())
         topRatedAdapter.submitList(emptyList())
-        
+
         Toast.makeText(requireContext(), state.throwable.message, Toast.LENGTH_SHORT).show()
       }
     }
   }
-  
+
   override fun onDestroyView() {
     // avoid memory leak
     binding.apply {

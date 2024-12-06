@@ -19,4 +19,5 @@ data class MovieDetailModel(
   val budget: Int, // 2000000
   val revenue: Int, // 87261211
   val productionCompanies: List<CompanyItemModel>,
+  val homepage: String,
 )
