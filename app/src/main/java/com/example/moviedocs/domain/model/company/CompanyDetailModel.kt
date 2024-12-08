@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.model.moviedetail.company
+package com.example.moviedocs.domain.model.company
 
 data class CompanyDetailModel(
   val description: String,

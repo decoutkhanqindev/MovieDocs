@@ -1,6 +1,7 @@
-package com.example.moviedocs.data.remote.response.moviedetails.company
+package com.example.moviedocs.data.remote.response.company
 
 import androidx.annotation.Keep
+import com.example.moviedocs.data.remote.response.moviedetails.company.CompanyItemResponse
 import com.squareup.moshi.Json
 
 @Keep
@@ -20,5 +21,5 @@ data class CompanyDetailResponse(
   @Json(name = "origin_country")
   val originCountry: String?,
   @Json(name = "parent_company")
-  val parentCompany: String?
+  val parentCompany: CompanyItemResponse?
 )
