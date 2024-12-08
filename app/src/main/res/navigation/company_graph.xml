@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/company_graph"
+    app:startDestination="@id/companyDetailFragment">
+
+  <fragment
+      android:id="@+id/companyDetailFragment"
+      android:name="com.example.moviedocs.presentation.company.CompanyDetailFragment"
+      android:label="CompanyDetailFragment"
+      tools:layout="@layout/fragment_company_detail">
+    <argument
+        android:name="companyId"
+        android:defaultValue="0"
+        app:argType="integer" />
+    <action
+        android:id="@+id/action_companyDetailFragment_to_companyMovieListFragment"
+        app:destination="@id/companyMovieListFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="companyId"
+          android:defaultValue="0"
+          app:argType="integer" />
+      <argument
+          android:name="companyName"
+          android:defaultValue="No name"
+          app:argType="string" />
+    </action>
+    <action
+        android:id="@+id/action_companyDetailFragment_to_movieDetailFragment"
+        app:destination="@id/movie_detail_graph"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
+  </fragment>
+  <fragment
+      android:id="@+id/companyMovieListFragment"
+      android:name="com.example.moviedocs.presentation.company.CompanyMovieListFragment"
+      android:label="CompanyMovieListFragment"
+      tools:layout="@layout/fragment_movie_list">
+    <argument
+        android:name="companyId"
+        android:defaultValue="0"
+        app:argType="integer" />
+    <argument
+        android:name="companyName"
+        android:defaultValue="No name"
+        app:argType="string" />
+    <action
+        android:id="@+id/action_companyMovieListFragment_to_movieDetailFragment"
+        app:destination="@id/movie_detail_graph"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
+  </fragment>
+
+</navigation>
