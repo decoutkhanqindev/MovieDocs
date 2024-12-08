@@ -41,14 +41,14 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(
     binding.movieListTitle.text = getString(R.string.popular)
     setUpNavigation()
     setUpRecyclerView(
-      binding.movieListRecyclerView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
-      movieListAdapter,
+      mRecyclerView = binding.movieListRecyclerView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+      mAdapter = movieListAdapter,
     )
     setUpRecyclerView(
-      binding.movieListBottomPageNumbersRecyclerView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      pageNumbersAdapter,
+      mRecyclerView = binding.movieListBottomPageNumbersRecyclerView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = pageNumbersAdapter,
     )
     bindViewModel()
     handleLoadNextPage()
