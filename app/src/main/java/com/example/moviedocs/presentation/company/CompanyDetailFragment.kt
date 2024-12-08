@@ -48,9 +48,9 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
     viewModel.getCompanyMoveList(page = 1, companyId = args.companyId)
     setUpNavigation()
     setUpRecyclerView(
-      binding.movieListRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      movieListAdapter
+      mRecyclerView = binding.movieListRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = movieListAdapter
     )
     bindViewModel()
   }
