@@ -32,8 +32,13 @@ fun String.toCountryName(countryList: List<CountryItemModel>): String {
 }
 
 fun Int.convertMinutesToHoursAndMinutes(): String {
-  val minutes = this
-  val hours = minutes / 60
-  val remainingMinutes = minutes % 60
+  val minutes: Int = this
+  val hours: Int = minutes / 60
+  val remainingMinutes: Int = minutes % 60
   return "${hours}h ${remainingMinutes}m"
+}
+
+fun Int.formatTotalResult(): String {
+  val totalResult: Int = this
+  return "($totalResult):"
 }
