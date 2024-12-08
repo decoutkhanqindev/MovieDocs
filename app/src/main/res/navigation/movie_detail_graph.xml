@@ -17,7 +17,7 @@
 
     <action
         android:id="@+id/action_movieDetailFragment_to_companyDetailFragment"
-        app:destination="@id/companyDetailFragment"
+        app:destination="@id/company_graph"
         app:enterAnim="@anim/to_right"
         app:exitAnim="@anim/to_right"
         app:popEnterAnim="@anim/from_right"
@@ -29,14 +29,5 @@
     </action>
   </fragment>
 
-  <fragment
-      android:id="@+id/companyDetailFragment"
-      android:name="com.example.moviedocs.presentation.moviedetail.overview.CompanyDetailFragment"
-      android:label="CompanyDetailFragment"
-      tools:layout="@layout/fragment_company_detail">
-    <argument
-        android:name="companyId"
-        android:defaultValue="0"
-        app:argType="integer" />
-  </fragment>
+  <include app:graph="@navigation/company_graph" />
 </navigation>
