@@ -6,6 +6,6 @@ import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 fun CompanyItemResponse.toCompanyItemModel(): CompanyItemModel =
   CompanyItemModel(
     id = id,
-    logoPath = logoPath ?: "No logo available",
-    name = if(name.equals("")) "No name" else name.toString(),
+    logoPath = logoPath ?.takeIf { it.isNotEmpty() } ?: "No logo available",
+    name = name?.takeIf { it.isNotEmpty() } ?: "No name"
   )
