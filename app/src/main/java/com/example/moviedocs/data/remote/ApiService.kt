@@ -1,10 +1,10 @@
 package com.example.moviedocs.data.remote
 
-import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
 import com.example.moviedocs.data.remote.response.company.CompanyDetailResponse
-import com.example.moviedocs.data.remote.response.moviedetails.counttry.CountryItemResponse
+import com.example.moviedocs.data.remote.response.country.CountryItemResponse
+import com.example.moviedocs.data.remote.response.language.LanguageItemResponse
+import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
 import com.example.moviedocs.data.remote.response.moviedetails.external.ExternalIdsResponse
-import com.example.moviedocs.data.remote.response.moviedetails.language.LanguageItemResponse
 import com.example.moviedocs.data.remote.response.moviegenre.GenreListResponse
 import com.example.moviedocs.data.remote.response.movielist.MovieListResponse
 import retrofit2.http.GET
