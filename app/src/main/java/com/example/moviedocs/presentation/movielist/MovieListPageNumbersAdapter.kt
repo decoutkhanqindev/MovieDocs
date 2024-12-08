@@ -22,7 +22,7 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
   
   fun setCurrentPage(page: Int) {
     if (page >= 0 && page != selectedPosition) {
-      val oldPosition = selectedPosition
+      val oldPosition: Int = selectedPosition
       selectedPosition = page
       notifyItemChanged(oldPosition)
       notifyItemChanged(selectedPosition)
@@ -33,7 +33,7 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
     
     init {
       binding.root.setOnClickListener {
-        val position = bindingAdapterPosition
+        val position: Int = bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) {
           setCurrentPage(position)
           onItemClickListener?.invoke(getItem(position))

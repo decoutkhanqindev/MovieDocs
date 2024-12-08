@@ -1,9 +1,9 @@
 package com.example.moviedocs.presentation.moviedetail
 
+import com.example.moviedocs.domain.model.country.CountryItemModel
+import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.model.moviedetail.country.CountryItemModel
 import com.example.moviedocs.domain.model.moviedetail.external.ExternalIdsModel
-import com.example.moviedocs.domain.model.moviedetail.language.LanguageItemModel
 
 sealed interface MovieDetailUiState {
   data object Loading : MovieDetailUiState

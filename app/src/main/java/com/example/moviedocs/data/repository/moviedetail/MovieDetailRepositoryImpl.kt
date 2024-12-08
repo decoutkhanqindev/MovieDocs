@@ -1,20 +1,12 @@
 package com.example.moviedocs.data.repository.moviedetail
 
-import com.example.moviedocs.data.mapper.moviedetail.company.toCompanyDetailModel
-import com.example.moviedocs.data.mapper.moviedetail.country.toCountryItemModel
 import com.example.moviedocs.data.mapper.moviedetail.external.toExternalIdsModel
-import com.example.moviedocs.data.mapper.moviedetail.language.toLanguageItemModel
 import com.example.moviedocs.data.mapper.moviedetail.toMovieDetailModel
-import com.example.moviedocs.data.mapper.movielist.toMovieListModel
 import com.example.moviedocs.data.remote.ApiService
 import com.example.moviedocs.di.AppDispatcher
 import com.example.moviedocs.di.DispatcherType
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.model.moviedetail.company.CompanyDetailModel
-import com.example.moviedocs.domain.model.moviedetail.country.CountryItemModel
 import com.example.moviedocs.domain.model.moviedetail.external.ExternalIdsModel
-import com.example.moviedocs.domain.model.moviedetail.language.LanguageItemModel
-import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.repository.moviedetail.MovieDetailRepository
 import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher
@@ -34,25 +26,5 @@ class MovieDetailRepositoryImpl @Inject constructor(
   override suspend fun getExternalIds(movieId: Int): Result<ExternalIdsModel> =
     runSuspendCatching(ioDispatcher) {
       apiService.getExternalIds(movieId = movieId).toExternalIdsModel()
-    }
-
-  override suspend fun getCountryList(): Result<List<CountryItemModel>> =
-    runSuspendCatching(ioDispatcher) {
-      apiService.getCountryList().map { it.toCountryItemModel() }
-    }
-
-  override suspend fun getLanguageList(): Result<List<LanguageItemModel>> =
-    runSuspendCatching(ioDispatcher) {
-      apiService.getLanguageList().map { it.toLanguageItemModel() }
-    }
-
-  override suspend fun getCompanyDetail(companyId: Int): Result<CompanyDetailModel> =
-    runSuspendCatching(ioDispatcher) {
-      apiService.getCompanyDetail(companyId = companyId).toCompanyDetailModel()
-    }
-
-  override suspend fun getCompanyMovieList(page: Int, companyId: Int): Result<MovieListModel> =
-    runSuspendCatching(ioDispatcher) {
-      apiService.getCompanyMovieList(page = page, companyId = companyId).toMovieListModel()
     }
 }

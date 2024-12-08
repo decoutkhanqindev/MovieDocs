@@ -32,10 +32,10 @@ class HomeViewModel @Inject constructor(
   val uiState: StateFlow<HomeUiState> get() = _uiState.asStateFlow()
 
   init {
-    getData()
+    loadData()
   }
 
-  private fun getData() {
+  private fun loadData() {
     viewModelScope.launch {
       _uiState.value = HomeUiState.Loading
 

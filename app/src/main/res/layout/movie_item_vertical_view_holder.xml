@@ -92,6 +92,7 @@
       android:layout_marginBottom="100dp"
       app:cardCornerRadius="8dp"
       app:cardElevation="16dp"
+      android:background="@color/main_color2"
       app:cardUseCompatPadding="true"
       app:layout_constraintBottom_toBottomOf="@id/movieItemDescriptionLayout"
       app:layout_constraintStart_toStartOf="@id/movieItemDescriptionLayout"

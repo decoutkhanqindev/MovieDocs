@@ -9,7 +9,7 @@ import com.squareup.moshi.Json
 @Keep
 data class MovieDetailResponse(
     @Json(name = "adult")
-    val adult: Boolean, // false
+    val adult: Boolean?, // false
     @Json(name = "backdrop_path")
     val backdropPath: String?, // /18TSJF1WLA4CkymvVUcKDBwUJ9F.jpg
 //    @Json(name = "belongs_to_collection")

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentMovieDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.convertMinutesToHoursAndMinutes
+import com.example.moviedocs.utils.formatTimestamp
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.loadImgFromUrl
@@ -45,7 +46,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
     super.onViewCreated(view, savedInstanceState)
 
     viewPagerAdapter = MovieDetailViewPagerAdapter(fragment = this)
-    viewModel.getMovieDetail(movieId = args.movieId)
+    viewModel.loadMovieDetail(movieId = args.movieId)
     setUpNavigation()
     setUpTabLayout()
     bindViewModel()
@@ -112,7 +113,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
 
           movieDetailImg.loadImgFromUrl(state.movieDetail.posterPath)
           movieDetailTitle.text = state.movieDetail.title
-          movieDetailReleaseDate.text = state.movieDetail.releaseDate
+          movieDetailReleaseDate.text = state.movieDetail.releaseDate.formatTimestamp()
           movieDetailRuntime.text = state.movieDetail.runtime.convertMinutesToHoursAndMinutes()
           movieDetailRatingVoteAverage.text = "%.1f".format(state.movieDetail.voteAverage)
           movieDetailRatingVoteCount.text = "${state.movieDetail.voteCount}"

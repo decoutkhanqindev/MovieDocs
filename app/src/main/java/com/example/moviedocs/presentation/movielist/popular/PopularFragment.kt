@@ -13,7 +13,7 @@ import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.MovieListPageNumbersAdapter
 import com.example.moviedocs.presentation.movielist.MovieListUiState
 import com.example.moviedocs.presentation.movielist.MovieListVerticalAdapter
-import com.example.moviedocs.utils.gone
+import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
 import com.example.moviedocs.utils.setUpRecyclerView
@@ -76,7 +76,7 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(
       MovieListUiState.Loading -> {
         binding.apply {
           movieListProgressBar.visible()
-          movieListRecyclerView.gone()
+          movieListRecyclerView.invisible()
         }
         movieListAdapter.submitList(emptyList())
       }
@@ -84,14 +84,14 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(
       is MovieListUiState.Error -> {
         binding.apply {
           movieListProgressBar.visible()
-          movieListRecyclerView.gone()
+          movieListRecyclerView.invisible()
         }
         movieListAdapter.submitList(emptyList())
       }
       
       is MovieListUiState.Success -> {
         binding.apply {
-          movieListProgressBar.gone()
+          movieListProgressBar.invisible()
           movieListRecyclerView.visible()
         }
         pageNumbersAdapter.submitList((1..state.totalPage).toList())

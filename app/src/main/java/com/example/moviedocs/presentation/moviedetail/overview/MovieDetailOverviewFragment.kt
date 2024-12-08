@@ -10,6 +10,7 @@ import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
+//import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.presentation.moviegenre.GenreListAdapter

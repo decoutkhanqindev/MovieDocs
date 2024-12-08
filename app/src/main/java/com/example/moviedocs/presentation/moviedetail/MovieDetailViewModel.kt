@@ -3,9 +3,9 @@ package com.example.moviedocs.presentation.moviedetail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.usecase.moviedetail.GetCountryListUseCase
+import com.example.moviedocs.domain.usecase.country.GetCountryListUseCase
+import com.example.moviedocs.domain.usecase.language.GetLanguageListUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetExternalIdsUseCase
-import com.example.moviedocs.domain.usecase.moviedetail.GetLanguageListUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetMovieDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,7 +27,7 @@ class MovieDetailViewModel @Inject constructor(
     MutableStateFlow(MovieDetailUiState.Loading)
   val uiState: StateFlow<MovieDetailUiState> = _uiState.asStateFlow()
   
-  fun getMovieDetail(movieId: Int) {
+  fun loadMovieDetail(movieId: Int) {
     viewModelScope.launch {
       _uiState.value = MovieDetailUiState.Loading
       
