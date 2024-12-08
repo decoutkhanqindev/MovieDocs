@@ -1,12 +1,12 @@
-package com.example.moviedocs.presentation.moviedetail.overview
+package com.example.moviedocs.presentation.company
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.model.moviedetail.company.CompanyDetailModel
+import com.example.moviedocs.domain.model.company.CompanyDetailModel
 import com.example.moviedocs.domain.model.movielist.MovieListModel
-import com.example.moviedocs.domain.usecase.moviedetail.GetCompanyDetailUseCase
-import com.example.moviedocs.domain.usecase.moviedetail.GetCompanyMovieListUseCase
-import com.example.moviedocs.domain.usecase.moviedetail.GetCountryListUseCase
+import com.example.moviedocs.domain.usecase.company.GetCompanyDetailUseCase
+import com.example.moviedocs.domain.usecase.movielist.GetCompanyMovieListUseCase
+import com.example.moviedocs.domain.usecase.country.GetCountryListUseCase
 import com.example.moviedocs.presentation.movielist.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+
 @HiltViewModel
 class CompanyDetailViewModel @Inject constructor(
   private val getCompanyDetailUseCase: GetCompanyDetailUseCase,
