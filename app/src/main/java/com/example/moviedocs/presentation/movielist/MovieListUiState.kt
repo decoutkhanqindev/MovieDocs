@@ -10,6 +10,7 @@ sealed interface MovieListUiState {
     val items: List<MovieItemModel>,
     val currentPage: Int,
     val totalPage: Int,
+    val totalResults: Int,
   ) : MovieListUiState
   
   enum class SortType {

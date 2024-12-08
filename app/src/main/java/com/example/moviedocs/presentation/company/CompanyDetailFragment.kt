@@ -13,6 +13,7 @@ import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.presentation.movielist.MovieListUiState
+import com.example.moviedocs.utils.formatTotalResult
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.loadImgFromUrl
@@ -118,6 +119,7 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
           MovieListUiState.Loading -> {}
 
           is MovieListUiState.Success -> {
+            binding.totalMovies.text = movieListState.totalResults.formatTotalResult()
             movieListAdapter.submitList(movieListState.items)
           }
 

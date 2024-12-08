@@ -47,6 +47,7 @@ class UpcomingViewModel @Inject constructor(
           items = it.results,
           currentPage = it.page,
           totalPage = it.totalPages,
+          totalResults = it.totalResults
         )
         _singleEvent.send(MovieListSingleEvent.Success)
       }.onFailure { it: Throwable ->

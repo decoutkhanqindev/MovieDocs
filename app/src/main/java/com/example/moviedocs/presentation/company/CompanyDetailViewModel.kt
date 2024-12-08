@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.company.CompanyDetailModel
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.company.GetCompanyDetailUseCase
-import com.example.moviedocs.domain.usecase.movielist.GetCompanyMovieListUseCase
 import com.example.moviedocs.domain.usecase.country.GetCountryListUseCase
+import com.example.moviedocs.domain.usecase.movielist.GetCompanyMovieListUseCase
 import com.example.moviedocs.presentation.movielist.MovieListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,7 +71,8 @@ class CompanyDetailViewModel @Inject constructor(
         _movieListUiState.value = MovieListUiState.Success(
           items = it.results,
           currentPage = it.page,
-          totalPage = it.totalPages
+          totalPage = it.totalPages,
+          totalResults = it.totalResults
         )
       }.onFailure { it: Throwable ->
         _movieListUiState.value = MovieListUiState.Error(it)
