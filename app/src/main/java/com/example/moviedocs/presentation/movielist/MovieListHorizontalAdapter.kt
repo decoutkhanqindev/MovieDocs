@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MovieItemHorizontalViewHolderBinding
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class MovieListHorizontalAdapter :
@@ -35,8 +36,8 @@ class MovieListHorizontalAdapter :
       binding.apply {
         movieItemImg.loadImgFromUrl(item.posterPath)
         movieItemTitle.text = item.title
-        movieItemRatingVoteAverage.text = "%.1f".format(item.voteAverage)
-        movieItemRatingVoteCout.text = "${item.voteCount}"
+        movieItemRatingVoteAverage.text = item.voteAverage.formatVoteAverage()
+        movieItemRatingVoteCout.text = item.voteCount.toString()
       }
     }
   }

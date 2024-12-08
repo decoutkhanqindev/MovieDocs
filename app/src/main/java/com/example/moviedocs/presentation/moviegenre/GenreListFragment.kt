@@ -34,9 +34,9 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
 
     setUpNavigation()
     setUpRecyclerView(
-      binding.genreRecycleView,
-      GridLayoutManager(requireContext(), 3, LinearLayoutManager.VERTICAL, false),
-      adapter
+      mRecyclerView = binding.genreRecycleView,
+      mLayoutManager = GridLayoutManager(requireContext(), 3, LinearLayoutManager.VERTICAL, false),
+      mAdapter = adapter
     )
     bindViewModel()
   }

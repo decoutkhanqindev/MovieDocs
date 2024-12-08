@@ -19,3 +19,8 @@ fun Int.formatDollar(): String {
   val formatDecimal: DecimalFormat = DecimalFormat("###,###,##0.00")
   return "$${formatDecimal.format(dollar)}"
 }
+
+fun Double.formatVoteAverage(): String {
+  val voteAverage: Double = this
+  return "%.1f".format(voteAverage)
+}

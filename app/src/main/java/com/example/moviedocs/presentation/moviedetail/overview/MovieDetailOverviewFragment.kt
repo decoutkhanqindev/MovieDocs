@@ -10,10 +10,10 @@ import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
-//import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
+import com.example.moviedocs.utils.formatDollar
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.setUpRecyclerView
@@ -45,14 +45,14 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
 
     setUpNavigation()
     setUpRecyclerView(
-      binding.genreRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      genreListAdapter,
+      mRecyclerView = binding.genreRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = genreListAdapter,
     )
     setUpRecyclerView(
-      binding.companyRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      companyListAdapter,
+      mRecyclerView = binding.companyRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = companyListAdapter,
     )
     bindViewModel()
   }
@@ -99,8 +99,8 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
           countryValue.text = state.movieDetail.originCountry.joinToString(", ") {
             it.toCountryName(state.countryList)
           }
-          budgetValue.text = "$${state.movieDetail.budget}"
-          revenueValue.text = "$${state.movieDetail.revenue}"
+          budgetValue.text = state.movieDetail.budget.formatDollar()
+          revenueValue.text = state.movieDetail.revenue.formatDollar()
           companyListAdapter.submitList(state.movieDetail.productionCompanies)
         }
       }

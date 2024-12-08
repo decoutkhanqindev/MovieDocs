@@ -10,7 +10,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentMovieDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.convertMinutesToHoursAndMinutes
-import com.example.moviedocs.utils.formatTimestamp
+import com.example.moviedocs.utils.formatDate
+import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.loadImgFromUrl
@@ -113,10 +114,10 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
 
           movieDetailImg.loadImgFromUrl(state.movieDetail.posterPath)
           movieDetailTitle.text = state.movieDetail.title
-          movieDetailReleaseDate.text = state.movieDetail.releaseDate.formatTimestamp()
+          movieDetailReleaseDate.text = state.movieDetail.releaseDate.formatDate()
           movieDetailRuntime.text = state.movieDetail.runtime.convertMinutesToHoursAndMinutes()
-          movieDetailRatingVoteAverage.text = "%.1f".format(state.movieDetail.voteAverage)
-          movieDetailRatingVoteCount.text = "${state.movieDetail.voteCount}"
+          movieDetailRatingVoteAverage.text = state.movieDetail.voteAverage.formatVoteAverage()
+          movieDetailRatingVoteCount.text = state.movieDetail.voteCount.toString()
           homepage = state.movieDetail.homepage
           fbId = state.externalIds.facebookId
           igId = state.externalIds.instagramId

@@ -89,29 +89,29 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     setUpNavigation()
     setUpSliderImg()
     setUpRecyclerView(
-      binding.genreRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      genreAdapter
+      mRecyclerView = binding.genreRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = genreAdapter
     )
     setUpRecyclerView(
-      binding.nowPlayingRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      nowPlayingAdapter
+      mRecyclerView = binding.nowPlayingRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = nowPlayingAdapter
     )
     setUpRecyclerView(
-      binding.popularRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      popularAdapter,
+      mRecyclerView = binding.popularRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = popularAdapter,
     )
     setUpRecyclerView(
-      binding.upcomingRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      upComingAdapter
+      mRecyclerView = binding.upcomingRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = upComingAdapter
     )
     setUpRecyclerView(
-      binding.topRatedRecycleView,
-      LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
-      topRatedAdapter,
+      mRecyclerView = binding.topRatedRecycleView,
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mAdapter = topRatedAdapter,
     )
     bindViewModel()
   }

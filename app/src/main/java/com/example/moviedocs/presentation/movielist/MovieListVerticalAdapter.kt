@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MovieItemVerticalViewHolderBinding
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
-import com.example.moviedocs.utils.formatTimestamp
+import com.example.moviedocs.utils.formatDate
+import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class MovieListVerticalAdapter :
@@ -26,7 +27,7 @@ class MovieListVerticalAdapter :
     
     init {
       binding.root.setOnClickListener {
-        val position = bindingAdapterPosition
+        val position: Int = bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) onItemClickListener?.invoke(getItem(position))
       }
     }
@@ -36,9 +37,9 @@ class MovieListVerticalAdapter :
       binding.apply {
         movieItemImg.loadImgFromUrl(item.posterPath)
         movieItemTitle.text = item.title
-        movieItemRatingVoteAverage.text = "%.1f".format(item.voteAverage)
+        movieItemRatingVoteAverage.text = item.voteAverage.formatVoteAverage()
         movieItemRatingOverView.text = item.overview
-        movieItemRatingReleaseDate.text = item.releaseDate.formatTimestamp()
+        movieItemRatingReleaseDate.text = item.releaseDate.formatDate()
       }
     }
   }
