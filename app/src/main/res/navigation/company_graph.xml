@@ -45,7 +45,7 @@
   </fragment>
   <fragment
       android:id="@+id/companyMovieListFragment"
-      android:name="com.example.moviedocs.presentation.company.CompanyMovieListFragment"
+      android:name="com.example.moviedocs.presentation.movielist.company.CompanyMovieListFragment"
       android:label="CompanyMovieListFragment"
       tools:layout="@layout/fragment_movie_list">
     <argument
