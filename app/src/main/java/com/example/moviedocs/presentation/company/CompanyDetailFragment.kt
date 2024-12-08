@@ -1,13 +1,15 @@
-package com.example.moviedocs.presentation.moviedetail.overview
+package com.example.moviedocs.presentation.company
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentCompanyDetailBinding
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.presentation.movielist.MovieListUiState
@@ -36,6 +38,8 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
 
   private lateinit var homepage: String
 
+  private lateinit var companyName: String
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -59,6 +63,23 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
       }
+
+      movieListMoreBtn.setOnClickListener {
+        findNavController().navigate(
+          CompanyDetailFragmentDirections.actionCompanyDetailFragmentToCompanyMovieListFragment(
+            companyId = args.companyId,
+            companyName = companyName
+          )
+        )
+      }
+
+      movieListAdapter.onItemClickListener = { it: MovieItemModel ->
+        findNavController().navigate(
+          CompanyDetailFragmentDirections.actionCompanyDetailFragmentToMovieDetailFragment(
+            movieId = it.id
+          )
+        )
+      }
     }
   }
 
@@ -73,54 +94,41 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
       CompanyDetailUiState.Loading -> {
         binding.apply {
           progressBar.visible()
-          mainLayout.invisible()
+          scrollView.invisible()
         }
       }
 
       is CompanyDetailUiState.Success -> {
         binding.apply {
           progressBar.invisible()
-          mainLayout.visible()
+          scrollView.visible()
 
           homepage = companyState.companyDetail.homepage
           movieDetailImg.loadImgFromUrl(companyState.companyDetail.logoPath)
           companyNameValue.text = companyState.companyDetail.name
+          companyName = companyState.companyDetail.name
           headquarterValue.text = companyState.companyDetail.headquarters
           originalCountryValue.text =
             companyState.companyDetail.originCountry.toCountryName(companyState.countryList)
           companyDetailDescription.text = companyState.companyDetail.description
           parentValue.text = companyState.companyDetail.parentCompany
         }
+
+        when (movieListState) {
+          MovieListUiState.Loading -> {}
+
+          is MovieListUiState.Success -> {
+            movieListAdapter.submitList(movieListState.items)
+          }
+
+          is MovieListUiState.Error -> {}
+        }
       }
 
       is CompanyDetailUiState.Error -> {
         binding.apply {
           progressBar.visible()
-          mainLayout.invisible()
-        }
-      }
-    }
-
-    when (movieListState) {
-      MovieListUiState.Loading -> {
-        binding.apply {
-          progressBar.visible()
-          mainLayout.invisible()
-        }
-      }
-
-      is MovieListUiState.Success -> {
-        binding.apply {
-          progressBar.invisible()
-          mainLayout.visible()
-        }
-        movieListAdapter.submitList(movieListState.items)
-      }
-
-      is MovieListUiState.Error -> {
-        binding.apply {
-          progressBar.visible()
-          mainLayout.invisible()
+          scrollView.invisible()
         }
       }
     }
