@@ -274,6 +274,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/totalMovies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/total_movies"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/movieListTitle"
+            app:layout_constraintStart_toEndOf="@id/movieListTitle"
+            app:layout_constraintTop_toTopOf="@id/movieListTitle" />
+
         <ImageView
             android:id="@+id/movieListMoreBtn"
             android:layout_width="20dp"

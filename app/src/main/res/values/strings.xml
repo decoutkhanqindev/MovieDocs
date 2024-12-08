@@ -72,5 +72,6 @@
   <string name="no_description_value">No description</string>
   <string name="parent_company_title">Parent Company:</string>
   <string name="no_parent_company_value">No parent company</string>
-  <string name="movie_list_title">Movie List:</string>
+  <string name="movie_list_title">Movies</string>
+  <string name="total_movies">(100):</string>
 </resources>
