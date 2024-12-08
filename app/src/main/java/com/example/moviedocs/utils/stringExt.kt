@@ -8,7 +8,7 @@ import java.util.Date
 import java.util.TimeZone
 
 @SuppressLint("SimpleDateFormat")
-fun String.formatTimestamp(): String {
+fun String.formatDate(): String {
   if (this.isEmpty()) {
     return "00/00/0000"
   }
@@ -29,16 +29,4 @@ fun String.toCountryName(countryList: List<CountryItemModel>): String {
   val countryCode: String = this
   val country: CountryItemModel? = countryList.find { it.iso31661 == countryCode }
   return country!!.englishName
-}
-
-fun Int.convertMinutesToHoursAndMinutes(): String {
-  val minutes: Int = this
-  val hours: Int = minutes / 60
-  val remainingMinutes: Int = minutes % 60
-  return "${hours}h ${remainingMinutes}m"
-}
-
-fun Int.formatTotalResult(): String {
-  val totalResult: Int = this
-  return "($totalResult):"
 }
