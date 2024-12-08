@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.model.moviedetail.country
+package com.example.moviedocs.domain.model.country
 
 data class CountryItemModel(
   val iso31661: String, // AD
