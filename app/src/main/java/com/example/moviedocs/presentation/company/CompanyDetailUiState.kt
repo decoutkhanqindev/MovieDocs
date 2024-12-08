@@ -1,7 +1,7 @@
-package com.example.moviedocs.presentation.moviedetail.overview
+package com.example.moviedocs.presentation.company
 
-import com.example.moviedocs.domain.model.moviedetail.company.CompanyDetailModel
-import com.example.moviedocs.domain.model.moviedetail.country.CountryItemModel
+import com.example.moviedocs.domain.model.company.CompanyDetailModel
+import com.example.moviedocs.domain.model.country.CountryItemModel
 
 sealed interface CompanyDetailUiState {
   data object Loading : CompanyDetailUiState
