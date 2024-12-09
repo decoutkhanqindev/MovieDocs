@@ -8,4 +8,5 @@ data class MovieItemModel(
   val voteAverage: Double,
   val voteCount: Int,
   val posterPath: String,
+  val popularity: Double,
 )
