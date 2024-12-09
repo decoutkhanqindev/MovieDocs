@@ -82,7 +82,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
       TabLayoutMediator(binding.tabLayout, this) { tab: TabLayout.Tab, position: Int ->
         tab.text = when (position) {
           0 -> "Overview"
-          1 -> "Cast & Crew"
+          1 -> "Credits"
           else -> throw IllegalArgumentException("Invalid $position")
         }
       }.attach()
@@ -117,7 +117,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           movieDetailReleaseDate.text = state.movieDetail.releaseDate.formatDate()
           movieDetailRuntime.text = state.movieDetail.runtime.convertMinutesToHoursAndMinutes()
           movieDetailRatingVoteAverage.text = state.movieDetail.voteAverage.formatVoteAverage()
-          movieDetailRatingVoteCount.text = state.movieDetail.voteCount.toString()
+          movieDetailPopularity.text = state.movieDetail.popularity.toString()
           homepage = state.movieDetail.homepage
           fbId = state.externalIds.facebookId
           igId = state.externalIds.instagramId

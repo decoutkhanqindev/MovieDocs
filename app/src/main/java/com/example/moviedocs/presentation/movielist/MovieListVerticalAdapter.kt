@@ -15,23 +15,23 @@ class MovieListVerticalAdapter :
   BaseListAdapter<MovieItemModel, MovieItemVerticalViewHolderBinding>(
     MovieItemModelDiffCallBack
   ) {
-  
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(
       MovieItemVerticalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
-  
+
   private inner class VH(binding: MovieItemVerticalViewHolderBinding) : BaseViewHolder(binding) {
-    
+
     init {
       binding.root.setOnClickListener {
         val position: Int = bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) onItemClickListener?.invoke(getItem(position))
       }
     }
-    
+
     @SuppressLint("SetTextI18n")
     override fun bind(item: MovieItemModel) {
       binding.apply {
@@ -40,6 +40,7 @@ class MovieListVerticalAdapter :
         movieItemRatingVoteAverage.text = item.voteAverage.formatVoteAverage()
         movieItemRatingOverView.text = item.overview
         movieItemRatingReleaseDate.text = item.releaseDate.formatDate()
+        movieItemPopularity.text = item.popularity.toString()
       }
     }
   }
