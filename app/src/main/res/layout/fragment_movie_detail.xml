@@ -154,15 +154,30 @@
           tools:ignore="ContentDescription" />
 
       <TextView
-          android:id="@+id/movieDetailRatingVoteCount"
-          android:layout_width="wrap_content"
+          android:id="@+id/movieDetailPopularity"
+          android:layout_width="0dp"
           android:layout_height="wrap_content"
+          android:layout_gravity="center"
           android:layout_marginStart="16dp"
-          android:text="@string/count"
+          android:gravity="center"
+          android:text="@string/popularity"
           android:textColor="@color/white"
           android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailRatingVoteAverage"
           app:layout_constraintStart_toEndOf="@id/movieDetailRatingIcon"
           app:layout_constraintTop_toTopOf="@id/movieDetailRatingVoteAverage" />
+
+      <ImageView
+          android:id="@+id/movieDetailPopularityIcon"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:layout_marginStart="4dp"
+          android:gravity="center"
+          android:src="@mipmap/popularity_icon"
+          app:layout_constraintBottom_toBottomOf="@id/movieDetailPopularity"
+          app:layout_constraintStart_toEndOf="@id/movieDetailPopularity"
+          app:layout_constraintTop_toTopOf="@id/movieDetailPopularity"
+          tools:ignore="ContentDescription" />
 
       <ImageView
           android:id="@+id/movieDetailLinkImg"
