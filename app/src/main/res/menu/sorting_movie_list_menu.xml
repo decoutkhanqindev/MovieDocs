@@ -27,6 +27,16 @@
           android:icon="@drawable/down_icon"
           android:title="@string/rating_dsc"
           app:showAsAction="never" />
+      <item
+          android:id="@+id/popularityAsc"
+          android:icon="@drawable/up_icon"
+          android:title="@string/popularity_asc"
+          app:showAsAction="never" />
+      <item
+          android:id="@+id/popularityDsc"
+          android:icon="@drawable/down_icon"
+          android:title="@string/popularity_dsc"
+          app:showAsAction="never" />
     </menu>
   </item>
 </menu>

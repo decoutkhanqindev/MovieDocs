@@ -74,4 +74,7 @@
   <string name="no_parent_company_value">No parent company</string>
   <string name="movie_list_title">Movies</string>
   <string name="total_movies">(100):</string>
+  <string name="popularity_asc">Popularity Ascending</string>
+  <string name="popularity_dsc">Popularity Descending</string>
+  <string name="popularity">11920.12</string>
 </resources>
