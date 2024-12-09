@@ -136,6 +136,16 @@ class CompanyMovieListFragment : BaseFragment<FragmentMovieListBinding>(
           true
         }
 
+        R.id.popularityAsc -> {
+          viewModel.sortList(MovieListUiState.SortType.POPULARITY_ASC)
+          true
+        }
+
+        R.id.popularityDsc -> {
+          viewModel.sortList(MovieListUiState.SortType.POPULARITY_DSC)
+          true
+        }
+
         else -> false
       }
     }

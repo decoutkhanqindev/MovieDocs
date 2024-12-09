@@ -3,9 +3,9 @@ package com.example.moviedocs.presentation.movielist.upcoming
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.movielist.GetUpcomingUseCase
-import com.example.moviedocs.presentation.movielist.BaseMovieListViewModel
 import com.example.moviedocs.presentation.movielist.MovieListSingleEvent
 import com.example.moviedocs.presentation.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UpcomingViewModel @Inject constructor(
   private val getUpcomingUseCase: GetUpcomingUseCase
-) : BaseMovieListViewModel() {
+) : MovieListViewModel() {
 
   init {
     loadPage(1)

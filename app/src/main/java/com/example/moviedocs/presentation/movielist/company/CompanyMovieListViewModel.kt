@@ -3,9 +3,9 @@ package com.example.moviedocs.presentation.movielist.company
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.movielist.GetCompanyMovieListUseCase
-import com.example.moviedocs.presentation.movielist.BaseMovieListViewModel
 import com.example.moviedocs.presentation.movielist.MovieListSingleEvent
 import com.example.moviedocs.presentation.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CompanyMovieListViewModel @Inject constructor(
   private val getCompanyMovieListUseCase: GetCompanyMovieListUseCase
-) : BaseMovieListViewModel() {
+) : MovieListViewModel() {
 
   fun loadPage(page: Int, companyId: Int) {
     viewModelScope.launch {

@@ -3,9 +3,9 @@ package com.example.moviedocs.presentation.movielist.toprated
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.movielist.GetTopRatedUseCase
-import com.example.moviedocs.presentation.movielist.BaseMovieListViewModel
 import com.example.moviedocs.presentation.movielist.MovieListSingleEvent
 import com.example.moviedocs.presentation.movielist.MovieListUiState
+import com.example.moviedocs.presentation.movielist.MovieListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TopRatedViewModel @Inject constructor(
   private val getTopRatedUseCase: GetTopRatedUseCase
-) : BaseMovieListViewModel() {
+) : MovieListViewModel() {
 
   init {
     loadPage(1)
