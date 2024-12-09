@@ -111,22 +111,22 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
     binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
       when (it.itemId) {
         R.id.titleAsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.TITLE_ASC)
+          viewModel.sortList(MovieListUiState.SortType.TITLE_ASC)
           true
         }
 
         R.id.titleDsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.TITLE_DSC)
+          viewModel.sortList(MovieListUiState.SortType.TITLE_DSC)
           true
         }
 
         R.id.ratingAsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.RATING_ASC)
+          viewModel.sortList(MovieListUiState.SortType.RATING_ASC)
           true
         }
 
         R.id.ratingDsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.RATING_DSC)
+          viewModel.sortList(MovieListUiState.SortType.RATING_DSC)
           true
         }
 

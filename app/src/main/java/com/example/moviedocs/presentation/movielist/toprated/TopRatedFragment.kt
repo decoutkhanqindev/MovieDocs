@@ -24,20 +24,20 @@ import dagger.hilt.android.AndroidEntryPoint
 class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
   FragmentMovieListBinding::inflate
 ) {
-  
+
   private val viewModel: TopRatedViewModel by viewModels()
-  
+
   private val movieListAdapter: MovieListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListVerticalAdapter()
   }
-  
+
   private val pageNumbersAdapter: MovieListPageNumbersAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListPageNumbersAdapter()
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
     binding.movieListTitle.text = getString(R.string.top_rated)
     setUpNavigation()
     setUpRecyclerView(
@@ -54,11 +54,11 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
     handleLoadNextPage()
     handleSortingMovies()
   }
-  
+
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
-    
-    movieListAdapter.onItemClickListener = {it: MovieItemModel ->
+
+    movieListAdapter.onItemClickListener = { it: MovieItemModel ->
       findNavController().navigate(
         TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailFragment(
           movieId = it.id
@@ -66,11 +66,11 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
       )
     }
   }
-  
+
   private fun bindViewModel() {
     launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
   }
-  
+
   private fun renderUi(state: MovieListUiState) {
     when (state) {
       MovieListUiState.Loading -> {
@@ -80,7 +80,7 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
         }
         movieListAdapter.submitList(emptyList())
       }
-      
+
       is MovieListUiState.Error -> {
         binding.apply {
           movieListProgressBar.visible()
@@ -88,7 +88,7 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
         }
         movieListAdapter.submitList(emptyList())
       }
-      
+
       is MovieListUiState.Success -> {
         binding.apply {
           movieListProgressBar.invisible()
@@ -100,41 +100,41 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
       }
     }
   }
-  
+
   private fun handleLoadNextPage() {
     pageNumbersAdapter.setOnItemClickListener { it: Int ->
       viewModel.loadPage(it)
     }
   }
-  
+
   private fun handleSortingMovies() {
     binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
       when (it.itemId) {
         R.id.titleAsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.TITLE_ASC)
+          viewModel.sortList(MovieListUiState.SortType.TITLE_ASC)
           true
         }
-        
+
         R.id.titleDsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.TITLE_DSC)
+          viewModel.sortList(MovieListUiState.SortType.TITLE_DSC)
           true
         }
-        
+
         R.id.ratingAsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.RATING_ASC)
+          viewModel.sortList(MovieListUiState.SortType.RATING_ASC)
           true
         }
-        
+
         R.id.ratingDsc -> {
-          viewModel.sortItems(MovieListUiState.SortType.RATING_DSC)
+          viewModel.sortList(MovieListUiState.SortType.RATING_DSC)
           true
         }
-        
+
         else -> false
       }
     }
   }
-  
+
   override fun onDestroyView() {
     binding.movieListRecyclerView.adapter = null
     super.onDestroyView()
