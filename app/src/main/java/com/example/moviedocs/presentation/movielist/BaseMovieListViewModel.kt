@@ -23,7 +23,7 @@ abstract class BaseMovieListViewModel : ViewModel() {
     Channel(capacity = Channel.UNLIMITED)
   val singleEvent: Flow<MovieListSingleEvent> get() = _singleEvent.receiveAsFlow()
 
-  fun sortList(type: MovieListUiState.SortType) {
+  protected fun sortList(type: MovieListUiState.SortType) {
     val currentState: MovieListUiState = _uiState.value
     if (currentState is MovieListUiState.Success) {
       val sortedList: List<MovieItemModel> = when (type) {
