@@ -130,7 +130,7 @@
 
       <TextView
           android:id="@+id/movieDetailRatingVoteAverage"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:gravity="center"
@@ -145,7 +145,6 @@
           android:id="@+id/movieDetailRatingIcon"
           android:layout_width="20dp"
           android:layout_height="20dp"
-          android:layout_marginStart="4dp"
           android:gravity="center"
           android:src="@mipmap/star_rating_icon"
           app:layout_constraintBottom_toBottomOf="@id/movieDetailRatingVoteAverage"
@@ -155,7 +154,7 @@
 
       <TextView
           android:id="@+id/movieDetailPopularity"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginStart="16dp"
@@ -171,7 +170,6 @@
           android:id="@+id/movieDetailPopularityIcon"
           android:layout_width="20dp"
           android:layout_height="20dp"
-          android:layout_marginStart="4dp"
           android:gravity="center"
           android:src="@mipmap/popularity_icon"
           app:layout_constraintBottom_toBottomOf="@id/movieDetailPopularity"
