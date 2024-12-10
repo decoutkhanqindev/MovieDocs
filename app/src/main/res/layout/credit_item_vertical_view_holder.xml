@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
+
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/creditItemDescriptionLayout"
+      android:layout_width="match_parent"
+      android:layout_height="120dp"
+      app:cardBackgroundColor="@color/item_bg_color_selector"
+      app:cardCornerRadius="16dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:strokeColor="@color/main_color"
+      app:strokeWidth="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+      <TextView
+          android:id="@+id/creditItemName"
+          android:layout_width="220dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="140dp"
+          android:layout_marginTop="8dp"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:text="@string/app_name"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+
+      <TextView
+          android:id="@+id/creditItemCharacter"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="16dp"
+          android:ellipsize="end"
+          android:maxLines="2"
+          android:text="@string/character"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:textStyle="italic"
+          app:layout_constraintBottom_toTopOf="@id/creditItemPopularity"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="@id/creditItemName"
+          app:layout_constraintTop_toBottomOf="@id/creditItemName" />
+
+      <TextView
+          android:id="@+id/creditItemPopularity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:text="@string/popularity"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="@id/creditItemName"
+          app:layout_constraintTop_toBottomOf="@id/creditItemCharacter" />
+
+      <ImageView
+          android:id="@+id/creditItemPopularityIcon"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:gravity="center"
+          android:src="@mipmap/popularity_icon"
+          app:layout_constraintBottom_toBottomOf="@id/creditItemPopularity"
+          app:layout_constraintStart_toEndOf="@id/creditItemPopularity"
+          app:layout_constraintTop_toTopOf="@id/creditItemPopularity"
+          tools:ignore="ContentDescription" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
+
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/creditItemImgLayout"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="8dp"
+      android:layout_marginBottom="100dp"
+      android:background="@color/main_color2"
+      app:cardCornerRadius="8dp"
+      app:cardElevation="16dp"
+      app:cardUseCompatPadding="true"
+      app:layout_constraintBottom_toBottomOf="@id/creditItemDescriptionLayout"
+      app:layout_constraintStart_toStartOf="@id/creditItemDescriptionLayout"
+      app:layout_constraintTop_toTopOf="@id/creditItemDescriptionLayout"
+      app:strokeColor="@android:color/transparent">
+
+    <ImageView
+        android:id="@+id/creditItemImg"
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:scaleType="fitXY"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+  </com.google.android.material.card.MaterialCardView>
+
+  <TextView
+      android:id="@+id/creditItemGender"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="4dp"
+      android:layout_marginBottom="8dp"
+      android:text="@string/gender"
+      android:textColor="@color/white"
+      android:textSize="16sp"
+      android:textStyle="italic"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="@id/creditItemImgLayout"
+      app:layout_constraintStart_toStartOf="@id/creditItemImgLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
