@@ -17,8 +17,8 @@ data class MovieDetailModel(
   val status: String, // Released
   val originCountry: List<String>,
   val originalLanguage: String, // en
-  val budget: Int, // 2000000
-  val revenue: Int, // 87261211
+  val budget: Long, // 2000000
+  val revenue: Long, // 87261211
   val productionCompanies: List<CompanyItemModel>,
   val homepage: String,
 )

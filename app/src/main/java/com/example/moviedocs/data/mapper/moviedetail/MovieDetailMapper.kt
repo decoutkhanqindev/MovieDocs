@@ -19,8 +19,8 @@ fun MovieDetailResponse.toMovieDetailModel(): MovieDetailModel =
     status = status?.takeIf { it.isNotEmpty() } ?: "No status found",
     originCountry = originCountry ?: emptyList(),
     originalLanguage = originalLanguage?.takeIf { it.isNotEmpty() } ?: "No original language found",
-    budget = budget ?: 0,
-    revenue = revenue ?: 0,
+    budget = budget?.takeIf { it != 0L } ?: 0L,
+    revenue = revenue?.takeIf { it != 0L } ?: 0L,
     productionCompanies = productionCompanies?.map { it.toCompanyItemModel() } ?: emptyList(),
     homepage = homepage?.takeIf { it.isNotEmpty() } ?: "No homepage found",
     popularity = popularity?.takeIf { it != 0.0 } ?: 0.0
