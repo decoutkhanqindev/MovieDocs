@@ -69,5 +69,4 @@
           app:argType="integer" />
     </action>
   </fragment>
-
 </navigation>

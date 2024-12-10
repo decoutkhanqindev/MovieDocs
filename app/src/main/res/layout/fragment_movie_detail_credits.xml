@@ -23,13 +23,26 @@
         android:layout_marginStart="8dp"
         android:text="@string/cast_title"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/castRecycleView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/totalCasts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/total_movies"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/castTitle"
+        app:layout_constraintStart_toEndOf="@id/castTitle"
+        app:layout_constraintTop_toTopOf="@id/castTitle" />
 
     <ImageView
         android:id="@+id/castMoreBtn"
@@ -76,13 +89,26 @@
         android:layout_marginStart="8dp"
         android:text="@string/crew_title"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/crewRecycleView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/totalCrews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/total_movies"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/crewTitle"
+        app:layout_constraintStart_toEndOf="@id/crewTitle"
+        app:layout_constraintTop_toTopOf="@id/crewTitle" />
 
     <ImageView
         android:id="@+id/crewMoreBtn"
