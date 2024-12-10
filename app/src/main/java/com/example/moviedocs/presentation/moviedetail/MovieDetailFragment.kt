@@ -47,7 +47,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
     super.onViewCreated(view, savedInstanceState)
 
     viewPagerAdapter = MovieDetailViewPagerAdapter(fragment = this)
-    viewModel.loadMovieDetail(movieId = args.movieId)
+    viewModel.loadData(args.movieId)
     setUpNavigation()
     setUpTabLayout()
     bindViewModel()
@@ -78,7 +78,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
       if (adapter == null) {
         adapter = viewPagerAdapter
       }
-      isUserInputEnabled = true
+      isUserInputEnabled = false
       TabLayoutMediator(binding.tabLayout, this) { tab: TabLayout.Tab, position: Int ->
         tab.text = when (position) {
           0 -> "Overview"

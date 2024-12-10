@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.company.CompanyListHorizontalAdapter
 import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
@@ -36,8 +37,8 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     GenreListAdapter()
   }
 
-  private val companyListAdapter: CompanyListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    CompanyListAdapter()
+  private val companyListAdapter: CompanyListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    CompanyListHorizontalAdapter()
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,22 +76,12 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
       MovieDetailUiState.Loading -> {
-        binding.apply {
-          movieDetailOverview.invisible()
-          movieDetailGenreLayout.invisible()
-          movieDetailStatusLayout.invisible()
-          movieDetailLanguageLayout.invisible()
-          movieDetailCountryLayout.invisible()
-        }
+        binding.scrollView.invisible()
       }
 
       is MovieDetailUiState.Success -> {
         binding.apply {
-          movieDetailOverview.visible()
-          movieDetailGenreLayout.visible()
-          movieDetailStatusLayout.visible()
-          movieDetailLanguageLayout.visible()
-          movieDetailCountryLayout.visible()
+          scrollView.visible()
 
           movieDetailOverview.text = state.movieDetail.overview
           genreListAdapter.submitList(state.movieDetail.genres)
@@ -106,13 +97,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
       }
 
       is MovieDetailUiState.Error -> {
-        binding.apply {
-          movieDetailOverview.invisible()
-          movieDetailGenreLayout.invisible()
-          movieDetailStatusLayout.invisible()
-          movieDetailLanguageLayout.invisible()
-          movieDetailCountryLayout.invisible()
-        }
+        binding.scrollView.invisible()
       }
     }
   }
