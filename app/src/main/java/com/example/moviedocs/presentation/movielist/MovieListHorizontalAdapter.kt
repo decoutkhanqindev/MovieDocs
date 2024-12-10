@@ -14,23 +14,25 @@ class MovieListHorizontalAdapter :
   BaseListAdapter<MovieItemModel, MovieItemHorizontalViewHolderBinding>(
     MovieItemModelDiffCallBack
   ) {
-  
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(
       MovieItemHorizontalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
-  
-  private inner class VH(binding: MovieItemHorizontalViewHolderBinding) : BaseViewHolder(binding) {
-    
+
+  private inner class VH(
+    binding: MovieItemHorizontalViewHolderBinding
+  ) : BaseViewHolder(binding) {
+
     init {
       binding.root.setOnClickListener {
-        val position = bindingAdapterPosition
+        val position: Int = bindingAdapterPosition
         if (position != RecyclerView.NO_POSITION) onItemClickListener?.invoke(getItem(position))
       }
     }
-    
+
     @SuppressLint("SetTextI18n")
     override fun bind(item: MovieItemModel) {
       binding.apply {

@@ -15,14 +15,14 @@ class SliderViewPagerAdapter(
 ) : ListAdapter<MovieItemModel, SliderViewPagerAdapter.SliderViewHolder>(
   MovieItemModelDiffCallBack
 ) {
-  
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder =
     SliderViewHolder(
       SliderItemViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
-  
+
   override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
     holder.bind(getItem(position))
     // infinite scrolling
@@ -32,11 +32,11 @@ class SliderViewPagerAdapter(
       }
     }
   }
-  
+
   inner class SliderViewHolder(
     private val binding: SliderItemViewHolderBinding,
   ) : RecyclerView.ViewHolder(binding.root) {
-    
+
     fun bind(item: MovieItemModel) {
       binding.run {
         sliderItemImg.loadImgFromUrl(item.posterPath)

@@ -10,16 +10,16 @@ import com.example.moviedocs.presentation.base.BaseListAdapter
 class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHolderBinding>(
   PageDiffUtil
 ) {
-  
+
   private var selectedPosition = 0
-  
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(
       PageNumbersItemViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
       )
     )
-  
+
   fun setCurrentPage(page: Int) {
     if (page >= 0 && page != selectedPosition) {
       val oldPosition: Int = selectedPosition
@@ -28,9 +28,11 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
       notifyItemChanged(selectedPosition)
     }
   }
-  
-  inner class VH(binding: PageNumbersItemViewHolderBinding) : BaseViewHolder(binding) {
-    
+
+  private inner class VH(
+    binding: PageNumbersItemViewHolderBinding
+  ) : BaseViewHolder(binding) {
+
     init {
       binding.root.setOnClickListener {
         val position: Int = bindingAdapterPosition
@@ -40,7 +42,7 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
         }
       }
     }
-    
+
     override fun bind(item: Int) {
       binding.apply {
         pageNumber.text = "$item"
@@ -51,10 +53,10 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
       }
     }
   }
-  
+
   private object PageDiffUtil : DiffUtil.ItemCallback<Int>() {
     override fun areContentsTheSame(oldItem: Int, newItem: Int): Boolean = oldItem == newItem
-    
+
     override fun areItemsTheSame(oldItem: Int, newItem: Int): Boolean = oldItem == newItem
   }
 }
