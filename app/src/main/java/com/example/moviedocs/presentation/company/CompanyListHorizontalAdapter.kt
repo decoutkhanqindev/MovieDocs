@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.moviedetail.overview
+package com.example.moviedocs.presentation.company
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,18 +9,19 @@ import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class CompanyListAdapter : BaseListAdapter<CompanyItemModel, CompanyItemViewHolderBinding>(
-  CompanyItemModelDiffCallback
-) {
+class CompanyListHorizontalAdapter :
+  BaseListAdapter<CompanyItemModel, CompanyItemViewHolderBinding>(
+    CompanyItemModelDiffCallback
+  ) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
     VH(
-    CompanyItemViewHolderBinding.inflate(
-      LayoutInflater.from(parent.context), parent, false
+      CompanyItemViewHolderBinding.inflate(
+        LayoutInflater.from(parent.context), parent, false
+      )
     )
-  )
 
-  inner class VH(
+  private inner class VH(
     binding: CompanyItemViewHolderBinding,
   ) : BaseViewHolder(binding) {
 
