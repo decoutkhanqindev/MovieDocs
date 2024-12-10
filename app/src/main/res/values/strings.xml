@@ -77,4 +77,5 @@
   <string name="popularity_asc">Popularity Ascending</string>
   <string name="popularity_dsc">Popularity Descending</string>
   <string name="popularity">11920.12</string>
+  <string name="error_message">Something went wrong.\nCheck the Log for details or try again.</string>
 </resources>

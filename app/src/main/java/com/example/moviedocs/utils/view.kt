@@ -19,7 +19,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 // Suspending function to start animation and await the end of the animation
 suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
   if (!this.isVisible) this.visibility = View.VISIBLE
-  
+
   suspendCancellableCoroutine { continuation: CancellableContinuation<Unit> ->
     ObjectAnimator.ofPropertyValuesHolder(
       this,
@@ -39,18 +39,18 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
 //          continuation.resumeWith(Result.success(Unit))
 //        }
 //      })
-      
+
       // or
-      
+
       doOnEnd {
         // resume another animation of views at suspend point
         continuation.resumeWith(Result.success(Unit))
       }
-      
+
       doOnCancel {
         continuation.resumeWith(Result.success(Unit))
       }
-      
+
       start()
     }
   }
@@ -99,4 +99,7 @@ fun setUpRecyclerView(
     layoutManager = mLayoutManager
     adapter = mAdapter
   }
+}
+
+fun setUpAlertDialog() {
 }
