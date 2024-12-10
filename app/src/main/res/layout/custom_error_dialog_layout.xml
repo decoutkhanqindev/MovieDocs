@@ -1,0 +1,70 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@color/dark_blue"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@android:color/transparent">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/noNetworkConnectivityImg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:importantForAccessibility="no"
+        android:src="@mipmap/error_icon"
+        app:layout_constraintBottom_toTopOf="@id/noNetworkConnectivityTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/noNetworkConnectivityTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/whoops"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/noNetworkConnectivityDescription"
+        app:layout_constraintEnd_toEndOf="@id/noNetworkConnectivityImg"
+        app:layout_constraintStart_toStartOf="@id/noNetworkConnectivityImg"
+        app:layout_constraintTop_toBottomOf="@id/noNetworkConnectivityImg" />
+
+    <TextView
+        android:id="@+id/noNetworkConnectivityDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:text="@string/error_message"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/noNetworkConnectivityTitle"
+        app:layout_constraintStart_toStartOf="@id/noNetworkConnectivityTitle"
+        app:layout_constraintTop_toBottomOf="@id/noNetworkConnectivityTitle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/tryAgainBtn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_red_rounded_no_border"
+        android:text="@string/try_again"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/noNetworkConnectivityDescription"
+        app:layout_constraintStart_toStartOf="@id/noNetworkConnectivityDescription"
+        app:layout_constraintTop_toBottomOf="@id/noNetworkConnectivityDescription" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
