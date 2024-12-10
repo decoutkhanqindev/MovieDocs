@@ -18,7 +18,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:strokeColor="@color/main_color"
-      app:strokeWidth="4dp">
+      app:strokeWidth="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
 
       <TextView
           android:id="@+id/movieItemRatingVoteAverage"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center"
           android:layout_marginTop="8dp"
@@ -58,12 +58,36 @@
           android:id="@+id/movieItemRatingIcon"
           android:layout_width="20dp"
           android:layout_height="20dp"
-          android:layout_marginStart="4dp"
           android:gravity="center"
           android:src="@mipmap/star_rating_icon"
           app:layout_constraintBottom_toBottomOf="@id/movieItemRatingVoteAverage"
           app:layout_constraintStart_toEndOf="@id/movieItemRatingVoteAverage"
           app:layout_constraintTop_toTopOf="@id/movieItemRatingVoteAverage"
+          tools:ignore="ContentDescription" />
+
+      <TextView
+          android:id="@+id/movieItemPopularity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_marginStart="16dp"
+          android:gravity="center"
+          android:text="@string/popularity"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/movieItemRatingVoteAverage"
+          app:layout_constraintStart_toEndOf="@id/movieItemRatingIcon"
+          app:layout_constraintTop_toTopOf="@id/movieItemRatingVoteAverage" />
+
+      <ImageView
+          android:id="@+id/movieItemPopularityIcon"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:gravity="center"
+          android:src="@mipmap/popularity_icon"
+          app:layout_constraintBottom_toBottomOf="@id/movieItemPopularity"
+          app:layout_constraintStart_toEndOf="@id/movieItemPopularity"
+          app:layout_constraintTop_toTopOf="@id/movieItemPopularity"
           tools:ignore="ContentDescription" />
 
       <TextView
@@ -90,9 +114,9 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginBottom="100dp"
+      android:background="@color/main_color2"
       app:cardCornerRadius="8dp"
       app:cardElevation="16dp"
-      android:background="@color/main_color2"
       app:cardUseCompatPadding="true"
       app:layout_constraintBottom_toBottomOf="@id/movieItemDescriptionLayout"
       app:layout_constraintStart_toStartOf="@id/movieItemDescriptionLayout"

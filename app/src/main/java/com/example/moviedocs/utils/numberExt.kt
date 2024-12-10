@@ -14,7 +14,7 @@ fun Int.formatTotalResult(): String {
   return "($totalResult):"
 }
 
-fun Int.formatDollar(): String {
+fun Long.formatDollar(): String {
   val dollar: Double = this.toDouble()
   val formatDecimal: DecimalFormat = DecimalFormat("###,###,##0.00")
   return "$${formatDecimal.format(dollar)}"
