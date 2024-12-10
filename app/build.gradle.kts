@@ -2,8 +2,8 @@ import java.util.Properties
 
 plugins {
   alias(libs.plugins.android.application)
-  alias(libs.plugins.kotlin.android)
-  id("kotlin-kapt")
+  alias(libs.plugins.kotlin.android) version "2.1.0"
+  id("com.google.devtools.ksp")
   id("com.google.dagger.hilt.android")
   id("com.google.gms.google-services")
   id("androidx.navigation.safeargs.kotlin")
@@ -112,14 +112,14 @@ dependencies {
 
   // Hilt
   implementation("com.google.dagger:hilt-android:2.53.1")
-  kapt("com.google.dagger:hilt-android-compiler:2.53.1")
+  ksp("com.google.dagger:hilt-android-compiler:2.53.1")
 
   // Room
   implementation("androidx.room:room-runtime:2.6.1")
   annotationProcessor("androidx.room:room-compiler:2.6.1")
   // optional - Kotlin Extensions and Coroutines support for Room
   implementation("androidx.room:room-ktx:2.6.1")
-  kapt("androidx.room:room-compiler:2.6.1")
+  ksp("androidx.room:room-compiler:2.6.1")
 
   // Timber
   implementation("com.jakewharton.timber:timber:5.0.1")
@@ -142,4 +142,8 @@ dependencies {
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
   implementation("com.google.firebase:firebase-auth:23.1.0")
   implementation("com.google.firebase:firebase-database:21.0.0")
+
+  // Paging 3
+  implementation("androidx.paging:paging-runtime:3.3.4")
+  testImplementation("androidx.paging:paging-common:3.3.4")
 }
