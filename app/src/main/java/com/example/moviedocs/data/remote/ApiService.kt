@@ -2,6 +2,7 @@ package com.example.moviedocs.data.remote
 
 import com.example.moviedocs.data.remote.response.company.CompanyDetailResponse
 import com.example.moviedocs.data.remote.response.country.CountryItemResponse
+import com.example.moviedocs.data.remote.response.credits.CreditListResponse
 import com.example.moviedocs.data.remote.response.language.LanguageItemResponse
 import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
 import com.example.moviedocs.data.remote.response.moviedetails.external.ExternalIdsResponse
@@ -47,7 +48,9 @@ interface ApiService {
 
   @GET("discover/movie")
   suspend fun getCompanyMovieList(
-    @Query("page") page: Int,
-    @Query("with_companies") companyId: Int
+    @Query("page") page: Int, @Query("with_companies") companyId: Int
   ): MovieListResponse
+
+  @GET("movie/{movie_id}/credits")
+  suspend fun getCreditList(@Path("movie_id") movieId: Int): CreditListResponse
 }
