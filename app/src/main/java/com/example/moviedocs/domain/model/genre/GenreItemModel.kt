@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.model.moviegenre
+package com.example.moviedocs.domain.model.genre
 
 data class GenreItemModel(
   val id: Int,

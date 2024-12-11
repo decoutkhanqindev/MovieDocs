@@ -1,7 +1,7 @@
-package com.example.moviedocs.domain.usecase.moviegenre
+package com.example.moviedocs.domain.usecase.genre
 
-import com.example.moviedocs.domain.model.moviegenre.GenreListModel
-import com.example.moviedocs.domain.repository.moviegenre.GenreListRepository
+import com.example.moviedocs.domain.model.genre.GenreListModel
+import com.example.moviedocs.domain.repository.genre.GenreListRepository
 import javax.inject.Inject
 
 class GetGenreListUseCase @Inject constructor(

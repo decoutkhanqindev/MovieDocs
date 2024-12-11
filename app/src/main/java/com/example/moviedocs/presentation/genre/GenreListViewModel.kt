@@ -1,9 +1,9 @@
-package com.example.moviedocs.presentation.moviegenre
+package com.example.moviedocs.presentation.genre
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.model.moviegenre.GenreListModel
-import com.example.moviedocs.domain.usecase.moviegenre.GetGenreListUseCase
+import com.example.moviedocs.domain.model.genre.GenreListModel
+import com.example.moviedocs.domain.usecase.genre.GetGenreListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,19 +16,19 @@ import javax.inject.Inject
 class GenreListViewModel @Inject constructor(
   private val getGenreListUseCase: GetGenreListUseCase,
 ) : ViewModel() {
-  
+
   private val _uiState: MutableStateFlow<GenreListUiState> =
     MutableStateFlow(GenreListUiState.Loading)
   val uiState: StateFlow<GenreListUiState> get() = _uiState.asStateFlow()
-  
+
   init {
     loadGenreList()
   }
-  
+
   private fun loadGenreList() {
     viewModelScope.launch {
       _uiState.value = GenreListUiState.Loading
-      
+
       getGenreListUseCase()
         .onSuccess { it: GenreListModel ->
           _uiState.value = GenreListUiState.Success(items = it.genres)

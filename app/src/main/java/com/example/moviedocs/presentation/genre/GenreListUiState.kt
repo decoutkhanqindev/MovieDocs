@@ -1,6 +1,6 @@
-package com.example.moviedocs.presentation.moviegenre
+package com.example.moviedocs.presentation.genre
 
-import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 
 sealed interface GenreListUiState {
   data object Loading : GenreListUiState

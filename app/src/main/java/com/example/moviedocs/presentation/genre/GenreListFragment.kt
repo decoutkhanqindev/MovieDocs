@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.moviegenre
+package com.example.moviedocs.presentation.genre
 
 import android.os.Bundle
 import android.view.View

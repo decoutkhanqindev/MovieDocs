@@ -1,11 +1,11 @@
-package com.example.moviedocs.presentation.moviegenre
+package com.example.moviedocs.presentation.genre
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.GenreItemViewHolderBinding
-import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 
 class GenreListAdapter : BaseListAdapter<GenreItemModel, GenreItemViewHolderBinding>(
