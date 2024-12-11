@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieDetailCreditsBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.credits.CastListHorizontalAdapter
-import com.example.moviedocs.presentation.credits.CrewListHorizontalAdapter
+import com.example.moviedocs.presentation.credits.cast.CastListHorizontalAdapter
+import com.example.moviedocs.presentation.credits.crew.CrewListHorizontalAdapter
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
+import com.example.moviedocs.utils.formatTotalResult
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
+import com.example.moviedocs.utils.navigateTo
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +40,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.castRecycleView,
       mLayoutManager = LinearLayoutManager(
@@ -52,6 +56,13 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       mAdapter = crewListHorizontalAdapter,
     )
     bindViewModel()
+  }
+
+  private fun setUpNavigation() {
+    binding.apply {
+      castMoreBtn.navigateTo(R.id.action_movieDetailFragment_to_castListFragment)
+      crewMoreBtn.navigateTo(R.id.action_movieDetailFragment_to_crewListFragment)
+    }
   }
 
   private fun bindViewModel() {
@@ -73,9 +84,12 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
         binding.apply {
           castLayout.visible()
           crewLayout.visible()
+
+          totalCasts.text = state.castList.size.formatTotalResult()
+          totalCrews.text = state.crewList.size.formatTotalResult()
         }
         castListHorizontalAdapter.submitList(state.castList)
-        crewListHorizontalAdapter.submitList(state.creditList)
+        crewListHorizontalAdapter.submitList(state.crewList)
       }
 
       is MovieDetailUiState.Error -> {
