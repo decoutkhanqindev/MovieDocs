@@ -17,7 +17,9 @@ import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CastListFragment : BaseFragment<FragmentCreditListBinding>(
   FragmentCreditListBinding::inflate
 ) {
@@ -34,8 +36,10 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    binding.creditListTitle.text = "Cast List"
-    viewModel.loadCreditList(movieId = args.movieId)
+    if (savedInstanceState == null) {
+      viewModel.loadCreditList(args.movieId)
+    }
+    binding.creditListTitle.text = getString(R.string.cast_list_title)
     setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.creditListRecyclerView,

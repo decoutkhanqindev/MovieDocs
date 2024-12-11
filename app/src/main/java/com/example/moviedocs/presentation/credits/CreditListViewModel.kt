@@ -19,7 +19,7 @@ class CreditListViewModel @Inject constructor(
   private val getCreditListUseCase: GetCreditListUseCase,
 ) : ViewModel() {
 
-  private var _uiState: MutableStateFlow<CreditListUiState> =
+  private val _uiState: MutableStateFlow<CreditListUiState> =
     MutableStateFlow(CreditListUiState.Loading)
   val uiState: StateFlow<CreditListUiState> get() = _uiState.asStateFlow()
 

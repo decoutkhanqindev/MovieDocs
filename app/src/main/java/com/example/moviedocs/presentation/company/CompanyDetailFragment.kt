@@ -44,8 +44,10 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    viewModel.getCompanyDetail(companyId = args.companyId)
-    viewModel.getCompanyMoveList(page = 1, companyId = args.companyId)
+    if (savedInstanceState == null) {
+      viewModel.getCompanyDetail(companyId = args.companyId)
+      viewModel.getCompanyMoveList(page = 1, companyId = args.companyId)
+    }
     setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.movieListRecycleView,
