@@ -1,9 +1,9 @@
-package com.example.moviedocs.presentation.credits
+package com.example.moviedocs.presentation.credits.crew
 
 import androidx.recyclerview.widget.DiffUtil
 import com.example.moviedocs.domain.model.credits.CrewItemModel
 
-object CrewItemDiffCallBack : DiffUtil.ItemCallback<CrewItemModel>() {
+object CrewItemModelDiffCallBack : DiffUtil.ItemCallback<CrewItemModel>() {
   override fun areItemsTheSame(
     oldItem: CrewItemModel,
     newItem: CrewItemModel
