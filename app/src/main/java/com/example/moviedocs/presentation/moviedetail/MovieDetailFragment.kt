@@ -46,7 +46,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    viewPagerAdapter = MovieDetailViewPagerAdapter(fragment = this)
+    viewPagerAdapter = MovieDetailViewPagerAdapter(fragment = this, movieId = args.movieId)
     viewModel.loadData(args.movieId)
     setUpNavigation()
     setUpTabLayout()
