@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -234,12 +233,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.visible()
           scrollView.invisible()
         }
-        sliderViewPagerAdapter.submitList(emptyList())
-        genreAdapter.submitList(emptyList())
-        nowPlayingAdapter.submitList(emptyList())
-        popularAdapter.submitList(emptyList())
-        upComingAdapter.submitList(emptyList())
-        topRatedAdapter.submitList(emptyList())
       }
 
       is HomeUiState.Success -> {
@@ -260,14 +253,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.visible()
           scrollView.invisible()
         }
-        genreAdapter.submitList(emptyList())
-        sliderViewPagerAdapter.submitList(emptyList())
-        nowPlayingAdapter.submitList(emptyList())
-        popularAdapter.submitList(emptyList())
-        upComingAdapter.submitList(emptyList())
-        topRatedAdapter.submitList(emptyList())
-
-        Toast.makeText(requireContext(), state.throwable.message, Toast.LENGTH_SHORT).show()
       }
     }
   }

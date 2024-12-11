@@ -52,7 +52,7 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
     )
     bindViewModel()
     handleLoadNextPage()
-    handleSortingMovies()
+    handleSortingList()
   }
 
   private fun setUpNavigation() {
@@ -78,15 +78,6 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
           movieListProgressBar.visible()
           movieListRecyclerView.invisible()
         }
-        movieListAdapter.submitList(emptyList())
-      }
-
-      is MovieListUiState.Error -> {
-        binding.apply {
-          movieListProgressBar.visible()
-          movieListRecyclerView.invisible()
-        }
-        movieListAdapter.submitList(emptyList())
       }
 
       is MovieListUiState.Success -> {
@@ -98,6 +89,13 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
         pageNumbersAdapter.setCurrentPage(state.currentPage - 1)
         movieListAdapter.submitList(state.items)
       }
+
+      is MovieListUiState.Error -> {
+        binding.apply {
+          movieListProgressBar.visible()
+          movieListRecyclerView.invisible()
+        }
+      }
     }
   }
 
@@ -107,35 +105,35 @@ class NowPlayingFragment : BaseFragment<FragmentMovieListBinding>(
     }
   }
 
-  private fun handleSortingMovies() {
+  private fun handleSortingList() {
     binding.toolBar.setOnMenuItemClickListener { it: MenuItem ->
       when (it.itemId) {
-        R.id.titleAsc -> {
+        R.id.movieTitleAsc -> {
           viewModel.sortList(MovieListUiState.SortType.TITLE_ASC)
           true
         }
 
-        R.id.titleDsc -> {
+        R.id.movieTitleDsc -> {
           viewModel.sortList(MovieListUiState.SortType.TITLE_DSC)
           true
         }
 
-        R.id.ratingAsc -> {
+        R.id.movieRatingAsc -> {
           viewModel.sortList(MovieListUiState.SortType.RATING_ASC)
           true
         }
 
-        R.id.ratingDsc -> {
+        R.id.movieRatingDsc -> {
           viewModel.sortList(MovieListUiState.SortType.RATING_DSC)
           true
         }
 
-        R.id.popularityAsc -> {
+        R.id.moviepopularityAsc -> {
           viewModel.sortList(MovieListUiState.SortType.POPULARITY_ASC)
           true
         }
 
-        R.id.popularityDsc -> {
+        R.id.moviepopularityAsc -> {
           viewModel.sortList(MovieListUiState.SortType.POPULARITY_DSC)
           true
         }

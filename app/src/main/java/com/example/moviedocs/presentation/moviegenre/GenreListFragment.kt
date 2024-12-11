@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentGenreListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -56,7 +55,14 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
           genreListProgressBar.visible()
           genreRecycleView.invisible()
         }
-        adapter.submitList(emptyList())
+      }
+
+      is GenreListUiState.Success -> {
+        binding.apply {
+          genreListProgressBar.invisible()
+          genreRecycleView.visible()
+        }
+        adapter.submitList(state.items)
       }
 
       is GenreListUiState.Error -> {
@@ -64,15 +70,6 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
           genreListProgressBar.visible()
           genreRecycleView.invisible()
         }
-        adapter.submitList(emptyList())
-      }
-
-      is GenreListUiState.Success -> {
-        binding.apply {
-          genreListProgressBar.gone()
-          genreRecycleView.visible()
-        }
-        adapter.submitList(state.items)
       }
     }
   }
