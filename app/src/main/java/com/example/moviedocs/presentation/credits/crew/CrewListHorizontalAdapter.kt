@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.credits
+package com.example.moviedocs.presentation.credits.crew
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,7 @@ import com.example.moviedocs.utils.loadImgFromUrl
 
 class CrewListHorizontalAdapter :
   BaseListAdapter<CrewItemModel, CreditItemHorizontalViewHolderBinding>(
-    CrewItemDiffCallBack
+    CrewItemModelDiffCallBack
   ) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
