@@ -29,10 +29,6 @@ import kotlin.math.abs
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-  companion object {
-    fun newInstance(): HomeFragment = HomeFragment()
-  }
-
   private val viewModel: HomeViewModel by viewModels()
 
   private lateinit var viewPager: ViewPager2
