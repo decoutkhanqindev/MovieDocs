@@ -66,7 +66,7 @@ class MovieDetailViewModel @Inject constructor(
           languageList = languageListResult.getOrNull()!!,
           countryList = countryListResult.getOrNull()!!,
           castList = creditListResult.getOrNull()?.cast ?: emptyList(),
-          creditList = creditListResult.getOrNull()?.crew ?: emptyList(),
+          crewList = creditListResult.getOrNull()?.crew ?: emptyList(),
         )
       } else {
         val error = listOf(

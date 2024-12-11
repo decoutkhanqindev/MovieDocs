@@ -16,6 +16,6 @@ sealed interface MovieDetailUiState {
     val languageList: List<LanguageItemModel> = emptyList(),
     val countryList: List<CountryItemModel> = emptyList(),
     val castList: List<CastItemModel> = emptyList(),
-    val creditList: List<CrewItemModel> = emptyList(),
+    val crewList: List<CrewItemModel> = emptyList(),
   ) : MovieDetailUiState
 }
