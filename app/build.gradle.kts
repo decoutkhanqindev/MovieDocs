@@ -83,10 +83,6 @@ dependencies {
   implementation("androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx-android:2.8.7")
 
-  // Paging 3
-  implementation("androidx.paging:paging-runtime:3.3.2")
-  implementation("androidx.paging:paging-runtime-ktx:3.3.2")
-
   // ViewPager2
   implementation("androidx.viewpager2:viewpager2:1.1.0")
 
@@ -131,9 +127,9 @@ dependencies {
   implementation("androidx.core:core-splashscreen:1.0.1")
 
   // Navigation
-  implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
-  implementation("androidx.navigation:navigation-fragment:2.8.3")
-  implementation("androidx.navigation:navigation-ui:2.8.3")
+  implementation("androidx.navigation:navigation-fragment-ktx:2.8.4")
+  implementation("androidx.navigation:navigation-fragment:2.8.4")
+  implementation("androidx.navigation:navigation-ui:2.8.4")
 
   // Data Store
   implementation("androidx.datastore:datastore-preferences-core:1.1.1")
