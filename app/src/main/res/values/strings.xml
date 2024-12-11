@@ -82,5 +82,6 @@
   <string name="crew_title">Crews</string>
   <string name="gender">Male</string>
   <string name="character">Eddie Brock / Venom</string>
-  <string name="cast_list_tilte">Cast List</string>
+  <string name="cast_list_title">Cast List</string>
+  <string name="crew_list_title">Crew List</string>
 </resources>

@@ -8,32 +8,32 @@
       app:showAsAction="ifRoom">
     <menu>
       <item
-          android:id="@+id/titleAsc"
+          android:id="@+id/movieTitleAsc"
           android:icon="@drawable/up_icon"
           android:title="@string/title_a_z"
           app:showAsAction="never" />
       <item
-          android:id="@+id/titleDsc"
+          android:id="@+id/movieTitleDsc"
           android:icon="@drawable/down_icon"
           android:title="@string/title_z_a"
           app:showAsAction="never" />
       <item
-          android:id="@+id/ratingAsc"
+          android:id="@+id/movieRatingAsc"
           android:icon="@drawable/up_icon"
           android:title="@string/rating_asc"
           app:showAsAction="never" />
       <item
-          android:id="@+id/ratingDsc"
+          android:id="@+id/movieRatingDsc"
           android:icon="@drawable/down_icon"
           android:title="@string/rating_dsc"
           app:showAsAction="never" />
       <item
-          android:id="@+id/popularityAsc"
+          android:id="@+id/moviepopularityAsc"
           android:icon="@drawable/up_icon"
           android:title="@string/popularity_asc"
           app:showAsAction="never" />
       <item
-          android:id="@+id/popularityDsc"
+          android:id="@+id/moviePopularityDsc"
           android:icon="@drawable/down_icon"
           android:title="@string/popularity_dsc"
           app:showAsAction="never" />
