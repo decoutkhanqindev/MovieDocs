@@ -15,13 +15,13 @@ abstract class MovieListViewModel : ViewModel() {
   // This is used for managing the UI state for the movie list (e.g., loading, success, error).
   protected val _uiState: MutableStateFlow<MovieListUiState> =
     MutableStateFlow(MovieListUiState.Loading)
-  val uiState: StateFlow<MovieListUiState> get() = _uiState.asStateFlow()
+  internal val uiState: StateFlow<MovieListUiState> get() = _uiState.asStateFlow()
 
   // Channel for One-Time Events:
   // This is used to send one-time events like error or success notifications to the UI.
   protected val _singleEvent: Channel<MovieListSingleEvent> =
     Channel(capacity = Channel.UNLIMITED)
-  val singleEvent: Flow<MovieListSingleEvent> get() = _singleEvent.receiveAsFlow()
+  internal val singleEvent: Flow<MovieListSingleEvent> get() = _singleEvent.receiveAsFlow()
 
   internal fun sortList(type: MovieListUiState.SortType) {
     val currentState: MovieListUiState = _uiState.value

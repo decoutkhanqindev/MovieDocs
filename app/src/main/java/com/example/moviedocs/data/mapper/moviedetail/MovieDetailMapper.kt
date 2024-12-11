@@ -1,7 +1,7 @@
 package com.example.moviedocs.data.mapper.moviedetail
 
 import com.example.moviedocs.data.mapper.moviedetail.company.toCompanyItemModel
-import com.example.moviedocs.data.mapper.moviegenre.toGenreItemModel
+import com.example.moviedocs.data.mapper.genre.toGenreItemModel
 import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
 

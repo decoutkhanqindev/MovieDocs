@@ -2,9 +2,9 @@ package com.example.moviedocs.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.model.moviegenre.GenreListModel
+import com.example.moviedocs.domain.model.genre.GenreListModel
 import com.example.moviedocs.domain.model.movielist.MovieListModel
-import com.example.moviedocs.domain.usecase.moviegenre.GetGenreListUseCase
+import com.example.moviedocs.domain.usecase.genre.GetGenreListUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetNowPlayingUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetPopularUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetTopRatedUseCase

@@ -1,7 +1,7 @@
 package com.example.moviedocs.domain.model.moviedetail
 
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
-import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 
 data class MovieDetailModel(
   val id: Int, // 1034541

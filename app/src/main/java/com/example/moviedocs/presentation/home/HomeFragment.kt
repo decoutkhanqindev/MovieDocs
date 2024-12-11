@@ -15,7 +15,7 @@ import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.moviegenre.GenreListAdapter
+import com.example.moviedocs.presentation.genre.GenreListAdapter
 import com.example.moviedocs.presentation.movielist.MovieListHorizontalAdapter
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted

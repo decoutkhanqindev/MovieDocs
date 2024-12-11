@@ -1,6 +1,6 @@
 package com.example.moviedocs.presentation.home
 
-import com.example.moviedocs.domain.model.moviegenre.GenreItemModel
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 
 sealed interface HomeUiState {
