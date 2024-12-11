@@ -1,20 +1,22 @@
 package com.example.moviedocs.presentation.moviedetail.credits
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentMovieDetailCreditsBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.credits.cast.CastListHorizontalAdapter
 import com.example.moviedocs.presentation.credits.crew.CrewListHorizontalAdapter
+import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.utils.formatTotalResult
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
-import com.example.moviedocs.utils.navigateTo
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,8 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
     fun newInstance(): MovieDetailCreditsFragment = MovieDetailCreditsFragment()
   }
 
+  private var movieId: Int = 0
+
   private val viewModel: MovieDetailViewModel by activityViewModels()
 
   private val castListHorizontalAdapter: CastListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
@@ -35,6 +39,15 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
 
   private val crewListHorizontalAdapter: CrewListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     CrewListHorizontalAdapter()
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    movieId = arguments?.getInt("movieId")!!
+    return super.onCreateView(inflater, container, savedInstanceState)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,8 +73,21 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
 
   private fun setUpNavigation() {
     binding.apply {
-      castMoreBtn.navigateTo(R.id.action_movieDetailFragment_to_castListFragment)
-      crewMoreBtn.navigateTo(R.id.action_movieDetailFragment_to_crewListFragment)
+      castMoreBtn.setOnClickListener {
+        findNavController().navigate(
+          MovieDetailFragmentDirections.actionMovieDetailFragmentToCastListFragment(
+            movieId = movieId
+          )
+        )
+      }
+
+      crewMoreBtn.setOnClickListener {
+        findNavController().navigate(
+          MovieDetailFragmentDirections.actionMovieDetailFragmentToCrewListFragment(
+            movieId = movieId
+          )
+        )
+      }
     }
   }
 
@@ -76,8 +102,6 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
           castLayout.invisible()
           crewLayout.invisible()
         }
-        castListHorizontalAdapter.submitList(emptyList())
-        crewListHorizontalAdapter.submitList(emptyList())
       }
 
       is MovieDetailUiState.Success -> {
@@ -97,8 +121,6 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
           castLayout.invisible()
           crewLayout.invisible()
         }
-        castListHorizontalAdapter.submitList(emptyList())
-        crewListHorizontalAdapter.submitList(emptyList())
       }
     }
   }
