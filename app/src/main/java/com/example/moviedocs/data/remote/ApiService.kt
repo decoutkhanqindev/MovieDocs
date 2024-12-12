@@ -53,4 +53,9 @@ interface ApiService {
 
   @GET("movie/{movie_id}/credits")
   suspend fun getCreditList(@Path("movie_id") movieId: Int): CreditListResponse
+
+  @GET("discover/movie")
+  suspend fun getGenreMovieList(
+    @Query("page") page: Int, @Query("with_genres") genreId: Int
+  ): MovieListResponse
 }
