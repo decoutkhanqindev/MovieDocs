@@ -70,8 +70,8 @@
           android:id="@+id/movieDetailImgLayout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          app:cardCornerRadius="8dp"
-          app:cardElevation="16dp"
+          app:cardCornerRadius="4dp"
+          app:cardElevation="8dp"
           app:cardUseCompatPadding="true"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@id/movieDetailTitle"
@@ -82,7 +82,8 @@
         <ImageView
             android:id="@+id/movieDetailImg"
             android:layout_width="140dp"
-            android:layout_height="190dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
             android:scaleType="fitXY"
             tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />

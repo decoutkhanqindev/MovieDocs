@@ -56,12 +56,10 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
   }
 }
 
-fun ImageView.loadImgFromUrl(url: String?) {
+fun ImageView.loadImgFromUrl(url: String) {
   Glide.with(context)
     .load("https://image.tmdb.org/t/p/w500$url")
     .error(R.drawable.app_icon)
-    .fitCenter()
-    .centerCrop()
     .transition(DrawableTransitionOptions.withCrossFade())
     .into(this)
 }
@@ -99,7 +97,4 @@ fun setUpRecyclerView(
     layoutManager = mLayoutManager
     adapter = mAdapter
   }
-}
-
-fun setUpAlertDialog() {
 }

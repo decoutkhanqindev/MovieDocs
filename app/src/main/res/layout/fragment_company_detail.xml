@@ -81,8 +81,8 @@
           android:id="@+id/companyDetailImgLayout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          app:cardCornerRadius="8dp"
-          app:cardElevation="16dp"
+          app:cardCornerRadius="0dp"
+          app:cardElevation="8dp"
           app:cardUseCompatPadding="true"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -91,9 +91,11 @@
 
         <ImageView
             android:id="@+id/movieDetailImg"
-            android:layout_width="375dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
             android:scaleType="fitXY"
+            android:layout_gravity="center"
             tools:ignore="ContentDescription"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
       </com.google.android.material.card.MaterialCardView>

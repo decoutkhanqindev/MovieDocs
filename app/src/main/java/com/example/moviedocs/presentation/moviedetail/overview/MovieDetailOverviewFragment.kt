@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.genre.GenreItemModel
@@ -48,12 +49,16 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.genreRecycleView,
-      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mLayoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.HORIZONTAL, false
+      ),
       mAdapter = genreListAdapter,
     )
     setUpRecyclerView(
       mRecyclerView = binding.companyRecycleView,
-      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mLayoutManager = GridLayoutManager(
+        requireContext(), 2, LinearLayoutManager.VERTICAL, false
+      ),
       mAdapter = companyListAdapter,
     )
     bindViewModel()
