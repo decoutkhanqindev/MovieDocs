@@ -13,6 +13,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentHomeBinding
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.genre.GenreListAdapter
@@ -114,11 +115,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   private fun setUpNavigation() {
     binding.apply {
       searchBtn.navigateTo(R.id.action_homeFragment_to_searchFragment)
+      genreMoreBtn.navigateTo(R.id.action_homeFragment_to_genreListFragment)
       nowPlayingMoreBtn.navigateTo(R.id.action_homeFragment_to_nowPlayingFragment)
       popularMoreBtn.navigateTo(R.id.action_homeFragment_to_popularFragment)
       upcomingMoreBtn.navigateTo(R.id.action_homeFragment_to_upcomingFragment)
       topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
-      genreMoreBtn.navigateTo(R.id.action_homeFragment_to_genreListFragment)
+    }
+
+    genreAdapter.onItemClickListener = { it: GenreItemModel ->
+      findNavController().navigate(
+        HomeFragmentDirections.actionHomeFragmentToGenreMovieListFragment(
+          genreId = it.id,
+          genreName = it.name
+        )
+      )
     }
 
     nowPlayingAdapter.onItemClickListener = { it: MovieItemModel ->

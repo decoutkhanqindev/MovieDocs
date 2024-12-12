@@ -7,13 +7,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.company.CompanyListHorizontalAdapter
+import com.example.moviedocs.presentation.genre.GenreListAdapter
 import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
-import com.example.moviedocs.presentation.genre.GenreListAdapter
 import com.example.moviedocs.utils.formatDollar
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
@@ -59,6 +60,15 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   }
 
   private fun setUpNavigation() {
+    genreListAdapter.onItemClickListener = { it: GenreItemModel ->
+      findNavController().navigate(
+        MovieDetailFragmentDirections.actionMovieDetailFragmentToGenreMovieListFragment(
+          genreId = it.id,
+          genreName = it.name
+        )
+      )
+    }
+
     companyListAdapter.onItemClickListener = { it: CompanyItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToCompanyDetailFragment(

@@ -3,10 +3,13 @@ package com.example.moviedocs.presentation.genre
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentGenreListBinding
+import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.home.HomeFragmentDirections
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.navigateBack
@@ -42,6 +45,15 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
 
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
+
+    adapter.onItemClickListener = { it: GenreItemModel ->
+      findNavController().navigate(
+        HomeFragmentDirections.actionHomeFragmentToGenreMovieListFragment(
+          genreId = it.id,
+          genreName = it.name
+        )
+      )
+    }
   }
 
   private fun bindViewModel() {
