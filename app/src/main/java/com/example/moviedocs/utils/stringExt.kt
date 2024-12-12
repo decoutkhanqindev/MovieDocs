@@ -19,14 +19,18 @@ fun String.formatDate(): String {
   return if (date != null) outputFormat.format(date) else "00/00/000"
 }
 
-fun String.toLanguageName(languageList: List<LanguageItemModel>): String {
-  val languageCode: String = this
-  val language: LanguageItemModel? = languageList.find { it.iso6391 == languageCode }
-  return language!!.englishName
+fun String?.toLanguageName(languageList: List<LanguageItemModel>): String {
+  if (this.isNullOrEmpty()) {
+    return "Unknown language"
+  }
+  val language: LanguageItemModel? = languageList.find { it.iso6391 == this }
+  return language?.englishName ?: "Unknown language"
 }
 
-fun String.toCountryName(countryList: List<CountryItemModel>): String {
-  val countryCode: String = this
-  val country: CountryItemModel? = countryList.find { it.iso31661 == countryCode }
-  return country!!.englishName
+fun String?.toCountryName(countryList: List<CountryItemModel>): String {
+  if (this.isNullOrEmpty()) {
+    return "Unknown country"
+  }
+  val country: CountryItemModel? = countryList.find { it.iso31661 == this }
+  return country?.englishName ?: "Unknown country"
 }
