@@ -138,8 +138,4 @@ dependencies {
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
   implementation("com.google.firebase:firebase-auth:23.1.0")
   implementation("com.google.firebase:firebase-database:21.0.0")
-
-  // Paging 3
-  implementation("androidx.paging:paging-runtime:3.3.4")
-  testImplementation("androidx.paging:paging-common:3.3.4")
 }
