@@ -14,5 +14,5 @@ fun CastItemResponse.toCastItemModel(): CastItemModel =
     name = name?.takeIf { it.isNotEmpty() } ?: "No name",
     originalName = originalName?.takeIf { it.isNotEmpty() } ?: "No original name",
     popularity = popularity?.takeIf { it != 0.0 } ?: 0.0,
-    profilePath = profilePath?.takeIf { it.isNotEmpty() } ?: "No profile path"
+    profilePath = profilePath?.takeIf { it.isNotEmpty() } ?: ""
   )
