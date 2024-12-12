@@ -15,24 +15,34 @@ class MovieListRepositoryImpl @Inject constructor(
   @AppDispatcher(DispatcherType.IO)
   private val ioDispatcher: CoroutineDispatcher,
 ) : MovieListRepository {
-  
+
   override suspend fun getNowPlaying(page: Int): Result<MovieListModel> =
     runSuspendCatching(ioDispatcher) {
       apiService.getNowPlaying(page).toMovieListModel()
     }
-  
+
   override suspend fun getPopular(page: Int): Result<MovieListModel> =
     runSuspendCatching(ioDispatcher) {
       apiService.getPopular(page).toMovieListModel()
     }
-  
+
   override suspend fun getUpcoming(page: Int): Result<MovieListModel> =
     runSuspendCatching(ioDispatcher) {
       apiService.getUpcoming(page).toMovieListModel()
     }
-  
+
   override suspend fun getTopRated(page: Int): Result<MovieListModel> =
     runSuspendCatching {
       apiService.getTopRated(page).toMovieListModel()
+    }
+
+  override suspend fun getCompanyMovieList(page: Int, companyId: Int): Result<MovieListModel> =
+    runSuspendCatching(ioDispatcher) {
+      apiService.getCompanyMovieList(page = page, companyId = companyId).toMovieListModel()
+    }
+
+  override suspend fun getGenreMovieList(page: Int, genreId: Int): Result<MovieListModel> =
+    runSuspendCatching(ioDispatcher) {
+      apiService.getGenreMovieList(page, genreId).toMovieListModel()
     }
 }
