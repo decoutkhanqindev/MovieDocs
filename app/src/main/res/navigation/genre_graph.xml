@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/genre_graph"
+    app:startDestination="@id/genreMovieListFragment">
+
+  <fragment
+      android:id="@+id/genreMovieListFragment"
+      android:name="com.example.moviedocs.presentation.movielist.genre.GenreMovieListFragment"
+      android:label="GenreMovieListFragment"
+      tools:layout="@layout/fragment_movie_list">
+    <argument
+        android:name="genreId"
+        android:defaultValue="0"
+        app:argType="integer" />
+
+    <argument
+        android:name="genreName"
+        android:defaultValue=""
+        app:argType="string" />
+
+    <action
+        android:id="@+id/action_genreMovieListFragment_to_movieDetailFragment"
+        app:destination="@id/movie_detail_graph"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
+  </fragment>
+</navigation>
