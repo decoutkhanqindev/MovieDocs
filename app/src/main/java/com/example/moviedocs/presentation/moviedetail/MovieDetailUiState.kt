@@ -1,11 +1,11 @@
 package com.example.moviedocs.presentation.moviedetail
 
+import com.example.moviedocs.domain.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.country.CountryItemModel
 import com.example.moviedocs.domain.model.credits.CastItemModel
 import com.example.moviedocs.domain.model.credits.CrewItemModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.model.moviedetail.external.ExternalIdsModel
 
 sealed interface MovieDetailUiState {
   data object Loading : MovieDetailUiState

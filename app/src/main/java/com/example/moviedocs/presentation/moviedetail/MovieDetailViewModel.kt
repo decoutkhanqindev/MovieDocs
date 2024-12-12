@@ -2,15 +2,15 @@ package com.example.moviedocs.presentation.moviedetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.moviedocs.domain.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.country.CountryItemModel
 import com.example.moviedocs.domain.model.credits.CreditListModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.model.moviedetail.external.ExternalIdsModel
 import com.example.moviedocs.domain.usecase.country.GetCountryListUseCase
 import com.example.moviedocs.domain.usecase.credits.GetCreditListUseCase
+import com.example.moviedocs.domain.usecase.externalId.GetMovieDetailExternalIdsUseCase
 import com.example.moviedocs.domain.usecase.language.GetLanguageListUseCase
-import com.example.moviedocs.domain.usecase.moviedetail.GetExternalIdsUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetMovieDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
@@ -25,7 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
   private val getMovieDetailUseCase: GetMovieDetailUseCase,
-  private val getExternalIdsUseCase: GetExternalIdsUseCase,
+  private val getExternalIdsUseCase: GetMovieDetailExternalIdsUseCase,
   private val getLanguageListUseCase: GetLanguageListUseCase,
   private val getCountryListUseCase: GetCountryListUseCase,
   private val getMovieCreditsUseCase: GetCreditListUseCase,

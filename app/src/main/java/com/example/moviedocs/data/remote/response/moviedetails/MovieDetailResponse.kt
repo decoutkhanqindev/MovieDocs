@@ -2,8 +2,8 @@ package com.example.moviedocs.data.remote.response.moviedetails
 
 
 import androidx.annotation.Keep
+import com.example.moviedocs.data.remote.response.genre.GenreItemResponse
 import com.example.moviedocs.data.remote.response.moviedetails.company.CompanyItemResponse
-import com.example.moviedocs.data.remote.response.moviegenre.GenreItemResponse
 import com.squareup.moshi.Json
 
 @Keep
