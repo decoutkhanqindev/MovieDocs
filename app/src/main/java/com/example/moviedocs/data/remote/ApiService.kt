@@ -1,12 +1,11 @@
 package com.example.moviedocs.data.remote
 
+import com.example.moviedocs.data.remote.externalId.ExternalIdsResponse
 import com.example.moviedocs.data.remote.response.company.CompanyDetailResponse
 import com.example.moviedocs.data.remote.response.country.CountryItemResponse
 import com.example.moviedocs.data.remote.response.credits.CreditListResponse
+import com.example.moviedocs.data.remote.response.genre.GenreListResponse
 import com.example.moviedocs.data.remote.response.language.LanguageItemResponse
-import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
-import com.example.moviedocs.data.remote.response.moviedetails.external.ExternalIdsResponse
-import com.example.moviedocs.data.remote.response.moviegenre.GenreListResponse
 import com.example.moviedocs.data.remote.response.movielist.MovieListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -35,7 +34,7 @@ interface ApiService {
   suspend fun getMovieDetail(@Path("movie_id") movieId: Int): MovieDetailResponse
 
   @GET("movie/{movie_id}/external_ids")
-  suspend fun getExternalIds(@Path("movie_id") movieId: Int): ExternalIdsResponse
+  suspend fun getMovieDetailExternalIds(@Path("movie_id") movieId: Int): ExternalIdsResponse
 
   @GET("configuration/countries")
   suspend fun getCountryList(): List<CountryItemResponse>
@@ -58,4 +57,7 @@ interface ApiService {
   suspend fun getGenreMovieList(
     @Query("page") page: Int, @Query("with_genres") genreId: Int
   ): MovieListResponse
+
+  @GET("person/{person_id}/external_ids")
+  suspend fun getPersonDetailExternalIds(@Path("person_id") personId: Int): ExternalIdsResponse
 }
