@@ -33,4 +33,17 @@ data class MovieItemResponse(
   val voteAverage: Double?, // 6.7
   @Json(name = "vote_count")
   val voteCount: Int?, // 357
+
+  // Specific to cast
+  @Json(name = "character")
+  val character: String?, // Eddie Brock / Venom
+
+  // Specific to crew
+  @Json(name = "department")
+  val department: String?, // Production
+  @Json(name = "job")
+  val job: String?, // Producer
+
+  @Json(name = "credit_id")
+  val creditId: String // 123abc456
 )
