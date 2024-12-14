@@ -6,6 +6,6 @@ import com.example.moviedocs.domain.model.language.LanguageItemModel
 fun LanguageItemResponse.toLanguageItemModel(): LanguageItemModel =
   LanguageItemModel(
     iso6391 = iso6391,
-    englishName = englishName?.takeIf { it.isNotEmpty() } ?: "No english name",
-    name = name?.takeIf { it.isNotEmpty() } ?: "No name"
+    englishName = englishName?.takeIf { it.isNotEmpty() } ?: "",
+    name = name?.takeIf { it.isNotEmpty() } ?: ""
   )

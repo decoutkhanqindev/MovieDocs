@@ -22,6 +22,6 @@ fun MovieDetailResponse.toMovieDetailModel(): MovieDetailModel =
     budget = budget?.takeIf { it != 0L } ?: 0L,
     revenue = revenue?.takeIf { it != 0L } ?: 0L,
     productionCompanies = productionCompanies?.map { it.toCompanyItemModel() } ?: emptyList(),
-    homepage = homepage?.takeIf { it.isNotEmpty() } ?: "No homepage found",
+    homepage = homepage?.takeIf { it.isNotEmpty() } ?: "",
     popularity = popularity?.takeIf { it != 0.0 } ?: 0.0
   )

@@ -6,7 +6,7 @@ import com.example.moviedocs.domain.model.movielist.MovieListModel
 fun MovieListResponse.toMovieListModel(): MovieListModel =
   MovieListModel(
     page = page,
-    results = results.map { it.toMovieModel() },
+    results = results.map { it.toMovieItemModel() },
     totalPages = totalPages ?: 0,
     totalResults = totalResults ?: 0
   )
