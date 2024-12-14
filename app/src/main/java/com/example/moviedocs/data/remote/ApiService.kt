@@ -8,6 +8,8 @@ import com.example.moviedocs.data.remote.response.genre.GenreListResponse
 import com.example.moviedocs.data.remote.response.language.LanguageItemResponse
 import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
 import com.example.moviedocs.data.remote.response.movielist.MovieListResponse
+import com.example.moviedocs.data.remote.response.person.PersonDetailResponse
+import com.example.moviedocs.data.remote.response.person.PersonMovieCreditListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -61,4 +63,12 @@ interface ApiService {
 
   @GET("person/{person_id}/external_ids")
   suspend fun getPersonDetailExternalIds(@Path("person_id") personId: Int): ExternalIdsResponse
+
+  @GET("person")
+  suspend fun getPersonDetail(@Query("person_id") personId: Int): PersonDetailResponse
+
+  @GET("person/{person_id}/movie_credits")
+  suspend fun getPersonMovieCreditList(
+    @Path("person_id") personId: Int
+  ): PersonMovieCreditListResponse
 }
