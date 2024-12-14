@@ -138,4 +138,7 @@ dependencies {
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
   implementation("com.google.firebase:firebase-auth:23.1.0")
   implementation("com.google.firebase:firebase-database:21.0.0")
+
+  // Read more TextView
+  implementation("kr.co.prnd:readmore-textview:1.0.0")
 }
