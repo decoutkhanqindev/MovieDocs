@@ -79,7 +79,7 @@
 
       <com.google.android.material.card.MaterialCardView
           android:id="@+id/companyDetailImgLayout"
-          android:layout_width="wrap_content"
+          android:layout_width="350dp"
           android:layout_height="wrap_content"
           app:cardCornerRadius="0dp"
           app:cardElevation="8dp"
@@ -91,7 +91,7 @@
 
         <ImageView
             android:id="@+id/movieDetailImg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -101,14 +101,16 @@
       </com.google.android.material.card.MaterialCardView>
 
 
-      <TextView
+      <kr.co.prnd.readmore.ReadMoreTextView
           android:id="@+id/companyDetailDescription"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="@string/overview"
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
+          app:readMoreColor="@color/light_white"
+          app:readMoreMaxLine="3"
+          app:readMoreText=" ...Read more"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"

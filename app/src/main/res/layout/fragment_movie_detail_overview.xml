@@ -22,15 +22,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-      <TextView
+      <kr.co.prnd.readmore.ReadMoreTextView
           android:id="@+id/movieDetailOverview"
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
-          android:text="@string/overview"
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
+          app:readMoreColor="@color/light_white"
+          app:readMoreMaxLine="3"
+          app:readMoreText=" ...Read more"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
