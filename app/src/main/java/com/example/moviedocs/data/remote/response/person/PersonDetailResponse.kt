@@ -14,11 +14,11 @@ data class PersonDetailResponse(
   @Json(name = "birthday")
   val birthday: String?,
   @Json(name = "deathday")
-  val deathday: Any?,
+  val deathday: String?,
   @Json(name = "gender")
   val gender: Int?,
   @Json(name = "homepage")
-  val homepage: Any?,
+  val homepage: String?,
   @Json(name = "id")
   val id: Int,
   @Json(name = "imdb_id")
