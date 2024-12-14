@@ -9,5 +9,5 @@ data class PersonMovieCreditListResponse(
   @Json(name = "crew")
   val crew: List<MovieItemResponse>,
   @Json(name = "id")
-  val id: Int // movie id
+  val id: Int // person id
 )

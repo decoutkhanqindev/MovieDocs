@@ -17,5 +17,5 @@ data class MovieItemModel(
   val department: String,
   val job: String,
 
-  val creditId: String,
+//  val creditId: String,
 )

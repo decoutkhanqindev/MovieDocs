@@ -20,6 +20,4 @@ fun MovieItemResponse.toMovieItemModel(): MovieItemModel =
     // specific to crew
     department = department?.takeIf { it.isNotEmpty() } ?: "Unknown department",
     job = job?.takeIf { it.isNotEmpty() } ?: "Unknown job",
-
-    creditId = creditId
   )

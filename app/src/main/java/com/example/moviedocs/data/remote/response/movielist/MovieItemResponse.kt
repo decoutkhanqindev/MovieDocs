@@ -43,7 +43,4 @@ data class MovieItemResponse(
   val department: String?, // Production
   @Json(name = "job")
   val job: String?, // Producer
-
-  @Json(name = "credit_id")
-  val creditId: String // 123abc456
 )
