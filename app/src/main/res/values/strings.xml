@@ -84,4 +84,6 @@
   <string name="character">Eddie Brock / Venom</string>
   <string name="cast_list_title">Cast List</string>
   <string name="crew_list_title">Crew List</string>
+  <string name="person_detail">Person Detail</string>
+  <string name="birthday_and_deathDay">22/10/1998 - 10/2/2019</string>
 </resources>
