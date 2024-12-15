@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+  <com.google.android.material.appbar.AppBarLayout
+      android:id="@+id/appBarLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/main_color"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <ImageView
+          android:id="@+id/backBtn"
+          android:layout_width="24dp"
+          android:layout_height="24dp"
+          android:layout_gravity="start"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/back_btn" />
+
+      <TextView
+          android:id="@+id/personDetailTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:maxLines="2"
+          android:text="@string/person_detail"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <com.google.android.material.card.MaterialCardView
+      android:id="@+id/personDetailTopLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:cardBackgroundColor="@color/dark_blue2"
+      app:cardCornerRadius="0dp"
+      app:cardElevation="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+      app:strokeColor="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+      <com.google.android.material.card.MaterialCardView
+          android:id="@+id/personDetailImgLayout"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          app:cardCornerRadius="4dp"
+          app:cardElevation="8dp"
+          app:cardUseCompatPadding="true"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toStartOf="@id/personDetailTitle"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:strokeColor="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/personDetailImg"
+            android:layout_width="140dp"
+            android:layout_height="200dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+      </com.google.android.material.card.MaterialCardView>
+
+      <TextView
+          android:id="@+id/personDetailName"
+          android:layout_width="220dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:gravity="start"
+          android:maxLines="2"
+          android:text="@string/app_name"
+          android:textColor="@color/white"
+          android:textSize="20sp"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toTopOf="@id/personDetailReleaseDate"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@id/personDetailImgLayout"
+          app:layout_constraintTop_toTopOf="@id/personDetailImgLayout" />
+
+      <TextView
+          android:id="@+id/personDetailGender"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/gender"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:textStyle="italic"
+          app:layout_constraintBottom_toTopOf="@id/personDetailPopularity"
+          app:layout_constraintStart_toStartOf="@id/personDetailName"
+          app:layout_constraintTop_toBottomOf="@id/personDetailName" />
+
+      <TextView
+          android:id="@+id/personDetailBirthdayAndDeathDay"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:text="@string/birthday_and_deathDay"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          android:textStyle="italic"
+          app:layout_constraintBottom_toBottomOf="@id/personDetailGender"
+          app:layout_constraintStart_toEndOf="@id/personDetailGender"
+          app:layout_constraintTop_toTopOf="@id/personDetailGender" />
+
+      <TextView
+          android:id="@+id/personDetailPopularity"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:gravity="center"
+          android:text="@string/popularity"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toTopOf="@id/personDetailFbImg"
+          app:layout_constraintStart_toStartOf="@id/personDetailGender"
+          app:layout_constraintTop_toBottomOf="@id/personDetailGender" />
+
+      <ImageView
+          android:id="@+id/personDetailPopularityIcon"
+          android:layout_width="20dp"
+          android:layout_height="20dp"
+          android:gravity="center"
+          android:src="@mipmap/popularity_icon"
+          app:layout_constraintBottom_toBottomOf="@id/personDetailPopularity"
+          app:layout_constraintStart_toEndOf="@id/personDetailPopularity"
+          app:layout_constraintTop_toTopOf="@id/personDetailPopularity"
+          tools:ignore="ContentDescription" />
+
+      <ImageView
+          android:id="@+id/personDetailTiktokImg"
+          android:layout_width="38dp"
+          android:layout_height="38dp"
+          android:importantForAccessibility="no"
+          android:src="@drawable/tiktok_icon"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/personDetailImgLayout"
+          app:layout_constraintStart_toStartOf="@id/personDetailName"
+          app:layout_constraintTop_toBottomOf="@id/personDetailPopularityIcon" />
+
+      <ImageView
+          android:id="@+id/personDetailFbImg"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/fb_icon"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/personDetailTiktokImg"
+          app:layout_constraintEnd_toStartOf="@id/personDetailIgImg"
+          app:layout_constraintStart_toEndOf="@id/personDetailTiktokImg"
+          app:layout_constraintTop_toTopOf="@id/personDetailTiktokImg" />
+
+      <ImageView
+          android:id="@+id/personDetailIgImg"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/ig_icon"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/personDetailFbImg"
+          app:layout_constraintEnd_toStartOf="@id/personDetailTwitterImg"
+          app:layout_constraintStart_toEndOf="@id/personDetailFbImg"
+          app:layout_constraintTop_toTopOf="@id/personDetailFbImg" />
+
+      <ImageView
+          android:id="@+id/personDetailTwitterImg"
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:importantForAccessibility="no"
+          android:src="@mipmap/twitter_icon"
+          android:text="@string/status_released"
+          android:textColor="@color/white"
+          android:textSize="16sp"
+          app:layout_constraintBottom_toBottomOf="@id/personDetailIgImg"
+          app:layout_constraintEnd_toEndOf="@id/personDetailName"
+          app:layout_constraintStart_toEndOf="@id/personDetailIgImg"
+          app:layout_constraintTop_toTopOf="@id/personDetailIgImg" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </com.google.android.material.card.MaterialCardView>
+
+  <com.google.android.material.tabs.TabLayout
+      android:id="@+id/tabLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/dark_blue2"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/personDetailTopLayout"
+      app:tabGravity="center"
+      app:tabIndicatorColor="@color/red"
+      app:tabMode="scrollable"
+      app:tabSelectedTextAppearance="@android:style/TextAppearance.Material.Large"
+      app:tabTextAppearance="@android:style/TextAppearance.Material.Small"
+      app:tabTextColor="@color/white" />
+
+  <androidx.viewpager2.widget.ViewPager2
+      android:id="@+id/personDetailViewPager"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+
+  <ProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminateTint="@android:color/white"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
