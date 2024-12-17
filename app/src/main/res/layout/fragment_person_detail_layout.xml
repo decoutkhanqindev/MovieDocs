@@ -65,7 +65,7 @@
           app:cardElevation="8dp"
           app:cardUseCompatPadding="true"
           app:layout_constraintBottom_toBottomOf="parent"
-          app:layout_constraintEnd_toStartOf="@id/personDetailTitle"
+          app:layout_constraintEnd_toStartOf="@id/personDetailName"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           app:strokeColor="@android:color/transparent">
@@ -91,7 +91,7 @@
           android:textColor="@color/white"
           android:textSize="20sp"
           android:textStyle="bold"
-          app:layout_constraintBottom_toTopOf="@id/personDetailReleaseDate"
+          app:layout_constraintBottom_toTopOf="@id/personDetailGender"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/personDetailImgLayout"
           app:layout_constraintTop_toTopOf="@id/personDetailImgLayout" />
@@ -107,19 +107,6 @@
           app:layout_constraintBottom_toTopOf="@id/personDetailPopularity"
           app:layout_constraintStart_toStartOf="@id/personDetailName"
           app:layout_constraintTop_toBottomOf="@id/personDetailName" />
-
-      <TextView
-          android:id="@+id/personDetailBirthdayAndDeathDay"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginStart="16dp"
-          android:text="@string/birthday_and_deathDay"
-          android:textColor="@color/white"
-          android:textSize="16sp"
-          android:textStyle="italic"
-          app:layout_constraintBottom_toBottomOf="@id/personDetailGender"
-          app:layout_constraintStart_toEndOf="@id/personDetailGender"
-          app:layout_constraintTop_toTopOf="@id/personDetailGender" />
 
       <TextView
           android:id="@+id/personDetailPopularity"
