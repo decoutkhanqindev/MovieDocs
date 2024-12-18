@@ -24,7 +24,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
 ) {
 
   companion object {
-    private const val TIKTOK_URL: String = "https://www.tiktok.com"
+    private const val TIKTOK_URL: String = "https://www.tiktok.com/"
     private const val FB_URL: String = "https://www.facebook.com/"
     private const val IG_URL: String = "https://www.instagram.com/"
     private const val TWITTER_URL: String = "https://www.twitter.com/"
@@ -97,6 +97,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
         binding.apply {
           progressBar.visible()
           personDetailTopLayout.invisible()
+          tabLayout.invisible()
+          personDetailViewPager.invisible()
         }
       }
 
@@ -104,6 +106,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
         binding.apply {
           progressBar.invisible()
           personDetailTopLayout.visible()
+          tabLayout.visible()
+          personDetailViewPager.visible()
 
           personDetailName.text = state.personDetail.name
           personDetailImg.loadImgFromUrl(state.personDetail.profilePath)
@@ -119,6 +123,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
         binding.apply {
           progressBar.visible()
           personDetailTopLayout.invisible()
+          tabLayout.invisible()
+          personDetailViewPager.invisible()
         }
       }
     }
