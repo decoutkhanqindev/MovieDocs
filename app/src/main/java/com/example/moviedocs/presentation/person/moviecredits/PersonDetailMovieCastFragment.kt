@@ -5,10 +5,10 @@ import com.example.moviedocs.presentation.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PersonDetailMovieCreditsFragment : BaseFragment<FragmentPersonDetailMovieCreditsBinding>(
+class PersonDetailMovieCastFragment : BaseFragment<FragmentPersonDetailMovieCreditsBinding>(
   FragmentPersonDetailMovieCreditsBinding::inflate
 ) {
   companion object {
-    fun newInstance(): PersonDetailMovieCreditsFragment = PersonDetailMovieCreditsFragment()
+    fun newInstance(): PersonDetailMovieCastFragment = PersonDetailMovieCastFragment()
   }
 }
