@@ -61,11 +61,11 @@ interface ApiService {
     @Query("page") page: Int, @Query("with_genres") genreId: Int
   ): MovieListResponse
 
+  @GET("person/{person_id}")
+  suspend fun getPersonDetail(@Path("person_id") personId: Int): PersonDetailResponse
+
   @GET("person/{person_id}/external_ids")
   suspend fun getPersonDetailExternalIds(@Path("person_id") personId: Int): ExternalIdsResponse
-
-  @GET("person")
-  suspend fun getPersonDetail(@Query("person_id") personId: Int): PersonDetailResponse
 
   @GET("person/{person_id}/movie_credits")
   suspend fun getPersonMovieCreditList(
