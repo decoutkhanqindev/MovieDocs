@@ -2,7 +2,8 @@ package com.example.moviedocs.presentation.person
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.moviedocs.presentation.person.moviecredits.PersonDetailMovieCreditsFragment
+import com.example.moviedocs.presentation.person.moviecredits.PersonDetailMovieCastFragment
+import com.example.moviedocs.presentation.person.moviecredits.PersonDetailMovieCrewFragment
 import com.example.moviedocs.presentation.person.overview.PersonDetailOverviewFragment
 
 class PersonDetailViewPagerAdapter(
@@ -14,7 +15,8 @@ class PersonDetailViewPagerAdapter(
 
   override fun createFragment(position: Int): Fragment = when (position) {
     0 -> PersonDetailOverviewFragment.newInstance()
-    1 -> PersonDetailMovieCreditsFragment.newInstance()
+    1 -> PersonDetailMovieCastFragment.newInstance()
+    2 -> PersonDetailMovieCrewFragment.newInstance()
 
     else -> throw IllegalArgumentException("Invalid $position")
   }
