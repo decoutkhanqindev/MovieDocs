@@ -5,12 +5,10 @@ import com.example.moviedocs.domain.person.PersonDetailModel
 
 fun PersonDetailResponse.toPersonDetailModel(): PersonDetailModel =
   PersonDetailModel(
-    alsoKnownAs = alsoKnownAs?.map {
-      it.takeIf { it?.isNotEmpty() == true } ?: "Unknown other names"
-    } ?: emptyList(),
+    alsoKnownAs = alsoKnownAs?.takeIf { it.isNotEmpty() } ?: listOf<String>("Unknown other names"),
     biography = biography?.takeIf { it.isNotEmpty() } ?: "No biography",
     birthday = birthday?.takeIf { it.isNotEmpty() } ?: "",
-    deathday = deathday?.takeIf { it.isNotEmpty() } ?: "Now",
+    deathday = deathday?.takeIf { it.isNotEmpty() } ?: "",
     gender = if (gender == 1) "Female" else if (gender == 2) "Male" else "Unknown",
     homepage = homepage?.takeIf { it.isNotEmpty() } ?: "",
     id = id,
