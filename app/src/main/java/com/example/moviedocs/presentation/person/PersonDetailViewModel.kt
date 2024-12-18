@@ -57,7 +57,7 @@ class PersonDetailViewModel @Inject constructor(
           personDetailResult, personExternalIdsResult, personMovieCreditListResult,
         ).first { it.isFailure }
         _uiState.value = PersonDetailUiState.Error(error.exceptionOrNull() ?: Throwable())
-        Timber.tag(this.javaClass.simpleName).e("loadData ${error.getOrThrow()}")
+        Timber.tag(this.javaClass.simpleName).e("loadData ${error.exceptionOrNull()}")
       }
     }
   }
