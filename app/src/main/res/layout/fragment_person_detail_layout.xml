@@ -91,22 +91,10 @@
           android:textColor="@color/white"
           android:textSize="20sp"
           android:textStyle="bold"
-          app:layout_constraintBottom_toTopOf="@id/personDetailGender"
+          app:layout_constraintBottom_toTopOf="@id/personDetailPopularity"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@id/personDetailImgLayout"
           app:layout_constraintTop_toTopOf="@id/personDetailImgLayout" />
-
-      <TextView
-          android:id="@+id/personDetailGender"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:text="@string/gender"
-          android:textColor="@color/white"
-          android:textSize="16sp"
-          android:textStyle="italic"
-          app:layout_constraintBottom_toTopOf="@id/personDetailPopularity"
-          app:layout_constraintStart_toStartOf="@id/personDetailName"
-          app:layout_constraintTop_toBottomOf="@id/personDetailName" />
 
       <TextView
           android:id="@+id/personDetailPopularity"
@@ -118,8 +106,8 @@
           android:textColor="@color/white"
           android:textSize="16sp"
           app:layout_constraintBottom_toTopOf="@id/personDetailFbImg"
-          app:layout_constraintStart_toStartOf="@id/personDetailGender"
-          app:layout_constraintTop_toBottomOf="@id/personDetailGender" />
+          app:layout_constraintStart_toStartOf="@id/personDetailName"
+          app:layout_constraintTop_toBottomOf="@id/personDetailName" />
 
       <ImageView
           android:id="@+id/personDetailPopularityIcon"

@@ -12,6 +12,7 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
       android:layout_marginEnd="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
@@ -26,16 +27,15 @@
           android:id="@+id/movieDetailOverview"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
-          app:readMoreColor="@color/light_white"
-          app:readMoreMaxLine="3"
-          app:readMoreText=" ...Read more"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />
+          app:layout_constraintTop_toTopOf="parent"
+          app:readMoreColor="@color/light_white"
+          app:readMoreMaxLine="3"
+          app:readMoreText=" ...Read more" />
 
       <androidx.constraintlayout.widget.ConstraintLayout
           android:id="@+id/movieDetailGenreLayout"

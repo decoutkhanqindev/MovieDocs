@@ -296,7 +296,6 @@
             android:id="@+id/movieListMoreBtn"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginBottom="4dp"
             android:importantForAccessibility="no"
             android:src="@drawable/more_btn"
             app:layout_constraintBottom_toBottomOf="@+id/movieListTitle"
