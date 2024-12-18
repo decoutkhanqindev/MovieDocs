@@ -27,7 +27,6 @@
           android:id="@+id/personDetailBiography"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="@string/overview"
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
@@ -167,8 +166,8 @@
 
         <TextView
             android:id="@+id/placeOfBirthValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:lineHeight="25dp"
             android:maxLines="2"
@@ -176,6 +175,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/placeOfBirthTitle"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/placeOfBirthTitle"
             app:layout_constraintTop_toTopOf="@id/placeOfBirthTitle"
             app:layout_constraintVertical_bias="0.0" />
@@ -203,17 +203,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <kr.co.prnd.readmore.ReadMoreTextView
             android:id="@+id/alsoKnownAsValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:lineHeight="25dp"
-            android:text="@string/also_known_as_value"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/alsoKnownAsTitle"
-            app:layout_constraintTop_toTopOf="@id/alsoKnownAsTitle" />
+            app:layout_constraintTop_toTopOf="@id/alsoKnownAsTitle"
+            app:readMoreColor="@color/light_white"
+            app:readMoreMaxLine="4"
+            app:readMoreText=" ...Read more" />
       </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
   </ScrollView>
