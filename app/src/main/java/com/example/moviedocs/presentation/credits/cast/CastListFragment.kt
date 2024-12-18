@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.FragmentCreditListBinding
+import com.example.moviedocs.domain.model.credits.CastItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.credits.CreditListUiState
 import com.example.moviedocs.presentation.credits.CreditListViewModel
@@ -28,7 +30,7 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
 
   private val viewModel: CreditListViewModel by activityViewModels()
 
-  private val verticalAdapter: CastListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+  private val castListVerticalAdapter: CastListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     CastListVerticalAdapter()
   }
 
@@ -46,7 +48,7 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
       mLayoutManager = LinearLayoutManager(
         requireContext(), LinearLayoutManager.VERTICAL, false
       ),
-      mAdapter = verticalAdapter
+      mAdapter = castListVerticalAdapter
     )
     bindViewModel()
     handleSortingList()
@@ -54,6 +56,14 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
 
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
+
+    castListVerticalAdapter.onItemClickListener = { it: CastItemModel ->
+      findNavController().navigate(
+        CastListFragmentDirections.actionCastListFragmentToPersonDetailFragment(
+          personId = it.id
+        )
+      )
+    }
   }
 
   private fun bindViewModel() {
@@ -74,7 +84,7 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
           creditListProgressBar.invisible()
           creditListRecyclerView.visible()
         }
-        verticalAdapter.submitList(state.castList)
+        castListVerticalAdapter.submitList(state.castList)
       }
 
       is CreditListUiState.Error -> {
