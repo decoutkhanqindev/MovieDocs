@@ -72,8 +72,8 @@
 
         <ImageView
             android:id="@+id/personDetailImg"
-            android:layout_width="140dp"
-            android:layout_height="200dp"
+            android:layout_width="130dp"
+            android:layout_height="190dp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
             tools:ignore="ContentDescription"
