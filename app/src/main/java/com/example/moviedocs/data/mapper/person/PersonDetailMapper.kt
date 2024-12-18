@@ -10,7 +10,7 @@ fun PersonDetailResponse.toPersonDetailModel(): PersonDetailModel =
     } ?: emptyList(),
     biography = biography?.takeIf { it.isNotEmpty() } ?: "No biography",
     birthday = birthday?.takeIf { it.isNotEmpty() } ?: "",
-    deathday = deathday?.takeIf { it.isNotEmpty() } ?: "",
+    deathday = deathday?.takeIf { it.isNotEmpty() } ?: "Now",
     gender = if (gender == 1) "Female" else if (gender == 2) "Male" else "Unknown",
     homepage = homepage?.takeIf { it.isNotEmpty() } ?: "",
     id = id,

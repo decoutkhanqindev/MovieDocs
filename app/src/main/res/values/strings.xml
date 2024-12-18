@@ -85,5 +85,14 @@
   <string name="cast_list_title">Cast List</string>
   <string name="crew_list_title">Crew List</string>
   <string name="person_detail">Person Detail</string>
-  <string name="birthday_and_deathDay">22/10/1998 - 10/2/2019</string>
+  <string name="birthday_and_deathDay">22/10/1998 - 10/2/2019 (22 years old)</string>
+  <string name="known_for_title">Known for:</string>
+  <string name="acting">Acting</string>
+  <string name="gender_title">Gender:</string>
+  <string name="male">Male</string>
+  <string name="birthday_title">Birthday:</string>
+  <string name="place_of_birth_title">Place of Birth:</string>
+  <string name="place_of_birth_value">Vancouver, British Columbia, Canada</string>
+  <string name="also_known_as_title">Also Known As:</string>
+  <string name="also_known_as_value">Ryan Rodney Reynolds\nChamp Nightengale\nไรอัน เรย์โนลส์\nরায়ান রেনল্ডস্\nGordon Reynolds</string>
 </resources>
