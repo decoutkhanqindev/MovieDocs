@@ -8,6 +8,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailCreditsBinding
+import com.example.moviedocs.domain.model.credits.CastItemModel
+import com.example.moviedocs.domain.model.credits.CrewItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.credits.cast.CastListHorizontalAdapter
 import com.example.moviedocs.presentation.credits.crew.CrewListHorizontalAdapter
@@ -88,6 +90,22 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
           )
         )
       }
+    }
+
+    castListHorizontalAdapter.onItemClickListener = { it: CastItemModel ->
+      findNavController().navigate(
+        MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
+          personId = it.id
+        )
+      )
+    }
+
+    crewListHorizontalAdapter.onItemClickListener = { it: CrewItemModel ->
+      findNavController().navigate(
+        MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
+          personId = it.id
+        )
+      )
     }
   }
 
