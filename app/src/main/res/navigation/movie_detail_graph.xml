@@ -69,6 +69,14 @@
           android:defaultValue=""
           app:argType="string" />
     </action>
+    <action
+        android:id="@+id/action_movieDetailFragment_to_personDetailFragment"
+        app:destination="@id/person_detail_graph">
+      <argument
+          android:name="personId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
   </fragment>
 
   <include app:graph="@navigation/company_graph" />
@@ -82,7 +90,16 @@
         android:name="movieId"
         android:defaultValue="0"
         app:argType="integer" />
+    <action
+        android:id="@+id/action_castListFragment_to_personDetailFragment"
+        app:destination="@id/person_detail_graph">
+      <argument
+          android:name="personId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
   </fragment>
+
   <fragment
       android:id="@+id/crewListFragment"
       android:name="com.example.moviedocs.presentation.credits.crew.CrewListFragment"
@@ -92,7 +109,16 @@
         android:name="movieId"
         android:defaultValue="0"
         app:argType="integer" />
+    <action
+        android:id="@+id/action_crewListFragment_to_personDetailFragment"
+        app:destination="@id/person_detail_graph">
+      <argument
+          android:name="personId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
   </fragment>
 
   <include app:graph="@navigation/genre_graph" />
+  <include app:graph="@navigation/person_detail_graph" />
 </navigation>
