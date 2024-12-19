@@ -9,7 +9,11 @@
       android:id="@+id/personDetailFragment"
       android:name="com.example.moviedocs.presentation.person.PersonDetailFragment"
       android:label="PersonDetailFragment"
-      tools:layout="@layout/fragment_person_detail">
+      tools:layout="@layout/fragment_person_detail"
+      app:enterAnim="@anim/to_right"
+      app:exitAnim="@anim/to_right"
+      app:popEnterAnim="@anim/from_right"
+      app:popExitAnim="@anim/from_right">
     <argument
         android:name="personId"
         android:defaultValue="0"

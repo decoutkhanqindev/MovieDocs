@@ -6,18 +6,18 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginTop="8dp"
-    android:background="@color/item_bg_color_selector"
+    android:layout_marginBottom="8dp"
+    app:cardPreventCornerOverlap="true"
     app:cardBackgroundColor="@color/item_bg_color_selector"
     app:cardCornerRadius="0dp"
-    app:cardUseCompatPadding="true"
     app:strokeColor="@android:color/transparent">
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/mainLayout"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_marginStart="8dp"
-      android:layout_marginEnd="8dp">
+      android:layout_marginStart="16dp"
+      android:layout_marginEnd="16dp">
 
     <TextView
         android:id="@+id/movieItemName"
@@ -36,7 +36,7 @@
         android:id="@+id/movieItemCharacter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="32dp"
         android:lineHeight="25dp"
         android:maxLines="2"
         android:text="@string/as_character"

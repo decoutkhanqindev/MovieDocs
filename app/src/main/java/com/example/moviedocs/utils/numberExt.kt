@@ -11,7 +11,7 @@ fun Int.convertMinutesToHoursAndMinutes(): String {
 
 fun Int.formatTotalResult(): String {
   val totalResult: Int = this
-  return "($totalResult):"
+  return "($totalResult)"
 }
 
 fun Long.formatDollar(): String {

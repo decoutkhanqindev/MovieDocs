@@ -9,9 +9,9 @@
 
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/personDetailMovieCreditsRecyclerview"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      tools:listitem="@layout/movie_credits_item_view_holder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      tools:listitem="@layout/movie_item_by_year_view_holder"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

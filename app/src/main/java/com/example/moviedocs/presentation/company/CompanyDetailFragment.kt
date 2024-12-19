@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.company
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -90,6 +91,7 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
     launchAndRepeatStarted({ viewModel.combinedUiState.collectLatest(::renderUi) })
   }
 
+  @SuppressLint("SetTextI18n")
   private fun renderUi(state: Pair<CompanyDetailUiState, MovieListUiState>) {
     val (companyState: CompanyDetailUiState, movieListState: MovieListUiState) = state
 
@@ -121,7 +123,7 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
           MovieListUiState.Loading -> {}
 
           is MovieListUiState.Success -> {
-            binding.totalMovies.text = movieListState.totalResults.formatTotalResult()
+            binding.totalMovies.text = "${movieListState.totalResults.formatTotalResult()}:"
             movieListAdapter.submitList(movieListState.items)
           }
 

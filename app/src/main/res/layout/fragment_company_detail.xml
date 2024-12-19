@@ -100,7 +100,6 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
       </com.google.android.material.card.MaterialCardView>
 
-
       <kr.co.prnd.readmore.ReadMoreTextView
           android:id="@+id/companyDetailDescription"
           android:layout_width="match_parent"
@@ -108,6 +107,7 @@
           android:textColor="@color/white"
           android:textSize="16sp"
           android:textStyle="italic"
+          android:lineHeight="25dp"
           app:readMoreColor="@color/light_white"
           app:readMoreMaxLine="3"
           app:readMoreText=" ...Read more"
@@ -143,13 +143,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:lineHeight="25dp"
+            android:maxLines="2"
             android:text="@string/company_name"
             android:textColor="@color/white"
-            android:maxLines="2"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/companyNameTitle"
             app:layout_constraintStart_toEndOf="@id/companyNameTitle"
-            app:layout_constraintTop_toTopOf="@id/companyNameTitle" />
+            app:layout_constraintTop_toTopOf="@id/companyNameTitle"
+            app:layout_constraintVertical_bias="0.0" />
       </androidx.constraintlayout.widget.ConstraintLayout>
 
       <androidx.constraintlayout.widget.ConstraintLayout
@@ -179,6 +181,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:lineHeight="25dp"
             android:maxLines="2"
             android:text="@string/headquarter_value"
             android:textColor="@color/white"
@@ -214,6 +217,8 @@
             android:id="@+id/originalCountryValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:lineHeight="25dp"
             android:layout_marginStart="8dp"
             android:text="@string/headquarter_value"
             android:textColor="@color/white"
@@ -251,6 +256,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/no_parent_company_value"
+            android:lineHeight="25dp"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/parentTitle"
