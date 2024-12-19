@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentPersonDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.utils.formatTotalResult
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.loadImgFromUrl
@@ -39,6 +40,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
   private lateinit var igId: String
   private lateinit var twId: String
 
+  private var totalMoviesCast = 0
+  private var totalMoviesCrew = 0
+
   private lateinit var viewPagerAdapter: PersonDetailViewPagerAdapter
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +53,6 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
     }
     viewPagerAdapter = PersonDetailViewPagerAdapter(fragment = this, personId = args.personId)
     setUpNavigation()
-    setUpViewPagerTabLayout()
     bindViewModel()
   }
 
@@ -79,7 +82,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
       TabLayoutMediator(binding.tabLayout, this) { tab: TabLayout.Tab, position: Int ->
         tab.text = when (position) {
           0 -> "Overview"
-          1 -> "Movie Credits"
+          1 -> "Cast ${totalMoviesCast.formatTotalResult()}"
+          2 -> "Crew ${totalMoviesCrew.formatTotalResult()}"
           else -> throw IllegalArgumentException("Invalid $position")
         }
       }.attach()
@@ -116,7 +120,10 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
           fbId = state.personExternalIds.facebookId
           igId = state.personExternalIds.instagramId
           twId = state.personExternalIds.twitterId
+          totalMoviesCast = state.castMovieCreditList.size
+          totalMoviesCrew = state.crewMovieCreditList.size
         }
+        setUpViewPagerTabLayout()
       }
 
       is PersonDetailUiState.Error -> {
