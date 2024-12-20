@@ -9,14 +9,27 @@
       android:id="@+id/personDetailFragment"
       android:name="com.example.moviedocs.presentation.person.PersonDetailFragment"
       android:label="PersonDetailFragment"
-      tools:layout="@layout/fragment_person_detail"
       app:enterAnim="@anim/to_right"
       app:exitAnim="@anim/to_right"
       app:popEnterAnim="@anim/from_right"
-      app:popExitAnim="@anim/from_right">
+      app:popExitAnim="@anim/from_right"
+      tools:layout="@layout/fragment_person_detail">
     <argument
         android:name="personId"
         android:defaultValue="0"
         app:argType="integer" />
+    <action
+        android:id="@+id/action_personDetailFragment_to_movie_detail_graph"
+        app:destination="@id/movie_detail_graph"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right"
+        tools:layout="@layout/fragment_person_detail">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
   </fragment>
 </navigation>
