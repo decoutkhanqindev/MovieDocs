@@ -3,11 +3,14 @@ package com.example.moviedocs.presentation.person
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.externalId.ExternalIdsModel
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
+import com.example.moviedocs.domain.model.movielist.year.MovieListByYearModel
 import com.example.moviedocs.domain.person.PersonDetailModel
 import com.example.moviedocs.domain.person.PersonMovieCreditListModel
 import com.example.moviedocs.domain.usecase.externalId.GetPersonDetailExternalIdsUseCase
 import com.example.moviedocs.domain.usecase.person.GetPersonDetailUseCase
 import com.example.moviedocs.domain.usecase.person.GetPersonMovieCreditListUseCase
+import com.example.moviedocs.utils.formatDate
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -60,5 +63,17 @@ class PersonDetailViewModel @Inject constructor(
         Timber.tag(this.javaClass.simpleName).e("loadData ${error.exceptionOrNull()}")
       }
     }
+  }
+
+  fun getMovieListByYear(movieCreditsList: List<MovieItemModel>): List<MovieListByYearModel> {
+    val mapByYear: Map<String, List<MovieItemModel>> =
+      movieCreditsList
+        .filter { it.releaseDate.formatDate() != "Unknown date" }
+        .groupBy { it: MovieItemModel -> it.releaseDate.formatDate().substring(6) }
+    val movieListByYear: List<MovieListByYearModel> =
+      mapByYear
+        .map { (year: String, movies: List<MovieItemModel>) -> MovieListByYearModel(year, movies) }
+        .sortedByDescending { it.year }
+    return movieListByYear
   }
 }
