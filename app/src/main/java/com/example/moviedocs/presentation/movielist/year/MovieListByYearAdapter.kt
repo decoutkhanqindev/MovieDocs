@@ -11,10 +11,11 @@ import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 
-class MovieListByYearAdapter :
-  BaseListAdapter<MovieListByYearModel, MovieItemByYearViewHolderBinding>(
-    MovieItemByYearDiffCallBack
-  ) {
+class MovieListByYearAdapter(
+  private val movieListItemByYearAdapter: MovieListItemByYearAdapter
+) : BaseListAdapter<MovieListByYearModel, MovieItemByYearViewHolderBinding>(
+  MovieItemByYearDiffCallBack
+) {
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
@@ -29,10 +30,6 @@ class MovieListByYearAdapter :
   private inner class VH(
     binding: MovieItemByYearViewHolderBinding
   ) : BaseViewHolder(binding) {
-
-    private val movieListItemByYearAdapter: MovieListItemByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
-      MovieListItemByYearAdapter()
-    }
 
     init {
       binding.root.setOnClickListener {
