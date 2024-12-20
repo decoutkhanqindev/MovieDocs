@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.genre.GenreListModel
 import com.example.moviedocs.domain.model.movielist.MovieListModel
+import com.example.moviedocs.domain.model.slider.SliderImageItemModel
 import com.example.moviedocs.domain.usecase.genre.GetGenreListUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetNowPlayingUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetPopularUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetTopRatedUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetUpcomingUseCase
+import com.example.moviedocs.domain.usecase.slider.GetSliderImageUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -21,6 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+  private val getSliderImageUseCase: GetSliderImageUseCase,
   private val getGenreListUseCase: GetGenreListUseCase,
   private val getNowPlayingUseCase: GetNowPlayingUseCase,
   private val getPopularUseCase: GetPopularUseCase,
@@ -40,6 +43,8 @@ class HomeViewModel @Inject constructor(
       _uiState.value = HomeUiState.Loading
 
       // launch coroutines in parallel and wait for all of them to complete
+      val sliderListDeferred: Deferred<Result<List<SliderImageItemModel>>> =
+        async { getSliderImageUseCase() }
       val genreListDeferred: Deferred<Result<GenreListModel>> =
         async { getGenreListUseCase() }
       val nowPlayingDeferred: Deferred<Result<MovieListModel>> =
@@ -51,6 +56,7 @@ class HomeViewModel @Inject constructor(
       val topRatedDeferred: Deferred<Result<MovieListModel>> =
         async { getTopRatedUseCase(page = 1) }
 
+      val sliderListResult: Result<List<SliderImageItemModel>> = sliderListDeferred.await()
       val genreListResult: Result<GenreListModel> = genreListDeferred.await()
       val nowPlayingResult: Result<MovieListModel> = nowPlayingDeferred.await()
       val popularResult: Result<MovieListModel> = popularDeferred.await()
@@ -58,10 +64,11 @@ class HomeViewModel @Inject constructor(
       val topRatedResult: Result<MovieListModel> = topRatedDeferred.await()
 
       // check if all requests were successful
-      if (genreListResult.isSuccess && nowPlayingResult.isSuccess && popularResult.isSuccess
-        && upcomingResult.isSuccess && topRatedResult.isSuccess
+      if (sliderListResult.isSuccess && genreListResult.isSuccess && nowPlayingResult.isSuccess
+        && popularResult.isSuccess && upcomingResult.isSuccess && topRatedResult.isSuccess
       ) {
         _uiState.value = HomeUiState.Success(
+          sliderList = sliderListResult.getOrNull() ?: emptyList(),
           genreList = genreListResult.getOrNull()?.genres ?: emptyList(),
           nowPlaying = nowPlayingResult.getOrNull()?.results ?: emptyList(),
           popular = popularResult.getOrNull()?.results ?: emptyList(),
