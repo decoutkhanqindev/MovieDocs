@@ -141,4 +141,7 @@ dependencies {
 
   // Read more TextView
   implementation("kr.co.prnd:readmore-textview:1.0.0")
+
+  // Paging
+  implementation("androidx.paging:paging-runtime:3.3.5")
 }
