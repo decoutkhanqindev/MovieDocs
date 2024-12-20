@@ -42,12 +42,16 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
     setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.movieListRecyclerView,
-      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+      mLayoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.VERTICAL, false
+      ),
       mAdapter = movieListAdapter,
     )
     setUpRecyclerView(
       mRecyclerView = binding.movieListBottomPageNumbersRecyclerView,
-      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mLayoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.HORIZONTAL, false
+      ),
       mAdapter = pageNumbersAdapter,
     )
     bindViewModel()
@@ -58,7 +62,7 @@ class TopRatedFragment : BaseFragment<FragmentMovieListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
 
-    movieListAdapter.onItemClickListener = { it: MovieItemModel ->
+    movieListAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         TopRatedFragmentDirections.actionTopRatedFragmentToMovieDetailFragment(
           movieId = it.id

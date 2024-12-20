@@ -122,7 +122,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
     }
 
-    genreAdapter.onItemClickListener = { it: GenreItemModel ->
+    genreAdapter.setOnItemClickListener { it: GenreItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToGenreMovieListFragment(
           genreId = it.id,
@@ -131,7 +131,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    nowPlayingAdapter.onItemClickListener = { it: MovieItemModel ->
+    nowPlayingAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id
@@ -139,7 +139,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    popularAdapter.onItemClickListener = { it: MovieItemModel ->
+    popularAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id
@@ -147,7 +147,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    upComingAdapter.onItemClickListener = { it: MovieItemModel ->
+    upComingAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id
@@ -155,7 +155,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    topRatedAdapter.onItemClickListener = { it: MovieItemModel ->
+    topRatedAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id

@@ -50,12 +50,16 @@ class CompanyMovieListFragment : BaseFragment<FragmentMovieListBinding>(
     setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.movieListRecyclerView,
-      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
+      mLayoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.VERTICAL, false
+      ),
       mAdapter = movieListAdapter,
     )
     setUpRecyclerView(
       mRecyclerView = binding.movieListBottomPageNumbersRecyclerView,
-      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
+      mLayoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.HORIZONTAL, false
+      ),
       mAdapter = pageNumbersAdapter,
     )
     bindViewModel()
@@ -66,7 +70,7 @@ class CompanyMovieListFragment : BaseFragment<FragmentMovieListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
 
-    movieListAdapter.onItemClickListener = { it: MovieItemModel ->
+    movieListAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         CompanyMovieListFragmentDirections.Companion.actionCompanyMovieListFragmentToMovieDetailFragment(
           movieId = it.id

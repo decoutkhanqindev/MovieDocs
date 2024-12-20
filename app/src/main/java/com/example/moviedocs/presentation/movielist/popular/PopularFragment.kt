@@ -58,7 +58,7 @@ class PopularFragment : BaseFragment<FragmentMovieListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
 
-    movieListAdapter.onItemClickListener = { it: MovieItemModel ->
+    movieListAdapter.setOnItemClickListener { it: MovieItemModel ->
       findNavController().navigate(
         PopularFragmentDirections.actionPopularFragmentToMovieDetailFragment(
           movieId = it.id

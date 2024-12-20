@@ -46,7 +46,7 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
 
-    adapter.onItemClickListener = { it: GenreItemModel ->
+    adapter.setOnItemClickListener { it: GenreItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToGenreMovieListFragment(
           genreId = it.id,

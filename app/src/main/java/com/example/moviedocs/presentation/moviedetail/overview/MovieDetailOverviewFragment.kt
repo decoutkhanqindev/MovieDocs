@@ -65,7 +65,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   }
 
   private fun setUpNavigation() {
-    genreListAdapter.onItemClickListener = { it: GenreItemModel ->
+    genreListAdapter.setOnItemClickListener { it: GenreItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToGenreMovieListFragment(
           genreId = it.id,
@@ -74,7 +74,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
       )
     }
 
-    companyListAdapter.onItemClickListener = { it: CompanyItemModel ->
+    companyListAdapter.setOnItemClickListener { it: CompanyItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToCompanyDetailFragment(
           companyId = it.id
