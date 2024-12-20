@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-  private val getSliderImageUseCase: GetSliderImageListUseCase,
+  private val getSliderImageListUseCase: GetSliderImageListUseCase,
   private val getGenreListUseCase: GetGenreListUseCase,
   private val getNowPlayingUseCase: GetNowPlayingUseCase,
   private val getPopularUseCase: GetPopularUseCase,
@@ -32,7 +32,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
   private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
-  val uiState: StateFlow<HomeUiState> get() = _uiState.asStateFlow()
+  internal val uiState: StateFlow<HomeUiState> get() = _uiState.asStateFlow()
 
   init {
     loadData()
@@ -44,7 +44,7 @@ class HomeViewModel @Inject constructor(
 
       // launch coroutines in parallel and wait for all of them to complete
       val sliderListDeferred: Deferred<Result<List<SliderImageItemModel>>> =
-        async { getSliderImageUseCase() }
+        async { getSliderImageListUseCase() }
       val genreListDeferred: Deferred<Result<GenreListModel>> =
         async { getGenreListUseCase() }
       val nowPlayingDeferred: Deferred<Result<MovieListModel>> =
@@ -80,7 +80,8 @@ class HomeViewModel @Inject constructor(
       // if at least one request failed, emit the error
       else {
         val error = listOf(
-          genreListResult, nowPlayingResult, popularResult, upcomingResult, topRatedResult
+          sliderListResult, genreListResult, nowPlayingResult,
+          popularResult, upcomingResult, topRatedResult
         ).first { it.isFailure }
         _uiState.value = HomeUiState.Error(error.exceptionOrNull() ?: Throwable())
         Timber.tag(this.javaClass.simpleName).e(error.exceptionOrNull())

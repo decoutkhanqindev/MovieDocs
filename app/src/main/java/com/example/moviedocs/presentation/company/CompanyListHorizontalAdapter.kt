@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.CompanyItemViewHolderBinding
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class CompanyListHorizontalAdapter :
@@ -14,16 +15,17 @@ class CompanyListHorizontalAdapter :
     CompanyItemModelDiffCallback
   ) {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
-    VH(
-      CompanyItemViewHolderBinding.inflate(
-        LayoutInflater.from(parent.context), parent, false
-      )
+  override fun onCreateViewHolder(
+    parent: ViewGroup, viewType: Int
+  ): BaseViewHolder<CompanyItemModel, CompanyItemViewHolderBinding> = VH(
+    CompanyItemViewHolderBinding.inflate(
+      LayoutInflater.from(parent.context), parent, false
     )
+  )
 
   private inner class VH(
     binding: CompanyItemViewHolderBinding,
-  ) : BaseViewHolder(binding) {
+  ) : BaseViewHolder<CompanyItemModel, CompanyItemViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {

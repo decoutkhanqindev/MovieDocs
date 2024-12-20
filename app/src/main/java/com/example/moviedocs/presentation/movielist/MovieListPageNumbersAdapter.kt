@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.PageNumbersItemViewHolderBinding
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.presentation.base.BaseViewHolder
 
 class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHolderBinding>(
   PageDiffUtil
@@ -13,7 +14,10 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
 
   private var selectedPosition = 0
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  ): BaseViewHolder<Int, PageNumbersItemViewHolderBinding> =
     VH(
       PageNumbersItemViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
@@ -31,7 +35,7 @@ class MovieListPageNumbersAdapter : BaseListAdapter<Int, PageNumbersItemViewHold
 
   private inner class VH(
     binding: PageNumbersItemViewHolderBinding
-  ) : BaseViewHolder(binding) {
+  ) : BaseViewHolder<Int, PageNumbersItemViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {

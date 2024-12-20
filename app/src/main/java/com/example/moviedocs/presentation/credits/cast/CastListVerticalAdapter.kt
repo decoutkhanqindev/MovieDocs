@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.CreditItemVerticalViewHolderBinding
 import com.example.moviedocs.domain.model.credits.CastItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class CastListVerticalAdapter :
@@ -14,7 +15,10 @@ class CastListVerticalAdapter :
     CastItemModelDiffCallBack
   ) {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  ): BaseViewHolder<CastItemModel, CreditItemVerticalViewHolderBinding> =
     VH(
       CreditItemVerticalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
@@ -23,7 +27,7 @@ class CastListVerticalAdapter :
 
   private inner class VH(
     binding: CreditItemVerticalViewHolderBinding
-  ) : BaseViewHolder(binding) {
+  ) : BaseViewHolder<CastItemModel, CreditItemVerticalViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {

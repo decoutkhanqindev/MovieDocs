@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.MovieItemByYearViewHolderBinding
 import com.example.moviedocs.domain.model.movielist.year.MovieListByYearModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
@@ -20,7 +21,7 @@ class MovieListByYearAdapter(
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): BaseListAdapter<MovieListByYearModel, MovieItemByYearViewHolderBinding>.BaseViewHolder =
+  ): BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding> =
     VH(
       MovieItemByYearViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
@@ -29,7 +30,7 @@ class MovieListByYearAdapter(
 
   private inner class VH(
     binding: MovieItemByYearViewHolderBinding
-  ) : BaseViewHolder(binding) {
+  ) : BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {

@@ -2,19 +2,20 @@ package com.example.moviedocs.presentation.credits.cast
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.CreditItemHorizontalViewHolderBinding
 import com.example.moviedocs.domain.model.credits.CastItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.loadImgFromUrl
 
 class CastListHorizontalAdapter :
-  BaseListAdapter<CastItemModel, CreditItemHorizontalViewHolderBinding>(
-    CastItemDiffCallBack
-  ) {
+  BaseListAdapter<CastItemModel, CreditItemHorizontalViewHolderBinding>(CastItemModelDiffCallBack) {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  ): BaseViewHolder<CastItemModel, CreditItemHorizontalViewHolderBinding> =
     VH(
       CreditItemHorizontalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
@@ -23,7 +24,7 @@ class CastListHorizontalAdapter :
 
   private inner class VH(
     binding: CreditItemHorizontalViewHolderBinding
-  ) : BaseViewHolder(binding) {
+  ) : BaseViewHolder<CastItemModel, CreditItemHorizontalViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {
@@ -39,17 +40,5 @@ class CastListHorizontalAdapter :
         creditItemName.text = item.name
       }
     }
-  }
-
-  private object CastItemDiffCallBack : DiffUtil.ItemCallback<CastItemModel>() {
-    override fun areItemsTheSame(
-      oldItem: CastItemModel,
-      newItem: CastItemModel
-    ): Boolean = oldItem.id == newItem.id
-
-    override fun areContentsTheSame(
-      oldItem: CastItemModel,
-      newItem: CastItemModel
-    ): Boolean = oldItem == newItem
   }
 }

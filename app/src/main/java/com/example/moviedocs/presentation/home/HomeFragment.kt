@@ -33,6 +33,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
   private lateinit var viewPager: ViewPager2
 
+  private val sliderViewPagerAdapter: SliderViewPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    SliderViewPagerAdapter(viewPager = viewPager)
+  }
+
   // Handler is used for scheduling tasks and delivering messages or Runnables to be executed on
   // specific thread (usually the main thread)
   // - It's associated with a thread's message queue (Looper).
@@ -50,7 +54,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   // (viewPager.currentItem += 1)
   private val sliderRunnable: Runnable by lazy(LazyThreadSafetyMode.NONE) {
     Runnable {
-      val nextItemPosition: Int = (viewPager.currentItem + 1) % sliderViewPagerAdapter.itemCount
+      val nextItemPosition: Int =
+        (viewPager.currentItem + 1) % sliderViewPagerAdapter.currentList.size
       viewPager.setCurrentItem(nextItemPosition, true)
 
       // nextItem = currentItem + 1 % itemCount = (0 + 1) % 3 = 1
@@ -61,10 +66,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
   // ==> This Handler and Runnable are used for auto-scrolling functionality in ViewPager2.
   // The sliderHandler posts a delayed sliderRunnable that transfer the viewPager to the next item.
-
-  private val sliderViewPagerAdapter: SliderViewPagerAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    SliderViewPagerAdapter(viewPager = viewPager)
-  }
 
   private val genreAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
     GenreListAdapter()

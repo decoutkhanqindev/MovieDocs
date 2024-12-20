@@ -20,6 +20,8 @@ import com.example.moviedocs.utils.navigateBack
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class CastListFragment : BaseFragment<FragmentCreditListBinding>(

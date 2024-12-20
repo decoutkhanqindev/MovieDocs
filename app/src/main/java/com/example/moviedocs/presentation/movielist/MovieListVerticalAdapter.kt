@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MovieItemVerticalViewHolderBinding
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
+import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.formatDate
 import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.loadImgFromUrl
@@ -16,7 +17,10 @@ class MovieListVerticalAdapter :
     MovieItemModelDiffCallBack
   ) {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder =
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  ): BaseViewHolder<MovieItemModel, MovieItemVerticalViewHolderBinding> =
     VH(
       MovieItemVerticalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
@@ -25,7 +29,7 @@ class MovieListVerticalAdapter :
 
   private inner class VH(
     binding: MovieItemVerticalViewHolderBinding
-  ) : BaseViewHolder(binding) {
+  ) : BaseViewHolder<MovieItemModel, MovieItemVerticalViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {

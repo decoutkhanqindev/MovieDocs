@@ -19,7 +19,7 @@ class GenreListViewModel @Inject constructor(
 
   private val _uiState: MutableStateFlow<GenreListUiState> =
     MutableStateFlow(GenreListUiState.Loading)
-  val uiState: StateFlow<GenreListUiState> get() = _uiState.asStateFlow()
+  internal val uiState: StateFlow<GenreListUiState> get() = _uiState.asStateFlow()
 
   init {
     loadGenreList()
