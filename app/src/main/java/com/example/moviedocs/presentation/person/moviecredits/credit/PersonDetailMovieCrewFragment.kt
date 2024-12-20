@@ -1,0 +1,74 @@
+package com.example.moviedocs.presentation.person.moviecredits.credit
+
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.moviedocs.databinding.FragmentPersonDetailMovieCreditsBinding
+import com.example.moviedocs.domain.model.movielist.year.MovieListByYearModel
+import com.example.moviedocs.presentation.base.BaseFragment
+import com.example.moviedocs.presentation.movielist.year.MovieListByYearAdapter
+import com.example.moviedocs.presentation.person.PersonDetailUiState
+import com.example.moviedocs.presentation.person.PersonDetailViewModel
+import com.example.moviedocs.utils.invisible
+import com.example.moviedocs.utils.launchAndRepeatStarted
+import com.example.moviedocs.utils.setUpRecyclerView
+import com.example.moviedocs.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCreditsBinding>(
+  FragmentPersonDetailMovieCreditsBinding::inflate
+) {
+  companion object {
+    fun newInstance(): PersonDetailMovieCrewFragment = PersonDetailMovieCrewFragment()
+  }
+
+  private val viewModel: PersonDetailViewModel by activityViewModels()
+
+  private val movieListByYearAdapter: MovieListByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListByYearAdapter()
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    setUpRecyclerView(
+      mRecyclerView = binding.personDetailMovieCreditsRecyclerview,
+      mLayoutManager = LinearLayoutManager(
+        requireContext(), LinearLayoutManager.VERTICAL, false
+      ),
+      mAdapter = movieListByYearAdapter
+    )
+    bindViewModel()
+  }
+
+  private fun bindViewModel() {
+    launchAndRepeatStarted({ viewModel.uiState.collect(::renderUi) })
+  }
+
+  private fun renderUi(state: PersonDetailUiState) {
+    when (state) {
+      PersonDetailUiState.Loading -> {
+        binding.personDetailMovieCreditsRecyclerview.invisible()
+      }
+
+      is PersonDetailUiState.Success -> {
+        binding.personDetailMovieCreditsRecyclerview.visible()
+
+        val movieListByYear: List<MovieListByYearModel> =
+          viewModel.getMovieListByYear(state.crewMovieCreditList)
+        movieListByYearAdapter.submitList(movieListByYear)
+      }
+
+      is PersonDetailUiState.Error -> {
+        binding.personDetailMovieCreditsRecyclerview.invisible()
+      }
+    }
+  }
+
+  override fun onDestroyView() {
+    binding.personDetailMovieCreditsRecyclerview.adapter = null
+    super.onDestroyView()
+  }
+}
