@@ -3,11 +3,15 @@ package com.example.moviedocs.presentation.person.moviecredits.credit
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentPersonDetailMovieCreditsBinding
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.domain.model.movielist.year.MovieListByYearModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.year.MovieListByYearAdapter
+import com.example.moviedocs.presentation.movielist.year.MovieListItemByYearAdapter
+import com.example.moviedocs.presentation.person.PersonDetailFragmentDirections
 import com.example.moviedocs.presentation.person.PersonDetailUiState
 import com.example.moviedocs.presentation.person.PersonDetailViewModel
 import com.example.moviedocs.utils.invisible
@@ -26,8 +30,12 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
 
   private val viewModel: PersonDetailViewModel by activityViewModels()
 
+  private val movieListItemByYearAdapter: MovieListItemByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MovieListItemByYearAdapter()
+  }
+
   private val movieListByYearAdapter: MovieListByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MovieListByYearAdapter()
+    MovieListByYearAdapter(movieListItemByYearAdapter)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,7 +48,18 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
       ),
       mAdapter = movieListByYearAdapter
     )
+    setUpNavigation()
     bindViewModel()
+  }
+
+  private fun setUpNavigation() {
+    movieListItemByYearAdapter.setOnItemClickListener { it: MovieItemModel ->
+      findNavController().navigate(
+        PersonDetailFragmentDirections.actionPersonDetailFragmentToMovieDetailGraph(
+          movieId = it.id
+        )
+      )
+    }
   }
 
   private fun bindViewModel() {
