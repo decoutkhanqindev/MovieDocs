@@ -13,7 +13,7 @@ class SliderRepositoryImpl @Inject constructor(
   @AppDispatcher(DispatcherType.IO)
   private val ioDispatcher: CoroutineDispatcher
 ) : SliderRepository {
-  override suspend fun getSliderImage(): Result<List<SliderImageItemModel>> =
+  override suspend fun getSliderImageList(): Result<List<SliderImageItemModel>> =
     runSuspendCatching(ioDispatcher) {
       listOf(
         SliderImageItemModel(1, R.drawable.wide),
