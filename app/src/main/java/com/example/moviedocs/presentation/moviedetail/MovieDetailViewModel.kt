@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.moviedetail
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.externalId.ExternalIdsModel
@@ -29,13 +30,20 @@ class MovieDetailViewModel @Inject constructor(
   private val getLanguageListUseCase: GetLanguageListUseCase,
   private val getCountryListUseCase: GetCountryListUseCase,
   private val getMovieCreditsUseCase: GetCreditListUseCase,
+  private val saveStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
   private val _uiState: MutableStateFlow<MovieDetailUiState> =
     MutableStateFlow(MovieDetailUiState.Loading)
-  val uiState: StateFlow<MovieDetailUiState> = _uiState.asStateFlow()
+  internal val uiState: StateFlow<MovieDetailUiState> get() = _uiState.asStateFlow()
 
-  fun loadData(movieId: Int) {
+  private val movieId: Int = saveStateHandle.get<Int>("movieId") ?: 0
+
+  init {
+    loadData(movieId)
+  }
+
+  private fun loadData(movieId: Int) {
     viewModelScope.launch {
       _uiState.value = MovieDetailUiState.Loading
 
@@ -77,6 +85,10 @@ class MovieDetailViewModel @Inject constructor(
         Timber.tag(this.javaClass.simpleName).e("loadData ${error.exceptionOrNull()}")
       }
     }
+  }
+
+  fun setMovieId(movieId: Int) {
+    saveStateHandle["movieId"] = movieId
   }
 
 //  private fun updateUiState(update: (MovieDetailUiState.Success) -> MovieDetailUiState.Success) {

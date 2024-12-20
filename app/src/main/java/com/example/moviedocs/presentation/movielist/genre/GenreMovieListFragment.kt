@@ -41,9 +41,6 @@ class GenreMovieListFragment : BaseFragment<FragmentMovieListBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    if (savedInstanceState == null) {
-      viewModel.loadPage(1, args.genreId)
-    }
     binding.movieListTitle.text = args.genreName
     setUpNavigation()
     setUpRecyclerView(
@@ -60,6 +57,7 @@ class GenreMovieListFragment : BaseFragment<FragmentMovieListBinding>(
       ),
       mAdapter = pageNumbersAdapter,
     )
+    viewModel.setGenreId(args.genreId)
     bindViewModel()
     handleLoadNextPage()
     handleSortingList()

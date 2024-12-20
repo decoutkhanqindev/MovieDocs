@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.movielist.company
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.movielist.GetCompanyMovieListUseCase
@@ -13,8 +14,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CompanyMovieListViewModel @Inject constructor(
-  private val getCompanyMovieListUseCase: GetCompanyMovieListUseCase
+  private val getCompanyMovieListUseCase: GetCompanyMovieListUseCase,
+  private val savedStateHandle: SavedStateHandle
 ) : MovieListViewModel() {
+
+  private val companyId: Int = savedStateHandle.get<Int>("companyId") ?: 0
+
+  init {
+    loadPage(1, companyId)
+  }
 
   fun loadPage(page: Int, companyId: Int) {
     viewModelScope.launch {
@@ -34,5 +42,9 @@ class CompanyMovieListViewModel @Inject constructor(
         Timber.tag(this.javaClass.simpleName).e("loadPage: ${it.message}")
       }
     }
+  }
+
+  fun setCompanyId(companyId: Int) {
+    savedStateHandle["companyId"] = companyId
   }
 }

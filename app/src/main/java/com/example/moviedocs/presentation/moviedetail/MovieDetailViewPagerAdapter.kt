@@ -7,21 +7,21 @@ import com.example.moviedocs.presentation.moviedetail.credits.MovieDetailCredits
 import com.example.moviedocs.presentation.moviedetail.overview.MovieDetailOverviewFragment
 
 class MovieDetailViewPagerAdapter(
-  fragment: Fragment,
-  private val movieId: Int
+  fragment: Fragment, private val movieId: Int
 ) : FragmentStateAdapter(fragment) {
 
   override fun getItemCount(): Int = 2
 
   override fun createFragment(position: Int): Fragment = when (position) {
-    0 -> MovieDetailOverviewFragment.newInstance()
-    1 -> {
-      val fragment: MovieDetailCreditsFragment = MovieDetailCreditsFragment.newInstance()
-      val bundle: Bundle = Bundle().apply { putInt("movieId", movieId) }
-      fragment.arguments = bundle
-      fragment
-    }
-
+    0 -> setArgument(MovieDetailOverviewFragment.newInstance(), movieId)
+    1 -> setArgument(MovieDetailCreditsFragment.newInstance(), movieId)
     else -> throw IllegalArgumentException("Invalid $position")
+  }
+
+  private fun setArgument(fragment: Fragment, movieId: Int): Fragment {
+    val fragment: Fragment = fragment
+    val bundle: Bundle = Bundle().apply { putInt("movieId", movieId) }
+    fragment.arguments = bundle
+    return fragment
   }
 }

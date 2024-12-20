@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.movielist.genre
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.movielist.MovieListModel
 import com.example.moviedocs.domain.usecase.movielist.GetGenreMovieListUseCase
@@ -13,8 +14,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GenreMovieListViewModel @Inject constructor(
-  private val getGenreMovieListUseCase: GetGenreMovieListUseCase
+  private val getGenreMovieListUseCase: GetGenreMovieListUseCase,
+  private val savedStateHandle: SavedStateHandle
 ) : MovieListViewModel() {
+
+  private val genreId: Int = savedStateHandle.get<Int>("genreId") ?: 0
+
+  init {
+    loadPage(1, genreId)
+  }
 
   fun loadPage(page: Int, genreId: Int) {
     viewModelScope.launch {
@@ -34,5 +42,9 @@ class GenreMovieListViewModel @Inject constructor(
         Timber.tag(this.javaClass.simpleName).e("loadPage: ${it.message}")
       }
     }
+  }
+
+  fun setGenreId(genreId: Int) {
+    savedStateHandle["genreId"] = genreId
   }
 }

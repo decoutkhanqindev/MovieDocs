@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailCreditsBinding
@@ -33,7 +33,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
 
   private var movieId: Int = 0
 
-  private val viewModel: MovieDetailViewModel by activityViewModels()
+  private val viewModel: MovieDetailViewModel by viewModels()
 
   private val castListHorizontalAdapter: CastListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     CastListHorizontalAdapter()
@@ -70,6 +70,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       ),
       mAdapter = crewListHorizontalAdapter,
     )
+    viewModel.setMovieId(movieId)
     bindViewModel()
   }
 

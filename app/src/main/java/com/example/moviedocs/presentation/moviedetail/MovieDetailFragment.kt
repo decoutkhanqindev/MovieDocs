@@ -5,12 +5,13 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentMovieDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.convertMinutesToHoursAndMinutes
 import com.example.moviedocs.utils.formatDate
+import com.example.moviedocs.utils.formatTotalResult
 import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
@@ -20,6 +21,7 @@ import com.example.moviedocs.utils.visible
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
@@ -39,19 +41,18 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
 
   private val args: MovieDetailFragmentArgs by navArgs()
 
-  private val viewModel: MovieDetailViewModel by activityViewModels()
+  private val viewModel: MovieDetailViewModel by viewModels()
 
   private lateinit var viewPagerAdapter: MovieDetailViewPagerAdapter
+
+  private var totalCredits: Int = 0
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    if (savedInstanceState == null) {
-      viewModel.loadData(args.movieId)
-    }
     viewPagerAdapter = MovieDetailViewPagerAdapter(fragment = this, movieId = args.movieId)
     setUpNavigation()
-    setUpTabLayout()
+    viewModel.setMovieId(args.movieId)
     bindViewModel()
   }
 
@@ -84,7 +85,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
       TabLayoutMediator(binding.tabLayout, this) { tab: TabLayout.Tab, position: Int ->
         tab.text = when (position) {
           0 -> "Overview"
-          1 -> "Credits"
+          1 -> "Credits ${totalCredits.formatTotalResult()}"
           else -> throw IllegalArgumentException("Invalid $position")
         }
       }.attach()
@@ -124,7 +125,9 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           fbId = state.externalIds.facebookId
           igId = state.externalIds.instagramId
           twId = state.externalIds.twitterId
+          totalCredits = state.castList.size + state.crewList.size
         }
+        setUpTabLayout()
       }
 
       is MovieDetailUiState.Error -> {

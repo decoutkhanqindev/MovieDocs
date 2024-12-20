@@ -2,8 +2,10 @@ package com.example.moviedocs.presentation.moviedetail.overview
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,7 +35,9 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     fun newInstance(): MovieDetailOverviewFragment = MovieDetailOverviewFragment()
   }
 
-  private val viewModel: MovieDetailViewModel by activityViewModels()
+  private var movieId: Int = 0
+
+  private val viewModel: MovieDetailViewModel by viewModels()
 
   private val genreListAdapter: GenreListAdapter by lazy(LazyThreadSafetyMode.NONE) {
     GenreListAdapter()
@@ -41,6 +45,15 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
 
   private val companyListAdapter: CompanyListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     CompanyListHorizontalAdapter()
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    movieId = arguments?.getInt("movieId")!!
+    return super.onCreateView(inflater, container, savedInstanceState)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,6 +74,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
       ),
       mAdapter = companyListAdapter,
     )
+    viewModel.setMovieId(movieId)
     bindViewModel()
   }
 
