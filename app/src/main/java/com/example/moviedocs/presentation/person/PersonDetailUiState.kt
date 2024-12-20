@@ -2,7 +2,7 @@ package com.example.moviedocs.presentation.person
 
 import com.example.moviedocs.domain.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
-import com.example.moviedocs.domain.person.PersonDetailModel
+import com.example.moviedocs.domain.model.person.PersonDetailModel
 
 sealed interface PersonDetailUiState {
   data object Loading : PersonDetailUiState

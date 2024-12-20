@@ -7,7 +7,7 @@ fun CrewItemResponse.toCrewItemModel(): CrewItemModel =
   CrewItemModel(
     creditId = creditId,
     department = department?.takeIf { it.isNotEmpty() } ?: "Unknown department",
-    gender = if (gender == 1) "Female" else if (gender == 2) "Male" else "Unknown",
+    gender = if (gender == 1) "Female" else if (gender == 2) "Male" else "Unknown gender",
     id = id,
     job = job?.takeIf { it.isNotEmpty() } ?: "No job",
     knownForDepartment = knownForDepartment?.takeIf { it.isNotEmpty() } ?: "Unknown department",

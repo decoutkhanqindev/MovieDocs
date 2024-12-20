@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.person
+package com.example.moviedocs.domain.model.person
 
 data class PersonDetailModel(
   val alsoKnownAs: List<String>,

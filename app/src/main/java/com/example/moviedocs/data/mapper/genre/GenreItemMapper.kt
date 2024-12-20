@@ -4,4 +4,4 @@ import com.example.moviedocs.data.remote.response.genre.GenreItemResponse
 import com.example.moviedocs.domain.model.genre.GenreItemModel
 
 fun GenreItemResponse.toGenreItemModel(): GenreItemModel =
-  GenreItemModel(id = id, name = name?.takeIf { it.isNotEmpty() } ?: "Unknown genre")
+  GenreItemModel(id = id, name = name?.takeIf { it.isNotEmpty() } ?: "Unknown genre name")

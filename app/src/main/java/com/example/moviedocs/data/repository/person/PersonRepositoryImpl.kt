@@ -5,8 +5,8 @@ import com.example.moviedocs.data.mapper.person.toPersonMovieCreditListModel
 import com.example.moviedocs.data.remote.ApiService
 import com.example.moviedocs.di.AppDispatcher
 import com.example.moviedocs.di.DispatcherType
-import com.example.moviedocs.domain.person.PersonDetailModel
-import com.example.moviedocs.domain.person.PersonMovieCreditListModel
+import com.example.moviedocs.domain.model.person.PersonDetailModel
+import com.example.moviedocs.domain.model.person.PersonMovieCreditListModel
 import com.example.moviedocs.domain.repository.person.PersonRepository
 import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher

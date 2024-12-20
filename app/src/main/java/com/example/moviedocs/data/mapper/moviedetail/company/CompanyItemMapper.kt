@@ -7,5 +7,5 @@ fun CompanyItemResponse.toCompanyItemModel(): CompanyItemModel =
   CompanyItemModel(
     id = id,
     logoPath = logoPath?.takeIf { it.isNotEmpty() } ?: "",
-    name = name?.takeIf { it.isNotEmpty() } ?: "Unknown company"
+    name = name?.takeIf { it.isNotEmpty() } ?: "Unknown name"
   )

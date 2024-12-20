@@ -2,7 +2,7 @@ package com.example.moviedocs.data.mapper.person
 
 import com.example.moviedocs.data.mapper.movielist.toMovieItemModel
 import com.example.moviedocs.data.remote.response.person.PersonMovieCreditListResponse
-import com.example.moviedocs.domain.person.PersonMovieCreditListModel
+import com.example.moviedocs.domain.model.person.PersonMovieCreditListModel
 
 fun PersonMovieCreditListResponse.toPersonMovieCreditListModel(): PersonMovieCreditListModel =
   PersonMovieCreditListModel(

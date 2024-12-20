@@ -8,7 +8,7 @@ fun CastItemResponse.toCastItemModel(): CastItemModel =
     castId = castId,
     character = character?.takeIf { it.isNotEmpty() } ?: "Unknown character",
     creditId = creditId,
-    gender = if (gender == 1) "Female" else if (gender == 2) "Male" else "Unknown",
+    gender = if (gender == 1) "Female" else if (gender == 2) "Male" else "Unknown gender",
     id = id,
     knownForDepartment = knownForDepartment?.takeIf { it.isNotEmpty() } ?: "Unknown department",
     name = name?.takeIf { it.isNotEmpty() } ?: "Unknown name",

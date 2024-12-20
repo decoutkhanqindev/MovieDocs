@@ -1,6 +1,6 @@
 package com.example.moviedocs.domain.usecase.person
 
-import com.example.moviedocs.domain.person.PersonMovieCreditListModel
+import com.example.moviedocs.domain.model.person.PersonMovieCreditListModel
 import com.example.moviedocs.domain.repository.person.PersonRepository
 import javax.inject.Inject
 

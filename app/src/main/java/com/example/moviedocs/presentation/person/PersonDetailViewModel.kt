@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.domain.model.movielist.year.MovieListByYearModel
-import com.example.moviedocs.domain.person.PersonDetailModel
-import com.example.moviedocs.domain.person.PersonMovieCreditListModel
+import com.example.moviedocs.domain.model.person.PersonDetailModel
+import com.example.moviedocs.domain.model.person.PersonMovieCreditListModel
 import com.example.moviedocs.domain.usecase.externalId.GetPersonDetailExternalIdsUseCase
 import com.example.moviedocs.domain.usecase.person.GetPersonDetailUseCase
 import com.example.moviedocs.domain.usecase.person.GetPersonMovieCreditListUseCase
@@ -65,7 +65,7 @@ class PersonDetailViewModel @Inject constructor(
     }
   }
 
-  fun getMovieListByYear(movieCreditsList: List<MovieItemModel>): List<MovieListByYearModel> {
+  internal fun getMovieListByYear(movieCreditsList: List<MovieItemModel>): List<MovieListByYearModel> {
     val mapByYear: Map<String, List<MovieItemModel>> =
       movieCreditsList
         .filter { it.releaseDate.formatDate() != "Unknown date" }
