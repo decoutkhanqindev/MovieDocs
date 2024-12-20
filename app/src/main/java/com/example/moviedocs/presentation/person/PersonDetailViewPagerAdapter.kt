@@ -6,18 +6,14 @@ import com.example.moviedocs.presentation.person.moviecredits.cast.PersonDetailM
 import com.example.moviedocs.presentation.person.moviecredits.credit.PersonDetailMovieCrewFragment
 import com.example.moviedocs.presentation.person.overview.PersonDetailOverviewFragment
 
-class PersonDetailViewPagerAdapter(
-  fragment: Fragment,
-//  private val personId: Int
-) : FragmentStateAdapter(fragment) {
+class PersonDetailViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-  override fun getItemCount(): Int = 2
+  override fun getItemCount(): Int = 3
 
   override fun createFragment(position: Int): Fragment = when (position) {
     0 -> PersonDetailOverviewFragment.newInstance()
     1 -> PersonDetailMovieCastFragment.newInstance()
     2 -> PersonDetailMovieCrewFragment.newInstance()
-
     else -> throw IllegalArgumentException("Invalid $position")
   }
 }
