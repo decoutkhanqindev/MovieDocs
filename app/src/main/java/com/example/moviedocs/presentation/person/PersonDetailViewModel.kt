@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.person
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.externalId.ExternalIdsModel
@@ -26,13 +27,20 @@ class PersonDetailViewModel @Inject constructor(
   private val getPersonDetailUseCase: GetPersonDetailUseCase,
   private val getPersonExternalIdsModel: GetPersonDetailExternalIdsUseCase,
   private val getPersonMovieCreditListUseCase: GetPersonMovieCreditListUseCase,
+  private val saveStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
   private val _uiState: MutableStateFlow<PersonDetailUiState> =
     MutableStateFlow(PersonDetailUiState.Loading)
-  val uiState: StateFlow<PersonDetailUiState> = _uiState.asStateFlow()
+  internal val uiState: StateFlow<PersonDetailUiState> = _uiState.asStateFlow()
 
-  fun loadData(personId: Int) {
+  private var personId: Int = saveStateHandle.get<Int>("personId") ?: 0
+
+  init {
+    loadData(personId)
+  }
+
+  private fun loadData(personId: Int) {
     viewModelScope.launch {
       _uiState.value = PersonDetailUiState.Loading
 
@@ -75,5 +83,9 @@ class PersonDetailViewModel @Inject constructor(
         .map { (year: String, movies: List<MovieItemModel>) -> MovieListByYearModel(year, movies) }
         .sortedByDescending { it.year }
     return movieListByYear
+  }
+
+  internal fun setPersonId(personId: Int) {
+    saveStateHandle["personId"] = personId
   }
 }

@@ -2,8 +2,10 @@ package com.example.moviedocs.presentation.person.overview
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.moviedocs.databinding.FragmentPersonDetailOverviewBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.person.PersonDetailUiState
@@ -24,11 +26,23 @@ class PersonDetailOverviewFragment : BaseFragment<FragmentPersonDetailOverviewBi
     fun newInstance(): PersonDetailOverviewFragment = PersonDetailOverviewFragment()
   }
 
-  private val viewModel: PersonDetailViewModel by activityViewModels()
+  private var personId: Int = 0
+
+  private val viewModel: PersonDetailViewModel by viewModels()
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    personId = arguments?.getInt("personId") ?: 0
+    return super.onCreateView(inflater, container, savedInstanceState)
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    viewModel.setPersonId(personId)
     bindViewModel()
   }
 

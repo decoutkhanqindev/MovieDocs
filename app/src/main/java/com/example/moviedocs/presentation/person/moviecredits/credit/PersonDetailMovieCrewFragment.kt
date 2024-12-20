@@ -1,8 +1,10 @@
 package com.example.moviedocs.presentation.person.moviecredits.credit
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentPersonDetailMovieCreditsBinding
@@ -28,7 +30,9 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
     fun newInstance(): PersonDetailMovieCrewFragment = PersonDetailMovieCrewFragment()
   }
 
-  private val viewModel: PersonDetailViewModel by activityViewModels()
+  private var personId: Int = 0
+
+  private val viewModel: PersonDetailViewModel by viewModels()
 
   private val movieListItemByYearAdapter: MovieListItemByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListItemByYearAdapter()
@@ -36,6 +40,13 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
 
   private val movieListByYearAdapter: MovieListByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
     MovieListByYearAdapter(movieListItemByYearAdapter)
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+  ): View? {
+    personId = arguments?.getInt("personId") ?: 0
+    return super.onCreateView(inflater, container, savedInstanceState)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,6 +60,7 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
       mAdapter = movieListByYearAdapter
     )
     setUpNavigation()
+    viewModel.setPersonId(personId)
     bindViewModel()
   }
 

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviedocs.databinding.FragmentPersonDetailBinding
 import com.example.moviedocs.presentation.base.BaseFragment
@@ -33,7 +33,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
 
   private val args: PersonDetailFragmentArgs by navArgs()
 
-  private val viewModel: PersonDetailViewModel by activityViewModels()
+  private val viewModel: PersonDetailViewModel by viewModels()
 
   private lateinit var tiktokId: String
   private lateinit var fbId: String
@@ -48,11 +48,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    if (savedInstanceState == null) {
-      viewModel.loadData(args.personId)
-    }
-    viewPagerAdapter = PersonDetailViewPagerAdapter(fragment = this)
+    viewPagerAdapter = PersonDetailViewPagerAdapter(fragment = this, args.personId)
     setUpNavigation()
+    viewModel.setPersonId(args.personId)
     bindViewModel()
   }
 
