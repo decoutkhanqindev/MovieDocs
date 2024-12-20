@@ -10,7 +10,7 @@ import com.example.moviedocs.domain.usecase.movielist.GetNowPlayingUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetPopularUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetTopRatedUseCase
 import com.example.moviedocs.domain.usecase.movielist.GetUpcomingUseCase
-import com.example.moviedocs.domain.usecase.slider.GetSliderImageUseCase
+import com.example.moviedocs.domain.usecase.slider.GetSliderImageListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-  private val getSliderImageUseCase: GetSliderImageUseCase,
+  private val getSliderImageUseCase: GetSliderImageListUseCase,
   private val getGenreListUseCase: GetGenreListUseCase,
   private val getNowPlayingUseCase: GetNowPlayingUseCase,
   private val getPopularUseCase: GetPopularUseCase,
