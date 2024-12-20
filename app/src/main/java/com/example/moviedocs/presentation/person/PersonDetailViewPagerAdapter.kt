@@ -2,13 +2,13 @@ package com.example.moviedocs.presentation.person
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.moviedocs.presentation.person.moviecredits.PersonDetailMovieCastFragment
-import com.example.moviedocs.presentation.person.moviecredits.PersonDetailMovieCrewFragment
+import com.example.moviedocs.presentation.person.moviecredits.cast.PersonDetailMovieCastFragment
+import com.example.moviedocs.presentation.person.moviecredits.credit.PersonDetailMovieCrewFragment
 import com.example.moviedocs.presentation.person.overview.PersonDetailOverviewFragment
 
 class PersonDetailViewPagerAdapter(
   fragment: Fragment,
-  private val personId: Int
+//  private val personId: Int
 ) : FragmentStateAdapter(fragment) {
 
   override fun getItemCount(): Int = 2

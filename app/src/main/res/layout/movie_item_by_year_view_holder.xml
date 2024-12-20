@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    app:cardUseCompatPadding="true"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
     app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
     app:strokeColor="@android:color/transparent">
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,61 +16,61 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_height="35dp"
         android:background="@color/main_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-      <androidx.appcompat.widget.Toolbar
-          android:id="@+id/toolBar"
-          android:layout_width="match_parent"
-          android:layout_height="40dp">
+      <TextView
+          android:id="@+id/yearTitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="16dp"
+          android:gravity="center"
+          android:text="@string/year_title"
+          android:textColor="@color/white"
+          android:textStyle="bold"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/yearTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:textStyle="bold"
-            android:text="@string/year_title"
-            android:textColor="@color/white" />
+      <ImageView
+          android:id="@+id/openBtn"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_marginEnd="16dp"
+          android:visibility="gone"
+          android:src="@drawable/down_icon"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/openBtn"
-            android:visibility="gone"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/down_icon" />
-
-        <ImageView
-            android:id="@+id/closeBtn"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="end"
-            android:visibility="visible"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/up_icon" />
-      </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+      <ImageView
+          android:id="@+id/closeBtn"
+          android:layout_width="25dp"
+          android:layout_height="25dp"
+          android:layout_marginEnd="16dp"
+          android:src="@drawable/up_icon"
+          android:visibility="visible"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/movieListCreditsRecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
+        android:layout_height="wrap_content"
         android:background="@color/dark_blue2"
-        tools:listitem="@layout/movie_list_item_by_year_view_holder"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        tools:listitem="@layout/movie_list_item_by_year_view_holder" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

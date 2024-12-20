@@ -51,7 +51,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
     if (savedInstanceState == null) {
       viewModel.loadData(args.personId)
     }
-    viewPagerAdapter = PersonDetailViewPagerAdapter(fragment = this, personId = args.personId)
+    viewPagerAdapter = PersonDetailViewPagerAdapter(fragment = this)
     setUpNavigation()
     bindViewModel()
   }

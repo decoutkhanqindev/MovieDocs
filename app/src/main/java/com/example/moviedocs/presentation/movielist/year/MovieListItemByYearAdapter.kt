@@ -13,6 +13,7 @@ class MovieListItemByYearAdapter :
   BaseListAdapter<MovieItemModel, MovieListItemByYearViewHolderBinding>(
     MovieItemModelDiffCallBack
   ) {
+
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int

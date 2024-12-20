@@ -15,6 +15,7 @@ class MovieListByYearAdapter :
   BaseListAdapter<MovieListByYearModel, MovieItemByYearViewHolderBinding>(
     MovieItemByYearDiffCallBack
   ) {
+
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
@@ -29,7 +30,9 @@ class MovieListByYearAdapter :
     binding: MovieItemByYearViewHolderBinding
   ) : BaseViewHolder(binding) {
 
-    private val movieListItemByYearAdapter = MovieListItemByYearAdapter()
+    private val movieListItemByYearAdapter: MovieListItemByYearAdapter by lazy(LazyThreadSafetyMode.NONE) {
+      MovieListItemByYearAdapter()
+    }
 
     init {
       binding.root.setOnClickListener {
@@ -55,7 +58,7 @@ class MovieListByYearAdapter :
       }
     }
 
-    internal fun handleOnItemClick(isOpen: Boolean) {
+    private fun handleOnItemClick(isOpen: Boolean) {
       binding.apply {
         if (isOpen == false) {
           openBtn.visible()
