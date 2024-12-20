@@ -49,7 +49,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   // In case, this Runnable contains the code to transfer the ViewPager2 to the next item
   // (viewPager.currentItem += 1)
   private val sliderRunnable: Runnable by lazy(LazyThreadSafetyMode.NONE) {
-    Runnable { viewPager.currentItem += 1 }
+    Runnable {
+      val nextItemPosition: Int = (viewPager.currentItem + 1) % sliderViewPagerAdapter.itemCount
+      viewPager.setCurrentItem(nextItemPosition, true)
+
+      // nextItem = currentItem + 1 % itemCount = (0 + 1) % 3 = 1
+      // nextItem = currentItem + 1 % itemCount = (1 + 1) % 3 = 2
+      // nextItem = currentItem + 1 % itemCount = (2 + 1) % 3 = 0
+    }
   }
 
   // ==> This Handler and Runnable are used for auto-scrolling functionality in ViewPager2.
@@ -125,8 +132,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     genreAdapter.setOnItemClickListener { it: GenreItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToGenreMovieListFragment(
-          genreId = it.id,
-          genreName = it.name
+          genreId = it.id, genreName = it.name
         )
       )
     }
@@ -211,7 +217,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           super.onPageSelected(position)
 
           sliderHandler.removeCallbacks(sliderRunnable)
-          sliderHandler.postDelayed(sliderRunnable, 2000)
+          sliderHandler.postDelayed(sliderRunnable, 1500)
 
           // This method is called when a new page is selected by user. It removes any pending callbacks for
           // the sliderRunnable (likely a runnable for auto-scrolling) and then posts a delayed execution
@@ -229,7 +235,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
   override fun onResume() {
     super.onResume()
-    sliderHandler.postDelayed(sliderRunnable, 2000)
+    sliderHandler.postDelayed(sliderRunnable, 1500)
   }
 
   private fun bindViewModel() {
@@ -250,7 +256,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.invisible()
           scrollView.visible()
         }
-        sliderViewPagerAdapter.submitList(state.nowPlaying)
+        sliderViewPagerAdapter.submitList(state.sliderList)
         genreAdapter.submitList(state.genreList)
         nowPlayingAdapter.submitList(state.nowPlaying)
         popularAdapter.submitList(state.popular)
