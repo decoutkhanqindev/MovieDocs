@@ -5,13 +5,11 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentPersonDetailMovieCreditsBinding
-import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.domain.model.movielist.year.MovieListByYearModel
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.movielist.year.MovieListByYearAdapter
 import com.example.moviedocs.presentation.person.PersonDetailUiState
 import com.example.moviedocs.presentation.person.PersonDetailViewModel
-import com.example.moviedocs.utils.formatDate
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.setUpRecyclerView
@@ -58,15 +56,9 @@ class PersonDetailMovieCastFragment : BaseFragment<FragmentPersonDetailMovieCred
       is PersonDetailUiState.Success -> {
         binding.personDetailMovieCreditsRecyclerview.visible()
 
-        val movieCredits: List<MovieItemModel> = state.castMovieCreditList
-        val mapByYear: Map<String, List<MovieItemModel>> =
-          movieCredits.filter { it.releaseDate.formatDate() != "Unknown date" }
-            .groupBy { it: MovieItemModel -> it.releaseDate.formatDate().substring(6) }
         val movieListByYear: List<MovieListByYearModel> =
-          mapByYear.map { (year: String, movies: List<MovieItemModel>) ->
-            MovieListByYearModel(year, movies)
-          }
-        movieListByYearAdapter.submitList(movieListByYear.sortedByDescending { it.year })
+          viewModel.getMovieListByYear(state.castMovieCreditList)
+        movieListByYearAdapter.submitList(movieListByYear)
       }
 
       is PersonDetailUiState.Error -> {
