@@ -8,5 +8,5 @@ class GetSliderImageListUseCase @Inject constructor(
   private val repository: SliderRepository
 ) {
   suspend operator fun invoke(): Result<List<SliderImageItemModel>> =
-    repository.getSliderImage()
+    repository.getSliderImageList()
 }
