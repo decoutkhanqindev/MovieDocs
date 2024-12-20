@@ -64,6 +64,14 @@ fun ImageView.loadImgFromUrl(url: String) {
     .into(this)
 }
 
+fun ImageView.loadImgFromDrawable(drawableId: Int) {
+  Glide.with(context)
+    .load(drawableId)
+    .error(R.drawable.app_icon)
+    .transition(DrawableTransitionOptions.withCrossFade())
+    .into(this)
+}
+
 fun View.navigateTo(actionId: Int) =
   this.setOnClickListener {
     findNavController().navigate(actionId)
