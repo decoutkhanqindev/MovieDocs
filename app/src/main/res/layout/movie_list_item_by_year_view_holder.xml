@@ -46,5 +46,21 @@
         app:layout_constraintEnd_toEndOf="@id/movieItemName"
         app:layout_constraintStart_toStartOf="@id/movieItemName"
         app:layout_constraintTop_toBottomOf="@id/movieItemName" />
+
+    <TextView
+        android:id="@+id/movieItemDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:lineHeight="25dp"
+        android:visibility="gone"
+        android:maxLines="2"
+        android:text="@string/as_character"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@id/movieItemName"
+        app:layout_constraintStart_toStartOf="@id/movieItemName"
+        app:layout_constraintTop_toBottomOf="@id/movieItemName" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
