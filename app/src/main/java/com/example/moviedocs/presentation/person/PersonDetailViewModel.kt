@@ -76,16 +76,23 @@ class PersonDetailViewModel @Inject constructor(
   internal fun getMovieListByYear(movieCreditsList: List<MovieItemModel>): List<MovieListByYearModel> {
     val mapByYear: Map<String, List<MovieItemModel>> =
       movieCreditsList
-        .filter { it.releaseDate.formatDate() != "Unknown date" }
-        .groupBy { it: MovieItemModel -> it.releaseDate.formatDate().substring(6) }
+        .groupBy { it: MovieItemModel ->
+          if (it.releaseDate.formatDate() == "Unknown date") {
+            "Unknown year"
+          } else {
+            it.releaseDate.formatDate().substring(6)
+          }
+        }
     val movieListByYear: List<MovieListByYearModel> =
       mapByYear
-        .map { (year: String, movies: List<MovieItemModel>) -> MovieListByYearModel(year, movies) }
+        .map { (year: String, movies: List<MovieItemModel>) ->
+          MovieListByYearModel(year, movies)
+        }
         .sortedByDescending { it.year }
     return movieListByYear
   }
 
-  internal fun setPersonId(personId: Int) {
+  fun setPersonId(personId: Int) {
     saveStateHandle["personId"] = personId
   }
 }

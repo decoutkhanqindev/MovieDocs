@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
@@ -48,9 +48,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   }
 
   override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
   ): View? {
     movieId = arguments?.getInt("movieId")!!
     return super.onCreateView(inflater, container, savedInstanceState)
@@ -69,9 +67,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     )
     setUpRecyclerView(
       mRecyclerView = binding.companyRecycleView,
-      mLayoutManager = GridLayoutManager(
-        requireContext(), 2, LinearLayoutManager.VERTICAL, false
-      ),
+      mLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL),
       mAdapter = companyListAdapter,
     )
     viewModel.setMovieId(movieId)
@@ -82,8 +78,7 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     genreListAdapter.setOnItemClickListener { it: GenreItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToGenreMovieListFragment(
-          genreId = it.id,
-          genreName = it.name
+          genreId = it.id, genreName = it.name
         )
       )
     }
