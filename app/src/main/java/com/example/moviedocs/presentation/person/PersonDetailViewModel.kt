@@ -80,13 +80,13 @@ class PersonDetailViewModel @Inject constructor(
           if (it.releaseDate.formatDate() == "Unknown date") {
             "Unknown year"
           } else {
-            it.releaseDate.formatDate().substring(6)
+            it.releaseDate.formatDate().takeLast(4)
           }
         }
     val movieListByYear: List<MovieListByYearModel> =
       mapByYear
         .map { (year: String, movies: List<MovieItemModel>) ->
-          MovieListByYearModel(year, movies)
+          MovieListByYearModel(year, movies.distinct())
         }
         .sortedByDescending { it.year }
     return movieListByYear
