@@ -70,7 +70,7 @@
           android:id="@+id/movieDetailImgLayout"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          app:cardCornerRadius="4dp"
+          app:cardCornerRadius="8dp"
           app:cardElevation="8dp"
           app:cardUseCompatPadding="true"
           app:layout_constraintBottom_toBottomOf="parent"
@@ -79,14 +79,22 @@
           app:layout_constraintTop_toTopOf="parent"
           app:strokeColor="@android:color/transparent">
 
-        <ImageView
-            android:id="@+id/movieDetailImg"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="130dp"
-            android:layout_height="190dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            tools:ignore="ContentDescription"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            android:layout_height="wrap_content">
+
+          <ImageView
+              android:id="@+id/movieDetailImg"
+              android:layout_width="match_parent"
+              android:layout_height="0dp"
+              android:scaleType="fitXY"
+              app:layout_constraintDimensionRatio="0.675"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"
+              tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
       </com.google.android.material.card.MaterialCardView>
 
       <TextView

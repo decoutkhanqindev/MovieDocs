@@ -6,23 +6,27 @@
     android:layout_height="match_parent"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
     app:strokeColor="@android:color/transparent">
 
-  <ImageView
-      android:id="@+id/sliderItemImg"
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:adjustViewBounds="true"
-      android:importantForAccessibility="no"
-      android:scaleType="centerCrop"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.0"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.0"
-      tools:ignore="ImageContrastCheck"
-      tools:srcCompat="@tools:sample/backgrounds/scenic" />
+      android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/sliderItemImg"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:importantForAccessibility="no"
+        android:scaleType="fitXY"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

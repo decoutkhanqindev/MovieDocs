@@ -43,8 +43,8 @@
           android:layout_width="25dp"
           android:layout_height="25dp"
           android:layout_marginEnd="16dp"
-          android:visibility="gone"
           android:src="@drawable/down_icon"
+          android:visibility="gone"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toTopOf="parent" />
@@ -61,16 +61,22 @@
           app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movieListCreditsRecyclerview"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/dark_blue2"
-        android:visibility="visible"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar"
-        tools:listitem="@layout/movie_list_item_by_year_view_holder" />
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/movieListCreditsRecyclerview"
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:background="@color/dark_blue2"
+          android:visibility="visible"
+          android:nestedScrollingEnabled="false"
+          tools:listitem="@layout/movie_list_item_by_year_view_holder" />
+    </androidx.core.widget.NestedScrollView>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
