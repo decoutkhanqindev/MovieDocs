@@ -95,7 +95,7 @@ fun View.invisible() {
 }
 
 fun setUpRecyclerView(
-  mSetHasFixedSize: Boolean = false, // true, if same height and width for all items
+  mSetHasFixedSize: Boolean = false,
   mRecyclerView: RecyclerView,
   mLayoutManager: RecyclerView.LayoutManager,
   mAdapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>
