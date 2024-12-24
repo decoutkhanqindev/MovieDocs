@@ -1,6 +1,7 @@
 package com.example.moviedocs.presentation.movielist.year
 
 import android.annotation.SuppressLint
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class MovieListByYearAdapter(
   MovieItemByYearDiffCallBack
 ) {
 
-  private val sharedViewPool = RecyclerView.RecycledViewPool()
+  private val scrollState: HashMap<String, Parcelable> = hashMapOf<String, Parcelable>()
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
@@ -33,6 +34,36 @@ class MovieListByYearAdapter(
       )
     )
 
+  override fun onViewRecycled(holder: BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding>) {
+    super.onViewRecycled(holder)
+
+    // save scroll state here
+    val key: String = currentList[holder.bindingAdapterPosition].year
+    val recyclerView: RecyclerView = holder.itemView.parent as RecyclerView
+    val layoutManager: RecyclerView.LayoutManager? = recyclerView.layoutManager
+    if (layoutManager != null) {
+      scrollState[key] = layoutManager.onSaveInstanceState()!!
+    }
+  }
+
+  override fun onBindViewHolder(
+    holder: BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding>,
+    position: Int
+  ) {
+    super.onBindViewHolder(holder, position)
+
+    val key: String = currentList[holder.bindingAdapterPosition].year
+    val state: Parcelable? = scrollState[key]
+    val recyclerView: RecyclerView = holder.itemView.parent as RecyclerView
+    val layoutManager: RecyclerView.LayoutManager? = recyclerView.layoutManager
+    if (layoutManager != null) {
+      if (state != null) {
+        layoutManager.onRestoreInstanceState(state)
+      } else {
+        layoutManager.scrollToPosition(0)
+      }
+    }
+  }
 
   private inner class VH(
     binding: MovieItemByYearViewHolderBinding
@@ -40,15 +71,12 @@ class MovieListByYearAdapter(
 
     init {
       binding.apply {
-        movieListCreditsRecyclerview.setRecycledViewPool(sharedViewPool)
-
         root.setOnClickListener {
           val isOpen: Boolean = binding.movieListCreditsRecyclerview.visibility == View.GONE
           handleOnItemClick(isOpen)
         }
 
         setUpRecyclerView(
-          mSetHasFixedSize = true,
           mRecyclerView = movieListCreditsRecyclerview,
           mLayoutManager = LinearLayoutManager(
             root.context, LinearLayoutManager.VERTICAL, false
