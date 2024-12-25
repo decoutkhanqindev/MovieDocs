@@ -28,8 +28,8 @@ class SliderViewPagerAdapter(
     holder: BaseViewHolder<SliderImageItemModel, SliderItemViewHolderBinding>,
     position: Int
   ) {
-    holder.bind(getItem(position % currentList.size))
-    if (position == currentList.size - 1) {
+    holder.bind(getItem(position % 3)) // 3 is itemCount
+    if (position == currentList.lastIndex) {
       viewPager.setCurrentItem(0, true)
     }
   }

@@ -54,8 +54,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
   // (viewPager.currentItem += 1)
   private val sliderRunnable: Runnable by lazy(LazyThreadSafetyMode.NONE) {
     Runnable {
-      val nextItemPosition: Int =
-        (viewPager.currentItem + 1) % sliderViewPagerAdapter.currentList.size
+      val nextItemPosition: Int = (viewPager.currentItem + 1) % 3 // 3 is itemCount
       viewPager.setCurrentItem(nextItemPosition, true)
 
       // nextItem = currentItem + 1 % itemCount = (0 + 1) % 3 = 1

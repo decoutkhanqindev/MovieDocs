@@ -62,7 +62,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movieListCreditsRecyclerview"
+        android:id="@+id/movieListItemByYearRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_blue2"
