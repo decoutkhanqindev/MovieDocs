@@ -1,9 +1,7 @@
 package com.example.moviedocs.presentation.movielist.year
 
 import android.annotation.SuppressLint
-import android.os.Parcelable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,11 +20,8 @@ class MovieListByYearAdapter(
   MovieItemByYearDiffCallBack
 ) {
 
-  private val scrollState: HashMap<String, Parcelable> = hashMapOf<String, Parcelable>()
-
   override fun onCreateViewHolder(
-    parent: ViewGroup,
-    viewType: Int
+    parent: ViewGroup, viewType: Int
   ): BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding> =
     VH(
       MovieItemByYearViewHolderBinding.inflate(
@@ -34,59 +29,29 @@ class MovieListByYearAdapter(
       )
     )
 
-  override fun onViewRecycled(holder: BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding>) {
-    super.onViewRecycled(holder)
-
-    // save scroll state here
-    val key: String = currentList[holder.bindingAdapterPosition].year
-    val recyclerView: RecyclerView = holder.itemView.parent as RecyclerView
-    val layoutManager: RecyclerView.LayoutManager? = recyclerView.layoutManager
-    if (layoutManager != null) {
-      scrollState[key] = layoutManager.onSaveInstanceState()!!
-    }
-  }
-
-  override fun onBindViewHolder(
-    holder: BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding>,
-    position: Int
-  ) {
-    super.onBindViewHolder(holder, position)
-
-    val key: String = currentList[holder.bindingAdapterPosition].year
-    val state: Parcelable? = scrollState[key]
-    val recyclerView: RecyclerView = holder.itemView.parent as RecyclerView
-    val layoutManager: RecyclerView.LayoutManager? = recyclerView.layoutManager
-    if (layoutManager != null) {
-      if (state != null) {
-        layoutManager.onRestoreInstanceState(state)
-      } else {
-        layoutManager.scrollToPosition(0)
-      }
-    }
-  }
-
-  private inner class VH(
+  inner class VH(
     binding: MovieItemByYearViewHolderBinding
   ) : BaseViewHolder<MovieListByYearModel, MovieItemByYearViewHolderBinding>(binding) {
 
     init {
       binding.apply {
         root.setOnClickListener {
-          val isOpen: Boolean = binding.movieListCreditsRecyclerview.visibility == View.GONE
-          handleOnItemClick(isOpen)
+          val position: Int = bindingAdapterPosition
+          if (position != RecyclerView.NO_POSITION) {
+            val item: MovieListByYearModel = getItem(position)
+            item.isOpen = !item.isOpen
+            notifyItemChanged(position)
+          }
         }
 
         setUpRecyclerView(
-          mRecyclerView = movieListCreditsRecyclerview,
+          mSetHasFixedSize = true,
+          mRecyclerView = movieListItemByYearRecyclerview,
           mLayoutManager = LinearLayoutManager(
             root.context, LinearLayoutManager.VERTICAL, false
           ),
           mAdapter = movieListItemByYearAdapter
         )
-
-        openBtn.visible()
-        closeBtn.gone()
-        movieListCreditsRecyclerview.gone()
       }
     }
 
@@ -95,19 +60,15 @@ class MovieListByYearAdapter(
       binding.apply {
         yearTitle.text = "${item.year} ${item.movies.size.formatTotalResult()}"
         movieListItemByYearAdapter.submitList(item.movies)
-      }
-    }
 
-    private fun handleOnItemClick(isOpen: Boolean) {
-      binding.apply {
-        if (isOpen == false) {
-          openBtn.visible()
-          closeBtn.gone()
-          movieListCreditsRecyclerview.gone()
-        } else {
+        if (item.isOpen) {
           openBtn.gone()
           closeBtn.visible()
-          movieListCreditsRecyclerview.visible()
+          movieListItemByYearRecyclerview.visible()
+        } else {
+          openBtn.visible()
+          closeBtn.gone()
+          movieListItemByYearRecyclerview.gone()
         }
       }
     }

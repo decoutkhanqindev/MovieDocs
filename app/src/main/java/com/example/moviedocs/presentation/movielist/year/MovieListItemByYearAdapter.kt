@@ -27,7 +27,7 @@ class MovieListItemByYearAdapter :
       )
     )
 
-  private inner class VH(
+  inner class VH(
     binding: MovieListItemByYearViewHolderBinding
   ) : BaseViewHolder<MovieItemModel, MovieListItemByYearViewHolderBinding>(binding) {
 

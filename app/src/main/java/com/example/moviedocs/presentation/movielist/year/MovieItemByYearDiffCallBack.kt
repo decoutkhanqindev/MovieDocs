@@ -8,7 +8,8 @@ object MovieItemByYearDiffCallBack : DiffUtil.ItemCallback<MovieListByYearModel>
   @SuppressLint("DiffUtilEquals")
   override fun areContentsTheSame(
     oldItem: MovieListByYearModel, newItem: MovieListByYearModel,
-  ): Boolean = oldItem.movies == newItem.movies
+  ): Boolean =
+    oldItem.movies == newItem.movies && oldItem.isOpen == newItem.isOpen && oldItem.year == newItem.year
 
   override fun areItemsTheSame(
     oldItem: MovieListByYearModel, newItem: MovieListByYearModel,

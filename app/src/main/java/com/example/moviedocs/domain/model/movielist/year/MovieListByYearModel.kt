@@ -5,4 +5,5 @@ import com.example.moviedocs.domain.model.movielist.MovieItemModel
 data class MovieListByYearModel(
   val year: String,
   val movies: List<MovieItemModel>,
+  var isOpen: Boolean = false
 )
