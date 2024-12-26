@@ -1,10 +1,10 @@
 package com.example.moviedocs.data.mapper.moviedetail.image
 
-import com.example.moviedocs.data.remote.response.moviedetails.image.ImageListResponse
-import com.example.moviedocs.domain.model.moviedetail.image.ImageListModel
+import com.example.moviedocs.data.remote.response.moviedetails.image.MediaListResponse
+import com.example.moviedocs.domain.model.moviedetail.image.MediaListModel
 
-fun ImageListResponse.toImageListModel(): ImageListModel =
-  ImageListModel(
+fun MediaListResponse.toImageListModel(): MediaListModel =
+  MediaListModel(
     id = id,
     backdrops = backdrops?.map { it.toImageItemModel() } ?: emptyList(),
     posters = posters?.map { it.toImageItemModel() } ?: emptyList(),

@@ -1,6 +1,6 @@
 package com.example.moviedocs.domain.model.moviedetail.image
 
-data class ImageItemModel(
+data class MediaItemModel(
   val aspectRatio: Double, // 1.778
   val filePath: String, // /8PwntYBvxnaJq6R57UiXGNFsluN.jpg
   val height: Int, // 1080

@@ -3,7 +3,7 @@ package com.example.moviedocs.data.remote.response.moviedetails.image
 
 import com.squareup.moshi.Json
 
-data class ImageItemResponse(
+data class MediaItemResponse(
   @Json(name = "aspect_ratio")
   val aspectRatio: Double, // 1.778
   @Json(name = "file_path")

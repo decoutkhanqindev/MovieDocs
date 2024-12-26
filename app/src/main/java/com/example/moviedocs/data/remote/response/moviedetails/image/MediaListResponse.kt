@@ -3,13 +3,13 @@ package com.example.moviedocs.data.remote.response.moviedetails.image
 
 import com.squareup.moshi.Json
 
-data class ImageListResponse(
+data class MediaListResponse(
   @Json(name = "backdrops")
-  val backdrops: List<ImageItemResponse>?,
+  val backdrops: List<MediaItemResponse>?,
   @Json(name = "id")
   val id: Int, // 912649
   @Json(name = "logos")
-  val logos: List<ImageItemResponse>?,
+  val logos: List<MediaItemResponse>?,
   @Json(name = "posters")
-  val posters: List<ImageItemResponse>?
+  val posters: List<MediaItemResponse>?
 )

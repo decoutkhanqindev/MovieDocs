@@ -6,7 +6,7 @@ import com.example.moviedocs.data.remote.ApiService
 import com.example.moviedocs.di.AppDispatcher
 import com.example.moviedocs.di.DispatcherType
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.model.moviedetail.image.ImageListModel
+import com.example.moviedocs.domain.model.moviedetail.image.MediaListModel
 import com.example.moviedocs.domain.repository.moviedetail.MovieDetailRepository
 import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,8 +23,8 @@ class MovieDetailRepositoryImpl @Inject constructor(
       apiService.getMovieDetail(movieId = movieId).toMovieDetailModel()
     }
 
-  override suspend fun getMovieImages(movieId: Int): Result<ImageListModel> =
+  override suspend fun getMovieMedia(movieId: Int): Result<MediaListModel> =
     runSuspendCatching(ioDispatcher) {
-      apiService.getMovieImages(movieId).toImageListModel()
+      apiService.getMovieMedia(movieId).toImageListModel()
     }
 }
