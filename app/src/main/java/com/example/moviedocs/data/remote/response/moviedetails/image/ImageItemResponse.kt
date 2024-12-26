@@ -13,9 +13,9 @@ data class ImageItemResponse(
   @Json(name = "iso_639_1")
   val iso6391: String?, // pt
   @Json(name = "vote_average")
-  val voteAverage: Double, // 8.034
+  val voteAverage: Double?, // 8.034
   @Json(name = "vote_count")
-  val voteCount: Int, // 5
+  val voteCount: Int?, // 5
   @Json(name = "width")
   val width: Int // 1920
 )
