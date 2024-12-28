@@ -8,11 +8,13 @@ import com.example.moviedocs.domain.model.country.CountryItemModel
 import com.example.moviedocs.domain.model.credits.CreditListModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
+import com.example.moviedocs.domain.model.moviedetail.image.MediaListModel
 import com.example.moviedocs.domain.usecase.country.GetCountryListUseCase
 import com.example.moviedocs.domain.usecase.credits.GetCreditListUseCase
 import com.example.moviedocs.domain.usecase.externalId.GetMovieDetailExternalIdsUseCase
 import com.example.moviedocs.domain.usecase.language.GetLanguageListUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetMovieDetailUseCase
+import com.example.moviedocs.domain.usecase.moviedetail.GetMovieMediaUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -30,6 +32,7 @@ class MovieDetailViewModel @Inject constructor(
   private val getLanguageListUseCase: GetLanguageListUseCase,
   private val getCountryListUseCase: GetCountryListUseCase,
   private val getMovieCreditsUseCase: GetCreditListUseCase,
+  private val getMovieMediaUseCase: GetMovieMediaUseCase,
   private val saveStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -57,16 +60,19 @@ class MovieDetailViewModel @Inject constructor(
         async { getCountryListUseCase() }
       val creditListDeferred: Deferred<Result<CreditListModel>> =
         async { getMovieCreditsUseCase(movieId) }
+      val mediaListDeferred: Deferred<Result<MediaListModel>> =
+        async { getMovieMediaUseCase(movieId) }
 
       val movieDetailResult: Result<MovieDetailModel> = movieDetailDeferred.await()
       val externalIdsResult: Result<ExternalIdsModel> = externalIdsDeferred.await()
       val languageListResult: Result<List<LanguageItemModel>> = languageListDeferred.await()
       val countryListResult: Result<List<CountryItemModel>> = countryListDeferred.await()
       val creditListResult: Result<CreditListModel> = creditListDeferred.await()
+      val mediaListResult: Result<MediaListModel> = mediaListDeferred.await()
 
       if (movieDetailResult.isSuccess && externalIdsResult.isSuccess
         && languageListResult.isSuccess && countryListResult.isSuccess
-        && creditListResult.isSuccess
+        && creditListResult.isSuccess && mediaListResult.isSuccess
       ) {
         _uiState.value = MovieDetailUiState.Success(
           movieDetail = movieDetailResult.getOrNull()!!,
@@ -75,11 +81,14 @@ class MovieDetailViewModel @Inject constructor(
           countryList = countryListResult.getOrNull()!!,
           castList = creditListResult.getOrNull()?.cast ?: emptyList(),
           crewList = creditListResult.getOrNull()?.crew ?: emptyList(),
+          backDropList = mediaListResult.getOrNull()?.backdrops ?: emptyList(),
+          logoList = mediaListResult.getOrNull()?.logos ?: emptyList(),
+          posterList = mediaListResult.getOrNull()?.posters ?: emptyList(),
         )
       } else {
         val error = listOf(
           movieDetailResult, externalIdsResult, languageListResult, countryListResult,
-          creditListResult
+          creditListResult, mediaListResult
         ).first { it.isFailure }
         _uiState.value = MovieDetailUiState.Error(error.exceptionOrNull() ?: Throwable())
         Timber.tag(this.javaClass.simpleName).e("loadData ${error.exceptionOrNull()}")
