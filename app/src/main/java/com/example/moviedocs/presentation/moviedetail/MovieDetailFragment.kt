@@ -21,7 +21,6 @@ import com.example.moviedocs.utils.visible
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
@@ -86,6 +85,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
         tab.text = when (position) {
           0 -> "Overview"
           1 -> "Credits ${totalCredits.formatTotalResult()}"
+          2 -> "Media"
           else -> throw IllegalArgumentException("Invalid $position")
         }
       }.attach()
