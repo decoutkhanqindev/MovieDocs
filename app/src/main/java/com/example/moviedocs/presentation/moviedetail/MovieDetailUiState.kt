@@ -6,6 +6,7 @@ import com.example.moviedocs.domain.model.credits.CastItemModel
 import com.example.moviedocs.domain.model.credits.CrewItemModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
+import com.example.moviedocs.domain.model.moviedetail.image.MediaItemModel
 
 sealed interface MovieDetailUiState {
   data object Loading : MovieDetailUiState
@@ -17,5 +18,8 @@ sealed interface MovieDetailUiState {
     val countryList: List<CountryItemModel> = emptyList(),
     val castList: List<CastItemModel> = emptyList(),
     val crewList: List<CrewItemModel> = emptyList(),
+    val backDropList: List<MediaItemModel> = emptyList(),
+    val logoList: List<MediaItemModel> = emptyList(),
+    val posterList: List<MediaItemModel> = emptyList(),
   ) : MovieDetailUiState
 }
