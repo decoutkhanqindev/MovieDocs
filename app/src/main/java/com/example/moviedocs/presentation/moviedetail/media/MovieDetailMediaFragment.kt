@@ -33,9 +33,17 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
 
   private val viewModel: MovieDetailViewModel by viewModels()
 
-  private val backDropAdapter: MediaListAdapter by lazy { MediaListAdapter() }
-  private val logoAdapter: MediaListAdapter by lazy { MediaListAdapter() }
-  private val posterAdapter: MediaListAdapter by lazy { MediaListAdapter() }
+  private val backDropAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MediaListAdapter(MediaListAdapter.MediaType.BACKDROPS)
+  }
+
+  private val logoAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MediaListAdapter(MediaListAdapter.MediaType.LOGOS)
+  }
+
+  private val posterAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MediaListAdapter(MediaListAdapter.MediaType.POSTERS)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -90,9 +98,7 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
         binding.scrollView.visible()
 
         backDropAdapter.submitList(state.backDropList)
-
         logoAdapter.submitList(state.logoList)
-
         posterAdapter.submitList(state.posterList)
       }
 
