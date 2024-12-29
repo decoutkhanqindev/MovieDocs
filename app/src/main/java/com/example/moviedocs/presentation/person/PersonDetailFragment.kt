@@ -18,6 +18,7 @@ import com.example.moviedocs.utils.visible
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
@@ -44,6 +45,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(
   private var totalMoviesCrew = 0
 
   private lateinit var viewPagerAdapter: PersonDetailViewPagerAdapter
+
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

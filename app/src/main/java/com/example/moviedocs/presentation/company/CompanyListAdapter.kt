@@ -10,7 +10,7 @@ import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class CompanyListHorizontalAdapter :
+class CompanyListAdapter :
   BaseListAdapter<CompanyItemModel, CompanyItemViewHolderBinding>(
     CompanyItemModelDiffCallback
   ) {

@@ -2,12 +2,9 @@ package com.example.moviedocs.utils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.app.AlertDialog
 import android.content.Context
 import android.util.TypedValue
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import androidx.core.animation.doOnCancel
@@ -15,9 +12,9 @@ import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.moviedocs.BuildConfig
 import com.example.moviedocs.R
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -62,9 +59,9 @@ suspend fun View.applyAnimationFadeIn(timeSpan: Long = 1000L) {
   }
 }
 
-fun ImageView.loadImgFromUrl(url: String) {
+fun ImageView.loadImgFromUrl(path: String) {
   Glide.with(context)
-    .load("https://image.tmdb.org/t/p/w500$url")
+    .load(BuildConfig.IMG_URL + path)
     .error(R.drawable.app_icon)
     .transition(DrawableTransitionOptions.withCrossFade())
     .into(this)

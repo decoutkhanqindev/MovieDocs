@@ -22,6 +22,14 @@ import javax.inject.Singleton
 @Retention(AnnotationRetention.RUNTIME)
 annotation class BaseUrl
 
+//@Qualifier
+//@Retention(AnnotationRetention.RUNTIME)
+//annotation class ImgUrl
+//
+//@Qualifier
+//@Retention(AnnotationRetention.RUNTIME)
+//annotation class OriginalImgUrl
+
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ApiKey
@@ -36,11 +44,19 @@ object RemoteModule {
   @Provides
   @BaseUrl
   fun provideBaseUrl(): String = BuildConfig.BASE_URL
-  
+
   @Provides
   @ApiKey
   fun provideApiKey(): String = BuildConfig.API_KEY
-  
+
+//  @Provides
+//  @ImgUrl
+//  fun provideImgUrl(): String = BuildConfig.IMG_URL
+//
+//  @Provides
+//  @OriginalImgUrl
+//  fun provideOriginalImgUrl(): String = BuildConfig.ORIGINAL_IMG_URL
+
   @Provides
   fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
     HttpLoggingInterceptor().apply {
@@ -50,7 +66,7 @@ object RemoteModule {
         HttpLoggingInterceptor.Level.NONE
       }
     }
-  
+
   @Provides
   @Singleton
   fun provideOkHttpClient(
@@ -64,14 +80,14 @@ object RemoteModule {
       .addInterceptor(authorizationInterceptor)
       .addNetworkInterceptor(httpLoggingInterceptor)
       .build()
-  
+
   @Provides
   @Singleton
   fun provideMoshi(): Moshi =
     Moshi.Builder()
       .addLast(KotlinJsonAdapterFactory()) // to convert kotlin obj to json
       .build()
-  
+
   @Provides
   @Singleton
   @ApiRequest
@@ -86,7 +102,7 @@ object RemoteModule {
       .client(client)
       .addConverterFactory(MoshiConverterFactory.create(moshi))
       .build()
-  
+
   @Provides
   @Singleton
   fun provideApiService(

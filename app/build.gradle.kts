@@ -36,10 +36,22 @@ android {
       val BASE_URL: String = checkNotNull(properties.getProperty("BASE_URL")) {
         "BASE_URL is not set in local.properties"
       }
+      val IMG_URL: String = checkNotNull(properties.getProperty("IMG_URL")) {
+        "IMG_URL is not set in local.properties"
+      }
+      val ORIGINAL_IMG_URL: String = checkNotNull(properties.getProperty("ORIGINAL_IMG_URL")) {
+        "ORIGINAL_IMG_URL is not set in local.properties"
+      }
 
       // Write API_KEY and BASE_URL to buildConfigFields
       buildConfigField(type = "String", name = "API_KEY", value = """"$API_KEY"""")
       buildConfigField(type = "String", name = "BASE_URL", value = """"$BASE_URL"""")
+      buildConfigField(type = "String", name = "IMG_URL", value = """"$IMG_URL"""")
+      buildConfigField(
+        type = "String",
+        name = "ORIGINAL_IMG_URL",
+        value = """"$ORIGINAL_IMG_URL""""
+      )
     }
 
     release {

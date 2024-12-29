@@ -9,6 +9,7 @@ import com.example.moviedocs.domain.model.credits.CrewItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.loadImgFromUrl
+import javax.inject.Inject
 
 class CrewListVerticalAdapter :
   BaseListAdapter<CrewItemModel, CreditItemVerticalViewHolderBinding>(

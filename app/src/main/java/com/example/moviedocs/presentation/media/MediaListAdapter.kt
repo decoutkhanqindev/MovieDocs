@@ -7,14 +7,16 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MediaItemViewHolderBinding
+import com.example.moviedocs.di.ImgUrl
 import com.example.moviedocs.domain.model.moviedetail.image.MediaItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.dpToPx
 import com.example.moviedocs.utils.loadImgFromUrl
+import javax.inject.Inject
 
 class MediaListAdapter(
-  private val type: MediaType
+  private val type: MediaType,
 ) : BaseListAdapter<MediaItemModel, MediaItemViewHolderBinding>(MediaItemModelDiffCallback) {
 
   override fun onCreateViewHolder(

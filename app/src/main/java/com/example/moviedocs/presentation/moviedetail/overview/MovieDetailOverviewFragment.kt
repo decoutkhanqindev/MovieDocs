@@ -13,7 +13,7 @@ import com.example.moviedocs.databinding.FragmentMovieDetailOverviewBinding
 import com.example.moviedocs.domain.model.genre.GenreItemModel
 import com.example.moviedocs.domain.model.moviedetail.company.CompanyItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.company.CompanyListHorizontalAdapter
+import com.example.moviedocs.presentation.company.CompanyListAdapter
 import com.example.moviedocs.presentation.genre.GenreListAdapter
 import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
@@ -43,8 +43,8 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
     GenreListAdapter()
   }
 
-  private val companyListAdapter: CompanyListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    CompanyListHorizontalAdapter()
+  private val companyListAdapter: CompanyListAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    CompanyListAdapter()
   }
 
   override fun onCreateView(

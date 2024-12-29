@@ -21,6 +21,7 @@ import com.example.moviedocs.utils.visible
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
