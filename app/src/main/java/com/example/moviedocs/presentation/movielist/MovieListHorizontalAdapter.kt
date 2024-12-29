@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.MovieItemHorizontalViewHolderBinding
-import com.example.moviedocs.di.ImgUrl
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.loadImgFromUrl
-import javax.inject.Inject
 
 class MovieListHorizontalAdapter :
   BaseListAdapter<MovieItemModel, MovieItemHorizontalViewHolderBinding>(
