@@ -2,6 +2,8 @@ package com.example.moviedocs.utils
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.content.Context
+import android.util.TypedValue
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
@@ -93,6 +95,13 @@ fun View.gone() {
 fun View.invisible() {
   if (visibility != View.INVISIBLE) visibility = View.INVISIBLE
 }
+
+fun Int.dpToPx(context: Context): Int =
+  TypedValue.applyDimension(
+    TypedValue.COMPLEX_UNIT_DIP,
+    this.toFloat(),
+    context.resources.displayMetrics
+  ).toInt()
 
 fun setUpRecyclerView(
   mSetHasFixedSize: Boolean = false,
