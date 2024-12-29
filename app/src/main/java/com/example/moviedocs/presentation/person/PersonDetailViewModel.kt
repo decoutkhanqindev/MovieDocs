@@ -40,7 +40,7 @@ class PersonDetailViewModel @Inject constructor(
     loadData(personId)
   }
 
-  private fun loadData(personId: Int) {
+  fun loadData(personId: Int) {
     viewModelScope.launch {
       _uiState.value = PersonDetailUiState.Loading
 

@@ -91,10 +91,14 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
       MovieDetailUiState.Loading -> {
+        hideErrorDialog()
+
         binding.scrollView.invisible()
       }
 
       is MovieDetailUiState.Success -> {
+        hideErrorDialog()
+
         binding.scrollView.visible()
 
         backDropAdapter.submitList(state.backDropList)
@@ -104,6 +108,8 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
 
       is MovieDetailUiState.Error -> {
         binding.scrollView.invisible()
+
+        showErrorDialog { viewModel.loadData(movieId) }
       }
     }
   }

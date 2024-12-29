@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.credits
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.credits.CastItemModel
@@ -17,11 +18,18 @@ import javax.inject.Inject
 @HiltViewModel
 class CreditListViewModel @Inject constructor(
   private val getCreditListUseCase: GetCreditListUseCase,
+  private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
   private val _uiState: MutableStateFlow<CreditListUiState> =
     MutableStateFlow(CreditListUiState.Loading)
   val uiState: StateFlow<CreditListUiState> get() = _uiState.asStateFlow()
+
+  private val movedId: Int = savedStateHandle.get<Int>("movieId") ?: 0
+
+  init {
+    loadCreditList(movedId)
+  }
 
   fun loadCreditList(movieId: Int) {
     viewModelScope.launch {
@@ -65,5 +73,9 @@ class CreditListViewModel @Inject constructor(
       }
       _uiState.value = currentState.copy(crewList = sortedList)
     }
+  }
+
+  fun setMovieId(movieId: Int) {
+    savedStateHandle["movieId"] = movieId
   }
 }

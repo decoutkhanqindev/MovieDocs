@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +20,6 @@ import com.example.moviedocs.utils.navigateBack
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class CastListFragment : BaseFragment<FragmentCreditListBinding>(
@@ -30,7 +28,7 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
 
   private val args: CastListFragmentArgs by navArgs()
 
-  private val viewModel: CreditListViewModel by activityViewModels()
+  private val viewModel: CreditListViewModel by viewModels()
 
   private val castListVerticalAdapter: CastListVerticalAdapter by lazy(LazyThreadSafetyMode.NONE) {
     CastListVerticalAdapter()
@@ -40,9 +38,6 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    if (savedInstanceState == null) {
-      viewModel.loadCreditList(args.movieId)
-    }
     binding.creditListTitle.text = getString(R.string.cast_list_title)
     setUpNavigation()
     setUpRecyclerView(
@@ -52,6 +47,7 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
       ),
       mAdapter = castListVerticalAdapter
     )
+    viewModel.setMovieId(movieId = args.movieId)
     bindViewModel()
     handleSortingList()
   }
@@ -75,6 +71,8 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
   private fun renderUi(state: CreditListUiState) {
     when (state) {
       CreditListUiState.Loading -> {
+        hideErrorDialog()
+
         binding.apply {
           creditListProgressBar.visible()
           creditListRecyclerView.invisible()
@@ -82,6 +80,8 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
       }
 
       is CreditListUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           creditListProgressBar.invisible()
           creditListRecyclerView.visible()
@@ -94,6 +94,8 @@ class CastListFragment : BaseFragment<FragmentCreditListBinding>(
           creditListProgressBar.visible()
           creditListRecyclerView.invisible()
         }
+
+        showErrorDialog { viewModel.loadCreditList(args.movieId) }
       }
     }
   }

@@ -81,10 +81,14 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
   private fun renderUi(state: PersonDetailUiState) {
     when (state) {
       PersonDetailUiState.Loading -> {
+        hideErrorDialog()
+
         binding.personDetailMovieCreditsRecyclerview.invisible()
       }
 
       is PersonDetailUiState.Success -> {
+        hideErrorDialog()
+
         binding.personDetailMovieCreditsRecyclerview.visible()
 
         val movieListByYear: List<MovieListByYearModel> =
@@ -94,6 +98,8 @@ class PersonDetailMovieCrewFragment : BaseFragment<FragmentPersonDetailMovieCred
 
       is PersonDetailUiState.Error -> {
         binding.personDetailMovieCreditsRecyclerview.invisible()
+
+        showErrorDialog { viewModel.loadData(personId) }
       }
     }
   }

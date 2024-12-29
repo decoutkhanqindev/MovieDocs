@@ -117,6 +117,8 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
       MovieDetailUiState.Loading -> {
+        hideErrorDialog()
+
         binding.apply {
           castLayout.invisible()
           crewLayout.invisible()
@@ -124,6 +126,8 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       }
 
       is MovieDetailUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           castLayout.visible()
           crewLayout.visible()
@@ -140,6 +144,8 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
           castLayout.invisible()
           crewLayout.invisible()
         }
+
+        showErrorDialog { viewModel.loadData(movieId) }
       }
     }
   }

@@ -1,8 +1,8 @@
 package com.example.moviedocs.presentation
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.moviedocs.R
 import com.example.moviedocs.databinding.ActivityMainBinding
-import com.example.moviedocs.databinding.CustomNetworkDialogLayoutBinding
 import com.example.moviedocs.presentation.base.BaseActivity
 import com.example.moviedocs.utils.connectivity.NetworkConnectivityObserver
 import com.example.moviedocs.utils.gone
@@ -19,6 +18,7 @@ import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -26,8 +26,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
   @Inject
   internal lateinit var networkConnectivityObserver: NetworkConnectivityObserver
-
-  private var alertDialog: AlertDialog? = null
 
   private lateinit var navController: NavController
 
@@ -75,35 +73,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
   private fun observeNetworkConnectivity() {
     launchAndRepeatStarted(
-      { networkConnectivityObserver.observe().collect(::renderAlertDialog) },
+      { networkConnectivityObserver.observe().collectLatest(::renderAlertDialog) },
     )
   }
 
   private fun renderAlertDialog(status: NetworkConnectivityObserver.NetworkStatus) {
     when (status) {
-      NetworkConnectivityObserver.NetworkStatus.AVAILABLE -> hideAlertDialog()
-      else -> showAlertDialog()
+      NetworkConnectivityObserver.NetworkStatus.AVAILABLE -> hideErrorDialog()
+
+      else -> showErrorDialog { startActivity(Intent(Settings.ACTION_WIFI_SETTINGS)) }
     }
-  }
-
-  private fun showAlertDialog() {
-    val dialogLayoutBinding: CustomNetworkDialogLayoutBinding =
-      CustomNetworkDialogLayoutBinding.inflate(layoutInflater)
-
-    if (alertDialog?.isShowing == true) return
-    alertDialog = AlertDialog.Builder(this).setView(dialogLayoutBinding.root)
-      .setCancelable(false) // can not close a dialog if network is unavailable
-      .show()
-
-    dialogLayoutBinding.tryAgainBtn.setOnClickListener {
-      // open wifi settings
-      val intent = Intent(android.provider.Settings.ACTION_WIFI_SETTINGS)
-      startActivity(intent)
-    }
-  }
-
-  private fun hideAlertDialog() {
-    alertDialog?.dismiss()
-    alertDialog = null
   }
 }

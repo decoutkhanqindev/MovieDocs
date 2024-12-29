@@ -46,7 +46,7 @@ class MovieDetailViewModel @Inject constructor(
     loadData(movieId)
   }
 
-  private fun loadData(movieId: Int) {
+  fun loadData(movieId: Int) {
     viewModelScope.launch {
       _uiState.value = MovieDetailUiState.Loading
 

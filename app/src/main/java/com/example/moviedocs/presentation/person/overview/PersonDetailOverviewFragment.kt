@@ -54,10 +54,14 @@ class PersonDetailOverviewFragment : BaseFragment<FragmentPersonDetailOverviewBi
   private fun renderUi(state: PersonDetailUiState) {
     when (state) {
       PersonDetailUiState.Loading -> {
+        hideErrorDialog()
+
         binding.scrollView.invisible()
       }
 
       is PersonDetailUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           scrollView.visible()
 
@@ -80,6 +84,8 @@ class PersonDetailOverviewFragment : BaseFragment<FragmentPersonDetailOverviewBi
 
       is PersonDetailUiState.Error -> {
         binding.scrollView.invisible()
+
+        showErrorDialog { viewModel.loadData(personId) }
       }
     }
   }

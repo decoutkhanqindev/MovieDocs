@@ -63,6 +63,8 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
   private fun renderUi(state: GenreListUiState) {
     when (state) {
       GenreListUiState.Loading -> {
+        hideErrorDialog()
+
         binding.apply {
           genreListProgressBar.visible()
           genreRecycleView.invisible()
@@ -70,6 +72,8 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
       }
 
       is GenreListUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           genreListProgressBar.invisible()
           genreRecycleView.visible()
@@ -82,7 +86,14 @@ class GenreListFragment : BaseFragment<FragmentGenreListBinding>(
           genreListProgressBar.visible()
           genreRecycleView.invisible()
         }
+
+        showErrorDialog { viewModel.loadGenreList() }
       }
     }
+  }
+
+  override fun onDestroyView() {
+    binding.genreRecycleView.adapter = null
+    super.onDestroyView()
   }
 }

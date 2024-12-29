@@ -82,6 +82,8 @@ class GenreMovieListFragment : BaseFragment<FragmentMovieListBinding>(
   private fun renderUi(state: MovieListUiState) {
     when (state) {
       MovieListUiState.Loading -> {
+        hideErrorDialog()
+
         binding.apply {
           movieListProgressBar.visible()
           movieListRecyclerView.invisible()
@@ -89,6 +91,8 @@ class GenreMovieListFragment : BaseFragment<FragmentMovieListBinding>(
       }
 
       is MovieListUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           movieListProgressBar.invisible()
           movieListRecyclerView.visible()
@@ -103,6 +107,8 @@ class GenreMovieListFragment : BaseFragment<FragmentMovieListBinding>(
           movieListProgressBar.visible()
           movieListRecyclerView.invisible()
         }
+
+        showErrorDialog { viewModel.loadPage(1, args.genreId) }
       }
     }
   }

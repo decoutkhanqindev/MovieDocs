@@ -45,16 +45,13 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
-    if (savedInstanceState == null) {
-      viewModel.getCompanyDetail(companyId = args.companyId)
-      viewModel.getCompanyMoveList(page = 1, companyId = args.companyId)
-    }
     setUpNavigation()
     setUpRecyclerView(
       mRecyclerView = binding.movieListRecycleView,
       mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false),
       mAdapter = movieListAdapter
     )
+    viewModel.setCompanyId(args.companyId)
     bindViewModel()
   }
 
@@ -97,6 +94,8 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
 
     when (companyState) {
       CompanyDetailUiState.Loading -> {
+        hideErrorDialog()
+
         binding.apply {
           progressBar.visible()
           scrollView.invisible()
@@ -104,6 +103,8 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
       }
 
       is CompanyDetailUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           progressBar.invisible()
           scrollView.visible()
@@ -136,7 +137,17 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
           progressBar.visible()
           scrollView.invisible()
         }
+
+        showErrorDialog {
+          viewModel.getCompanyDetail(args.companyId)
+          viewModel.getCompanyMoveList(1, args.companyId)
+        }
       }
     }
+  }
+
+  override fun onDestroyView() {
+    binding.movieListRecycleView.adapter = null
+    super.onDestroyView()
   }
 }

@@ -249,6 +249,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.visible()
           scrollView.invisible()
         }
+
+        hideErrorDialog()
       }
 
       is HomeUiState.Success -> {
@@ -256,6 +258,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
           progressBar.invisible()
           scrollView.visible()
         }
+
+        hideErrorDialog()
+
         sliderViewPagerAdapter.submitList(state.sliderList)
         genreAdapter.submitList(state.genreList)
         nowPlayingAdapter.submitList(state.nowPlaying)
@@ -268,6 +273,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.apply {
           progressBar.visible()
           scrollView.invisible()
+
+          showErrorDialog { viewModel.loadData() }
         }
       }
     }

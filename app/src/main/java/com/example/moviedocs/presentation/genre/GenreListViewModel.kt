@@ -25,7 +25,7 @@ class GenreListViewModel @Inject constructor(
     loadGenreList()
   }
 
-  private fun loadGenreList() {
+  fun loadGenreList() {
     viewModelScope.launch {
       _uiState.value = GenreListUiState.Loading
 

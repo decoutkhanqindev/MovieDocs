@@ -1,5 +1,6 @@
 package com.example.moviedocs.presentation.company
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moviedocs.domain.model.company.CompanyDetailModel
@@ -18,12 +19,14 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.Int
 
 @HiltViewModel
 class CompanyDetailViewModel @Inject constructor(
   private val getCompanyDetailUseCase: GetCompanyDetailUseCase,
   private val getCountryListUseCase: GetCountryListUseCase,
   private val getCompanyMovieListUseCase: GetCompanyMovieListUseCase,
+  private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
   private var _companyDetailUiState: MutableStateFlow<CompanyDetailUiState> =
@@ -46,6 +49,13 @@ class CompanyDetailViewModel @Inject constructor(
       started = SharingStarted.WhileSubscribed(5000),
       initialValue = CompanyDetailUiState.Loading to MovieListUiState.Loading
     )
+
+  private val companyId: Int = savedStateHandle.get<Int>("companyId") ?: 0
+
+  init {
+    getCompanyDetail(companyId)
+    getCompanyMoveList(1, companyId)
+  }
 
   fun getCompanyDetail(companyId: Int) {
     viewModelScope.launch {
@@ -79,5 +89,9 @@ class CompanyDetailViewModel @Inject constructor(
         Timber.tag("CompanyDetailViewModel").d("getCompanyMoveList: ${it.message}")
       }
     }
+  }
+
+  fun setCompanyId(companyId: Int) {
+    savedStateHandle.set<Int>("companyId", companyId)
   }
 }

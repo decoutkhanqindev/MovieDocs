@@ -100,10 +100,14 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
   private fun renderUi(state: MovieDetailUiState) {
     when (state) {
       MovieDetailUiState.Loading -> {
+        hideErrorDialog()
+
         binding.scrollView.invisible()
       }
 
       is MovieDetailUiState.Success -> {
+        hideErrorDialog()
+
         binding.apply {
           scrollView.visible()
 
@@ -122,6 +126,8 @@ class MovieDetailOverviewFragment : BaseFragment<FragmentMovieDetailOverviewBind
 
       is MovieDetailUiState.Error -> {
         binding.scrollView.invisible()
+
+        showErrorDialog { viewModel.loadData(movieId) }
       }
     }
   }
