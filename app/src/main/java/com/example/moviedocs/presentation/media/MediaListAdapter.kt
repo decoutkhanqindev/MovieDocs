@@ -6,27 +6,30 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedocs.BuildConfig
 import com.example.moviedocs.databinding.MediaItemViewHolderBinding
 import com.example.moviedocs.domain.model.moviedetail.image.MediaItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
+import com.example.moviedocs.utils.download.Downloader
 import com.example.moviedocs.utils.dpToPx
 import com.example.moviedocs.utils.loadImgFromUrl
-import javax.inject.Inject
 
 class MediaListAdapter(
   private val type: MediaType,
+  private val downloader: Downloader
 ) : BaseListAdapter<MediaItemModel, MediaItemViewHolderBinding>(MediaItemModelDiffCallback) {
 
   override fun onCreateViewHolder(
     parent: ViewGroup, viewType: Int
-  ): BaseViewHolder<MediaItemModel, MediaItemViewHolderBinding> = VH(
-    MediaItemViewHolderBinding.inflate(
-      LayoutInflater.from(parent.context), parent, false
+  ): BaseViewHolder<MediaItemModel, MediaItemViewHolderBinding> =
+    VH(
+      MediaItemViewHolderBinding.inflate(
+        LayoutInflater.from(parent.context), parent, false
+      )
     )
-  )
 
-  private inner class VH(
+  inner class VH(
     binding: MediaItemViewHolderBinding
   ) : BaseViewHolder<MediaItemModel, MediaItemViewHolderBinding>(binding) {
 
@@ -58,6 +61,18 @@ class MediaListAdapter(
         }
 
         mediaItemImg.loadImgFromUrl(item.filePath)
+
+        handleDownloadImg(item.filePath, type.name)
+      }
+    }
+
+    private fun handleDownloadImg(url: String, type: String) {
+      binding.downloadBtn.setOnClickListener {
+        downloader.downloadFile(
+          url = BuildConfig.ORIGINAL_IMG_URL + url,
+          filename = "$type.jpg",
+          mimeType = "image/jpeg"
+        )
       }
     }
   }

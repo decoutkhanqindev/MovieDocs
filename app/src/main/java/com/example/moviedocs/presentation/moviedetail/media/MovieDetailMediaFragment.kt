@@ -14,6 +14,8 @@ import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.media.MediaListAdapter
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
+import com.example.moviedocs.utils.download.Downloader
+import com.example.moviedocs.utils.download.DownloaderImpl
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
@@ -33,16 +35,20 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
 
   private val viewModel: MovieDetailViewModel by viewModels()
 
+  private val downloader: Downloader by lazy(LazyThreadSafetyMode.NONE) {
+    DownloaderImpl(requireContext())
+  }
+
   private val backDropAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.BACKDROPS)
+    MediaListAdapter(MediaListAdapter.MediaType.BACKDROPS, downloader)
   }
 
   private val logoAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.LOGOS)
+    MediaListAdapter(MediaListAdapter.MediaType.LOGOS, downloader)
   }
 
   private val posterAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.POSTERS)
+    MediaListAdapter(MediaListAdapter.MediaType.POSTERS, downloader)
   }
 
   override fun onCreateView(
