@@ -25,7 +25,7 @@ import javax.inject.Inject
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
   @Inject
-  internal lateinit var networkConnectivityObserver: NetworkConnectivityObserver
+  lateinit var networkConnectivityObserver: NetworkConnectivityObserver
 
   private lateinit var navController: NavController
 
