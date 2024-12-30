@@ -8,7 +8,6 @@
     android:layout_gravity="center"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/white"
     app:cardUseCompatPadding="true"
     app:strokeColor="@android:color/transparent">
 
@@ -30,11 +29,11 @@
 
     <ImageView
         android:id="@+id/downloadBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_margin="4dp"
         android:src="@drawable/download_icon"
-        app:layout_constraintEnd_toEndOf="@id/mediaItemImg"
-        app:layout_constraintTop_toTopOf="@id/mediaItemImg" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
   </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

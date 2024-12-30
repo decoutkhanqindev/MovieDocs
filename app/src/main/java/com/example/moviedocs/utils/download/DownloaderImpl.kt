@@ -12,7 +12,7 @@ class DownloaderImpl(context: Context) : Downloader {
 
   override fun downloadFile(url: String, filename: String, mimeType: String): Long {
     val request: DownloadManager.Request = DownloadManager.Request(url.toUri())
-      .setTitle("Download $filename")
+      .setTitle(filename)
       .setMimeType(mimeType)
       .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI)
       .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
