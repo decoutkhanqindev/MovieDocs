@@ -3,7 +3,7 @@ package com.example.moviedocs.presentation.moviedetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.externalId.ExternalIdsModel
+import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.country.CountryItemModel
 import com.example.moviedocs.domain.model.credits.CreditListModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel

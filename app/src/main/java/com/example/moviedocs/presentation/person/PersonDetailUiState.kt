@@ -1,6 +1,6 @@
 package com.example.moviedocs.presentation.person
 
-import com.example.moviedocs.domain.externalId.ExternalIdsModel
+import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.movielist.MovieItemModel
 import com.example.moviedocs.domain.model.person.PersonDetailModel
 

@@ -1,4 +1,4 @@
-package com.example.moviedocs.data.remote.externalId
+package com.example.moviedocs.data.remote.response.externalId
 
 import androidx.annotation.Keep
 import com.squareup.moshi.Json

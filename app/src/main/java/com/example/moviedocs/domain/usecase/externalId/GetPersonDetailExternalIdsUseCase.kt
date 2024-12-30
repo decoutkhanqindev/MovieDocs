@@ -1,6 +1,6 @@
 package com.example.moviedocs.domain.usecase.externalId
 
-import com.example.moviedocs.domain.externalId.ExternalIdsModel
+import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.repository.externalId.ExternalIdRepository
 import javax.inject.Inject
 

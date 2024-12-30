@@ -28,7 +28,6 @@
       android:background="@drawable/bg_rounded_no_border"
       app:itemActiveIndicatorStyle="@style/ShapeAppearance.Material3.Corner.None"
       app:itemBackground="@drawable/bottom_nav_menu_item_selector"
-      app:itemIconSize="24sp"
       app:itemIconTint="@color/white"
       app:itemRippleColor="@android:color/transparent"
       app:itemTextAppearanceActive="@android:style/TextAppearance.Material.Small"

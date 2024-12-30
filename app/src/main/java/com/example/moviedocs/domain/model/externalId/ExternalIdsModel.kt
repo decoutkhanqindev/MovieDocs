@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.externalId
+package com.example.moviedocs.domain.model.externalId
 
 data class ExternalIdsModel(
   val id: Int, // 1034541

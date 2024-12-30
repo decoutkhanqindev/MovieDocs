@@ -4,7 +4,7 @@ import com.example.moviedocs.data.mapper.externalId.toExternalIdsModel
 import com.example.moviedocs.data.remote.ApiService
 import com.example.moviedocs.di.AppDispatcher
 import com.example.moviedocs.di.DispatcherType
-import com.example.moviedocs.domain.externalId.ExternalIdsModel
+import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.repository.externalId.ExternalIdRepository
 import com.example.moviedocs.utils.runSuspendCatching
 import kotlinx.coroutines.CoroutineDispatcher
