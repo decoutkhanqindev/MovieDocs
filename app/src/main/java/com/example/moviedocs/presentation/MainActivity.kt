@@ -17,7 +17,6 @@ import com.example.moviedocs.utils.gone
 import com.example.moviedocs.utils.launchAndRepeatStarted
 import com.example.moviedocs.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -53,12 +52,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     navController.addOnDestinationChangedListener { _, destination, _ ->
       when (destination.id) {
-        R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
-          launchAndRepeatStarted({
-            delay(200)
-            binding.bottomNavigationMenu.visible()
-          })
-        }
+        R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment ->
+          binding.bottomNavigationMenu.visible()
 
         else -> binding.bottomNavigationMenu.gone()
       }
