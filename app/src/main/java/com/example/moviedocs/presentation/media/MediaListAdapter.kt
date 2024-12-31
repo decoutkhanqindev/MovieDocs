@@ -29,7 +29,7 @@ class MediaListAdapter(
       )
     )
 
-  inner class VH(
+  private inner class VH(
     binding: MediaItemViewHolderBinding
   ) : BaseViewHolder<MediaItemModel, MediaItemViewHolderBinding>(binding) {
 
@@ -43,10 +43,11 @@ class MediaListAdapter(
     @SuppressLint("SetTextI18n")
     override fun bind(item: MediaItemModel) {
       binding.apply {
+
         val newWidth: Int = when (type) {
-          MediaType.BACKDROPS -> 250
-          MediaType.LOGOS -> 150
-          MediaType.POSTERS -> 100
+          MediaType.BACKDROP -> 250
+          MediaType.LOGO -> 150
+          MediaType.POSTER -> 100
         }.dpToPx(itemView.context)
 
         constraintLayout.updateLayoutParams {
@@ -62,7 +63,7 @@ class MediaListAdapter(
 
         mediaItemImg.loadImgFromUrl(item.filePath)
 
-        handleDownloadImg(item.filePath, type.name)
+        handleDownloadImg(item.filePath, type.name.lowercase())
       }
     }
 
@@ -78,6 +79,6 @@ class MediaListAdapter(
   }
 
   enum class MediaType {
-    BACKDROPS, LOGOS, POSTERS
+    BACKDROP, LOGO, POSTER
   }
 }

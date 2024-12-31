@@ -1,9 +1,9 @@
 package com.example.moviedocs.data.remote
 
-import com.example.moviedocs.data.remote.externalId.ExternalIdsResponse
 import com.example.moviedocs.data.remote.response.company.CompanyDetailResponse
 import com.example.moviedocs.data.remote.response.country.CountryItemResponse
 import com.example.moviedocs.data.remote.response.credits.CreditListResponse
+import com.example.moviedocs.data.remote.response.externalId.ExternalIdsResponse
 import com.example.moviedocs.data.remote.response.genre.GenreListResponse
 import com.example.moviedocs.data.remote.response.language.LanguageItemResponse
 import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse

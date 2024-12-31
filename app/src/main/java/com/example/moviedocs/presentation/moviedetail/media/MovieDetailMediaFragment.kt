@@ -16,6 +16,7 @@ import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.utils.download.Downloader
 import com.example.moviedocs.utils.download.DownloaderImpl
+import com.example.moviedocs.utils.formatTotalResult
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
@@ -40,15 +41,15 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
   }
 
   private val backDropAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.BACKDROPS, downloader)
+    MediaListAdapter(MediaListAdapter.MediaType.BACKDROP, downloader)
   }
 
   private val logoAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.LOGOS, downloader)
+    MediaListAdapter(MediaListAdapter.MediaType.LOGO, downloader)
   }
 
   private val posterAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.POSTERS, downloader)
+    MediaListAdapter(MediaListAdapter.MediaType.POSTER, downloader)
   }
 
   override fun onCreateView(
@@ -105,8 +106,12 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
       is MovieDetailUiState.Success -> {
         hideErrorDialog()
 
-        binding.scrollView.visible()
-
+        binding.apply {
+          scrollView.visible()
+          backDropTotal.text = state.backDropList.size.formatTotalResult()
+          logoTotal.text = state.logoList.size.formatTotalResult()
+          posterTotal.text = state.posterList.size.formatTotalResult()
+        }
         backDropAdapter.submitList(state.backDropList)
         logoAdapter.submitList(state.logoList)
         posterAdapter.submitList(state.posterList)
