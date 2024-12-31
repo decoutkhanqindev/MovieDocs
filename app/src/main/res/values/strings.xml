@@ -100,4 +100,5 @@
   <string name="backdrops_title">Backdrops</string>
   <string name="logos">Logos</string>
   <string name="posters_title">Posters</string>
+  <string name="logo_list">Logo List</string>
 </resources>
