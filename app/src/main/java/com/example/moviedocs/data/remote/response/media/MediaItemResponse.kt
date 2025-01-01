@@ -1,4 +1,4 @@
-package com.example.moviedocs.data.remote.response.moviedetails.image
+package com.example.moviedocs.data.remote.response.media
 
 
 import com.squareup.moshi.Json

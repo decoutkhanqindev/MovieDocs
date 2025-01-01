@@ -1,4 +1,4 @@
-package com.example.moviedocs.domain.model.moviedetail.image
+package com.example.moviedocs.domain.model.media
 
 data class MediaItemModel(
   val aspectRatio: Double, // 1.778

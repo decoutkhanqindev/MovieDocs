@@ -1,9 +1,9 @@
 package com.example.moviedocs.data.mapper.moviedetail.image
 
-import com.example.moviedocs.data.remote.response.moviedetails.image.MediaItemResponse
-import com.example.moviedocs.domain.model.moviedetail.image.MediaItemModel
+import com.example.moviedocs.data.remote.response.media.MediaItemResponse
+import com.example.moviedocs.domain.model.media.MediaItemModel
 
-fun MediaItemResponse.toImageItemModel(): MediaItemModel =
+fun MediaItemResponse.toMediaItemModel(): MediaItemModel =
   MediaItemModel(
     aspectRatio = aspectRatio,
     filePath = filePath,

@@ -6,8 +6,8 @@ import com.example.moviedocs.data.remote.response.credits.CreditListResponse
 import com.example.moviedocs.data.remote.response.externalId.ExternalIdsResponse
 import com.example.moviedocs.data.remote.response.genre.GenreListResponse
 import com.example.moviedocs.data.remote.response.language.LanguageItemResponse
+import com.example.moviedocs.data.remote.response.media.MediaListResponse
 import com.example.moviedocs.data.remote.response.moviedetails.MovieDetailResponse
-import com.example.moviedocs.data.remote.response.moviedetails.image.MediaListResponse
 import com.example.moviedocs.data.remote.response.movielist.MovieListResponse
 import com.example.moviedocs.data.remote.response.person.PersonDetailResponse
 import com.example.moviedocs.data.remote.response.person.PersonMovieCreditListResponse
@@ -74,5 +74,5 @@ interface ApiService {
   ): PersonMovieCreditListResponse
 
   @GET("movie/{movie_id}/images")
-  suspend fun getMovieMedia(@Path("movie_id") movieId: Int): MediaListResponse
+  suspend fun getMediaList(@Path("movie_id") movieId: Int): MediaListResponse
 }

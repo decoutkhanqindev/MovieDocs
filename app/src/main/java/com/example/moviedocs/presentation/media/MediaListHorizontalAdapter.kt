@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.updateLayoutParams
-import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.BuildConfig
 import com.example.moviedocs.databinding.MediaItemViewHolderBinding
-import com.example.moviedocs.domain.model.moviedetail.image.MediaItemModel
+import com.example.moviedocs.domain.model.media.MediaItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.download.Downloader
 import com.example.moviedocs.utils.dpToPx
 import com.example.moviedocs.utils.loadImgFromUrl
 
-class MediaListAdapter(
+class MediaListHorizontalAdapter(
   private val type: MediaType,
   private val downloader: Downloader
 ) : BaseListAdapter<MediaItemModel, MediaItemViewHolderBinding>(MediaItemModelDiffCallback) {
@@ -32,13 +31,6 @@ class MediaListAdapter(
   private inner class VH(
     binding: MediaItemViewHolderBinding
   ) : BaseViewHolder<MediaItemModel, MediaItemViewHolderBinding>(binding) {
-
-    init {
-      binding.root.setOnClickListener {
-        val position: Int = bindingAdapterPosition
-        if (position != RecyclerView.NO_POSITION) onItemClickListener?.invoke(getItem(position))
-      }
-    }
 
     @SuppressLint("SetTextI18n")
     override fun bind(item: MediaItemModel) {
@@ -76,9 +68,5 @@ class MediaListAdapter(
         )
       }
     }
-  }
-
-  enum class MediaType {
-    BACKDROP, LOGO, POSTER
   }
 }
