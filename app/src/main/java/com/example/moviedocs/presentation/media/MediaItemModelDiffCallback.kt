@@ -1,7 +1,7 @@
 package com.example.moviedocs.presentation.media
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.moviedocs.domain.model.moviedetail.image.MediaItemModel
+import com.example.moviedocs.domain.model.media.MediaItemModel
 
 object MediaItemModelDiffCallback : DiffUtil.ItemCallback<MediaItemModel>() {
   override fun areItemsTheSame(
