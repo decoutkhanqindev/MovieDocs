@@ -81,6 +81,45 @@
           android:defaultValue="0"
           app:argType="integer" />
     </action>
+
+    <action
+        android:id="@+id/action_movieDetailFragment_to_backdropListFragment"
+        app:destination="@id/backdropListFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
+
+    <action
+        android:id="@+id/action_movieDetailFragment_to_logoListFragment"
+        app:destination="@id/logoListFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
+
+    <action
+        android:id="@+id/action_movieDetailFragment_to_posterListFragment"
+        app:destination="@id/posterListFragment"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
   </fragment>
 
   <include app:graph="@navigation/company_graph" />
@@ -133,4 +172,37 @@
 
   <include app:graph="@navigation/genre_graph" />
   <include app:graph="@navigation/person_detail_graph" />
+
+  <fragment
+      android:id="@+id/backdropListFragment"
+      android:name="com.example.moviedocs.presentation.media.BackdropListFragment"
+      android:label="BackdropListFragment"
+      tools:layout="@layout/fragment_media_list">
+    <argument
+        android:name="movieId"
+        android:defaultValue="0"
+        app:argType="integer" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/logoListFragment"
+      android:name="com.example.moviedocs.presentation.media.LogoListFragment"
+      android:label="LogoListFragment"
+      tools:layout="@layout/fragment_media_list">
+    <argument
+        android:name="movieId"
+        android:defaultValue="0"
+        app:argType="integer" />
+  </fragment>
+
+  <fragment
+      android:id="@+id/posterListFragment"
+      android:name="com.example.moviedocs.presentation.media.PosterListFragment"
+      android:label="PosterListFragment"
+      tools:layout="@layout/fragment_media_list">
+    <argument
+        android:name="movieId"
+        android:defaultValue="0"
+        app:argType="integer" />
+  </fragment>
 </navigation>

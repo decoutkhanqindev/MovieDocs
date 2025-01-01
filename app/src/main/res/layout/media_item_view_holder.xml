@@ -2,20 +2,19 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cardView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:cardCornerRadius="0dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="@color/white"
     app:cardUseCompatPadding="true"
     app:strokeColor="@android:color/transparent">
 
   <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/constraintLayout"
       android:layout_width="wrap_content"
-      android:layout_height="wrap_content">
+      android:layout_height="wrap_content"
+      android:layout_gravity="center">
 
     <ImageView
         android:id="@+id/mediaItemImg"
