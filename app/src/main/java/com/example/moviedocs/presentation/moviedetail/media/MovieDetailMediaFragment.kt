@@ -11,7 +11,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailMediaBinding
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.media.MediaListAdapter
+import com.example.moviedocs.presentation.media.MediaListHorizontalAdapter
+import com.example.moviedocs.presentation.media.MediaType
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.utils.download.Downloader
@@ -40,16 +41,16 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
     DownloaderImpl(requireContext())
   }
 
-  private val backDropAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.BACKDROP, downloader)
+  private val backdropAdapter: MediaListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MediaListHorizontalAdapter(MediaType.BACKDROP, downloader)
   }
 
-  private val logoAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.LOGO, downloader)
+  private val logoAdapter: MediaListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MediaListHorizontalAdapter(MediaType.LOGO, downloader)
   }
 
-  private val posterAdapter: MediaListAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    MediaListAdapter(MediaListAdapter.MediaType.POSTER, downloader)
+  private val posterAdapter: MediaListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    MediaListHorizontalAdapter(MediaType.POSTER, downloader)
   }
 
   override fun onCreateView(
@@ -67,7 +68,7 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
       mLayoutManager = LinearLayoutManager(
         requireContext(), LinearLayoutManager.HORIZONTAL, false
       ),
-      mAdapter = backDropAdapter,
+      mAdapter = backdropAdapter,
     )
     setUpRecyclerView(
       mRecyclerView = binding.logoRecycleView,
@@ -112,7 +113,7 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
           logoTotal.text = state.logoList.size.formatTotalResult()
           posterTotal.text = state.posterList.size.formatTotalResult()
         }
-        backDropAdapter.submitList(state.backDropList)
+        backdropAdapter.submitList(state.backDropList)
         logoAdapter.submitList(state.logoList)
         posterAdapter.submitList(state.posterList)
       }

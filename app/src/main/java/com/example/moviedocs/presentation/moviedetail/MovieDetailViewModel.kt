@@ -8,13 +8,13 @@ import com.example.moviedocs.domain.model.country.CountryItemModel
 import com.example.moviedocs.domain.model.credits.CreditListModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
-import com.example.moviedocs.domain.model.moviedetail.image.MediaListModel
+import com.example.moviedocs.domain.model.media.MediaListModel
 import com.example.moviedocs.domain.usecase.country.GetCountryListUseCase
 import com.example.moviedocs.domain.usecase.credits.GetCreditListUseCase
 import com.example.moviedocs.domain.usecase.externalId.GetMovieDetailExternalIdsUseCase
 import com.example.moviedocs.domain.usecase.language.GetLanguageListUseCase
 import com.example.moviedocs.domain.usecase.moviedetail.GetMovieDetailUseCase
-import com.example.moviedocs.domain.usecase.moviedetail.GetMovieMediaUseCase
+import com.example.moviedocs.domain.usecase.media.GetMediaListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
@@ -32,7 +32,7 @@ class MovieDetailViewModel @Inject constructor(
   private val getLanguageListUseCase: GetLanguageListUseCase,
   private val getCountryListUseCase: GetCountryListUseCase,
   private val getMovieCreditsUseCase: GetCreditListUseCase,
-  private val getMovieMediaUseCase: GetMovieMediaUseCase,
+  private val getMovieMediaUseCase: GetMediaListUseCase,
   private val saveStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
