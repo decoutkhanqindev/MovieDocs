@@ -11,9 +11,12 @@ import com.example.moviedocs.utils.download.Downloader
 import com.example.moviedocs.utils.download.DownloaderImpl
 import com.example.moviedocs.utils.invisible
 import com.example.moviedocs.utils.launchAndRepeatStarted
+import com.example.moviedocs.utils.navigateBack
 import com.example.moviedocs.utils.setUpRecyclerView
 import com.example.moviedocs.utils.visible
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BackdropListFragment : BaseFragment<FragmentMediaListBinding>(
   FragmentMediaListBinding::inflate
 ) {
@@ -34,6 +37,7 @@ class BackdropListFragment : BaseFragment<FragmentMediaListBinding>(
     super.onViewCreated(view, savedInstanceState)
 
     binding.mediaListTitle.text = "Backdrop List"
+    setUpNavigate()
     setUpRecyclerView(
       mRecyclerView = binding.mediaListRecyclerview,
       mLayoutManager = LinearLayoutManager(
@@ -41,8 +45,12 @@ class BackdropListFragment : BaseFragment<FragmentMediaListBinding>(
       ),
       mAdapter = adapter
     )
-    viewModel.loadData(args.movieId)
+    viewModel.setMovieId(args.movieId)
     bindViewModel()
+  }
+
+  private fun setUpNavigate() {
+    binding.backBtn.navigateBack()
   }
 
   private fun bindViewModel() {
