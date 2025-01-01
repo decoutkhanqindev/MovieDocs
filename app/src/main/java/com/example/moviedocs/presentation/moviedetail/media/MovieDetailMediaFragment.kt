@@ -8,11 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailMediaBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.presentation.media.MediaListHorizontalAdapter
 import com.example.moviedocs.presentation.media.MediaType
+import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
 import com.example.moviedocs.utils.download.Downloader
@@ -63,6 +65,7 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
+    setUpNavigate()
     setUpRecyclerView(
       mRecyclerView = binding.backDropRecycleView,
       mLayoutManager = LinearLayoutManager(
@@ -86,6 +89,28 @@ class MovieDetailMediaFragment : BaseFragment<FragmentMovieDetailMediaBinding>(
     )
     viewModel.setMovieId(movieId)
     bindViewModel()
+  }
+
+  private fun setUpNavigate() {
+    binding.apply {
+      backDropMoreBtn.setOnClickListener {
+        findNavController().navigate(
+          MovieDetailFragmentDirections.actionMovieDetailFragmentToBackdropListFragment(movieId)
+        )
+      }
+
+      logoMoreBtn.setOnClickListener {
+        findNavController().navigate(
+          MovieDetailFragmentDirections.actionMovieDetailFragmentToLogoListFragment(movieId)
+        )
+      }
+
+      posterMoreBtn.setOnClickListener {
+        findNavController().navigate(
+          MovieDetailFragmentDirections.actionMovieDetailFragmentToPosterListFragment(movieId)
+        )
+      }
+    }
   }
 
   private fun bindViewModel() {
