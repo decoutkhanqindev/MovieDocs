@@ -37,9 +37,9 @@ class MediaListVerticalAdapter(
       binding.apply {
 
         val newWidth: Int = when (type) {
-          MediaType.BACKDROP -> ViewGroup.LayoutParams.WRAP_CONTENT
-          MediaType.LOGO -> ViewGroup.LayoutParams.WRAP_CONTENT
-          MediaType.POSTER -> 100
+          MediaType.BACKDROP -> 400
+          MediaType.LOGO -> 200
+          MediaType.POSTER -> 200
         }.dpToPx(itemView.context)
 
         constraintLayout.updateLayoutParams {
@@ -48,7 +48,6 @@ class MediaListVerticalAdapter(
 
         ConstraintSet().apply {
           clone(constraintLayout)
-          constrainWidth(constraintLayout.id, newWidth)
           setDimensionRatio(mediaItemImg.id, "${item.aspectRatio}")
           applyTo(constraintLayout)
         }

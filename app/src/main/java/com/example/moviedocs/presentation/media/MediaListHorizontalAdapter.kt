@@ -48,7 +48,6 @@ class MediaListHorizontalAdapter(
 
         ConstraintSet().apply {
           clone(constraintLayout)
-          constrainWidth(constraintLayout.id, newWidth)
           setDimensionRatio(mediaItemImg.id, "${item.aspectRatio}")
           applyTo(constraintLayout)
         }
