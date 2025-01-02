@@ -86,6 +86,7 @@ class MovieDetailFragment : BaseFragment<FragmentMovieDetailBinding>(
           0 -> "Overview"
           1 -> "Credits ${totalCredits.formatTotalResult()}"
           2 -> "Media"
+          3 -> "Similar"
           else -> throw IllegalArgumentException("Invalid $position")
         }
       }.attach()

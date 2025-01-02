@@ -6,6 +6,7 @@ import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
 import com.example.moviedocs.domain.model.media.MediaItemModel
 import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
+import com.example.moviedocs.domain.model.movielist.MovieItemModel
 
 sealed interface MovieDetailUiState {
   data object Loading : MovieDetailUiState
@@ -20,5 +21,6 @@ sealed interface MovieDetailUiState {
     val backDropList: List<MediaItemModel> = emptyList(),
     val logoList: List<MediaItemModel> = emptyList(),
     val posterList: List<MediaItemModel> = emptyList(),
+    val similarMovieList: List<MovieItemModel> = emptyList(),
   ) : MovieDetailUiState
 }
