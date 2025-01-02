@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.moviedocs.databinding.FragmentMediaListBinding
 import com.example.moviedocs.presentation.base.BaseFragment
 import com.example.moviedocs.utils.download.Downloader
@@ -40,7 +39,7 @@ class LogoListFragment : BaseFragment<FragmentMediaListBinding>(
     binding.mediaListTitle.text = "Logo List"
     setUpRecyclerView(
       mRecyclerView = binding.mediaListRecyclerview,
-      mLayoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL),
+      mLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false),
       mAdapter = adapter
     )
     setUpNavigate()

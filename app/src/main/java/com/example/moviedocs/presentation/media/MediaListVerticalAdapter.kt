@@ -38,7 +38,7 @@ class MediaListVerticalAdapter(
 
         val newWidth: Int = when (type) {
           MediaType.BACKDROP -> 400
-          MediaType.LOGO -> 200
+          MediaType.LOGO -> 400
           MediaType.POSTER -> 200
         }.dpToPx(itemView.context)
 
