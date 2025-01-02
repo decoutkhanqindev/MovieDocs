@@ -11,7 +11,6 @@ import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.formatDate
 import com.example.moviedocs.utils.formatVoteAverage
 import com.example.moviedocs.utils.loadImgFromUrl
-import javax.inject.Inject
 
 class MovieListVerticalAdapter :
   BaseListAdapter<MovieItemModel, MovieItemVerticalViewHolderBinding>(

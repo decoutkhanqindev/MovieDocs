@@ -21,7 +21,7 @@ suspend inline fun <T> runSuspendCatching(
   crossinline block: suspend () -> T,
 ): Result<T> {
   contract { callsInPlace(block, InvocationKind.EXACTLY_ONCE) }
-  
+
   return try {
     Result.success(withContext(context) {
       block()

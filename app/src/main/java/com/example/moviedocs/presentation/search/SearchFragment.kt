@@ -9,13 +9,13 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding::inflate) {
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
     setUpNavigation()
   }
-  
+
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
   }

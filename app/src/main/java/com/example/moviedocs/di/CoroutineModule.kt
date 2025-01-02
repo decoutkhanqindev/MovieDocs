@@ -24,12 +24,12 @@ object CoroutineModule {
   @Singleton
   @AppDispatcher(DispatcherType.Default)
   fun provideDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
-  
+
   @Provides
   @Singleton
   @AppDispatcher(DispatcherType.IO)
   fun provideIODispatcher(): CoroutineDispatcher = Dispatchers.IO
-  
+
   @Provides
   @Singleton
   @AppDispatcher(DispatcherType.Main)

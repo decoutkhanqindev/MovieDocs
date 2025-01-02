@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
  * and receive updates whenever the connectivity changes.
  */
 interface NetworkConnectivityObserver {
-  
+
   // Observes network connectivity changes and emits the current network status.
   fun observe(): Flow<NetworkStatus>
-  
+
   // This enum represents the different states of network connectivity:
   // - AVAILABLE: The device is connected to a network and has internet access.
   // - UNAVAILABLE: The device is not connected to any network.

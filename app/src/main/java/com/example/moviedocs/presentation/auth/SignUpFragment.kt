@@ -9,17 +9,17 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(FragmentSignUpBinding::inflate) {
-  
+
   companion object {
     fun newInstance(): SignUpFragment = SignUpFragment()
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    
+
     setUpNavigation()
   }
-  
+
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
   }
