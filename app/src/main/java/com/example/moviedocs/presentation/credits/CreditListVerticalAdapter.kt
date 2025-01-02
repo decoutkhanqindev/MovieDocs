@@ -1,25 +1,24 @@
-package com.example.moviedocs.presentation.credits.cast
+package com.example.moviedocs.presentation.credits
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedocs.databinding.CreditItemVerticalViewHolderBinding
-import com.example.moviedocs.domain.model.credits.CastItemModel
+import com.example.moviedocs.domain.model.credits.CreditItemModel
 import com.example.moviedocs.presentation.base.BaseListAdapter
 import com.example.moviedocs.presentation.base.BaseViewHolder
 import com.example.moviedocs.utils.loadImgFromUrl
-import javax.inject.Inject
 
-class CastListVerticalAdapter :
-  BaseListAdapter<CastItemModel, CreditItemVerticalViewHolderBinding>(
-    CastItemModelDiffCallBack
+class CreditListVerticalAdapter :
+  BaseListAdapter<CreditItemModel, CreditItemVerticalViewHolderBinding>(
+    CreditItemModelDiffCallBack
   ) {
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): BaseViewHolder<CastItemModel, CreditItemVerticalViewHolderBinding> =
+  ): BaseViewHolder<CreditItemModel, CreditItemVerticalViewHolderBinding> =
     VH(
       CreditItemVerticalViewHolderBinding.inflate(
         LayoutInflater.from(parent.context), parent, false
@@ -28,7 +27,7 @@ class CastListVerticalAdapter :
 
   private inner class VH(
     binding: CreditItemVerticalViewHolderBinding
-  ) : BaseViewHolder<CastItemModel, CreditItemVerticalViewHolderBinding>(binding) {
+  ) : BaseViewHolder<CreditItemModel, CreditItemVerticalViewHolderBinding>(binding) {
 
     init {
       binding.root.setOnClickListener {
@@ -39,12 +38,17 @@ class CastListVerticalAdapter :
     }
 
     @SuppressLint("SetTextI18n")
-    override fun bind(item: CastItemModel) {
+    override fun bind(item: CreditItemModel) {
       binding.apply {
         creditItemImg.loadImgFromUrl(item.profilePath)
         creditItemName.text = item.name
         creditItemGender.text = item.gender
-        creditItemCharacter.text = item.character
+        creditItemCharacter.text =
+          if (item.character == "Unknown character") {
+            item.department
+          } else {
+            item.character
+          }
         creditItemPopularity.text = item.popularity.toString()
       }
     }

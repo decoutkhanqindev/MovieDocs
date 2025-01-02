@@ -1,7 +1,6 @@
 package com.example.moviedocs.presentation.credits
 
-import com.example.moviedocs.domain.model.credits.CastItemModel
-import com.example.moviedocs.domain.model.credits.CrewItemModel
+import com.example.moviedocs.domain.model.credits.CreditItemModel
 
 sealed interface CreditListUiState {
   data object Loading : CreditListUiState
@@ -9,8 +8,8 @@ sealed interface CreditListUiState {
   data class Error(val throwable: Throwable) : CreditListUiState
 
   data class Success(
-    val castList: List<CastItemModel>,
-    val crewList: List<CrewItemModel>,
+    val castList: List<CreditItemModel>,
+    val crewList: List<CreditItemModel>,
   ) : CreditListUiState
 
   enum class SortType {

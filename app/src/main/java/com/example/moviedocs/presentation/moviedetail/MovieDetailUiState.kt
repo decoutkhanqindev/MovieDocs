@@ -1,12 +1,11 @@
 package com.example.moviedocs.presentation.moviedetail
 
-import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.country.CountryItemModel
-import com.example.moviedocs.domain.model.credits.CastItemModel
-import com.example.moviedocs.domain.model.credits.CrewItemModel
+import com.example.moviedocs.domain.model.credits.CreditItemModel
+import com.example.moviedocs.domain.model.externalId.ExternalIdsModel
 import com.example.moviedocs.domain.model.language.LanguageItemModel
-import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
 import com.example.moviedocs.domain.model.media.MediaItemModel
+import com.example.moviedocs.domain.model.moviedetail.MovieDetailModel
 
 sealed interface MovieDetailUiState {
   data object Loading : MovieDetailUiState
@@ -16,8 +15,8 @@ sealed interface MovieDetailUiState {
     val externalIds: ExternalIdsModel,
     val languageList: List<LanguageItemModel> = emptyList(),
     val countryList: List<CountryItemModel> = emptyList(),
-    val castList: List<CastItemModel> = emptyList(),
-    val crewList: List<CrewItemModel> = emptyList(),
+    val castList: List<CreditItemModel> = emptyList(),
+    val crewList: List<CreditItemModel> = emptyList(),
     val backDropList: List<MediaItemModel> = emptyList(),
     val logoList: List<MediaItemModel> = emptyList(),
     val posterList: List<MediaItemModel> = emptyList(),

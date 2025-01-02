@@ -126,7 +126,7 @@
 
   <fragment
       android:id="@+id/castListFragment"
-      android:name="com.example.moviedocs.presentation.credits.cast.CastListFragment"
+      android:name="com.example.moviedocs.presentation.credits.CastListFragment"
       android:label="CastListFragment"
       tools:layout="@layout/fragment_credit_list">
     <argument
@@ -149,7 +149,7 @@
 
   <fragment
       android:id="@+id/crewListFragment"
-      android:name="com.example.moviedocs.presentation.credits.crew.CrewListFragment"
+      android:name="com.example.moviedocs.presentation.credits.CrewListFragment"
       android:label="CrewListFragment"
       tools:layout="@layout/fragment_credit_list">
     <argument

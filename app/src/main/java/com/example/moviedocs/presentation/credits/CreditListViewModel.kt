@@ -3,9 +3,8 @@ package com.example.moviedocs.presentation.credits
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedocs.domain.model.credits.CastItemModel
+import com.example.moviedocs.domain.model.credits.CreditItemModel
 import com.example.moviedocs.domain.model.credits.CreditListModel
-import com.example.moviedocs.domain.model.credits.CrewItemModel
 import com.example.moviedocs.domain.usecase.credits.GetCreditListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -42,36 +41,25 @@ class CreditListViewModel @Inject constructor(
         )
       }.onFailure { it: Throwable ->
         _uiState.value = CreditListUiState.Error(it)
-        Timber.tag(this.javaClass.simpleName).e("loadCreditList $it")
+        Timber.tag("CreditListViewModel").e("loadCreditList $it")
       }
     }
   }
 
-  fun sortCastList(sortType: CreditListUiState.SortType) {
+  fun sortCreditList(creditType: CreditType, sortType: CreditListUiState.SortType) {
     val currentState: CreditListUiState = _uiState.value
     if (currentState is CreditListUiState.Success) {
-      val currentList: List<CastItemModel> = currentState.castList
-      val sortedList: List<CastItemModel> = when (sortType) {
+      val currentList: List<CreditItemModel> = when (creditType) {
+        CreditType.CAST -> currentState.castList
+        CreditType.CREW -> currentState.crewList
+      }
+      val sortedList: List<CreditItemModel> = when (sortType) {
         CreditListUiState.SortType.TITLE_ASC -> currentList.sortedBy { it.name }
         CreditListUiState.SortType.TITLE_DSC -> currentList.sortedByDescending { it.name }
         CreditListUiState.SortType.POPULARITY_ASC -> currentList.sortedBy { it.popularity }
         CreditListUiState.SortType.POPULARITY_DSC -> currentList.sortedByDescending { it.popularity }
       }
       _uiState.value = currentState.copy(castList = sortedList)
-    }
-  }
-
-  fun sortCrewList(sortType: CreditListUiState.SortType) {
-    val currentState: CreditListUiState = _uiState.value
-    if (currentState is CreditListUiState.Success) {
-      val currentList: List<CrewItemModel> = currentState.crewList
-      val sortedList: List<CrewItemModel> = when (sortType) {
-        CreditListUiState.SortType.TITLE_ASC -> currentList.sortedBy { it.name }
-        CreditListUiState.SortType.TITLE_DSC -> currentList.sortedByDescending { it.name }
-        CreditListUiState.SortType.POPULARITY_ASC -> currentList.sortedBy { it.popularity }
-        CreditListUiState.SortType.POPULARITY_DSC -> currentList.sortedByDescending { it.popularity }
-      }
-      _uiState.value = currentState.copy(crewList = sortedList)
     }
   }
 

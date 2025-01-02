@@ -5,7 +5,7 @@ import com.example.moviedocs.domain.model.credits.CreditListModel
 
 fun CreditListResponse.toCreditListModel(): CreditListModel =
   CreditListModel(
-    cast = cast.map { it.toCastItemModel() },
-    crew = crew.map { it.toCrewItemModel() },
+    cast = cast.map { it.toCreditItemModel() },
+    crew = crew.map { it.toCreditItemModel() },
     id = id
   )

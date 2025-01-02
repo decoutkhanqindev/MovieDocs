@@ -6,9 +6,9 @@ import com.squareup.moshi.Json
 @Keep
 data class CreditListResponse(
   @Json(name = "cast")
-  val cast: List<CastItemResponse>,
+  val cast: List<CreditItemResponse>,
   @Json(name = "crew")
-  val crew: List<CrewItemResponse>,
+  val crew: List<CreditItemResponse>,
   @Json(name = "id")
   val id: Int // movie id
 )

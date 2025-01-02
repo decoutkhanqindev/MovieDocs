@@ -8,11 +8,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moviedocs.databinding.FragmentMovieDetailCreditsBinding
-import com.example.moviedocs.domain.model.credits.CastItemModel
-import com.example.moviedocs.domain.model.credits.CrewItemModel
+import com.example.moviedocs.domain.model.credits.CreditItemModel
 import com.example.moviedocs.presentation.base.BaseFragment
-import com.example.moviedocs.presentation.credits.cast.CastListHorizontalAdapter
-import com.example.moviedocs.presentation.credits.crew.CrewListHorizontalAdapter
+import com.example.moviedocs.presentation.credits.CreditListHorizontalAdapter
 import com.example.moviedocs.presentation.moviedetail.MovieDetailFragmentDirections
 import com.example.moviedocs.presentation.moviedetail.MovieDetailUiState
 import com.example.moviedocs.presentation.moviedetail.MovieDetailViewModel
@@ -35,12 +33,12 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
 
   private val viewModel: MovieDetailViewModel by viewModels()
 
-  private val castListHorizontalAdapter: CastListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    CastListHorizontalAdapter()
+  private val castListHorizontalAdapter: CreditListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    CreditListHorizontalAdapter()
   }
 
-  private val crewListHorizontalAdapter: CrewListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
-    CrewListHorizontalAdapter()
+  private val crewListHorizontalAdapter: CreditListHorizontalAdapter by lazy(LazyThreadSafetyMode.NONE) {
+    CreditListHorizontalAdapter()
   }
 
   override fun onCreateView(
@@ -93,7 +91,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       }
     }
 
-    castListHorizontalAdapter.setOnItemClickListener { it: CastItemModel ->
+    castListHorizontalAdapter.setOnItemClickListener { it: CreditItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
           personId = it.id
@@ -101,7 +99,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       )
     }
 
-    crewListHorizontalAdapter.setOnItemClickListener { it: CrewItemModel ->
+    crewListHorizontalAdapter.setOnItemClickListener { it: CreditItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
           personId = it.id
@@ -131,7 +129,6 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
         binding.apply {
           castLayout.visible()
           crewLayout.visible()
-
           totalCasts.text = state.castList.size.formatTotalResult()
           totalCrews.text = state.crewList.size.formatTotalResult()
         }
