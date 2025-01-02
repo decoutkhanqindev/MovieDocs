@@ -76,8 +76,8 @@ interface ApiService {
   @GET("movie/{movie_id}/images")
   suspend fun getMediaList(@Path("movie_id") movieId: Int): MediaListResponse
 
-  @GET("movie/{movie_id}/recommendations")
-  suspend fun getMovieRecommendations(
+  @GET("movie/{movie_id}/similar")
+  suspend fun getSimilarMovieList(
     @Path("movie_id") movieId: Int,
     @Query("page") page: Int
   ): MovieListResponse

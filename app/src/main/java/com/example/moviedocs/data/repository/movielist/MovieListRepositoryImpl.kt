@@ -46,8 +46,8 @@ class MovieListRepositoryImpl @Inject constructor(
       apiService.getGenreMovieList(page, genreId).toMovieListModel()
     }
 
-  override suspend fun getMovieRecommendations(movieId: Int, page: Int): Result<MovieListModel> =
+  override suspend fun getSimilarMovieList(movieId: Int, page: Int): Result<MovieListModel> =
     runSuspendCatching(ioDispatcher) {
-      apiService.getMovieRecommendations(movieId, page).toMovieListModel()
+      apiService.getSimilarMovieList(movieId, page).toMovieListModel()
     }
 }
