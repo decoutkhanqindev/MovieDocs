@@ -16,6 +16,19 @@
         app:argType="integer" />
 
     <action
+        android:id="@+id/action_movieDetailFragment_to_movieDetailFragment"
+        app:destination="@id/movie_detail_graph"
+        app:enterAnim="@anim/to_right"
+        app:exitAnim="@anim/to_right"
+        app:popEnterAnim="@anim/from_right"
+        app:popExitAnim="@anim/from_right">
+      <argument
+          android:name="movieId"
+          android:defaultValue="0"
+          app:argType="integer" />
+    </action>
+
+    <action
         android:id="@+id/action_movieDetailFragment_to_companyDetailFragment"
         app:destination="@id/company_graph"
         app:enterAnim="@anim/to_right"
