@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/bg_gradient">
-  
+
   <TextView
       android:id="@+id/abc"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:text="Favorite Fragment"
       android:textColor="@color/white"
-      android:textSize="50sp"/>
+      android:textSize="50sp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

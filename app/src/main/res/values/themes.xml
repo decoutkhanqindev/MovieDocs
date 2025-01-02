@@ -3,12 +3,12 @@
   <style name="Base.Theme.MovieDocs" parent="Theme.Material3.DayNight.NoActionBar">
     <item name="android:windowFullscreen">true</item>
   </style>
-  
+
   <style name="Theme.App.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowBackground">@drawable/bg_gradient</item>
   </style>
-  
+
   <style name="ToolbarMenuStyle" parent="Widget.Material3.PopupMenu">
     <item name="android:popupBackground">@drawable/bg_rounded_no_border</item>
     <item name="android:textColor">@color/white</item>

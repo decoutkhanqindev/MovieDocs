@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/bg_gradient">
-  
+
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
-    
+
     <TextView
         android:id="@+id/signInTitle"
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editEmailLayout"
         android:layout_width="340dp"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/signInTitle"
         app:startIconDrawable="@mipmap/email_icon"
         app:startIconTint="@color/white">
-      
+
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/editEmailEditText"
           android:layout_width="match_parent"
@@ -60,7 +60,7 @@
           android:textStyle="normal"
           tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
-    
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editPasswordLayout"
         android:layout_width="340dp"
@@ -80,7 +80,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editEmailLayout"
         app:startIconDrawable="@mipmap/pw_icon"
         app:startIconTint="@color/white">
-      
+
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/editPasswordEditText"
           android:layout_width="match_parent"
@@ -92,7 +92,7 @@
           android:textStyle="normal"
           tools:ignore="LabelFor,SpeakableTextPresentCheck,TouchTargetSizeCheck,VisualLintBounds" />
     </com.google.android.material.textfield.TextInputLayout>
-    
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/signInBtn"
         android:layout_width="150dp"
@@ -103,12 +103,12 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        
+
         app:layout_constraintEnd_toEndOf="@+id/editPasswordLayout"
         app:layout_constraintStart_toStartOf="@+id/editPasswordLayout"
         app:layout_constraintTop_toBottomOf="@+id/editPasswordLayout"
         tools:ignore="SpUsage,TextSizeCheck,VisualLintBounds,VisualLintButtonSize,VisualLintOverlap" />
-    
+
     <TextView
         android:id="@+id/signUpBtn"
         android:layout_width="wrap_content"

@@ -6,10 +6,10 @@
     android:checkable="true"
     android:clickable="true"
     android:focusable="true"
-    app:cardUseCompatPadding="true"
     app:cardBackgroundColor="@color/item_bg_color_selector"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
     app:strokeColor="@color/main_color"
     app:strokeWidth="3dp">
 

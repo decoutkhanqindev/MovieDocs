@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/bg_gradient">
-  
+
   <com.google.android.material.appbar.AppBarLayout
       android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
@@ -15,7 +15,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
-    
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
         android:elevation="4dp"
         app:menu="@menu/sorting_movie_list_menu"
         app:popupTheme="@style/ToolbarMenuStyle">
-      
+
       <ImageView
           android:id="@+id/backBtn"
           android:layout_width="24dp"
@@ -31,7 +31,7 @@
           android:layout_gravity="start"
           android:importantForAccessibility="no"
           android:src="@mipmap/back_btn" />
-      
+
       <TextView
           android:id="@+id/movieListTitle"
           android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
           android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
   </com.google.android.material.appbar.AppBarLayout>
-  
+
   <ProgressBar
       android:id="@+id/movieListProgressBar"
       android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
       app:layout_constraintEnd_toEndOf="@id/movieListRecyclerView"
       app:layout_constraintStart_toStartOf="@id/movieListRecyclerView"
       app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
-  
+
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/movieListRecyclerView"
       android:layout_width="match_parent"
@@ -64,7 +64,7 @@
       app:layout_constraintTop_toBottomOf="@id/appBarLayout"
       tools:listitem="@layout/movie_item_vertical_view_holder"
       tools:orientation="vertical" />
-  
+
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/movieListBottomPageNumbersRecyclerView"
       android:layout_width="match_parent"

@@ -8,7 +8,7 @@
       android:id="@+id/favorite_graph"
       android:icon="@mipmap/favorite_icon"
       android:title="@string/favorite_icon" />
-  
+
   <item
       android:id="@+id/profile_graph"
       android:icon="@mipmap/profile_icon"

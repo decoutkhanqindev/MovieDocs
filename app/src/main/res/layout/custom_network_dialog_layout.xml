@@ -7,11 +7,11 @@
     app:cardCornerRadius="0dp"
     app:cardElevation="4dp"
     app:strokeColor="@android:color/transparent">
-  
+
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
-    
+
     <ImageView
         android:id="@+id/noNetworkConnectivityImg"
         android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <TextView
         android:id="@+id/noNetworkConnectivityTitle"
         android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="@id/noNetworkConnectivityImg"
         app:layout_constraintStart_toStartOf="@id/noNetworkConnectivityImg"
         app:layout_constraintTop_toBottomOf="@id/noNetworkConnectivityImg" />
-    
+
     <TextView
         android:id="@+id/noNetworkConnectivityDescription"
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="@id/noNetworkConnectivityTitle"
         app:layout_constraintStart_toStartOf="@id/noNetworkConnectivityTitle"
         app:layout_constraintTop_toBottomOf="@id/noNetworkConnectivityTitle" />
-    
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/tryAgainBtn"
         android:layout_width="150dp"

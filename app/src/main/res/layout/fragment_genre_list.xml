@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/bg_gradient">
-  
+
   <com.google.android.material.appbar.AppBarLayout
       android:id="@+id/appBarLayout"
       android:layout_width="match_parent"
@@ -16,14 +16,14 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent">
-    
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="4dp"
         app:popupTheme="@style/ToolbarMenuStyle">
-      
+
       <ImageView
           android:id="@+id/backBtn"
           android:layout_width="24dp"
@@ -31,7 +31,7 @@
           android:layout_gravity="start"
           android:importantForAccessibility="no"
           android:src="@mipmap/back_btn" />
-      
+
       <TextView
           android:id="@+id/movieListTitle"
           android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
           android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
   </com.google.android.material.appbar.AppBarLayout>
-  
+
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/genreRecycleView"
       android:layout_width="0dp"
@@ -54,7 +54,7 @@
       app:layout_constraintTop_toBottomOf="@id/appBarLayout"
       tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
       tools:listitem="@layout/genre_item_view_holder" />
-  
+
   <ProgressBar
       android:id="@+id/genreListProgressBar"
       android:layout_width="wrap_content"
