@@ -67,7 +67,7 @@ class PersonDetailMovieCastFragment : BaseFragment<FragmentPersonDetailMovieCred
   }
 
   private fun setUpNavigation() {
-    movieListItemByYearAdapter.setOnItemClickListener { it: MovieItemModel ->
+    movieListItemByYearAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         PersonDetailFragmentDirections.actionPersonDetailFragmentToMovieDetailGraph(
           movieId = it.id

@@ -129,7 +129,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       topRatedMoreBtn.navigateTo(R.id.action_homeFragment_to_topRatedFragment)
     }
 
-    genreAdapter.setOnItemClickListener { it: GenreItemModel ->
+    genreAdapter.setOnItemInAdapterClickListener { it: GenreItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToGenreMovieListFragment(
           genreId = it.id, genreName = it.name
@@ -137,7 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    nowPlayingAdapter.setOnItemClickListener { it: MovieItemModel ->
+    nowPlayingAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id
@@ -145,7 +145,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    popularAdapter.setOnItemClickListener { it: MovieItemModel ->
+    popularAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id
@@ -153,7 +153,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    upComingAdapter.setOnItemClickListener { it: MovieItemModel ->
+    upComingAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id
@@ -161,7 +161,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
       )
     }
 
-    topRatedAdapter.setOnItemClickListener { it: MovieItemModel ->
+    topRatedAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         HomeFragmentDirections.actionHomeFragmentToMovieDetailFragment(
           movieId = it.id

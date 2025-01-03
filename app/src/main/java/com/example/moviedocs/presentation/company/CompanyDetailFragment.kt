@@ -74,7 +74,7 @@ class CompanyDetailFragment : BaseFragment<FragmentCompanyDetailBinding>(
         )
       }
 
-      movieListAdapter.setOnItemClickListener { it: MovieItemModel ->
+      movieListAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
         findNavController().navigate(
           CompanyDetailFragmentDirections.actionCompanyDetailFragmentToMovieDetailFragment(
             movieId = it.id

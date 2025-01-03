@@ -64,7 +64,7 @@ class MovieDetailSimilarFragment : BaseFragment<FragmentMovieDetailSimilarBindin
 
     }
 
-    adapter.setOnItemClickListener { it: MovieItemModel ->
+    adapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieDetailFragment(
           movieId = it.id

@@ -91,7 +91,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       }
     }
 
-    castListHorizontalAdapter.setOnItemClickListener { it: CreditItemModel ->
+    castListHorizontalAdapter.setOnItemInAdapterClickListener { it: CreditItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
           personId = it.id
@@ -99,7 +99,7 @@ class MovieDetailCreditsFragment : BaseFragment<FragmentMovieDetailCreditsBindin
       )
     }
 
-    crewListHorizontalAdapter.setOnItemClickListener { it: CreditItemModel ->
+    crewListHorizontalAdapter.setOnItemInAdapterClickListener { it: CreditItemModel ->
       findNavController().navigate(
         MovieDetailFragmentDirections.actionMovieDetailFragmentToPersonDetailFragment(
           personId = it.id

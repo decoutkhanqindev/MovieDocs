@@ -53,7 +53,7 @@ class CrewListFragment : BaseFragment<FragmentCreditListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
 
-    adapter.setOnItemClickListener { it: CreditItemModel ->
+    adapter.setOnItemInAdapterClickListener { it: CreditItemModel ->
       findNavController().navigate(
         CrewListFragmentDirections.Companion.actionCrewListFragmentToPersonDetailFragment(
           personId = it.id

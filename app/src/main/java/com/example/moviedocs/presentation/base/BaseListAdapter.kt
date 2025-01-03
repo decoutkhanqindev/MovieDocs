@@ -9,14 +9,14 @@ abstract class BaseListAdapter<T : Any, VB : ViewBinding>(
 ) : ListAdapter<T, BaseViewHolder<T, VB>>(diffCallBack) {
 
   // init in child adapter
-  internal var onItemClickListener: ((T) -> Unit)? = null
+  protected var onItemClickListener: ((T) -> Unit)? = null
 
   override fun onBindViewHolder(holder: BaseViewHolder<T, VB>, position: Int) {
     holder.bind(getItem(position))
   }
 
   // activity or fragment call
-  fun setOnItemClickListener(listener: (T) -> Unit) {
+  internal fun setOnItemInAdapterClickListener(listener: (T) -> Unit) {
     onItemClickListener = listener
   }
 }

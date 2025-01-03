@@ -62,7 +62,7 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(
   private fun setUpNavigation() {
     binding.backBtn.navigateBack()
 
-    movieListAdapter.setOnItemClickListener { it: MovieItemModel ->
+    movieListAdapter.setOnItemInAdapterClickListener { it: MovieItemModel ->
       findNavController().navigate(
         UpcomingFragmentDirections.actionUpcomingFragmentToMovieDetailFragment(
           movieId = it.id
@@ -110,7 +110,7 @@ class UpcomingFragment : BaseFragment<FragmentMovieListBinding>(
   }
 
   private fun handleLoadNextPage() {
-    pageNumbersAdapter.setOnItemClickListener { it: Int ->
+    pageNumbersAdapter.setOnItemInAdapterClickListener { it: Int ->
       viewModel.loadPage(it)
     }
   }
