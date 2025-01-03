@@ -1,4 +1,4 @@
-package com.example.moviedocs.presentation.moviedetail.recommendations
+package com.example.moviedocs.presentation.moviedetail.similar
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -61,7 +61,11 @@ class MovieDetailSimilarFragment : BaseFragment<FragmentMovieDetailSimilarBindin
 
   private fun setUpNavigation() {
     binding.moreBtn.setOnClickListener {
-
+      findNavController().navigate(
+        MovieDetailFragmentDirections.actionMovieDetailFragmentToSimilarMovieListFragment(
+          movieId = movieId
+        )
+      )
     }
 
     adapter.setOnItemInAdapterClickListener { it: MovieItemModel ->

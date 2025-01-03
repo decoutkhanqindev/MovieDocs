@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.moviedocs.presentation.moviedetail.credits.MovieDetailCreditsFragment
 import com.example.moviedocs.presentation.moviedetail.media.MovieDetailMediaFragment
 import com.example.moviedocs.presentation.moviedetail.overview.MovieDetailOverviewFragment
-import com.example.moviedocs.presentation.moviedetail.recommendations.MovieDetailSimilarFragment
+import com.example.moviedocs.presentation.moviedetail.similar.MovieDetailSimilarFragment
 
 class MovieDetailViewPagerAdapter(
   fragment: Fragment, private val movieId: Int
