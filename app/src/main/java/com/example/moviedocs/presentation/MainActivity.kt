@@ -52,8 +52,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     navController.addOnDestinationChangedListener { _, destination, _ ->
       when (destination.id) {
-        R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment ->
+        R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
+          Thread.sleep(150)
           binding.bottomNavigationMenu.visible()
+        }
 
         else -> binding.bottomNavigationMenu.gone()
       }
