@@ -3,10 +3,13 @@ package com.example.moviedocs.presentation
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.moviedocs.R
@@ -31,8 +34,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
   override fun onCreate(savedInstanceState: Bundle?) {
     enableEdgeToEdge()
     super.onCreate(savedInstanceState)
-    ViewCompat.setOnApplyWindowInsetsListener(findViewById(binding.root.id)) { v, insets ->
-      val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+    ViewCompat.setOnApplyWindowInsetsListener(findViewById(binding.root.id)) { v: View, insets: WindowInsetsCompat ->
+      val systemBarsInsets: Insets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
       v.setPadding(
         systemBarsInsets.left,
         systemBarsInsets.top,
@@ -50,7 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     val navHostFragment: NavHostFragment = binding.mainNavHost.getFragment()
     navController = navHostFragment.navController
 
-    navController.addOnDestinationChangedListener { _, destination, _ ->
+    navController.addOnDestinationChangedListener { _: NavController, destination: NavDestination, _: Bundle? ->
       when (destination.id) {
         R.id.homeFragment, R.id.favoriteFragment, R.id.profileFragment -> {
           Thread.sleep(150)
