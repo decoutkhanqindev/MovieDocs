@@ -83,6 +83,7 @@ dependencies {
   implementation(libs.androidx.core.animation)
   implementation(libs.androidx.annotation)
   implementation(libs.androidx.lifecycle.livedata.ktx)
+  implementation(libs.firebase.auth)
   testImplementation(libs.junit)
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
@@ -148,7 +149,7 @@ dependencies {
 
   // Firebase
   implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
-  implementation("com.google.firebase:firebase-auth:23.1.0")
+  implementation("com.google.firebase:firebase-auth-ktx:23.1.0")
   implementation("com.google.firebase:firebase-database:21.0.0")
 
   // Read more TextView
